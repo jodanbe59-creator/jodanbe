@@ -216,6 +216,39 @@ h1 {
 }
 @media (prefers-reduced-motion: reduce) { .scroll-cue .mouse i, .loader-bar i { animation: none; } }
 body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .scrim { display: none; }
+/* ---------- intro: ARON in the mist, cleared by scrolling ---------- */
+#intro { height: 100vh; height: 100svh; }
+.mist {
+  position: fixed; inset: 0; z-index: 4; display: grid; place-items: center; pointer-events: none; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 55%, #ecebe7 0%, #dcdad5 55%, #c9c6c0 100%);
+}
+.mist::before, .mist::after {
+  content: ""; position: absolute; width: 90vmax; height: 50vmax; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.mist::before { left: -30vmax; top: 10%; }
+.mist::after { right: -30vmax; bottom: 5%; animation-duration: 23s; animation-direction: alternate-reverse; }
+@keyframes drift { from { transform: translateX(-6vmax); } to { transform: translateX(10vmax); } }
+.mist-inner { position: relative; text-align: center; color: var(--ink); }
+.mist-logo { margin: 0; font-family: "Cormorant Garamond", var(--font-display); font-weight: 300; font-size: clamp(3.4rem, 12vw, 9rem); line-height: 1; letter-spacing: 0.42em; padding-left: 0.42em; }
+.mist-sub { margin: 18px 0 0; font-size: 0.75rem; letter-spacing: 0.32em; padding-left: 0.32em; color: var(--ink-soft); }
+.intro-cue { position: fixed; left: 50%; bottom: clamp(18px, 4vh, 36px); transform: translateX(-50%); z-index: 5; }
+.intro-cue.scroll-cue:hover, .intro-cue.scroll-cue:focus-visible { transform: translate(-50%, -4px); }
+.intro-cue .mouse { border-color: rgba(42, 37, 32, 0.55); }
+.logo {
+  position: fixed; top: 12px; left: clamp(14px, 3vw, 36px); z-index: 21; height: 58px; display: flex; align-items: center;
+  font-family: "Cormorant Garamond", var(--font-display); font-size: 1.4rem; letter-spacing: 0.4em; color: var(--gold-soft); text-decoration: none; text-shadow: 0 1px 14px rgba(10, 12, 18, 0.75);
+  opacity: 0; visibility: hidden;
+}
+.logo:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 6px; }
+@media (max-width: 600px) {
+  .logo { top: 8px; height: 54px; font-size: 1.15rem; letter-spacing: 0.26em; left: 14px; }
+  .topbar { left: auto; right: 8px; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .mist::before, .mist::after { animation: none; } }
+body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none; }
+
 </style>
 </head>
 <body>
@@ -225,9 +258,11 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 <canvas id="scene" aria-label="빈 상가 한 층이 피부과로 지어지는 실시간 3D 장면"></canvas>
 <div class="scrim"></div>
 
+<div class="mist" aria-hidden="true"><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
+<button type="button" class="scroll-cue intro-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
+<a class="logo" href="#intro" aria-label="ARON, 맨 위로">ARON</a>
 <header class="topbar">
   <nav class="menu" aria-label="메뉴">
-    <a class="brand-name" href="#hero" aria-label="ARON, 맨 위로">ARON</a>
     <div class="has-sub">
       <button type="button" class="menu-link" aria-expanded="false" aria-controls="sub-interior">INTERIOR<span class="caret" aria-hidden="true">▾</span></button>
       <div class="sub" id="sub-interior">
@@ -243,6 +278,8 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 </header>
 
 <main>
+  <section id="intro" aria-label="ARON"></section>
+
   <section id="hero" aria-label="소개">
     <div class="hero-sticky">
       <div class="hero-copy">
@@ -252,7 +289,6 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
           <span class="hero-line"><span>A place where <em>care</em> begins.</span></span>
         </h1>
         <p class="hero-sub">아론은 병원과 상업 공간을 디자인하고 시공하는 인테리어 스튜디오입니다.</p>
-        <button type="button" class="scroll-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
       </div>
       <aside class="build-log" aria-label="공정 진행">
         <div class="log-head"><span>PROCESS</span><span class="log-day">01</span></div>
@@ -500,6 +536,7 @@ const M = {
   ground: new THREE.MeshStandardMaterial({ map: streetTex, roughness: 1 }),
   route: new THREE.MeshBasicMaterial({ color: 0xe9c48a, transparent: true, opacity: 0, depthWrite: false }),
 };
+const MIST = new THREE.Color(0xd6d4cf);
 const PLASTER = new THREE.Color(0xf0e9df), DRYWALL = new THREE.Color(0x9c978f);
 
 /* ---------- sky + lights ---------- */
@@ -853,7 +890,18 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('cli
 }));
 
 /* ---------- scroll icon: click to move one screen into the build ---------- */
-document.querySelector('.scroll-cue').addEventListener('click', () => window.scrollBy({ top: innerHeight * 0.9, behavior: reduceMotion ? 'auto' : 'smooth' }));
+document.querySelector('.intro-cue').addEventListener('click', () => document.getElementById('hero').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }));
+
+/* ---------- intro: the mist clears as you scroll; the 3D fog thins with it ---------- */
+const mistState = { p: CAPTURE ? 1 : 0 };
+if (!CAPTURE) {
+  gsap.timeline({ scrollTrigger: { trigger: '#intro', start: 'top top', end: 'bottom top', scrub: reduceMotion ? true : 0.6 } })
+    .to(mistState, { p: 1, duration: 1, ease: 'none' }, 0)
+    .to('.mist-inner', { scale: 1.18, y: -30, autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 0)
+    .to('.intro-cue', { autoAlpha: 0, duration: 0.25, ease: 'none' }, 0)
+    .to('.mist', { autoAlpha: 0, duration: 0.6, ease: 'power1.inOut' }, 0.05)
+    .to('.logo', { autoAlpha: 1, duration: 0.3, ease: 'none' }, 0.7);
+}
 
 /* ---------- portfolio filter (menu ALL / CLINIC / COMMERCIAL / HOSPITAL) ---------- */
 const cards = [...document.querySelectorAll('.card')], fbtns = [...document.querySelectorAll('.filters button')];
@@ -961,6 +1009,9 @@ function frame(time, deltaMs) {
   site.visible = site.scale.y > 0.002;
   sign.visible = sign.scale.x > 0.002;
 
+  // intro mist: pale and dense at first, so buildings emerge as silhouettes, then the night fog takes over
+  scene.fog.density = lerp(0.035, 0.0055, smooth(0, 0.75, mistState.p));
+  scene.fog.color.copy(MIST).lerp(skyU.uHor.value, smooth(0.25, 1, mistState.p));
   if (shadowDirty) { renderer.shadowMap.needsUpdate = true; shadowDirty = false; }
   renderer.render(scene, camera);
 }
@@ -1002,8 +1053,8 @@ ready.then(() => {
   ScrollTrigger.refresh();
   gsap.to('#loader', { autoAlpha: 0, duration: CAPTURE ? 0 : 0.9, ease: 'power2.out', delay: CAPTURE ? 0 : 0.2 });
   if (!reduceMotion && !CAPTURE && scrollY < 10) {
-    gsap.from('.hero-line > span', { yPercent: 110, duration: 1.4, stagger: 0.12, ease: 'expo.out', delay: 0.35 });
-    gsap.from(['.hero-copy .eyebrow', '.hero-sub', '.scroll-cue', '.build-log'], { autoAlpha: 0, y: 18, duration: 1.1, stagger: 0.1, ease: 'power3.out', delay: 0.7 });
+    gsap.from('.mist-logo', { autoAlpha: 0, letterSpacing: '0.7em', duration: 2, ease: 'power3.out', delay: 0.4 });
+    gsap.from(['.mist-sub', '.intro-cue'], { autoAlpha: 0, y: 12, duration: 1.2, stagger: 0.15, ease: 'power3.out', delay: 1.1 });
   }
   window.__aronReady = true;
 });
