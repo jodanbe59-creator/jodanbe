@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARON 피부과 인테리어 V1</title>
+<meta name="description" content="아론 디자인: 피부과 인테리어. 스크롤하면 빈 상가 한 층이 프라이빗 피부과로 완성됩니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<style>
+/* VOICE  calm, private, clinical-luxury: few hues, lots of air.
+   IDEA   an architect's cutaway model of one clinic floor, built in front of the client.
+   PICTURE real-time 3D floor plate: bare concrete at night → finished clinic on opening-day morning.
+   COLOUR warm ivory plaster, travertine, champagne gold; night navy only at the start.
+   TYPE   Noto Serif KR (titles) + Noto Sans KR (body). LAYOUT full-bleed stage, ivory panels alternate sides. */
+:root {
+  --ivory: #f6f1ea;
+  --ivory-glass: rgba(248, 244, 238, 0.9);
+  --ink: #2a2520;
+  --ink-soft: #6c635a;
+  --gold: #b08d57;
+  --gold-soft: #d8bf93;
+  --night: #10131b;
+  --rule: rgba(42, 37, 32, 0.14);
+  --font-display: "Noto Serif KR", "Nanum Myeongjo", serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --gutter: clamp(16px, 5vw, 88px);
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; min-width: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--night); color: var(--ivory);
+  font: 16px/1.7 var(--font-body); font-weight: 400;
+  -webkit-font-smoothing: antialiased; overflow-x: clip; word-break: keep-all;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+#scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+.scrim {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(12, 14, 20, 0.5) 0%, rgba(12, 14, 20, 0) 18%),
+    linear-gradient(0deg, rgba(12, 14, 20, 0.45) 0%, rgba(12, 14, 20, 0) 30%);
+}
+
+#loader { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--night); }
+.loader-mark { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.5em; padding-left: 0.5em; color: var(--gold-soft); }
+.loader-bar { width: 140px; height: 1px; margin: 18px auto 0; background: rgba(246, 241, 234, 0.15); overflow: hidden; }
+.loader-bar i { display: block; height: 100%; width: 40%; background: var(--gold); animation: load 1.4s ease-in-out infinite; }
+@keyframes load { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+
+/* header */
+.topbar {
+  position: fixed; top: 12px; left: 12px; right: 12px; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 12px clamp(14px, 2.4vw, 28px);
+  background: rgba(20, 18, 16, 0.38); border: 1px solid rgba(246, 241, 234, 0.12);
+  border-radius: 999px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+.brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
+.brand-name { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.42em; font-weight: 500; }
+.brand-sub { font-size: 0.8125rem; color: rgba(246, 241, 234, 0.7); }
+.nav { display: flex; gap: clamp(14px, 2.2vw, 30px); }
+.nav a { font-size: 0.875rem; text-decoration: none; color: rgba(246, 241, 234, 0.72); padding: 6px 0; position: relative; transition: color .4s; }
+.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--gold-soft); transform: scaleX(0); transition: transform .5s; }
+.nav a:hover, .nav a.is-active { color: var(--ivory); }
+.nav a.is-active::after { transform: scaleX(1); }
+.cta-link {
+  font-size: 0.875rem; text-decoration: none; color: var(--night); background: var(--gold-soft);
+  padding: 9px 18px; border-radius: 999px; transition: background .4s; white-space: nowrap;
+}
+.cta-link:hover { background: var(--ivory); }
+
+/* hero */
+main { position: relative; z-index: 2; }
+#hero { height: 620vh; position: relative; }
+.hero-sticky {
+  position: sticky; top: 0; height: 100vh; height: 100svh;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 32px;
+  padding: 0 var(--gutter) clamp(28px, 7vh, 72px);
+}
+.eyebrow { font-size: 0.875rem; color: var(--gold-soft); margin: 0 0 18px; display: flex; align-items: center; gap: 12px; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+h1 {
+  font-family: var(--font-display); font-weight: 300; margin: 0 0 22px;
+  font-size: clamp(2.3rem, 5.6vw, 4.6rem); line-height: 1.18; letter-spacing: -0.01em;
+}
+.hero-line { display: block; overflow: hidden; padding-bottom: 0.06em; }
+.hero-line > span { display: inline-block; }
+.hero-sub { max-width: 30em; font-size: 1.0625rem; color: rgba(246, 241, 234, 0.85); margin: 0 0 26px; font-weight: 300; }
+.scroll-cue { display: inline-flex; align-items: center; gap: 12px; font-size: 0.8125rem; color: rgba(246, 241, 234, 0.7); }
+.scroll-cue i { width: 1px; height: 34px; background: rgba(246, 241, 234, 0.25); position: relative; overflow: hidden; }
+.scroll-cue i::after { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 12px; background: var(--gold-soft); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { from { transform: translateY(-12px); } to { transform: translateY(34px); } }
+
+.build-log {
+  width: 300px; padding: 18px 20px;
+  background: rgba(20, 18, 16, 0.5); border: 1px solid rgba(246, 241, 234, 0.12); border-radius: 18px;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+.log-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.8125rem; color: rgba(246, 241, 234, 0.75); }
+.log-day { font-family: var(--font-display); font-size: 1.5rem; color: var(--ivory); font-variant-numeric: tabular-nums; }
+.log-bar { height: 2px; background: rgba(246, 241, 234, 0.14); margin: 12px 0 10px; border-radius: 2px; overflow: hidden; }
+.log-bar i { display: block; height: 100%; background: var(--gold-soft); transform: scaleX(0); transform-origin: left; }
+.log-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.log-list li { display: grid; grid-template-columns: 3.2em 1fr; font-size: 0.875rem; opacity: 0.38; }
+.log-list b { font-weight: 400; color: var(--gold-soft); font-variant-numeric: tabular-nums; }
+
+/* chapters */
+.chapter { position: relative; height: 165vh; }
+.chapter-sticky {
+  position: sticky; top: 0; height: 100vh; height: 100svh;
+  display: flex; align-items: center; padding: 96px var(--gutter) 40px;
+}
+.chapter--right .chapter-sticky { justify-content: flex-end; }
+.panel {
+  width: min(470px, 100%); padding: clamp(26px, 3vw, 40px);
+  background: var(--ivory-glass); color: var(--ink); border-radius: 22px;
+  box-shadow: 0 30px 80px -30px rgba(20, 16, 12, 0.45);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+}
+.panel .eyebrow { color: var(--gold); }
+.panel h2 {
+  font-family: var(--font-display); font-weight: 400; margin: 0 0 18px;
+  font-size: clamp(1.75rem, 2.8vw, 2.4rem); line-height: 1.3; text-wrap: balance;
+}
+.panel .lede { margin: 0 0 22px; color: var(--ink-soft); font-size: 1rem; }
+.spec { margin: 0; border-top: 1px solid var(--rule); }
+.spec > div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--rule); font-size: 0.9375rem; }
+.spec dt { color: var(--gold); }
+.spec dd { margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+.stat { padding: 16px 0 14px; border-bottom: 1px solid var(--rule); }
+.stat:nth-child(odd) { padding-right: 16px; border-right: 1px solid var(--rule); }
+.stat:nth-child(even) { padding-left: 16px; }
+.stat-num { display: block; font-family: var(--font-display); font-size: clamp(1.9rem, 3vw, 2.5rem); line-height: 1.1; color: var(--ink); }
+.stat-label { font-size: 0.8125rem; color: var(--ink-soft); }
+.sample-note { margin: 14px 0 0; font-size: 0.8125rem; color: var(--ink-soft); }
+.btn {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  background: var(--ink); color: var(--ivory); text-decoration: none; border-radius: 999px;
+  padding: 15px 24px; font-size: 1rem; transition: background .4s;
+}
+.btn:hover { background: var(--gold); }
+.contact { margin: 16px 0 0; font-size: 0.875rem; color: var(--ink-soft); display: grid; gap: 2px; }
+.contact span { color: var(--ink); user-select: all; }
+
+.site-foot {
+  position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px;
+  padding: 26px var(--gutter); background: var(--night); border-top: 1px solid rgba(246, 241, 234, 0.1);
+  font-size: 0.8125rem; color: rgba(246, 241, 234, 0.6);
+}
+
+@media (max-width: 960px) { .nav { display: none; } }
+@media (max-width: 760px) {
+  .topbar { top: 8px; left: 8px; right: 8px; padding: 10px 14px; }
+  .brand-sub { display: none; }
+  .hero-sticky { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-bottom: 18px; align-content: end; }
+  .hero-sub { font-size: 1rem; margin-bottom: 14px; }
+  .scroll-cue { display: none; }
+  .build-log { width: 100%; padding: 12px 14px; }
+  .log-list { grid-template-columns: repeat(6, minmax(0, 1fr)); text-align: center; }
+  .log-list li { grid-template-columns: 1fr; font-size: 0.75rem; }
+  .log-list li span { display: none; }
+  .chapter-sticky { align-items: flex-end; padding: 80px 12px 14px; }
+  .chapter--right .chapter-sticky { justify-content: flex-start; }
+  .panel { padding: 22px 20px; max-height: 64svh; overflow-y: auto; border-radius: 18px; }
+  .panel .lede { font-size: 0.9375rem; margin-bottom: 16px; }
+  .spec > div { grid-template-columns: 6.5em minmax(0, 1fr); padding: 8px 0; font-size: 0.875rem; }
+}
+@media (prefers-reduced-motion: reduce) { .scroll-cue i::after, .loader-bar i { animation: none; } }
+body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .scrim { display: none; }
+</style>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true"><div><div class="loader-mark">ARON</div><div class="loader-bar"><i></i></div></div></div>
+
+<canvas id="scene" aria-label="빈 상가 한 층이 피부과로 지어지는 실시간 3D 장면"></canvas>
+<div class="scrim"></div>
+
+<header class="topbar">
+  <a class="brand" href="#hero" aria-label="ARON, 맨 위로"><span class="brand-name">ARON</span><span class="brand-sub">아론 디자인 · 피부과 인테리어</span></a>
+  <nav class="nav" aria-label="섹션">
+    <a href="#plan">공간 기획</a>
+    <a href="#materials">소재와 위생</a>
+    <a href="#branding">브랜딩</a>
+    <a href="#schedule">시공과 일정</a>
+    <a href="#consult">상담</a>
+  </nav>
+  <a class="cta-link" href="#consult">상담 신청</a>
+</header>
+
+<main>
+  <section id="hero" aria-label="소개">
+    <div class="hero-sticky">
+      <div class="hero-copy">
+        <p class="eyebrow">피부과 · 에스테틱 클리닉 인테리어</p>
+        <h1>
+          <span class="hero-line"><span>빈 층 하나가</span></span>
+          <span class="hero-line"><span>원장님의 이름이 되기까지.</span></span>
+        </h1>
+        <p class="hero-sub">스크롤을 내려 보세요. 콘크리트뿐인 빈 상가 한 층이 밤새 지어져, 개원일 아침 아론의 피부과로 문을 엽니다.</p>
+        <div class="scroll-cue"><i></i>스크롤하여 시공 시작</div>
+      </div>
+      <aside class="build-log" aria-label="공정 진행">
+        <div class="log-head"><span>개원 일지</span><span class="log-day">D-56</span></div>
+        <div class="log-bar"><i></i></div>
+        <ol class="log-list">
+          <li><b>D-56</b><span>빈 공간 실측</span></li>
+          <li><b>D-49</b><span>평면 · 동선 설계</span></li>
+          <li><b>D-35</b><span>벽체 · 아치</span></li>
+          <li><b>D-21</b><span>조명 · 설비</span></li>
+          <li><b>D-10</b><span>마감 · 가구</span></li>
+          <li><b>D-Day</b><span>개원일 아침</span></li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <section class="chapter" id="plan" aria-labelledby="t-plan">
+    <div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow reveal">공간 기획</p>
+      <h2 class="reveal" id="t-plan">동선이 곧 진료의 질입니다.</h2>
+      <p class="lede reveal">접수부터 상담, 시술, 수납까지 환자가 되돌아가지 않는 한 방향 동선을 그립니다. 직원 동선은 뒤편으로 분리하고, 기다리는 동안 다른 환자와 마주치지 않도록 대기 공간을 나눕니다.</p>
+      <dl class="spec reveal">
+        <div><dt>환자 동선</dt><dd>입구 → 접수 → 대기 → 시술실, 단방향</dd></div>
+        <div><dt>대기</dt><dd>개별 대기 포드로 시선 분리</dd></div>
+        <div><dt>시술실</dt><dd>창가 4실, 장비 전원과 동선 사전 설계</dd></div>
+        <div><dt>직원 동선</dt><dd>환자 동선과 겹치지 않게 분리</dd></div>
+      </dl>
+    </article></div>
+  </section>
+
+  <section class="chapter chapter--right" id="materials" aria-labelledby="t-materials">
+    <div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow reveal">소재와 위생</p>
+      <h2 class="reveal" id="t-materials">아름다움은 오래 깨끗해야 합니다.</h2>
+      <p class="lede reveal">매일 소독하는 공간이라 보기 좋은 소재보다 관리하기 좋은 소재가 먼저입니다. 이음매를 줄이고 모서리를 곡면으로 처리해 먼지가 쌓일 틈을 없앱니다.</p>
+      <dl class="spec reveal">
+        <div><dt>바닥</dt><dd>대형 포세린 타일, 트래버틴 패턴</dd></div>
+        <div><dt>벽</dt><dd>항균 · 내오염 도장, 웜 화이트</dd></div>
+        <div><dt>모서리</dt><dd>곡면 마감, 무몰딩 디테일</dd></div>
+        <div><dt>포인트</dt><dd>샴페인 골드 금속, 간접 조명</dd></div>
+      </dl>
+    </article></div>
+  </section>
+
+  <section class="chapter" id="branding" aria-labelledby="t-branding">
+    <div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow reveal">브랜딩</p>
+      <h2 class="reveal" id="t-branding">간판에 불이 켜지는 순간까지.</h2>
+      <p class="lede reveal">공간은 병원의 첫 번째 명함입니다. 로고와 사인, 컬러와 소재, 안내 사인까지 하나의 언어로 맞춰서 문을 여는 순간 병원의 철학이 보이게 합니다.</p>
+      <dl class="spec reveal">
+        <div><dt>BI · 사인</dt><dd>로고 사인, 입구 파사드</dd></div>
+        <div><dt>컬러 · 소재</dt><dd>브랜드 톤에 맞춘 마감 가이드</dd></div>
+        <div><dt>안내</dt><dd>웨이파인딩 사인, 실 번호 체계</dd></div>
+        <div><dt>경험</dt><dd>조도, 향, 음악까지 함께 설계</dd></div>
+      </dl>
+    </article></div>
+  </section>
+
+  <section class="chapter chapter--right" id="schedule" aria-labelledby="t-schedule">
+    <div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow reveal">시공과 일정</p>
+      <h2 class="reveal" id="t-schedule">개원일은 약속입니다.</h2>
+      <p class="lede reveal">원장님이 가장 걱정하는 건 일정과 예산, 그리고 인허가입니다. 설계 단계부터 의료기관 개설과 소방 기준을 함께 검토하고, 매주 공정을 보고합니다.</p>
+      <div class="stats reveal">
+        <div class="stat"><span class="stat-num">4주</span><span class="stat-label">기획 · 설계</span></div>
+        <div class="stat"><span class="stat-num">8주</span><span class="stat-label">시공</span></div>
+        <div class="stat"><span class="stat-num">매주</span><span class="stat-label">공정 보고</span></div>
+        <div class="stat"><span class="stat-num">D-Day</span><span class="stat-label">개원일 맞춤 공정</span></div>
+      </div>
+      <p class="sample-note reveal">기간은 예시입니다. 실제 아론의 일정으로 바꿔 주세요.</p>
+    </article></div>
+  </section>
+
+  <section class="chapter" id="consult" aria-labelledby="t-consult">
+    <div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow reveal">상담</p>
+      <h2 class="reveal" id="t-consult">원장님의 첫 병원, 함께 걸어 들어가 봅니다.</h2>
+      <p class="lede reveal">임대 계약 전이라도 괜찮습니다. 후보 공간의 도면이나 사진을 보내 주시면, 진료 방식에 맞는 배치와 대략의 공정을 먼저 그려 드립니다.</p>
+      <div class="reveal">
+        <a class="btn" href="mailto:hello@aron-design.example?subject=%ED%94%BC%EB%B6%80%EA%B3%BC%20%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4%20%EC%83%81%EB%8B%B4">공간 상담 신청 <span aria-hidden="true">→</span></a>
+        <p class="contact">이메일 <span>hello@aron-design.example</span> 전화 <span>02-000-0000</span></p>
+        <p class="sample-note">연락처는 예시입니다.</p>
+      </div>
+    </article></div>
+  </section>
+</main>
+
+<footer class="site-foot"><span>© ARON Design</span><span>V1 · 실시간 3D 렌더링</span></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const { gsap, ScrollTrigger } = window;
+gsap.registerPlugin(ScrollTrigger);
+
+const CAPTURE = location.hash === '#capture';   // used to record the placeholder video for V2
+if (CAPTURE) document.body.classList.add('capture');
+const isSmall = matchMedia('(max-width: 760px)').matches;
+const isCoarse = matchMedia('(pointer: coarse)').matches;
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+const lerp = (a, b, t) => a + (b - a) * t;
+const smooth = (e0, e1, x) => { const t = clamp01((x - e0) / (e1 - e0)); return t * t * (3 - 2 * t); };
+function mulberry32(a) {
+  return () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+const rand = mulberry32(11);
+
+/* ---------- renderer ---------- */
+const canvas = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: !isSmall, powerPreference: 'high-performance' });
+let dpr = CAPTURE ? 1 : Math.min(window.devicePixelRatio || 1, isSmall ? 1.5 : 1.75);
+renderer.setPixelRatio(dpr);
+renderer.setSize(window.innerWidth, window.innerHeight, false);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.autoUpdate = false;
+let shadowDirty = true;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x1b2236, 0.0055);
+const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 900);
+function fitCamera() {
+  const a = window.innerWidth / window.innerHeight;
+  camera.aspect = a; camera.fov = a < 0.8 ? 58 : a < 1.2 ? 48 : 38; camera.updateProjectionMatrix();
+}
+fitCamera();
+
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+/* ---------- textures ---------- */
+function canvasTex(w, h, draw, repeat = true) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  if (repeat) t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.anisotropy = 4; return t;
+}
+const concreteTex = canvasTex(256, 256, (g, w, h) => {
+  g.fillStyle = '#8d8983'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 2600; i++) { const v = 110 + rand() * 60 | 0; g.fillStyle = `rgba(${v},${v - 3},${v - 7},${rand() * 0.18})`; g.fillRect(rand() * w, rand() * h, 1 + rand() * 3, 1 + rand() * 3); }
+  g.strokeStyle = 'rgba(60,58,55,0.25)'; g.lineWidth = 1; g.strokeRect(0, 0, w, h);
+});
+concreteTex.repeat.set(9, 4.5);
+const travTex = canvasTex(512, 512, (g, w, h) => {
+  g.fillStyle = '#e9dfd0'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 180; i++) {
+    const y = rand() * h; g.strokeStyle = `rgba(${150 + rand() * 40 | 0},${130 + rand() * 30 | 0},${100 + rand() * 25 | 0},${0.05 + rand() * 0.1})`;
+    g.lineWidth = 0.5 + rand() * 2; g.beginPath(); g.moveTo(0, y);
+    for (let x = 0; x <= w; x += 32) g.lineTo(x, y + Math.sin(x * 0.02 + i) * 2); g.stroke();
+  }
+  g.strokeStyle = 'rgba(160,140,115,0.35)'; g.lineWidth = 2; g.strokeRect(0, 0, w, h);
+  g.beginPath(); g.moveTo(w / 2, 0); g.lineTo(w / 2, h); g.moveTo(0, h / 2); g.lineTo(w, h / 2); g.stroke();
+});
+travTex.repeat.set(9, 4.5);
+const towerTex = canvasTex(64, 128, (g, w, h) => {
+  g.fillStyle = '#4a5562'; g.fillRect(0, 0, w, h);
+  for (let y = 4; y < h; y += 8) for (let x = 3; x < w; x += 7) { g.fillStyle = '#6f7f91'; g.fillRect(x, y, 4, 5); }
+});
+const towerLit = canvasTex(64, 128, (g, w, h) => {
+  g.fillStyle = '#000'; g.fillRect(0, 0, w, h);
+  for (let y = 4; y < h; y += 8) for (let x = 3; x < w; x += 7) if (rand() < 0.38) { g.fillStyle = rand() < 0.7 ? '#ffd9a0' : '#cfe2ff'; g.fillRect(x, y, 4, 5); }
+});
+const bandTex = canvasTex(64, 64, (g, w, h) => {
+  g.fillStyle = '#1d232b'; g.fillRect(0, 0, w, h); g.fillStyle = '#39424e'; g.fillRect(0, 0, w, 6);
+});
+bandTex.repeat.set(12, 30);
+
+/* ---------- materials ---------- */
+const M = {
+  concrete: new THREE.MeshStandardMaterial({ map: concreteTex, roughness: 0.95, envMapIntensity: 0.3 }),
+  slabEdge: new THREE.MeshStandardMaterial({ color: 0x3b3a38, roughness: 0.9 }),
+  tower: new THREE.MeshStandardMaterial({ map: bandTex, roughness: 0.4, metalness: 0.5 }),
+  wall: new THREE.MeshStandardMaterial({ color: 0x9c978f, roughness: 0.92, side: THREE.DoubleSide, envMapIntensity: 0.4 }),
+  trav: new THREE.MeshStandardMaterial({ map: travTex, roughness: 0.35, envMapIntensity: 0.5 }),
+  gold: new THREE.MeshStandardMaterial({ color: 0xc9a46a, metalness: 1, roughness: 0.28 }),
+  glass: new THREE.MeshStandardMaterial({ color: 0xcfe0e6, metalness: 0.2, roughness: 0.05, transparent: true, opacity: 0.16, depthWrite: false }),
+  mullion: new THREE.MeshStandardMaterial({ color: 0x2c2b29, metalness: 0.6, roughness: 0.4 }),
+  cove: new THREE.MeshStandardMaterial({ color: 0xfff1dc, emissive: 0xffd8a6, emissiveIntensity: 0 }),
+  bulb: new THREE.MeshStandardMaterial({ color: 0xfff3dc, emissive: 0xffcf8a, emissiveIntensity: 0 }),
+  duct: new THREE.MeshStandardMaterial({ color: 0xa7abae, metalness: 0.8, roughness: 0.45 }),
+  boucle: new THREE.MeshStandardMaterial({ color: 0xe4d9c8, roughness: 1 }),
+  taupe: new THREE.MeshStandardMaterial({ color: 0xb7a48b, roughness: 0.9 }),
+  white: new THREE.MeshStandardMaterial({ color: 0xf4f2ee, roughness: 0.5 }),
+  oak: new THREE.MeshStandardMaterial({ color: 0xc49a6c, roughness: 0.6 }),
+  leaf: new THREE.MeshStandardMaterial({ color: 0x5f6e4f, roughness: 0.9, flatShading: true }),
+  screen: new THREE.MeshStandardMaterial({ color: 0x1c2228, emissive: 0x6fa8c8, emissiveIntensity: 0.4 }),
+  sign: new THREE.MeshStandardMaterial({ color: 0xc9a46a, metalness: 1, roughness: 0.25, emissive: 0xffd9a0, emissiveIntensity: 0 }),
+  door: new THREE.MeshStandardMaterial({ color: 0x1a1c1f, roughness: 0.8 }),
+  city: new THREE.MeshStandardMaterial({ map: towerTex, emissiveMap: towerLit, emissive: 0xffffff, emissiveIntensity: 1, roughness: 0.6, metalness: 0.3 }),
+  ground: new THREE.MeshStandardMaterial({ color: 0x23262b, roughness: 1 }),
+  route: new THREE.MeshBasicMaterial({ color: 0xe9c48a, transparent: true, opacity: 0, depthWrite: false }),
+};
+const PLASTER = new THREE.Color(0xf0e9df), DRYWALL = new THREE.Color(0x9c978f);
+
+/* ---------- sky + lights ---------- */
+const skyU = {
+  uTop: { value: new THREE.Color() }, uHor: { value: new THREE.Color() }, uBot: { value: new THREE.Color() },
+  uSunDir: { value: new THREE.Vector3(0, 1, 0) }, uSun: { value: new THREE.Color() }, uDisc: { value: 1 }, uStars: { value: 0 },
+};
+const sky = new THREE.Mesh(new THREE.SphereGeometry(600, 32, 16), new THREE.ShaderMaterial({
+  uniforms: skyU, side: THREE.BackSide, depthWrite: false, fog: false,
+  vertexShader: `varying vec3 vD; void main(){ vD = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.); }`,
+  fragmentShader: `uniform vec3 uTop,uHor,uBot,uSunDir,uSun; uniform float uDisc,uStars; varying vec3 vD;
+    float h(vec3 p){ return fract(sin(dot(p, vec3(12.9898,78.233,37.719)))*43758.5453); }
+    void main(){ vec3 d = normalize(vD); float y = d.y;
+      vec3 c = y > 0. ? mix(uHor, uTop, pow(clamp(y,0.,1.), .5)) : mix(uHor, uBot, pow(clamp(-y,0.,1.), .4));
+      float s = max(dot(d, normalize(uSunDir)), 0.);
+      c += uSun * uDisc * (pow(s, 900.) * 6. + pow(s, 12.) * .35 + pow(s, 3.) * .1);
+      if (uStars > 0.) { vec3 q = floor(d * 300.); c += vec3(step(.9975, h(q))) * uStars * smoothstep(.05,.3,y); }
+      gl_FragColor = vec4(c, 1.);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+    }`,
+}));
+sky.frustumCulled = false; scene.add(sky);
+
+const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 0.5);
+const sun = new THREE.DirectionalLight(0xffffff, 2);
+sun.castShadow = true;
+sun.shadow.mapSize.set(isSmall || CAPTURE ? 1024 : 2048, isSmall || CAPTURE ? 1024 : 2048);
+Object.assign(sun.shadow.camera, { left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 200 });
+sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.03;
+scene.add(hemi, sun, sun.target);
+
+// 0 night (site work) → .3 pre-dawn → .55 dawn → .78 sunrise → 1 opening-day morning
+const TOD = [
+  { t: 0,    top: '#05070e', hor: '#1d2539', bot: '#0b0e17', sun: '#8fa6d8', sunI: 0.25, dir: [-0.4, 0.7, 0.3],  disc: 0.08, hs: '#2e3752', hg: '#0b0c10', hi: 0.32, stars: 1,   exp: 1.15, city: 1 },
+  { t: 0.3,  top: '#0e1731', hor: '#3d4c73', bot: '#151b2d', sun: '#aab9e2', sunI: 0.45, dir: [0.6, 0.06, -0.8], disc: 0.2,  hs: '#4b5a80', hg: '#151519', hi: 0.38, stars: 0.4, exp: 1.12, city: 0.85 },
+  { t: 0.55, top: '#2b3b6b', hor: '#eaa892', bot: '#5a4a57', sun: '#ffb48a', sunI: 1.5,  dir: [0.7, 0.12, -0.7], disc: 1,    hs: '#caa9b0', hg: '#3a2f2c', hi: 0.48, stars: 0,   exp: 1.05, city: 0.45 },
+  { t: 0.78, top: '#4b78b0', hor: '#f4d3b2', bot: '#a08f80', sun: '#ffd4a2', sunI: 2.6,  dir: [0.6, 0.3, -0.75], disc: 1,    hs: '#e8d9c9', hg: '#6a5a4a', hi: 0.62, stars: 0,   exp: 1.0,  city: 0.12 },
+  { t: 1,    top: '#5c8ec7', hor: '#e9eef2', bot: '#b6b9b9', sun: '#fff3e2', sunI: 3.0,  dir: [0.45, 0.55, -0.7], disc: 0.9, hs: '#e7eef5', hg: '#8b7f71', hi: 0.78, stars: 0,   exp: 1.0,  city: 0.03 },
+].map((k) => ({ ...k, top: new THREE.Color(k.top), hor: new THREE.Color(k.hor), bot: new THREE.Color(k.bot), sun: new THREE.Color(k.sun),
+  hs: new THREE.Color(k.hs), hg: new THREE.Color(k.hg), dir: new THREE.Vector3(...k.dir) }));
+const sunDir = new THREE.Vector3();
+
+/* ---------- the building and city ---------- */
+const X0 = -18, X1 = 18, Z0 = -10, Z1 = 8, H = 3.0;   // clinic floor plate (metres)
+const parts = [];   // meshes revealed by scale: hidden while collapsed
+
+function mesh(geo, mat, x, y, z, { shadow = true, receive = true, track = false } = {}) {
+  const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z);
+  m.castShadow = shadow; m.receiveShadow = receive; scene.add(m);
+  if (track) parts.push(m);
+  return m;
+}
+// a box whose origin sits on its base (or a chosen side), so it can grow by scale
+function block(w, h, d, mat, x, y, z, origin = 'bottom', opts = {}) {
+  const g = new THREE.BoxGeometry(w, h, d);
+  if (origin === 'bottom') g.translate(0, h / 2, 0);
+  if (origin === 'left') g.translate(w / 2, 0, 0);
+  return mesh(g, mat, x, y, z, opts);
+}
+function rounded(w, h, d, r, mat, x, y, z, opts = {}) {
+  const g = new RoundedBoxGeometry(w, h, d, 2, r); g.translate(0, h / 2, 0);
+  return mesh(g, mat, x, y, z, { track: true, ...opts });
+}
+
+// slab and the tower below it
+block(X1 - X0 + 0.6, 0.6, Z1 - Z0 + 0.6, M.slabEdge, 0, -0.6, (Z0 + Z1) / 2, 'bottom', { shadow: false });
+const floorShell = new THREE.Mesh(new THREE.PlaneGeometry(X1 - X0, Z1 - Z0), M.concrete);
+floorShell.rotation.x = -Math.PI / 2; floorShell.position.set(0, 0.001, (Z0 + Z1) / 2); floorShell.receiveShadow = true; scene.add(floorShell);
+block(X1 - X0, 119.4, Z1 - Z0, M.tower, 0, -120, (Z0 + Z1) / 2, 'bottom', { shadow: false, receive: false });
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(1400, 1400), M.ground);
+ground.rotation.x = -Math.PI / 2; ground.position.y = -120; scene.add(ground);
+
+// city
+{
+  const n = 170, g = new THREE.BoxGeometry(1, 1, 1); g.translate(0, 0.5, 0);
+  const im = new THREE.InstancedMesh(g, M.city, n); const o = new THREE.Object3D(); let k = 0;
+  while (k < n) {
+    const a = rand() * Math.PI * 2, d = 75 + Math.pow(rand(), 0.8) * 260;
+    const x = Math.cos(a) * d, z = Math.sin(a) * d;
+    if (Math.abs(x) < 50 && Math.abs(z) < 40) continue;
+    o.position.set(x, -120, z); o.scale.set(10 + rand() * 18, 35 + Math.pow(rand(), 1.6) * (d > 180 ? 150 : 105), 10 + rand() * 18); o.rotation.y = (rand() - 0.5) * 0.3;
+    o.updateMatrix(); im.setMatrixAt(k++, o.matrix);
+  }
+  scene.add(im);
+}
+
+// columns, core, window walls
+const colGeo = new THREE.BoxGeometry(0.6, H + 0.4, 0.6); colGeo.translate(0, (H + 0.4) / 2, 0);
+const colPts = [];
+for (const x of [-12, -6, 0, 6]) for (const z of [-4, 4]) colPts.push([x, z]);
+const cols = new THREE.InstancedMesh(colGeo, M.wall, colPts.length);
+colPts.forEach(([x, z], i) => cols.setMatrixAt(i, new THREE.Matrix4().makeTranslation(x, 0, z)));
+cols.castShadow = cols.receiveShadow = true; scene.add(cols);
+
+block(5, H + 0.4, 9, M.concrete, 15.5, 0, 0);                         // lift and stair core
+block(0.04, 2.4, 2.4, M.door, 12.99, 0, 0, 'bottom', { shadow: false }); // lift lobby, seen through the entrance
+
+{ // window walls on the back (z0) and left (x0) edges
+  const mg = new THREE.BoxGeometry(0.08, H + 0.4, 0.14); mg.translate(0, (H + 0.4) / 2, 0);
+  const pts = [];
+  for (let x = X0; x <= 13; x += 1.8) pts.push([x, Z0, 0]);
+  for (let z = Z0 + 1.8; z <= Z1; z += 1.8) pts.push([X0, z, Math.PI / 2]);
+  const im = new THREE.InstancedMesh(mg, M.mullion, pts.length);
+  const o = new THREE.Object3D();
+  pts.forEach(([x, z, r], i) => { o.position.set(x, 0, z); o.rotation.y = r; o.updateMatrix(); im.setMatrixAt(i, o.matrix); });
+  im.castShadow = true; scene.add(im);
+  const gb = mesh(new THREE.PlaneGeometry(13 - X0, H + 0.4), M.glass, (X0 + 13) / 2, (H + 0.4) / 2, Z0, { shadow: false, receive: false });
+  const gl = mesh(new THREE.PlaneGeometry(Z1 - Z0, H + 0.4), M.glass, X0, (H + 0.4) / 2, (Z0 + Z1) / 2, { shadow: false, receive: false });
+  gl.rotation.y = Math.PI / 2; gb.renderOrder = gl.renderOrder = 2;
+  block(13 - X0, 0.1, 0.2, M.mullion, (X0 + 13) / 2, H + 0.35, Z0, 'bottom');
+  block(0.2, 0.1, Z1 - Z0, M.mullion, X0, H + 0.35, (Z0 + Z1) / 2, 'bottom');
+}
+
+/* ---------- site works: ducts and work lights (removed at finishing) ---------- */
+const site = new THREE.Group(); scene.add(site);
+for (const z of [-6.5, 2.2, 6]) {
+  const d = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 30, 12), M.duct);
+  d.rotation.z = Math.PI / 2; d.position.set(-2.5, H + 0.15, z); d.castShadow = true; site.add(d);
+}
+const workLights = [];
+for (const [x, z] of [[-12, -1.5], [-2, 3], [8, -2]]) {
+  const b = new THREE.Mesh(new THREE.SphereGeometry(0.16, 12, 8), M.bulb); b.position.set(x, 2.3, z); site.add(b);
+  const w = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, 1, 4), M.mullion); w.position.set(x, 2.85, z); site.add(w);
+  const p = new THREE.PointLight(0xffc98a, 0, 22, 1.6); p.position.set(x, 2.2, z); site.add(p); workLights.push(p);
+}
+
+/* ---------- plan: walls and their floor-plan lines ---------- */
+const ARCH_W = 1.3, ARCH_SPRING = 1.75;
+const STRAIGHT = [
+  // [x1, z1, x2, z2, arch centres along the wall]
+  [X0, -3.5, 2, -3.5, [2.5, 7.5, 12.5, 17.5]],    // treatment rooms → corridor
+  [-13, Z0, -13, -3.5, []], [-8, Z0, -8, -3.5, []], [-3, Z0, -3, -3.5, []], [2, Z0, 2, -3.5, [3.2]],
+  [X0, -1.3, 2, -1.3, [3.5, 10.5, 17]],          // corridor → consultation rooms
+  [-11, -1.3, -11, Z1, []], [-4, -1.3, -4, Z1, []], [2, -1.3, 2, Z1, [5.5]],
+];
+const ARCS = [
+  // [cx, cz, r, thetaStart, thetaLength, height]
+  [7.2, 1.4, 3.1, 3 * Math.PI / 2 - 0.8, 1.6, H],              // curved feature wall behind reception
+  [4.6, 6.6, 1.35, -Math.PI / 2, Math.PI, 2.3],                // waiting pods
+  [8.0, 6.6, 1.35, -Math.PI / 2, Math.PI, 2.3],
+  [11.4, 6.6, 1.35, -Math.PI / 2, Math.PI, 2.3],
+];
+
+const walls = [], coves = [], planSegs = [];
+function wallShape(L, arches) {
+  const s = new THREE.Shape(); const r = ARCH_W / 2;
+  s.moveTo(0, 0);
+  for (const a of arches) { s.lineTo(a - r, 0); s.lineTo(a - r, ARCH_SPRING); s.absarc(a, ARCH_SPRING, r, Math.PI, 0, true); s.lineTo(a + r, 0); }
+  s.lineTo(L, 0); s.lineTo(L, H); s.lineTo(0, H); s.lineTo(0, 0);
+  return s;
+}
+for (const [x1, z1, x2, z2, arches] of STRAIGHT) {
+  const dx = x2 - x1, dz = z2 - z1, L = Math.hypot(dx, dz), rot = Math.atan2(-dz, dx);
+  const g = new THREE.ExtrudeGeometry(wallShape(L, arches), { depth: 0.16, bevelEnabled: false, curveSegments: 10 });
+  g.translate(0, 0, -0.08);
+  const m = mesh(g, M.wall, x1, 0, z1, { track: true }); m.rotation.y = rot; walls.push(m);
+  const c = new THREE.Mesh(new THREE.BoxGeometry(L, 0.05, 0.22).translate(L / 2, 0, 0), M.cove);
+  c.position.set(x1, H + 0.03, z1); c.rotation.y = rot; scene.add(c); parts.push(c); coves.push(c);
+  // plan: wall line broken at each arch, plus a short tick across every opening
+  let u = 0; const ux = dx / L, uz = dz / L, nx = -uz * 0.35, nz = ux * 0.35;
+  const P = (t) => [x1 + ux * t, z1 + uz * t];
+  for (const a of arches) {
+    const [ax, az] = P(u), [bx, bz] = P(a - ARCH_W / 2); planSegs.push([ax, az, bx, bz]);
+    const [cx, cz] = P(a); planSegs.push([cx - nx, cz - nz, cx + nx, cz + nz]);
+    u = a + ARCH_W / 2;
+  }
+  const [ax, az] = P(u); planSegs.push([ax, az, x2, z2]);
+}
+for (const [cx, cz, r, t0, tl, h] of ARCS) {
+  const g = new THREE.CylinderGeometry(r, r, h, 28, 1, true, t0, tl); g.translate(0, h / 2, 0);
+  walls.push(mesh(g, M.wall, cx, 0, cz, { track: true }));
+  const n = 14;
+  for (let i = 0; i < n; i++) {
+    const a = t0 + (tl * i) / n, b = t0 + (tl * (i + 1)) / n;
+    planSegs.push([cx + Math.sin(a) * r, cz + Math.cos(a) * r, cx + Math.sin(b) * r, cz + Math.cos(b) * r]);
+  }
+}
+// furniture footprints in the plan
+const footprint = (x, z, w, d) => { planSegs.push([x - w / 2, z - d / 2, x + w / 2, z - d / 2], [x + w / 2, z - d / 2, x + w / 2, z + d / 2], [x + w / 2, z + d / 2, x - w / 2, z + d / 2], [x - w / 2, z + d / 2, x - w / 2, z - d / 2]); };
+
+/* ---------- furniture and fit-out ---------- */
+const furniture = [];
+const F = (m) => { furniture.push(m); return m; };
+const ROOMS = [-15.5, -10.5, -5.5, -0.5];
+const pendants = [];
+for (const cx of ROOMS) {
+  F(rounded(2.1, 0.55, 0.85, 0.06, M.taupe, cx, 0, -7.2));                // treatment bed base
+  F(rounded(2.0, 0.16, 0.8, 0.07, M.white, cx, 0.55, -7.2));              // mattress
+  F(rounded(0.55, 1.25, 0.5, 0.06, M.white, cx + 1.55, 0, -8.6));          // laser device
+  F(mesh(new THREE.BoxGeometry(0.42, 0.28, 0.03), M.screen, cx + 1.55, 1.38, -8.42, { track: true }));
+  F(rounded(1.6, 0.9, 0.5, 0.05, M.oak, cx - 1.1, 0, -9.55));             // cabinet
+  const p = mesh(new THREE.SphereGeometry(0.22, 16, 10), M.cove, cx, 2.35, -7.2, { shadow: false, track: true }); pendants.push(p);
+  footprint(cx, -7.2, 2.1, 0.85);
+}
+for (const [cx, w] of [[-14.5, 7], [-7.5, 7]]) {                          // consultation rooms
+  F(rounded(1.7, 0.75, 0.85, 0.05, M.oak, cx, 0, 3.2));
+  F(rounded(0.62, 0.8, 0.62, 0.12, M.boucle, cx, 0, 2.1));
+  F(rounded(0.62, 0.8, 0.62, 0.12, M.boucle, cx - 0.6, 0, 4.3));
+  F(rounded(0.62, 0.8, 0.62, 0.12, M.boucle, cx + 0.6, 0, 4.3));
+  F(rounded(0.5, 1.6, 0.5, 0.2, M.leaf, cx + w / 2 - 0.8, 0, 7.2));
+  footprint(cx, 3.2, 1.7, 0.85);
+}
+F(rounded(2.0, 0.75, 0.9, 0.05, M.oak, -1, 0, 2.6));                     // director's office
+F(rounded(2.6, 0.75, 0.95, 0.3, M.boucle, -1, 0, 6.6));
+footprint(-1, 2.6, 2.0, 0.9);
+// reception: curved-front desk with a gold plinth line, logo on the core wall
+F(rounded(1.0, 1.05, 3.2, 0.35, M.white, 8.6, 0, 1.4));
+F(block(0.04, 0.06, 3.0, M.gold, 9.11, 0.12, 1.4, 'bottom', { track: true }));
+footprint(8.6, 1.4, 1.0, 3.2);
+for (const [x, z] of [[4.6, 6.6], [8, 6.6], [11.4, 6.6]]) F(rounded(1.7, 0.45, 0.6, 0.18, M.boucle, x, 0, z + 0.55));
+// lounge facing the windows
+for (const x of [5.2, 10]) { F(rounded(2.6, 0.72, 0.95, 0.3, M.boucle, x, 0, -6.2)); footprint(x, -6.2, 2.6, 0.95); }
+for (const x of [5.2, 10]) F(mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.4, 24).translate(0, 0.2, 0), M.trav, x, 0, -7.7, { track: true }));
+for (const [x, z] of [[3, -9.2], [12.3, -9.2], [-17, -2.4], [12.2, -3.0]]) {
+  F(mesh(new THREE.CylinderGeometry(0.35, 0.3, 0.55, 16).translate(0, 0.275, 0), M.white, x, 0, z, { track: true }));
+  F(mesh(new THREE.IcosahedronGeometry(0.6, 0).translate(0, 1.1, 0), M.leaf, x, 0, z, { track: true }));
+}
+for (const x of [5.2, 10, 7.6]) {
+  const p = mesh(new THREE.SphereGeometry(0.3, 16, 10), M.cove, x, 2.5, -6.6, { shadow: false, track: true }); pendants.push(p);
+}
+// finish floor (wipes across the slab) and the logo sign
+const travGeo = new THREE.PlaneGeometry(X1 - X0 - 5, Z1 - Z0); travGeo.translate((X1 - X0 - 5) / 2, 0, 0);
+const floorFinish = new THREE.Mesh(travGeo, M.trav);
+floorFinish.rotation.x = -Math.PI / 2; floorFinish.position.set(X0, 0.012, (Z0 + Z1) / 2); floorFinish.receiveShadow = true;
+scene.add(floorFinish); parts.push(floorFinish);
+block(0.06, H, 2.8, M.trav, 12.95, 0, 2.9, 'bottom', { shadow: false });   // travertine feature panel behind the sign
+const sign = new THREE.Group(); sign.position.set(12.86, 1.95, 2.9); sign.rotation.y = -Math.PI / 2; scene.add(sign);
+{
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.045, 12, 48), M.sign); sign.add(ring);
+  const bar = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.6, 0.06), M.sign); bar.rotation.z = 0.5; sign.add(bar);
+  parts.push(ring, bar);
+}
+
+// plan lines
+const planGeo = new THREE.BufferGeometry();
+planGeo.setAttribute('position', new THREE.Float32BufferAttribute(planSegs.flatMap(([a, b, c, d]) => [a, 0.03, b, c, 0.03, d]), 3));
+const planMat = new THREE.LineBasicMaterial({ color: 0xffd69e, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+const plan = new THREE.LineSegments(planGeo, planMat); plan.renderOrder = 3; scene.add(plan);
+const planState = { p: 0 };
+
+// patient route (shown in the planning chapter)
+const routeCurve = new THREE.CatmullRomCurve3([
+  [13.6, 0, 0], [10.4, 0, 0.2], [9.6, 0, 4.4], [6.6, 0, 4.6], [3.4, 0, -0.4], [1, 0, -2.4], [-10.5, 0, -2.4], [-10.5, 0, -3.8], [-10.5, 0, -6.2],
+].map(([x, y, z]) => new THREE.Vector3(x, 0.06, z)), false, 'catmullrom', 0.2);
+const routeGeo = new THREE.TubeGeometry(routeCurve, 160, 0.07, 6, false);
+const route = new THREE.Mesh(routeGeo, M.route); route.renderOrder = 4; scene.add(route);
+const routeState = { p: 0 };
+const routeIdx = routeGeo.index.count;
+
+/* ---------- collapse everything that gets built ---------- */
+for (const m of walls) m.scale.y = 0.001;
+for (const c of coves) c.scale.x = 0.001;
+for (const m of furniture) m.scale.set(0.001, 0.001, 0.001);
+for (const p of pendants) p.scale.set(0.001, 0.001, 0.001);
+floorFinish.scale.x = 0.001;
+sign.scale.set(0.001, 0.001, 0.001);
+for (const c of sign.children) c.scale.set(1, 1, 1);
+const view = { work: 0, lights: 0, signGlow: 0 };
+
+/* ---------- views ---------- */
+const heroCam = { az: -0.75, el: 1.0, r: 78, tx: 0, ty: 0, tz: -1, tod: 0, sx: 0 };
+const PRESETS = [
+  { px: 0, py: 50, pz: 13, tx: -2, ty: 0, tz: -1, tod: 0.96, sx: 1 },             // plan, from above
+  { px: 13.6, py: 2.4, pz: 7.8, tx: 7.4, ty: 1.0, tz: -0.6, tod: 0.92, sx: -1 },   // materials: reception desk + travertine
+  { px: 7.0, py: 1.65, pz: 5.2, tx: 13, ty: 1.8, tz: 1.6, tod: 0.94, sx: 1 },      // branding: entrance + sign
+  { px: -36, py: 22, pz: 30, tx: -2, ty: 0, tz: -1, tod: 0.86, sx: -1 },           // schedule: wide, other side
+  { px: -10.5, py: 1.6, pz: -2.4, tx: -10.5, ty: 1.15, tz: -10, tod: 1, sx: 1 },   // consult: inside a treatment room
+];
+const secCam = { ...PRESETS[0] };
+
+/* ---------- build timeline (10 units = whole hero) ---------- */
+const logItems = gsap.utils.toArray('.log-list li');
+const dayEl = document.querySelector('.log-day');
+const DAYS = ['D-56', 'D-49', 'D-35', 'D-21', 'D-10', 'D-Day'];
+const STARTS = [0, 1.5, 3.0, 4.8, 6.3, 8.4];
+
+const build = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' }, onUpdate: () => { shadowDirty = true; } });
+build
+  .to(heroCam, { az: -0.1, el: 0.85, r: 64, tod: 0.3, duration: 4, ease: 'sine.inOut' }, 0)
+  .to(heroCam, { az: 0.5, el: 0.62, r: 48, tx: -1, tz: -0.5, tod: 0.62, duration: 3.6, ease: 'sine.inOut' }, 4)
+  .to(heroCam, { az: 0.62, el: 0.56, r: 44, tod: 1, duration: 2.4, ease: 'sine.inOut' }, 7.6);
+if (!CAPTURE) build.to('.hero-copy', { autoAlpha: 0, y: -40, duration: 1, ease: 'power1.in' }, 0.3);
+build.to('.log-bar i', { scaleX: 1, duration: 10, ease: 'none' }, 0);
+STARTS.forEach((s, i) => {
+  build.to(logItems[i], { opacity: 1, duration: 0.25, ease: 'none', onStart: () => { dayEl.textContent = DAYS[i]; }, onReverseComplete: () => { dayEl.textContent = DAYS[Math.max(i - 1, 0)]; } }, Math.max(s - 0.1, 0));
+  if (i < STARTS.length - 1) build.to(logItems[i], { opacity: 0.38, duration: 0.25, ease: 'none' }, STARTS[i + 1] - 0.1);
+});
+// 1 shell: work lights on
+build.to(view, { work: 1, duration: 1, ease: 'power1.out' }, 0.2);
+// 2 plan lines draw across the concrete
+build.to(planMat, { opacity: 0.95, duration: 0.5 }, 1.4).to(planState, { p: 1, duration: 1.7, ease: 'none' }, 1.5);
+// 3 walls rise
+build.to(walls.map((w) => w.scale), { y: 1, duration: 1.1, stagger: 0.1, ease: 'power3.out' }, 3.0);
+// 4 light: coves and pendants
+build.to(coves.map((c) => c.scale), { x: 1, duration: 0.8, stagger: 0.06, ease: 'power2.out' }, 4.8)
+  .to(pendants.map((p) => p.scale), { x: 1, y: 1, z: 1, duration: 0.6, stagger: 0.05, ease: 'back.out(2)' }, 5.0)
+  .to(view, { lights: 1, duration: 1.2, ease: 'power1.inOut' }, 5.0);
+// 5 finishes: travertine wipe, plaster, furniture; site works cleared
+build.to(floorFinish.scale, { x: 1, duration: 1.4, ease: 'power2.inOut' }, 6.3)
+  .to(M.wall.color, { r: PLASTER.r, g: PLASTER.g, b: PLASTER.b, duration: 1.2 }, 6.4)
+  .to(planMat, { opacity: 0, duration: 0.8 }, 6.6)
+  .to(view, { work: 0, duration: 0.8 }, 6.4)
+  .to(site.scale, { y: 0.001, duration: 0.8, ease: 'power2.in' }, 6.6)
+  .to(furniture.map((f) => f.scale), { x: 1, y: 1, z: 1, duration: 0.7, stagger: 0.025, ease: 'back.out(1.6)' }, 6.9);
+// 6 opening day: sign lights up
+build.to(sign.scale, { x: 1, y: 1, z: 1, duration: 0.7, ease: 'back.out(1.8)' }, 8.4)
+  .to(view, { signGlow: 1, duration: 1, ease: 'power1.inOut' }, 8.7)
+  .set({}, {}, 10);
+
+const SCRUB = reduceMotion ? true : 1;
+if (!CAPTURE) {
+  ScrollTrigger.create({ trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: SCRUB, animation: build });
+}
+
+/* ---------- chapters ---------- */
+const handover = CAPTURE ? { progress: 0 } : ScrollTrigger.create({ trigger: '#plan', start: 'top bottom', end: 'top 35%' });
+const chapters = gsap.utils.toArray('.chapter');
+const navLinks = gsap.utils.toArray('.nav a');
+chapters.forEach((ch) => gsap.set(ch.querySelectorAll('.reveal'), { autoAlpha: 0, y: 30 }));
+function setNav(i) { navLinks.forEach((a, j) => a.classList.toggle('is-active', j === i)); }
+function activate(i) {
+  const ch = chapters[i];
+  gsap.to(secCam, { ...PRESETS[i], duration: reduceMotion ? 0.01 : 2.2, ease: 'power3.inOut', overwrite: 'auto' });
+  gsap.to(ch.querySelectorAll('.reveal'), { autoAlpha: 1, y: 0, duration: 1, stagger: 0.08, ease: 'power3.out', overwrite: true, delay: 0.15 });
+  gsap.to(routeState, { p: i === 0 ? 1 : 0, duration: i === 0 ? 2.4 : 0.6, ease: 'power2.inOut', delay: i === 0 ? 0.8 : 0, overwrite: true });
+  setNav(i);
+}
+function deactivate(i) {
+  gsap.to(chapters[i].querySelectorAll('.reveal'), { autoAlpha: 0, y: -20, duration: 0.45, stagger: 0.03, ease: 'power2.in', overwrite: true });
+}
+if (!CAPTURE) {
+  chapters.forEach((ch, i) => ScrollTrigger.create({ trigger: ch, start: 'top 55%', end: 'bottom 55%', onToggle: (s) => (s.isActive ? activate(i) : deactivate(i)) }));
+  ScrollTrigger.create({ trigger: '#hero', start: 'top top', end: 'bottom 55%', onToggle: (s) => { if (s.isActive) { setNav(-1); gsap.to(routeState, { p: 0, duration: 0.5, overwrite: true }); } } });
+}
+document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+  const t = document.querySelector(a.getAttribute('href')); if (!t) return;
+  e.preventDefault(); t.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+}));
+
+/* ---------- frame loop ---------- */
+const camPos = new THREE.Vector3(), camTarget = new THREE.Vector3(), wantPos = new THREE.Vector3(), wantTarget = new THREE.Vector3();
+const pointer = { x: 0, y: 0, sx: 0, sy: 0 };
+const right = new THREE.Vector3(), up = new THREE.Vector3();
+let tod = 0, firstFrame = true, lastTod = -1, lastKey = '';
+const shift = { x: 0, ox: 0, oy: 0 };
+const override = { on: false, pos: new THREE.Vector3(), target: new THREE.Vector3(), tod: 1 };
+if (!isCoarse && !CAPTURE) addEventListener('pointermove', (e) => { pointer.x = (e.clientX / innerWidth) * 2 - 1; pointer.y = (e.clientY / innerHeight) * 2 - 1; }, { passive: true });
+
+function applyTod(t) {
+  let i = 0; while (i < TOD.length - 2 && t > TOD[i + 1].t) i++;
+  const a = TOD[i], b = TOD[i + 1], f = clamp01((t - a.t) / (b.t - a.t));
+  skyU.uTop.value.lerpColors(a.top, b.top, f); skyU.uHor.value.lerpColors(a.hor, b.hor, f); skyU.uBot.value.lerpColors(a.bot, b.bot, f);
+  skyU.uSun.value.lerpColors(a.sun, b.sun, f); skyU.uDisc.value = lerp(a.disc, b.disc, f); skyU.uStars.value = lerp(a.stars, b.stars, f);
+  sunDir.lerpVectors(a.dir, b.dir, f).normalize(); skyU.uSunDir.value.copy(sunDir);
+  sun.color.copy(skyU.uSun.value); sun.intensity = lerp(a.sunI, b.sunI, f);
+  sun.position.copy(sun.target.position).addScaledVector(sunDir, 80);
+  hemi.color.lerpColors(a.hs, b.hs, f); hemi.groundColor.lerpColors(a.hg, b.hg, f); hemi.intensity = lerp(a.hi, b.hi, f);
+  scene.fog.color.copy(skyU.uHor.value);
+  renderer.toneMappingExposure = lerp(a.exp, b.exp, f);
+  M.city.emissiveIntensity = lerp(a.city, b.city, f) * 1.4;
+  const night = 1 - smooth(0.45, 0.95, t);
+  const env = lerp(0.12, 0.7, 1 - night);
+  for (const k of ['wall', 'trav', 'boucle', 'white', 'oak', 'taupe']) M[k].envMapIntensity = env;
+  M.cove.emissiveIntensity = view.lights * (0.6 + 1.8 * night) * 1.6;
+  M.bulb.emissiveIntensity = view.work * 4;
+  for (const p of workLights) p.intensity = view.work * 30;
+  M.sign.emissiveIntensity = view.signGlow * (0.5 + 1.5 * night);
+}
+
+let perfN = 0, perfT = 0, perfSkip = 60;
+function adapt(dt) {
+  if (CAPTURE || perfSkip-- > 0) return;
+  perfN++; perfT += dt; if (perfN < 90) return;
+  const avg = perfT / perfN; perfN = 0; perfT = 0;
+  if (avg > 1 / 50 && dpr > 1) { dpr = Math.max(1, dpr - 0.25); renderer.setPixelRatio(dpr); renderer.setSize(innerWidth, innerHeight, false); perfSkip = 30; }
+}
+
+function frame(time, deltaMs) {
+  const dt = Math.min(deltaMs / 1000, 0.1);
+  adapt(dt);
+  let wantTod;
+  if (override.on) {
+    wantPos.copy(override.pos); wantTarget.copy(override.target); wantTod = override.tod;
+  } else {
+    const { az, el, r } = heroCam;
+    const hx = heroCam.tx + Math.sin(az) * Math.cos(el) * r, hy = heroCam.ty + Math.sin(el) * r, hz = heroCam.tz + Math.cos(az) * Math.cos(el) * r;
+    const m = smooth(0, 1, handover.progress);
+    wantPos.set(lerp(hx, secCam.px, m), lerp(hy, secCam.py, m), lerp(hz, secCam.pz, m));
+    wantTarget.set(lerp(heroCam.tx, secCam.tx, m), lerp(heroCam.ty, secCam.ty, m), lerp(heroCam.tz, secCam.tz, m));
+    wantTod = lerp(heroCam.tod, secCam.tod, m);
+    const sx = lerp(heroCam.sx, secCam.sx, m);
+    shift.x += (sx - shift.x) * (firstFrame ? 1 : 1 - Math.exp(-dt * 3.4));
+  }
+  const k = firstFrame || CAPTURE ? 1 : 1 - Math.exp(-dt * 3.4);
+  camPos.lerp(wantPos, k); camTarget.lerp(wantTarget, k); tod += (wantTod - tod) * k;
+  firstFrame = false;
+
+  pointer.sx += (pointer.x - pointer.sx) * Math.min(dt * 2.5, 1);
+  pointer.sy += (pointer.y - pointer.sy) * Math.min(dt * 2.5, 1);
+  camera.position.copy(camPos); camera.lookAt(camTarget);
+  right.setFromMatrixColumn(camera.matrixWorld, 0); up.setFromMatrixColumn(camera.matrixWorld, 1);
+  const sway = Math.min(camPos.distanceTo(camTarget) * 0.015, 0.6);
+  camera.position.addScaledVector(right, pointer.sx * sway).addScaledVector(up, -pointer.sy * sway * 0.5);
+  camera.lookAt(camTarget);
+  sky.position.copy(camera.position);
+
+  const offX = isSmall || override.on ? 0 : -shift.x * 0.16 * innerWidth;
+  const offY = isSmall && !override.on ? smooth(0, 1, handover.progress) * 0.18 * innerHeight : 0;
+  if (Math.abs(offX - shift.ox) > 0.5 || Math.abs(offY - shift.oy) > 0.5) {
+    shift.ox = offX; shift.oy = offY;
+    camera.setViewOffset(innerWidth, innerHeight, offX, offY, innerWidth, innerHeight);
+  }
+
+  const key = `${view.lights.toFixed(3)}|${view.work.toFixed(3)}|${view.signGlow.toFixed(3)}`;
+  if (Math.abs(tod - lastTod) > 0.0005 || key !== lastKey) { applyTod(tod); lastTod = tod; lastKey = key; shadowDirty = true; }
+
+  planGeo.setDrawRange(0, Math.floor(planState.p * planSegs.length) * 2);
+  routeGeo.setDrawRange(0, Math.floor(routeState.p * routeIdx / 3) * 3);
+  M.route.opacity = Math.min(routeState.p * 4, 0.95);
+  route.visible = routeState.p > 0.001;
+  for (const p of parts) p.visible = p.scale.x > 0.002 && p.scale.y > 0.002 && p.scale.z > 0.002;
+  site.visible = site.scale.y > 0.002;
+  sign.visible = sign.scale.x > 0.002;
+
+  if (shadowDirty) { renderer.shadowMap.needsUpdate = true; shadowDirty = false; }
+  renderer.render(scene, camera);
+}
+gsap.ticker.add(frame);
+
+addEventListener('resize', () => requestAnimationFrame(() => {
+  renderer.setSize(innerWidth, innerHeight, false); fitCamera(); shift.ox = shift.oy = 1e9;
+}));
+
+/* ---------- capture path for the V2 placeholder video ----------
+   p 0–.5 build · .5–.75 slow orbit of the finished clinic · .75–1 descend into a treatment room */
+if (CAPTURE) {
+  const sph = (az, el, r, t) => new THREE.Vector3(t.x + Math.sin(az) * Math.cos(el) * r, t.y + Math.sin(el) * r, t.z + Math.cos(az) * Math.cos(el) * r);
+  const T0 = new THREE.Vector3(-1, 0, -0.5);
+  window.__aronCapture = (p) => {
+    override.on = true;
+    if (p <= 0.5) {
+      build.progress(p / 0.5);
+      override.pos.copy(sph(heroCam.az, heroCam.el, heroCam.r, new THREE.Vector3(heroCam.tx, heroCam.ty, heroCam.tz)));
+      override.target.set(heroCam.tx, heroCam.ty, heroCam.tz); override.tod = heroCam.tod;
+    } else if (p <= 0.75) {
+      build.progress(1);
+      const f = (p - 0.5) / 0.25;
+      override.pos.copy(sph(lerp(0.62, 1.25, f), lerp(0.56, 0.5, f), lerp(44, 40, f), T0)); override.target.copy(T0); override.tod = 1;
+    } else {
+      build.progress(1);
+      const f = smooth(0, 1, (p - 0.75) / 0.25);
+      const S = sph(1.25, 0.5, 40, T0), C = new THREE.Vector3(-10.5, 12, 6), E = new THREE.Vector3(-10.5, 1.6, -2.4);
+      override.pos.set(0, 0, 0).addScaledVector(S, (1 - f) ** 2).addScaledVector(C, 2 * f * (1 - f)).addScaledVector(E, f * f);
+      override.target.lerpVectors(T0, new THREE.Vector3(-10.5, 1.15, -10), smooth(0.2, 1, f)); override.tod = 1;
+    }
+    frame(0, 16);
+  };
+}
+
+/* ---------- intro ---------- */
+const ready = Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 2500))]);
+ready.then(() => {
+  ScrollTrigger.refresh();
+  gsap.to('#loader', { autoAlpha: 0, duration: CAPTURE ? 0 : 0.9, ease: 'power2.out', delay: CAPTURE ? 0 : 0.2 });
+  if (!reduceMotion && !CAPTURE && scrollY < 10) {
+    gsap.from('.hero-line > span', { yPercent: 110, duration: 1.4, stagger: 0.12, ease: 'expo.out', delay: 0.35 });
+    gsap.from(['.hero-copy .eyebrow', '.hero-sub', '.scroll-cue', '.build-log'], { autoAlpha: 0, y: 18, duration: 1.1, stagger: 0.1, ease: 'power3.out', delay: 0.7 });
+  }
+  window.__aronReady = true;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARON 피부과 인테리어 V2</title>
+<meta name="description" content="아론 디자인: 피부과 인테리어. 스크롤하면 빈 상가 한 층이 프라이빗 피부과로 완성됩니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<style>
+/* VOICE  calm, private, clinical-luxury.
+   IDEA   frosted clinic glass you wipe clear, then a film of the clinic being built that you scrub with scroll.
+   PICTURE one full-bleed video: empty floor → finished clinic → camera walks into a treatment room.
+   COLOUR warm ivory, travertine, champagne gold; video supplies the light.
+   TYPE   Noto Serif KR + Noto Sans KR. LAYOUT fixed film, frost veil, ivory panels alternate sides, finale centred. */
+:root {
+  --ivory: #f6f1ea; --ivory-glass: rgba(248, 244, 238, 0.9); --ink: #2a2520; --ink-soft: #6c635a;
+  --gold: #b08d57; --gold-soft: #d8bf93; --night: #10131b; --rule: rgba(42, 37, 32, 0.14);
+  --font-display: "Noto Serif KR", "Nanum Myeongjo", serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --gutter: clamp(16px, 5vw, 88px);
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; min-width: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--night); color: var(--ivory); font: 16px/1.7 var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: clip; word-break: keep-all; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* film: inset:0 + 100%, never 100vw/100vh (mobile viewport mismatch) */
+.film { position: fixed; inset: 0; z-index: 0; background: var(--night) center / cover no-repeat; }
+.film video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.scrim { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(10, 12, 18, 0.45) 0%, rgba(10, 12, 18, 0) 20%), linear-gradient(0deg, rgba(10, 12, 18, 0.55) 0%, rgba(10, 12, 18, 0) 38%); }
+
+/* frost veil wiped away on the first scroll */
+.frost {
+  position: fixed; inset: 0; z-index: 5; display: grid; place-items: center; text-align: center;
+  background: rgba(246, 241, 234, 0.32); -webkit-backdrop-filter: blur(22px) saturate(1.1); backdrop-filter: blur(22px) saturate(1.1);
+  clip-path: inset(0 0 0 0); color: var(--ink);
+}
+.frost-mark { font-family: var(--font-display); font-weight: 400; font-size: clamp(3rem, 10vw, 7.5rem); letter-spacing: 0.4em; padding-left: 0.4em; margin: 0; line-height: 1; }
+.frost-sub { margin: 18px 0 0; font-size: 1.0625rem; color: var(--ink); }
+.frost-cue { margin-top: 44px; font-size: 0.875rem; color: var(--ink-soft); display: inline-flex; flex-direction: column; align-items: center; gap: 10px; }
+.frost-cue i { width: 1px; height: 38px; background: rgba(42, 37, 32, 0.2); position: relative; overflow: hidden; }
+.frost-cue i::after { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 14px; background: var(--gold); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { from { transform: translateY(-14px); } to { transform: translateY(38px); } }
+.frost-edge { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(255, 255, 255, 0.7); box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.5); }
+
+.topbar {
+  position: fixed; top: 12px; left: 12px; right: 12px; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px clamp(14px, 2.4vw, 28px);
+  background: rgba(20, 18, 16, 0.38); border: 1px solid rgba(246, 241, 234, 0.12); border-radius: 999px;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+.brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
+.brand-name { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.42em; font-weight: 500; }
+.brand-sub { font-size: 0.8125rem; color: rgba(246, 241, 234, 0.7); }
+.nav { display: flex; gap: clamp(14px, 2.2vw, 30px); }
+.nav a { font-size: 0.875rem; text-decoration: none; color: rgba(246, 241, 234, 0.72); padding: 6px 0; position: relative; transition: color .4s; }
+.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--gold-soft); transform: scaleX(0); transition: transform .5s; }
+.nav a:hover, .nav a.is-active { color: var(--ivory); }
+.nav a.is-active::after { transform: scaleX(1); }
+.cta-link { font-size: 0.875rem; text-decoration: none; color: var(--night); background: var(--gold-soft); padding: 9px 18px; border-radius: 999px; white-space: nowrap; transition: background .4s; }
+.cta-link:hover { background: var(--ivory); }
+.progress { position: fixed; left: 0; right: 0; top: 0; height: 2px; z-index: 21; background: var(--gold-soft); transform: scaleX(0); transform-origin: left; }
+
+main { position: relative; z-index: 2; }
+#intro { height: 100vh; height: 100svh; }
+
+#build { height: 420vh; position: relative; }
+.build-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 32px; padding: 0 var(--gutter) clamp(28px, 7vh, 72px); }
+.eyebrow { font-size: 0.875rem; color: var(--gold-soft); margin: 0 0 18px; display: flex; align-items: center; gap: 12px; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+h1 { font-family: var(--font-display); font-weight: 300; margin: 0 0 22px; font-size: clamp(2.3rem, 5.6vw, 4.6rem); line-height: 1.18; }
+.hero-sub { max-width: 30em; font-size: 1.0625rem; color: rgba(246, 241, 234, 0.86); margin: 0; font-weight: 300; }
+.stages { width: 300px; padding: 18px 20px; background: rgba(20, 18, 16, 0.5); border: 1px solid rgba(246, 241, 234, 0.12); border-radius: 18px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.stages-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.8125rem; color: rgba(246, 241, 234, 0.75); }
+.stages-day { font-family: var(--font-display); font-size: 1.5rem; color: var(--ivory); }
+.stages-bar { height: 2px; background: rgba(246, 241, 234, 0.14); margin: 12px 0 10px; border-radius: 2px; overflow: hidden; }
+.stages-bar i { display: block; height: 100%; background: var(--gold-soft); transform: scaleX(0); transform-origin: left; }
+.stages ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.stages li { display: grid; grid-template-columns: 3.2em 1fr; font-size: 0.875rem; opacity: 0.38; transition: opacity .4s; }
+.stages li.on { opacity: 1; }
+.stages b { font-weight: 400; color: var(--gold-soft); }
+
+.chapter { position: relative; height: 130vh; }
+.chapter-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; padding: 96px var(--gutter) 40px; }
+.chapter--right .chapter-sticky { justify-content: flex-end; }
+.panel { width: min(460px, 100%); padding: clamp(26px, 3vw, 40px); background: var(--ivory-glass); color: var(--ink); border-radius: 22px; box-shadow: 0 30px 80px -30px rgba(20, 16, 12, 0.45); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+.panel .eyebrow { color: var(--gold); }
+.panel h2 { font-family: var(--font-display); font-weight: 400; margin: 0 0 16px; font-size: clamp(1.75rem, 2.8vw, 2.4rem); line-height: 1.3; text-wrap: balance; }
+.panel p { margin: 0; color: var(--ink-soft); }
+.panel .points { list-style: none; margin: 20px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+.panel .points li { padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 0.9375rem; }
+.sample-note { margin-top: 12px !important; font-size: 0.8125rem; }
+
+#inside { height: 260vh; position: relative; }
+.inside-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; text-align: center; padding: 96px var(--gutter) 40px; }
+.finale { max-width: 760px; padding: clamp(28px, 5vw, 56px) clamp(22px, 5vw, 64px); background: rgba(18, 16, 14, 0.55); border: 1px solid rgba(246, 241, 234, 0.14); border-radius: 28px; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.finale h2 { font-family: var(--font-display); font-weight: 300; font-size: clamp(2.6rem, 7vw, 5.6rem); line-height: 1.15; margin: 0 0 18px; text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35); }
+.finale p { margin: 0 auto 28px; max-width: 28em; font-size: 1.0625rem; color: rgba(246, 241, 234, 0.92); text-shadow: 0 1px 16px rgba(0, 0, 0, 0.4); }
+.btn { display: inline-flex; align-items: center; gap: 16px; background: var(--ivory); color: var(--ink); text-decoration: none; border-radius: 999px; padding: 15px 28px; font-size: 1rem; transition: background .4s; }
+.btn:hover { background: var(--gold-soft); }
+.contact { margin-top: 16px !important; font-size: 0.875rem; }
+
+.site-foot { position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding: 26px var(--gutter); background: var(--night); border-top: 1px solid rgba(246, 241, 234, 0.1); font-size: 0.8125rem; color: rgba(246, 241, 234, 0.6); }
+
+@media (max-width: 960px) { .nav { display: none; } }
+@media (max-width: 760px) {
+  .topbar { top: 8px; left: 8px; right: 8px; padding: 10px 14px; }
+  .brand-sub { display: none; }
+  .build-sticky { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-bottom: 18px; align-content: end; }
+  .stages { width: 100%; padding: 12px 14px; }
+  .stages ol { grid-template-columns: repeat(6, minmax(0, 1fr)); text-align: center; }
+  .stages li { grid-template-columns: 1fr; font-size: 0.75rem; }
+  .stages li span { display: none; }
+  .chapter-sticky { align-items: flex-end; padding: 80px 12px 14px; }
+  .chapter--right .chapter-sticky { justify-content: flex-start; }
+  .panel { padding: 22px 20px; border-radius: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .frost-cue i::after { animation: none; } }
+</style>
+</head>
+<body>
+
+<div class="film" style="background-image:url('hero-poster.jpg')">
+  <video id="film" muted playsinline autoplay preload="auto" poster="hero-poster.jpg" aria-label="빈 상가 한 층이 피부과로 지어지고, 카메라가 시술실로 들어가는 영상"></video>
+</div>
+<div class="scrim"></div>
+<div class="progress" aria-hidden="true"></div>
+
+<div class="frost" aria-hidden="true">
+  <div>
+    <p class="frost-mark">ARON</p>
+    <p class="frost-sub">피부과 · 에스테틱 클리닉 인테리어 디자인</p>
+    <div class="frost-cue"><i></i>스크롤하여 유리 닦기</div>
+  </div>
+  <span class="frost-edge"></span>
+</div>
+
+<header class="topbar">
+  <a class="brand" href="#intro" aria-label="ARON, 맨 위로"><span class="brand-name">ARON</span><span class="brand-sub">아론 디자인 · 피부과 인테리어</span></a>
+  <nav class="nav" aria-label="섹션">
+    <a href="#plan">공간 기획</a><a href="#materials">소재와 위생</a><a href="#branding">브랜딩</a><a href="#schedule">시공과 일정</a><a href="#inside">상담</a>
+  </nav>
+  <a class="cta-link" href="#inside">상담 신청</a>
+</header>
+
+<main>
+  <section id="intro" aria-label="인트로"></section>
+
+  <section id="build" aria-label="시공 과정">
+    <div class="build-sticky">
+      <div class="build-copy">
+        <p class="eyebrow">피부과 · 에스테틱 클리닉 인테리어</p>
+        <h1>빈 층 하나가<br>원장님의 이름이 되기까지.</h1>
+        <p class="hero-sub">콘크리트뿐인 빈 상가 한 층이 밤새 지어져, 개원일 아침 아론의 피부과로 문을 엽니다. 스크롤로 공정을 넘겨 보세요.</p>
+      </div>
+      <aside class="stages" aria-label="공정 진행">
+        <div class="stages-head"><span>개원 일지</span><span class="stages-day">D-56</span></div>
+        <div class="stages-bar"><i></i></div>
+        <ol>
+          <li><b>D-56</b><span>빈 공간 실측</span></li>
+          <li><b>D-49</b><span>평면 · 동선 설계</span></li>
+          <li><b>D-35</b><span>벽체 · 아치</span></li>
+          <li><b>D-21</b><span>조명 · 설비</span></li>
+          <li><b>D-10</b><span>마감 · 가구</span></li>
+          <li><b>D-Day</b><span>개원일 아침</span></li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <div id="orbit">
+    <section class="chapter" id="plan" aria-labelledby="t-plan"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">공간 기획</p>
+      <h2 id="t-plan">동선이 곧 진료의 질입니다.</h2>
+      <p>접수부터 상담, 시술, 수납까지 환자가 되돌아가지 않는 한 방향 동선을 그립니다. 기다리는 동안에도 다른 환자와 마주치지 않게 대기 공간을 나눕니다.</p>
+      <ul class="points"><li>단방향 환자 동선, 직원 동선 분리</li><li>개별 대기 포드로 시선 분리</li><li>장비 전원까지 고려한 시술실 배치</li></ul>
+    </article></div></section>
+
+    <section class="chapter chapter--right" id="materials" aria-labelledby="t-materials"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">소재와 위생</p>
+      <h2 id="t-materials">아름다움은 오래 깨끗해야 합니다.</h2>
+      <p>매일 소독하는 공간이라 관리하기 좋은 소재가 먼저입니다. 이음매를 줄이고 모서리를 곡면으로 처리해 먼지가 쌓일 틈을 없앱니다.</p>
+      <ul class="points"><li>트래버틴 패턴 대형 포세린 타일</li><li>항균 · 내오염 도장, 웜 화이트</li><li>샴페인 골드 금속과 간접 조명</li></ul>
+    </article></div></section>
+
+    <section class="chapter" id="branding" aria-labelledby="t-branding"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">브랜딩</p>
+      <h2 id="t-branding">간판에 불이 켜지는 순간까지.</h2>
+      <p>로고와 사인, 컬러와 소재, 안내 사인까지 하나의 언어로 맞춥니다. 문을 여는 순간 병원의 철학이 보이게 합니다.</p>
+      <ul class="points"><li>BI · 로고 사인 · 입구 파사드</li><li>브랜드 톤에 맞춘 마감 가이드</li><li>조도, 향, 음악까지 함께 설계</li></ul>
+    </article></div></section>
+
+    <section class="chapter chapter--right" id="schedule" aria-labelledby="t-schedule"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">시공과 일정</p>
+      <h2 id="t-schedule">개원일은 약속입니다.</h2>
+      <p>설계 단계부터 의료기관 개설과 소방 기준을 함께 검토하고, 매주 공정을 보고합니다. 일정과 예산 걱정은 아론이 맡습니다.</p>
+      <ul class="points"><li>기획 · 설계 4주, 시공 8주</li><li>주간 공정 보고</li><li>개원일에 맞춘 역산 공정표</li></ul>
+      <p class="sample-note">기간은 예시입니다. 실제 아론의 일정으로 바꿔 주세요.</p>
+    </article></div></section>
+
+    <section class="chapter chapter--right" id="portfolio" aria-labelledby="t-portfolio"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">경험</p>
+      <h2 id="t-portfolio">진료 방식이 다르면 공간도 달라야 합니다.</h2>
+      <p>레이저 중심인지, 리프팅과 상담 중심인지에 따라 시술실의 수와 크기, 대기의 방식이 바뀝니다. 원장님의 진료 방식을 먼저 듣고 공간을 그립니다.</p>
+      <ul class="points"><li>진료 과목 · 장비 목록 기반 설계</li><li>후보 공간 사전 검토</li><li>개원 후 유지보수까지</li></ul>
+    </article></div></section>
+  </div>
+
+  <section id="inside" aria-labelledby="t-inside">
+    <div class="inside-sticky">
+      <div class="finale">
+        <h2 id="t-inside">들어오세요.</h2>
+        <p>원장님의 첫 병원을 함께 걸어 들어가 봅니다. 임대 계약 전이라도 괜찮습니다. 후보 공간의 도면이나 사진을 보내 주시면 배치와 공정을 먼저 그려 드립니다.</p>
+        <a class="btn" href="mailto:hello@aron-design.example?subject=%ED%94%BC%EB%B6%80%EA%B3%BC%20%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4%20%EC%83%81%EB%8B%B4">공간 상담 신청 <span aria-hidden="true">→</span></a>
+        <p class="contact">hello@aron-design.example · 02-000-0000 (예시 연락처)</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot"><span>© ARON Design</span><span>V2 · 임시 영상(V1 3D 녹화본), 드리미나 영상으로 교체 예정</span></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+{
+  gsap.registerPlugin(ScrollTrigger);
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const video = document.getElementById('film');
+  const SRC = 'hero-sequence.mp4';
+
+  /* Load the film. A blob URL seeks anywhere without HTTP range support; fall back to a direct src. */
+  let duration = 0, ready = false;
+  function prime() {
+    duration = video.duration || 20; ready = true;
+    // hidden or never-played videos may not decode: let it start muted, then pause and scrub
+    const p = video.play(); if (p && p.then) p.then(() => video.pause()).catch(() => {}); else video.pause();
+  }
+  video.addEventListener('loadedmetadata', prime, { once: true });
+  fetch(SRC).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+    .then((b) => { video.src = URL.createObjectURL(b); })
+    .catch(() => { video.src = SRC; });
+
+  /* seek-chase: scroll sets a target time; each frame eases toward it and seeks only when the last seek is done */
+  let target = 0, shown = 0;
+  gsap.ticker.add(() => {
+    if (!ready) return;
+    shown += (target - shown) * (reduceMotion ? 1 : 0.18);
+    if (Math.abs(target - shown) < 0.002) shown = target;
+    if (!video.seeking && Math.abs(video.currentTime - shown) > 0.012) video.currentTime = shown;
+  });
+  const segment = (trigger, a, b, extra = {}) => ScrollTrigger.create({
+    trigger, start: 'top top', end: 'bottom bottom', ...extra,
+    onUpdate: (s) => { target = duration * (a + (b - a) * s.progress); extra.onProgress && extra.onProgress(s.progress); },
+  });
+
+  /* 1 frost wipe */
+  gsap.to('.frost', { clipPath: 'inset(0 0 100% 0)', ease: 'none', scrollTrigger: { trigger: '#intro', start: 'top top', end: 'bottom top', scrub: true } });
+  gsap.from('.build-copy > *', { autoAlpha: 0, y: 30, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: '#intro', start: '30% top', end: 'bottom top', scrub: true } });
+
+  /* 2 build: film 0 → 50% */
+  const items = [...document.querySelectorAll('.stages li')], dayEl = document.querySelector('.stages-day'), bar = document.querySelector('.stages-bar i');
+  segment('#build', 0, 0.5, {
+    onProgress: (p) => {
+      const k = Math.min(items.length - 1, Math.floor(p * items.length));
+      items.forEach((li, i) => li.classList.toggle('on', i === k));
+      dayEl.textContent = items[k].querySelector('b').textContent;
+      bar.style.transform = `scaleX(${p})`;
+    },
+  });
+  gsap.to('.build-copy', { autoAlpha: 0, y: -40, ease: 'power1.in', scrollTrigger: { trigger: '#build', start: '18% top', end: '34% top', scrub: true } });
+  gsap.to('.stages', { autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: '#build', start: '86% bottom', end: 'bottom bottom', scrub: true } });
+
+  /* 3 orbit: film 50 → 75%, panels arrive one by one */
+  segment('#orbit', 0.5, 0.75);
+  document.querySelectorAll('.chapter .panel').forEach((panel) => {
+    const kids = panel.children;
+    gsap.set(kids, { autoAlpha: 0, y: 26, filter: 'blur(6px)' });
+    ScrollTrigger.create({
+      trigger: panel.closest('.chapter'), start: 'top 60%', end: 'bottom 40%',
+      onToggle: (s) => gsap.to(kids, s.isActive
+        ? { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.9, stagger: 0.07, ease: 'power3.out', overwrite: true }
+        : { autoAlpha: 0, y: -18, filter: 'blur(6px)', duration: 0.4, stagger: 0.03, ease: 'power2.in', overwrite: true }),
+    });
+  });
+
+  /* 4 inside: film 75 → 100%, finale title */
+  segment('#inside', 0.75, 1);
+  gsap.set('.finale > *', { autoAlpha: 0, y: 24 });
+  gsap.to('.finale > *', { autoAlpha: 1, y: 0, stagger: 0.12, ease: 'power2.out', scrollTrigger: { trigger: '#inside', start: 'top -60%', end: 'top -100%', scrub: true } });
+
+  /* chrome: progress bar and nav state */
+  gsap.to('.progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
+  const links = [...document.querySelectorAll('.nav a')];
+  ['#plan', '#materials', '#branding', '#schedule', '#inside'].forEach((id, i) => ScrollTrigger.create({
+    trigger: id, start: 'top 55%', end: 'bottom 55%', onToggle: (s) => s.isActive && links.forEach((a, j) => a.classList.toggle('is-active', j === i)),
+  }));
+  ScrollTrigger.create({ trigger: '#build', start: 'top top', end: 'bottom 55%', onToggle: (s) => s.isActive && links.forEach((a) => a.classList.remove('is-active')) });
+  document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+    const t = document.querySelector(a.getAttribute('href')); if (!t) return;
+    e.preventDefault(); t.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  }));
+}
+</script>
+</body>
+</html>
