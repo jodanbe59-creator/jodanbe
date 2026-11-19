@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARON 피부과 인테리어</title>
+<meta name="description" content="빈 층 하나가 원장님의 이름이 되기까지. 아론 디자인의 피부과 인테리어 랜딩페이지 시안 두 가지.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ARON 피부과 인테리어 · 랜딩페이지 시안">
+<meta property="og:description" content="빈 층 하나가 원장님의 이름이 되기까지. V1 3D 버전과 V2 영상 버전.">
+<meta property="og:image" content="og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<style>
+/* Hub for the two drafts: dark night ground (the start of the build), ivory cards, champagne gold. */
+:root { --night: #10131b; --ivory: #f6f1ea; --ink: #2a2520; --soft: #6c635a; --gold: #b08d57; --gold-soft: #d8bf93; }
+* { box-sizing: border-box; min-width: 0; }
+body {
+  margin: 0; min-height: 100vh; min-height: 100svh; color: var(--ivory); word-break: keep-all;
+  font: 16px/1.7 "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  background: linear-gradient(180deg, rgba(16, 19, 27, 0.6), rgba(16, 19, 27, 0.92)), url("og.jpg") center / cover fixed, var(--night);
+  display: grid; place-items: center; padding: 48px max(5vw, 16px);
+}
+main { width: min(960px, 100%); }
+.mark { font-family: "Noto Serif KR", serif; font-size: 1.1rem; letter-spacing: 0.45em; color: var(--gold-soft); margin: 0 0 20px; }
+h1 { font-family: "Noto Serif KR", serif; font-weight: 300; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.25; margin: 0 0 14px; }
+.lede { margin: 0 0 36px; color: rgba(246, 241, 234, 0.8); max-width: 34em; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+a.card {
+  display: block; text-decoration: none; color: var(--ink); background: rgba(248, 244, 238, 0.94);
+  border-radius: 22px; padding: 28px 28px 24px; transition: transform .4s, box-shadow .4s;
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.6);
+}
+a.card:hover, a.card:focus-visible { transform: translateY(-4px); box-shadow: 0 30px 70px -28px rgba(0, 0, 0, 0.7); outline: none; }
+.tag { font-size: 0.875rem; color: var(--gold); margin: 0 0 6px; }
+.card h2 { font-family: "Noto Serif KR", serif; font-weight: 400; font-size: 1.6rem; margin: 0 0 10px; }
+.card p { margin: 0 0 18px; color: var(--soft); }
+.go { font-weight: 500; }
+.note { margin: 28px 0 0; font-size: 0.8125rem; color: rgba(246, 241, 234, 0.6); }
+@media (max-width: 640px) { .cards { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<main>
+  <p class="mark">ARON</p>
+  <h1>빈 층 하나가<br>원장님의 이름이 되기까지.</h1>
+  <p class="lede">아론 디자인 피부과 인테리어 랜딩페이지 시안입니다. 두 버전 모두 스크롤을 내리면 빈 상가 한 층이 피부과로 완성됩니다.</p>
+  <div class="cards">
+    <a class="card" href="/v1/">
+      <p class="tag">V1 · 3D</p>
+      <h2>실시간 3D 버전</h2>
+      <p>건축 모형처럼 공간이 지어지고, 섹션마다 카메라가 공간 곳곳을 비춥니다.</p>
+      <span class="go">보기 →</span>
+    </a>
+    <a class="card" href="/v2/">
+      <p class="tag">V2 · 영상</p>
+      <h2>시네마틱 영상 버전</h2>
+      <p>서리 낀 유리를 닦아내면, 스크롤에 맞춰 시공 영상이 흐르고 시술실로 들어갑니다.</p>
+      <span class="go">보기 →</span>
+    </a>
+  </div>
+  <p class="note">시안 단계입니다. V2의 영상은 임시본이며, 일정과 연락처는 예시입니다.</p>
+</main>
+</body>
+</html>
