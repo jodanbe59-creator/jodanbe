@@ -54,25 +54,35 @@ a { color: inherit; }
 
 /* header */
 .topbar {
-  position: fixed; top: 12px; left: 12px; right: 12px; z-index: 20;
-  display: flex; align-items: center; justify-content: space-between; gap: 20px;
-  padding: 12px clamp(14px, 2.4vw, 28px);
-  background: rgba(20, 18, 16, 0.38); border: 1px solid rgba(246, 241, 234, 0.12);
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 20;
+  width: max-content; max-width: calc(100% - 24px);
+  padding: 6px clamp(10px, 2vw, 18px);
+  background: rgba(20, 18, 16, 0.42); border: 1px solid rgba(246, 241, 234, 0.12);
   border-radius: 999px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
 }
-.brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
-.brand-name { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.42em; font-weight: 500; }
-.brand-sub { font-size: 0.8125rem; color: rgba(246, 241, 234, 0.7); }
-.nav { display: flex; gap: clamp(14px, 2.2vw, 30px); }
-.nav a { font-size: 0.875rem; text-decoration: none; color: rgba(246, 241, 234, 0.72); padding: 6px 0; position: relative; transition: color .4s; }
-.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--gold-soft); transform: scaleX(0); transition: transform .5s; }
-.nav a:hover, .nav a.is-active { color: var(--ivory); }
-.nav a.is-active::after { transform: scaleX(1); }
-.cta-link {
-  font-size: 0.875rem; text-decoration: none; color: var(--night); background: var(--gold-soft);
-  padding: 9px 18px; border-radius: 999px; transition: background .4s; white-space: nowrap;
+.menu { display: flex; align-items: center; justify-content: center; gap: clamp(6px, 2.6vw, 34px); }
+.menu-link, .menu .brand-name {
+  all: unset; box-sizing: border-box; cursor: pointer; position: relative;
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 clamp(6px, 1vw, 10px);
+  font-size: 0.8125rem; letter-spacing: 0.16em; color: rgba(246, 241, 234, 0.78); transition: color .3s;
 }
-.cta-link:hover { background: var(--ivory); }
+.menu .brand-name { font-family: "Cormorant Garamond", var(--font-display); font-size: 1.2rem; letter-spacing: 0.4em; color: var(--gold-soft); padding-right: 0.2em; }
+.menu-link::after { content: ""; position: absolute; left: clamp(6px, 1vw, 10px); right: clamp(6px, 1vw, 10px); bottom: 9px; height: 1px; background: var(--gold-soft); transform: scaleX(0); transition: transform .4s; }
+.menu-link:hover, .menu-link.is-active, .menu-link[aria-expanded="true"] { color: var(--ivory); }
+.menu-link:hover::after, .menu-link.is-active::after, .menu-link[aria-expanded="true"]::after { transform: scaleX(1); }
+.menu-link:focus-visible, .menu .brand-name:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
+.menu-link .caret { margin-left: 6px; font-size: 0.6rem; transition: transform .3s; }
+.menu-link[aria-expanded="true"] .caret { transform: rotate(180deg); }
+.has-sub { position: relative; }
+.sub {
+  position: absolute; top: calc(100% + 10px); left: 50%; min-width: 180px; padding: 8px;
+  background: rgba(20, 18, 16, 0.82); border: 1px solid rgba(246, 241, 234, 0.12); border-radius: 16px;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  display: grid; opacity: 0; visibility: hidden; transform: translate(-50%, -6px); transition: opacity .3s, transform .3s, visibility .3s;
+}
+.has-sub.open .sub { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.sub a { display: flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 10px; text-decoration: none; font-size: 0.8125rem; letter-spacing: 0.16em; color: rgba(246, 241, 234, 0.8); transition: background .25s, color .25s; }
+.sub a:hover, .sub a:focus-visible { background: rgba(246, 241, 234, 0.08); color: var(--ivory); outline: none; }
 
 /* hero */
 main { position: relative; z-index: 2; }
@@ -161,8 +171,6 @@ h1 {
 }
 
 .display-en { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; letter-spacing: 0; }
-.nav a { letter-spacing: 0.14em; font-size: 0.8125rem; }
-.cta-link { letter-spacing: 0.14em; font-size: 0.8125rem; }
 .projects { position: relative; z-index: 2; background: var(--ivory); color: var(--ink); padding: clamp(56px, 8vw, 110px) var(--gutter); }
 .projects-head { max-width: 1240px; margin: 0 auto 32px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; }
 .projects-head .eyebrow { color: var(--gold); letter-spacing: 0.14em; }
@@ -176,6 +184,7 @@ h1 {
 .card-img { aspect-ratio: 4 / 3; display: grid; place-items: center; background: linear-gradient(135deg, #e7dfd3, #d8cdbd); color: var(--ink-soft); font-size: 0.875rem; }
 .card-body { padding: 14px 18px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 0.9375rem; }
 .card-cat { font-size: 0.75rem; letter-spacing: 0.14em; color: var(--gold); }
+.projects-empty { max-width: 1240px; margin: 0 auto; padding: 48px 0; text-align: center; color: var(--ink-soft); border: 1px dashed var(--rule); border-radius: 18px; }
 .projects-note { max-width: 1240px; margin: 18px auto 0; font-size: 0.8125rem; color: var(--ink-soft); }
 .site-foot { display: block; padding: clamp(48px, 7vw, 90px) var(--gutter) 28px; }
 .foot-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
@@ -184,10 +193,13 @@ h1 {
 .foot-base { max-width: 1240px; margin: 48px auto 0; padding-top: 20px; border-top: 1px solid rgba(246, 241, 234, 0.1); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
 @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
 @media (max-width: 480px) { .grid { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 960px) { .nav { display: none; } }
 @media (max-width: 760px) {
-  .topbar { top: 8px; left: 8px; right: 8px; padding: 10px 14px; }
-  .brand-sub { display: none; }
+  .topbar { top: 8px; padding: 4px 8px; }
+  .menu { gap: 0; }
+  .menu-link { font-size: 0.72rem; letter-spacing: 0.06em; padding: 0 8px; }
+  .menu-link::after { left: 8px; right: 8px; }
+  .menu-link .caret { margin-left: 3px; }
+  .menu .brand-name { font-size: 1.05rem; letter-spacing: 0.24em; }
   .hero-sticky { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-bottom: 18px; align-content: end; }
   .hero-sub { font-size: 1rem; margin-bottom: 14px; }
   .scroll-cue { width: 40px; height: 54px; }
@@ -214,15 +226,20 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 <div class="scrim"></div>
 
 <header class="topbar">
-  <a class="brand" href="#hero" aria-label="ARON, 맨 위로"><span class="brand-name">ARON</span><span class="brand-sub">아론 디자인 · 병의원 인테리어</span></a>
-  <nav class="nav" aria-label="메뉴">
-    <a href="#survey">INTERIOR</a>
-    <a href="#projects" data-filter="all">ALL</a>
-    <a href="#projects" data-filter="clinic">CLINIC</a>
-    <a href="#projects" data-filter="commercial">COMMERCIAL</a>
-    <a href="#projects" data-filter="hospital">HOSPITAL</a>
+  <nav class="menu" aria-label="메뉴">
+    <a class="brand-name" href="#hero" aria-label="ARON, 맨 위로">ARON</a>
+    <div class="has-sub">
+      <button type="button" class="menu-link" aria-expanded="false" aria-controls="sub-interior">INTERIOR<span class="caret" aria-hidden="true">▾</span></button>
+      <div class="sub" id="sub-interior">
+        <a href="#projects" data-filter="all">ALL</a>
+        <a href="#projects" data-filter="clinic">CLINIC</a>
+        <a href="#projects" data-filter="commercial">COMMERCIAL</a>
+        <a href="#projects" data-filter="hospital">HOSPITAL</a>
+      </div>
+    </div>
+    <a class="menu-link" href="#contact">CONTACT</a>
+    <a class="menu-link" href="#follow">FOLLOW</a>
   </nav>
-  <a class="cta-link" href="#contact">CONTACT</a>
 </header>
 
 <main>
@@ -336,21 +353,18 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
     </div>
   </div>
   <div class="grid">
-    <article class="card" data-cat="clinic"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">CLINIC</span></div></article>
-    <article class="card" data-cat="hospital"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">HOSPITAL</span></div></article>
-    <article class="card" data-cat="commercial"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">COMMERCIAL</span></div></article>
-    <article class="card" data-cat="clinic"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">CLINIC</span></div></article>
-    <article class="card" data-cat="hospital"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">HOSPITAL</span></div></article>
-    <article class="card" data-cat="commercial"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">COMMERCIAL</span></div></article>
+    <article class="card" data-cat="hospital"><div class="card-img">사진 준비 중</div><div class="card-body"><span>경희온생한의원</span><span class="card-cat">HOSPITAL</span></div></article>
+    <article class="card" data-cat="hospital"><div class="card-img">사진 준비 중</div><div class="card-body"><span>광명마디원정형외과</span><span class="card-cat">HOSPITAL</span></div></article>
+    <article class="card" data-cat="hospital"><div class="card-img">사진 준비 중</div><div class="card-body"><span>다산에이아이정형외과</span><span class="card-cat">HOSPITAL</span></div></article>
   </div>
-  <p class="projects-note">포트폴리오 사진과 프로젝트명은 추후 기재 예정입니다.</p>
+  <p class="projects-empty" hidden>이 분류의 프로젝트는 준비 중입니다.</p>
 </section>
 
 <footer class="site-foot" id="contact">
   <div class="foot-grid">
     <div><h3>INQUIRIES</h3><p>추후 기재</p></div>
     <div><h3>LOCATION</h3><p>추후 기재</p></div>
-    <div><h3>FOLLOW</h3><p>추후 기재</p></div>
+    <div id="follow"><h3>FOLLOW</h3><p>추후 기재</p></div>
   </div>
   <div class="foot-base"><span>© ARON Design</span><span>V1 · 실시간 3D 렌더링</span></div>
 </footer>
@@ -816,7 +830,7 @@ if (!CAPTURE) {
 /* ---------- chapters ---------- */
 const handover = CAPTURE ? { progress: 0 } : ScrollTrigger.create({ trigger: '#survey', start: 'top bottom', end: 'top 35%' });
 const chapters = gsap.utils.toArray('.chapter');
-const navLinks = gsap.utils.toArray('.nav a');
+const navLinks = gsap.utils.toArray('.has-sub > .menu-link');
 chapters.forEach((ch) => gsap.set(ch.querySelectorAll('.reveal'), { autoAlpha: 0, y: 30 }));
 function setNav(i) { navLinks.forEach((a, j) => a.classList.toggle('is-active', j === 0 && i >= 0)); }   // INTERIOR covers the five process chapters
 function activate(i) {
@@ -846,9 +860,20 @@ const cards = [...document.querySelectorAll('.card')], fbtns = [...document.quer
 function setFilter(f) {
   fbtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === f)));
   cards.forEach((c) => { c.hidden = f !== 'all' && c.dataset.cat !== f; });
+  document.querySelector('.projects-empty').hidden = cards.some((c) => !c.hidden);
 }
 fbtns.forEach((b) => b.addEventListener('click', () => setFilter(b.dataset.filter)));
-document.querySelectorAll('.nav a[data-filter]').forEach((a) => a.addEventListener('click', () => setFilter(a.dataset.filter)));
+document.querySelectorAll('.sub a[data-filter]').forEach((a) => a.addEventListener('click', () => { setFilter(a.dataset.filter); closeSub(); }));
+
+/* ---------- INTERIOR submenu: click/tap to toggle, hover on desktop, Esc or outside click closes ---------- */
+const hasSub = document.querySelector('.has-sub'), subBtn = hasSub.querySelector('.menu-link');
+function openSub() { hasSub.classList.add('open'); subBtn.setAttribute('aria-expanded', 'true'); }
+function closeSub() { hasSub.classList.remove('open'); subBtn.setAttribute('aria-expanded', 'false'); }
+let hoverOpenedAt = 0;   // a click right after hover-open should keep the menu open, not toggle it shut
+subBtn.addEventListener('click', () => (hasSub.classList.contains('open') && performance.now() - hoverOpenedAt > 500 ? closeSub() : openSub()));
+if (!isCoarse) { hasSub.addEventListener('mouseenter', () => { if (!hasSub.classList.contains('open')) hoverOpenedAt = performance.now(); openSub(); }); hasSub.addEventListener('mouseleave', closeSub); }
+document.addEventListener('click', (e) => { if (!hasSub.contains(e.target)) closeSub(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeSub(); subBtn.focus(); } });
 
 /* ---------- frame loop ---------- */
 const camPos = new THREE.Vector3(), camTarget = new THREE.Vector3(), wantPos = new THREE.Vector3(), wantTarget = new THREE.Vector3();
