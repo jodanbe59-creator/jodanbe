@@ -7,7 +7,7 @@
 <meta name="description" content="아론 디자인: 피부과 인테리어. 스크롤하면 빈 상가 한 층이 프라이빗 피부과로 완성됩니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
 <style>
 /* VOICE  calm, private, clinical-luxury.
    IDEA   frosted clinic glass you wipe clear, then a film of the clinic being built that you scrub with scroll.
@@ -107,6 +107,30 @@ h1 { font-family: var(--font-display); font-weight: 300; margin: 0 0 22px; font-
 
 .site-foot { position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding: 26px var(--gutter); background: var(--night); border-top: 1px solid rgba(246, 241, 234, 0.1); font-size: 0.8125rem; color: rgba(246, 241, 234, 0.6); }
 
+.display-en { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; letter-spacing: 0; }
+.nav a { letter-spacing: 0.14em; font-size: 0.8125rem; }
+.cta-link { letter-spacing: 0.14em; font-size: 0.8125rem; }
+.projects { position: relative; z-index: 2; background: var(--ivory); color: var(--ink); padding: clamp(56px, 8vw, 110px) var(--gutter); }
+.projects-head { max-width: 1240px; margin: 0 auto 32px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; }
+.projects-head .eyebrow { color: var(--gold); letter-spacing: 0.14em; }
+.projects-head h2 { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; margin: 0; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filters button { font: inherit; font-size: 0.8125rem; letter-spacing: 0.14em; padding: 10px 18px; min-height: 44px; border-radius: 999px; border: 1px solid var(--rule); background: transparent; color: var(--ink); cursor: pointer; transition: background .3s, color .3s; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+.grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.card { border-radius: 18px; overflow: hidden; background: #ece5da; }
+.card[hidden] { display: none; }
+.card-img { aspect-ratio: 4 / 3; display: grid; place-items: center; background: linear-gradient(135deg, #e7dfd3, #d8cdbd); color: var(--ink-soft); font-size: 0.875rem; }
+.card-body { padding: 14px 18px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 0.9375rem; }
+.card-cat { font-size: 0.75rem; letter-spacing: 0.14em; color: var(--gold); }
+.projects-note { max-width: 1240px; margin: 18px auto 0; font-size: 0.8125rem; color: var(--ink-soft); }
+.site-foot { display: block; padding: clamp(48px, 7vw, 90px) var(--gutter) 28px; }
+.foot-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.foot-grid h3 { margin: 0 0 12px; font-size: 0.8125rem; letter-spacing: 0.2em; font-weight: 500; color: var(--gold-soft); }
+.foot-grid p { margin: 0; color: rgba(246, 241, 234, 0.5); font-size: 0.9375rem; }
+.foot-base { max-width: 1240px; margin: 48px auto 0; padding-top: 20px; border-top: 1px solid rgba(246, 241, 234, 0.1); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+@media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+@media (max-width: 480px) { .grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 960px) { .nav { display: none; } }
 @media (max-width: 760px) {
   .topbar { top: 8px; left: 8px; right: 8px; padding: 10px 14px; }
@@ -141,11 +165,15 @@ h1 { font-family: var(--font-display); font-weight: 300; margin: 0 0 22px; font-
 </div>
 
 <header class="topbar">
-  <a class="brand" href="#intro" aria-label="ARON, 맨 위로"><span class="brand-name">ARON</span><span class="brand-sub">아론 디자인 · 피부과 인테리어</span></a>
-  <nav class="nav" aria-label="섹션">
-    <a href="#plan">공간 기획</a><a href="#materials">소재와 위생</a><a href="#branding">브랜딩</a><a href="#schedule">시공과 일정</a><a href="#inside">상담</a>
+  <a class="brand" href="#intro" aria-label="ARON, 맨 위로"><span class="brand-name">ARON</span><span class="brand-sub">아론 디자인 · 병의원 인테리어</span></a>
+  <nav class="nav" aria-label="메뉴">
+    <a href="#survey">INTERIOR</a>
+    <a href="#projects" data-filter="all">ALL</a>
+    <a href="#projects" data-filter="clinic">CLINIC</a>
+    <a href="#projects" data-filter="commercial">COMMERCIAL</a>
+    <a href="#projects" data-filter="hospital">HOSPITAL</a>
   </nav>
-  <a class="cta-link" href="#inside">상담 신청</a>
+  <a class="cta-link" href="#contact">CONTACT</a>
 </header>
 
 <main>
@@ -154,8 +182,8 @@ h1 { font-family: var(--font-display); font-weight: 300; margin: 0 0 22px; font-
   <section id="build" aria-label="시공 과정">
     <div class="build-sticky">
       <div class="build-copy">
-        <p class="eyebrow">피부과 · 에스테틱 클리닉 인테리어</p>
-        <h1>빈 층 하나가<br>원장님의 이름이 되기까지.</h1>
+        <p class="eyebrow">CLINIC &amp; HOSPITAL INTERIOR</p>
+        <h1 class="display-en">More than a space.<br>A place where <em>care</em> begins.</h1>
         <p class="hero-sub">콘크리트뿐인 빈 상가 한 층이 밤새 지어져, 개원일 아침 아론의 피부과로 문을 엽니다. 스크롤로 공정을 넘겨 보세요.</p>
       </div>
       <aside class="stages" aria-label="공정 진행">
@@ -174,40 +202,36 @@ h1 { font-family: var(--font-display); font-weight: 300; margin: 0 0 22px; font-
   </section>
 
   <div id="orbit">
-    <section class="chapter" id="plan" aria-labelledby="t-plan"><div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow">공간 기획</p>
+    <section class="chapter" id="survey" aria-labelledby="t-survey"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">상담 · 실측</p>
+      <h2 id="t-survey">공간을 보기 전에, 진료를 먼저 듣습니다.</h2>
+      <p>진료 과목과 주력 시술, 들여올 장비, 함께 일할 인원부터 여쭙니다. 그다음 후보 공간을 직접 실측하고, 병원으로 쓸 수 있는 건물인지 먼저 확인합니다.</p>
+      <ul class="points"><li>진료 과목 · 장비 · 인원 상담</li><li>평면 · 층고 · 기둥 현장 실측</li><li>전기 용량 · 급배수 · 소방 확인, 임대 계약 전 검토</li></ul>
+    </article></div></section>
+    <section class="chapter chapter--right" id="plan" aria-labelledby="t-plan"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">공간 설계</p>
       <h2 id="t-plan">동선이 곧 진료의 질입니다.</h2>
-      <p>접수부터 상담, 시술, 수납까지 환자가 되돌아가지 않는 한 방향 동선을 그립니다. 기다리는 동안에도 다른 환자와 마주치지 않게 대기 공간을 나눕니다.</p>
-      <ul class="points"><li>단방향 환자 동선, 직원 동선 분리</li><li>개별 대기 포드로 시선 분리</li><li>장비 전원까지 고려한 시술실 배치</li></ul>
+      <p>접수부터 상담, 시술, 수납까지 환자가 되돌아가지 않는 한 방향 동선을 그립니다. 기다리는 동안에도 다른 환자와 마주치지 않게 공간을 나눕니다.</p>
+      <ul class="points"><li>접수 · 대기 · 상담 · 시술 · 원장실 조닝</li><li>환자 동선과 직원 동선 분리</li><li>의료기관 시설 기준 · 피난 동선 검토</li></ul>
     </article></div></section>
-
-    <section class="chapter chapter--right" id="materials" aria-labelledby="t-materials"><div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow">소재와 위생</p>
-      <h2 id="t-materials">아름다움은 오래 깨끗해야 합니다.</h2>
-      <p>매일 소독하는 공간이라 관리하기 좋은 소재가 먼저입니다. 이음매를 줄이고 모서리를 곡면으로 처리해 먼지가 쌓일 틈을 없앱니다.</p>
-      <ul class="points"><li>트래버틴 패턴 대형 포세린 타일</li><li>항균 · 내오염 도장, 웜 화이트</li><li>샴페인 골드 금속과 간접 조명</li></ul>
+    <section class="chapter" id="design" aria-labelledby="t-design"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">디자인 · 마감재</p>
+      <h2 id="t-design">공사 전에, 완성된 병원을 먼저 보여 드립니다.</h2>
+      <p>3D 투시도로 완성된 모습을 미리 확인하고, 실제 마감재 샘플을 만져 보며 고릅니다. 매일 소독하는 공간이라 관리하기 좋은 소재를 먼저 제안합니다.</p>
+      <ul class="points"><li>주요 공간 3D 투시도</li><li>바닥 · 벽 · 금속 · 조명 실물 샘플 보드</li><li>항균 도장 · 이음매 최소화 · 병원 로고 사인</li></ul>
     </article></div></section>
-
-    <section class="chapter" id="branding" aria-labelledby="t-branding"><div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow">브랜딩</p>
-      <h2 id="t-branding">간판에 불이 켜지는 순간까지.</h2>
-      <p>로고와 사인, 컬러와 소재, 안내 사인까지 하나의 언어로 맞춥니다. 문을 여는 순간 병원의 철학이 보이게 합니다.</p>
-      <ul class="points"><li>BI · 로고 사인 · 입구 파사드</li><li>브랜드 톤에 맞춘 마감 가이드</li><li>조도, 향, 음악까지 함께 설계</li></ul>
-    </article></div></section>
-
-    <section class="chapter chapter--right" id="schedule" aria-labelledby="t-schedule"><div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow">시공과 일정</p>
-      <h2 id="t-schedule">개원일은 약속입니다.</h2>
-      <p>설계 단계부터 의료기관 개설과 소방 기준을 함께 검토하고, 매주 공정을 보고합니다. 일정과 예산 걱정은 아론이 맡습니다.</p>
-      <ul class="points"><li>기획 · 설계 4주, 시공 8주</li><li>주간 공정 보고</li><li>개원일에 맞춘 역산 공정표</li></ul>
+    <section class="chapter chapter--right" id="build" aria-labelledby="t-build"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">시공 · 공정 관리</p>
+      <h2 id="t-build">개원일은 약속입니다.</h2>
+      <p>철거부터 준공까지 공정표대로 진행하고, 매주 사진과 함께 진행 상황을 보고합니다. 전기, 설비, 소방, 의료 장비 설치까지 한 팀이 맞춥니다.</p>
+      <ul class="points"><li>설계 · 디자인 4주, 시공 8주</li><li>매주 사진 공정 보고</li><li>개원일에서 거꾸로 짜는 공정표</li></ul>
       <p class="sample-note">기간은 예시입니다. 실제 아론의 일정으로 바꿔 주세요.</p>
     </article></div></section>
-
-    <section class="chapter chapter--right" id="portfolio" aria-labelledby="t-portfolio"><div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow">경험</p>
-      <h2 id="t-portfolio">진료 방식이 다르면 공간도 달라야 합니다.</h2>
-      <p>레이저 중심인지, 리프팅과 상담 중심인지에 따라 시술실의 수와 크기, 대기의 방식이 바뀝니다. 원장님의 진료 방식을 먼저 듣고 공간을 그립니다.</p>
-      <ul class="points"><li>진료 과목 · 장비 목록 기반 설계</li><li>후보 공간 사전 검토</li><li>개원 후 유지보수까지</li></ul>
+    <section class="chapter" id="care" aria-labelledby="t-care"><div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow">준공 · 사후관리</p>
+      <h2 id="t-care">문을 연 다음 날에도, 아론이 곁에 있습니다.</h2>
+      <p>준공 검사와 개원 준비를 함께 마무리하고, 운영하면서 생기는 하자와 보수도 책임지고 챙깁니다.</p>
+      <ul class="points"><li>준공 검사 · 개원 준비 지원</li><li>하자 보수 · 유지관리</li><li>확장 · 리뉴얼 상담</li></ul>
     </article></div></section>
   </div>
 
@@ -216,14 +240,41 @@ h1 { font-family: var(--font-display); font-weight: 300; margin: 0 0 22px; font-
       <div class="finale">
         <h2 id="t-inside">들어오세요.</h2>
         <p>원장님의 첫 병원을 함께 걸어 들어가 봅니다. 임대 계약 전이라도 괜찮습니다. 후보 공간의 도면이나 사진을 보내 주시면 배치와 공정을 먼저 그려 드립니다.</p>
-        <a class="btn" href="mailto:hello@aron-design.example?subject=%ED%94%BC%EB%B6%80%EA%B3%BC%20%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4%20%EC%83%81%EB%8B%B4">공간 상담 신청 <span aria-hidden="true">→</span></a>
-        <p class="contact">hello@aron-design.example · 02-000-0000 (예시 연락처)</p>
+        <a class="btn" href="#contact">문의하기 <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="site-foot"><span>© ARON Design</span><span>V2 · 임시 영상(V1 3D 녹화본), 드리미나 영상으로 교체 예정</span></footer>
+<section class="projects" id="projects" aria-labelledby="t-projects">
+  <div class="projects-head">
+    <div><p class="eyebrow">PROJECTS</p><h2 id="t-projects">Selected work</h2></div>
+    <div class="filters" role="group" aria-label="프로젝트 분류">
+      <button type="button" data-filter="all" aria-pressed="true">ALL</button>
+      <button type="button" data-filter="clinic" aria-pressed="false">CLINIC</button>
+      <button type="button" data-filter="commercial" aria-pressed="false">COMMERCIAL</button>
+      <button type="button" data-filter="hospital" aria-pressed="false">HOSPITAL</button>
+    </div>
+  </div>
+  <div class="grid">
+    <article class="card" data-cat="clinic"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">CLINIC</span></div></article>
+    <article class="card" data-cat="hospital"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">HOSPITAL</span></div></article>
+    <article class="card" data-cat="commercial"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">COMMERCIAL</span></div></article>
+    <article class="card" data-cat="clinic"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">CLINIC</span></div></article>
+    <article class="card" data-cat="hospital"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">HOSPITAL</span></div></article>
+    <article class="card" data-cat="commercial"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">COMMERCIAL</span></div></article>
+  </div>
+  <p class="projects-note">포트폴리오 사진과 프로젝트명은 추후 기재 예정입니다.</p>
+</section>
+
+<footer class="site-foot" id="contact">
+  <div class="foot-grid">
+    <div><h3>INQUIRIES</h3><p>추후 기재</p></div>
+    <div><h3>LOCATION</h3><p>추후 기재</p></div>
+    <div><h3>FOLLOW</h3><p>추후 기재</p></div>
+  </div>
+  <div class="foot-base"><span>© ARON Design</span><span>V2 · 임시 영상(V1 3D 녹화본), 드리미나 영상으로 교체 예정</span></div>
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -294,13 +345,19 @@ h1 { font-family: var(--font-display); font-weight: 300; margin: 0 0 22px; font-
   gsap.set('.finale > *', { autoAlpha: 0, y: 24 });
   gsap.to('.finale > *', { autoAlpha: 1, y: 0, stagger: 0.12, ease: 'power2.out', scrollTrigger: { trigger: '#inside', start: 'top -60%', end: 'top -100%', scrub: true } });
 
+  /* ---------- portfolio filter (menu ALL / CLINIC / COMMERCIAL / HOSPITAL) ---------- */
+  const cards = [...document.querySelectorAll('.card')], fbtns = [...document.querySelectorAll('.filters button')];
+  function setFilter(f) {
+    fbtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === f)));
+    cards.forEach((c) => { c.hidden = f !== 'all' && c.dataset.cat !== f; });
+  }
+  fbtns.forEach((b) => b.addEventListener('click', () => setFilter(b.dataset.filter)));
+  document.querySelectorAll('.nav a[data-filter]').forEach((a) => a.addEventListener('click', () => setFilter(a.dataset.filter)));
+
   /* chrome: progress bar and nav state */
   gsap.to('.progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
-  const links = [...document.querySelectorAll('.nav a')];
-  ['#plan', '#materials', '#branding', '#schedule', '#inside'].forEach((id, i) => ScrollTrigger.create({
-    trigger: id, start: 'top 55%', end: 'bottom 55%', onToggle: (s) => s.isActive && links.forEach((a, j) => a.classList.toggle('is-active', j === i)),
-  }));
-  ScrollTrigger.create({ trigger: '#build', start: 'top top', end: 'bottom 55%', onToggle: (s) => s.isActive && links.forEach((a) => a.classList.remove('is-active')) });
+  const links = [...document.querySelectorAll('.nav a')];   // INTERIOR lights up across the five process chapters
+  ScrollTrigger.create({ trigger: '#orbit', start: 'top 55%', end: 'bottom 55%', onToggle: (s) => links[0].classList.toggle('is-active', s.isActive) });
   document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
     const t = document.querySelector(a.getAttribute('href')); if (!t) return;
     e.preventDefault(); t.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });

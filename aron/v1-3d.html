@@ -7,7 +7,7 @@
 <meta name="description" content="아론 디자인: 피부과 인테리어. 스크롤하면 빈 상가 한 층이 프라이빗 피부과로 완성됩니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
 <style>
 /* VOICE  calm, private, clinical-luxury: few hues, lots of air.
    IDEA   an architect's cutaway model of one clinic floor, built in front of the client.
@@ -154,6 +154,30 @@ h1 {
   font-size: 0.8125rem; color: rgba(246, 241, 234, 0.6);
 }
 
+.display-en { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; letter-spacing: 0; }
+.nav a { letter-spacing: 0.14em; font-size: 0.8125rem; }
+.cta-link { letter-spacing: 0.14em; font-size: 0.8125rem; }
+.projects { position: relative; z-index: 2; background: var(--ivory); color: var(--ink); padding: clamp(56px, 8vw, 110px) var(--gutter); }
+.projects-head { max-width: 1240px; margin: 0 auto 32px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; }
+.projects-head .eyebrow { color: var(--gold); letter-spacing: 0.14em; }
+.projects-head h2 { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; margin: 0; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filters button { font: inherit; font-size: 0.8125rem; letter-spacing: 0.14em; padding: 10px 18px; min-height: 44px; border-radius: 999px; border: 1px solid var(--rule); background: transparent; color: var(--ink); cursor: pointer; transition: background .3s, color .3s; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+.grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.card { border-radius: 18px; overflow: hidden; background: #ece5da; }
+.card[hidden] { display: none; }
+.card-img { aspect-ratio: 4 / 3; display: grid; place-items: center; background: linear-gradient(135deg, #e7dfd3, #d8cdbd); color: var(--ink-soft); font-size: 0.875rem; }
+.card-body { padding: 14px 18px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 0.9375rem; }
+.card-cat { font-size: 0.75rem; letter-spacing: 0.14em; color: var(--gold); }
+.projects-note { max-width: 1240px; margin: 18px auto 0; font-size: 0.8125rem; color: var(--ink-soft); }
+.site-foot { display: block; padding: clamp(48px, 7vw, 90px) var(--gutter) 28px; }
+.foot-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.foot-grid h3 { margin: 0 0 12px; font-size: 0.8125rem; letter-spacing: 0.2em; font-weight: 500; color: var(--gold-soft); }
+.foot-grid p { margin: 0; color: rgba(246, 241, 234, 0.5); font-size: 0.9375rem; }
+.foot-base { max-width: 1240px; margin: 48px auto 0; padding-top: 20px; border-top: 1px solid rgba(246, 241, 234, 0.1); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+@media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+@media (max-width: 480px) { .grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 960px) { .nav { display: none; } }
 @media (max-width: 760px) {
   .topbar { top: 8px; left: 8px; right: 8px; padding: 10px 14px; }
@@ -183,27 +207,27 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 <div class="scrim"></div>
 
 <header class="topbar">
-  <a class="brand" href="#hero" aria-label="ARON, 맨 위로"><span class="brand-name">ARON</span><span class="brand-sub">아론 디자인 · 피부과 인테리어</span></a>
-  <nav class="nav" aria-label="섹션">
-    <a href="#plan">공간 기획</a>
-    <a href="#materials">소재와 위생</a>
-    <a href="#branding">브랜딩</a>
-    <a href="#schedule">시공과 일정</a>
-    <a href="#consult">상담</a>
+  <a class="brand" href="#hero" aria-label="ARON, 맨 위로"><span class="brand-name">ARON</span><span class="brand-sub">아론 디자인 · 병의원 인테리어</span></a>
+  <nav class="nav" aria-label="메뉴">
+    <a href="#survey">INTERIOR</a>
+    <a href="#projects" data-filter="all">ALL</a>
+    <a href="#projects" data-filter="clinic">CLINIC</a>
+    <a href="#projects" data-filter="commercial">COMMERCIAL</a>
+    <a href="#projects" data-filter="hospital">HOSPITAL</a>
   </nav>
-  <a class="cta-link" href="#consult">상담 신청</a>
+  <a class="cta-link" href="#contact">CONTACT</a>
 </header>
 
 <main>
   <section id="hero" aria-label="소개">
     <div class="hero-sticky">
       <div class="hero-copy">
-        <p class="eyebrow">피부과 · 에스테틱 클리닉 인테리어</p>
-        <h1>
-          <span class="hero-line"><span>빈 층 하나가</span></span>
-          <span class="hero-line"><span>원장님의 이름이 되기까지.</span></span>
+        <p class="eyebrow">CLINIC &amp; HOSPITAL INTERIOR</p>
+        <h1 class="display-en">
+          <span class="hero-line"><span>More than a space.</span></span>
+          <span class="hero-line"><span>A place where <em>care</em> begins.</span></span>
         </h1>
-        <p class="hero-sub">스크롤을 내려 보세요. 콘크리트뿐인 빈 상가 한 층이 밤새 지어져, 개원일 아침 아론의 피부과로 문을 엽니다.</p>
+        <p class="hero-sub">스크롤을 내려 보세요. 콘크리트뿐인 빈 상가 한 층이 밤새 지어져, 개원일 아침 하나의 병원으로 문을 엽니다.</p>
         <div class="scroll-cue"><i></i>스크롤하여 시공 시작</div>
       </div>
       <aside class="build-log" aria-label="공정 진행">
@@ -221,78 +245,104 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
     </div>
   </section>
 
-  <section class="chapter" id="plan" aria-labelledby="t-plan">
+  <section class="chapter" id="survey" aria-labelledby="t-survey">
     <div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow reveal">공간 기획</p>
+      <p class="eyebrow reveal">상담 · 실측</p>
+      <h2 class="reveal" id="t-survey">공간을 보기 전에, 진료를 먼저 듣습니다.</h2>
+      <p class="lede reveal">진료 과목과 주력 시술, 들여올 장비, 함께 일할 인원부터 여쭙니다. 그다음 후보 공간을 직접 실측하고, 병원으로 쓸 수 있는 건물인지 먼저 확인해 드립니다.</p>
+      <dl class="spec reveal">
+        <div><dt>진료 상담</dt><dd>과목, 주력 시술, 장비 목록, 인원</dd></div>
+        <div><dt>현장 실측</dt><dd>평면, 층고, 기둥, 창 위치</dd></div>
+        <div><dt>설비 확인</dt><dd>전기 용량, 급배수, 공조, 소방</dd></div>
+        <div><dt>입지 검토</dt><dd>임대 계약 전 사전 검토 가능</dd></div>
+      </dl>
+    </article></div>
+  </section>
+
+  <section class="chapter chapter--right" id="plan" aria-labelledby="t-plan">
+    <div class="chapter-sticky"><article class="panel">
+      <p class="eyebrow reveal">공간 설계</p>
       <h2 class="reveal" id="t-plan">동선이 곧 진료의 질입니다.</h2>
-      <p class="lede reveal">접수부터 상담, 시술, 수납까지 환자가 되돌아가지 않는 한 방향 동선을 그립니다. 직원 동선은 뒤편으로 분리하고, 기다리는 동안 다른 환자와 마주치지 않도록 대기 공간을 나눕니다.</p>
+      <p class="lede reveal">접수부터 상담, 시술, 수납까지 환자가 되돌아가지 않는 한 방향 동선을 그립니다. 직원 동선은 뒤편으로 분리하고, 대기 중에도 다른 환자와 마주치지 않게 공간을 나눕니다.</p>
       <dl class="spec reveal">
-        <div><dt>환자 동선</dt><dd>입구 → 접수 → 대기 → 시술실, 단방향</dd></div>
-        <div><dt>대기</dt><dd>개별 대기 포드로 시선 분리</dd></div>
-        <div><dt>시술실</dt><dd>창가 4실, 장비 전원과 동선 사전 설계</dd></div>
-        <div><dt>직원 동선</dt><dd>환자 동선과 겹치지 않게 분리</dd></div>
+        <div><dt>조닝</dt><dd>접수 · 대기 · 상담 · 시술 · 원장실</dd></div>
+        <div><dt>환자 동선</dt><dd>입구에서 시술실까지 단방향</dd></div>
+        <div><dt>프라이버시</dt><dd>개별 대기 공간, 시선 분리</dd></div>
+        <div><dt>법규 검토</dt><dd>의료기관 시설 기준, 피난 동선</dd></div>
       </dl>
     </article></div>
   </section>
 
-  <section class="chapter chapter--right" id="materials" aria-labelledby="t-materials">
+  <section class="chapter" id="design" aria-labelledby="t-design">
     <div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow reveal">소재와 위생</p>
-      <h2 class="reveal" id="t-materials">아름다움은 오래 깨끗해야 합니다.</h2>
-      <p class="lede reveal">매일 소독하는 공간이라 보기 좋은 소재보다 관리하기 좋은 소재가 먼저입니다. 이음매를 줄이고 모서리를 곡면으로 처리해 먼지가 쌓일 틈을 없앱니다.</p>
+      <p class="eyebrow reveal">디자인 · 마감재</p>
+      <h2 class="reveal" id="t-design">공사 전에, 완성된 병원을 먼저 보여 드립니다.</h2>
+      <p class="lede reveal">3D 투시도로 완성된 모습을 미리 확인하고, 실제 마감재 샘플을 손으로 만져 보며 고릅니다. 매일 소독하는 공간이라 보기 좋은 소재보다 관리하기 좋은 소재를 먼저 제안합니다.</p>
       <dl class="spec reveal">
-        <div><dt>바닥</dt><dd>대형 포세린 타일, 트래버틴 패턴</dd></div>
-        <div><dt>벽</dt><dd>항균 · 내오염 도장, 웜 화이트</dd></div>
-        <div><dt>모서리</dt><dd>곡면 마감, 무몰딩 디테일</dd></div>
-        <div><dt>포인트</dt><dd>샴페인 골드 금속, 간접 조명</dd></div>
+        <div><dt>3D 투시도</dt><dd>대기실, 시술실 등 주요 공간</dd></div>
+        <div><dt>마감재 보드</dt><dd>바닥, 벽, 금속, 조명 실물 샘플</dd></div>
+        <div><dt>위생 소재</dt><dd>항균 도장, 이음매 최소화, 곡면 모서리</dd></div>
+        <div><dt>사인 · 간판</dt><dd>병원 로고에 맞춘 입구 사인</dd></div>
       </dl>
     </article></div>
   </section>
 
-  <section class="chapter" id="branding" aria-labelledby="t-branding">
+  <section class="chapter chapter--right" id="build" aria-labelledby="t-build">
     <div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow reveal">브랜딩</p>
-      <h2 class="reveal" id="t-branding">간판에 불이 켜지는 순간까지.</h2>
-      <p class="lede reveal">공간은 병원의 첫 번째 명함입니다. 로고와 사인, 컬러와 소재, 안내 사인까지 하나의 언어로 맞춰서 문을 여는 순간 병원의 철학이 보이게 합니다.</p>
-      <dl class="spec reveal">
-        <div><dt>BI · 사인</dt><dd>로고 사인, 입구 파사드</dd></div>
-        <div><dt>컬러 · 소재</dt><dd>브랜드 톤에 맞춘 마감 가이드</dd></div>
-        <div><dt>안내</dt><dd>웨이파인딩 사인, 실 번호 체계</dd></div>
-        <div><dt>경험</dt><dd>조도, 향, 음악까지 함께 설계</dd></div>
-      </dl>
-    </article></div>
-  </section>
-
-  <section class="chapter chapter--right" id="schedule" aria-labelledby="t-schedule">
-    <div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow reveal">시공과 일정</p>
-      <h2 class="reveal" id="t-schedule">개원일은 약속입니다.</h2>
-      <p class="lede reveal">원장님이 가장 걱정하는 건 일정과 예산, 그리고 인허가입니다. 설계 단계부터 의료기관 개설과 소방 기준을 함께 검토하고, 매주 공정을 보고합니다.</p>
+      <p class="eyebrow reveal">시공 · 공정 관리</p>
+      <h2 class="reveal" id="t-build">개원일은 약속입니다.</h2>
+      <p class="lede reveal">철거부터 준공까지 공정표대로 진행하고, 매주 사진과 함께 진행 상황을 보고합니다. 전기, 설비, 소방, 의료 장비 설치까지 한 팀이 맞춰서 개원 일정이 밀리지 않게 합니다.</p>
       <div class="stats reveal">
-        <div class="stat"><span class="stat-num">4주</span><span class="stat-label">기획 · 설계</span></div>
+        <div class="stat"><span class="stat-num">4주</span><span class="stat-label">설계 · 디자인</span></div>
         <div class="stat"><span class="stat-num">8주</span><span class="stat-label">시공</span></div>
-        <div class="stat"><span class="stat-num">매주</span><span class="stat-label">공정 보고</span></div>
-        <div class="stat"><span class="stat-num">D-Day</span><span class="stat-label">개원일 맞춤 공정</span></div>
+        <div class="stat"><span class="stat-num">매주</span><span class="stat-label">사진 공정 보고</span></div>
+        <div class="stat"><span class="stat-num">D-Day</span><span class="stat-label">개원일 역산 공정표</span></div>
       </div>
       <p class="sample-note reveal">기간은 예시입니다. 실제 아론의 일정으로 바꿔 주세요.</p>
     </article></div>
   </section>
 
-  <section class="chapter" id="consult" aria-labelledby="t-consult">
+  <section class="chapter" id="care" aria-labelledby="t-care">
     <div class="chapter-sticky"><article class="panel">
-      <p class="eyebrow reveal">상담</p>
-      <h2 class="reveal" id="t-consult">원장님의 첫 병원, 함께 걸어 들어가 봅니다.</h2>
-      <p class="lede reveal">임대 계약 전이라도 괜찮습니다. 후보 공간의 도면이나 사진을 보내 주시면, 진료 방식에 맞는 배치와 대략의 공정을 먼저 그려 드립니다.</p>
+      <p class="eyebrow reveal">준공 · 사후관리</p>
+      <h2 class="reveal" id="t-care">문을 연 다음 날에도, 아론이 곁에 있습니다.</h2>
+      <p class="lede reveal">준공 검사와 개원 준비를 함께 마무리하고, 운영하면서 생기는 하자와 보수도 책임지고 챙깁니다. 원장님의 첫 병원, 상담부터 시작해 보세요.</p>
       <div class="reveal">
-        <a class="btn" href="mailto:hello@aron-design.example?subject=%ED%94%BC%EB%B6%80%EA%B3%BC%20%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4%20%EC%83%81%EB%8B%B4">공간 상담 신청 <span aria-hidden="true">→</span></a>
-        <p class="contact">이메일 <span>hello@aron-design.example</span> 전화 <span>02-000-0000</span></p>
-        <p class="sample-note">연락처는 예시입니다.</p>
+        <a class="btn" href="#contact">문의하기 <span aria-hidden="true">→</span></a>
       </div>
     </article></div>
   </section>
 </main>
 
-<footer class="site-foot"><span>© ARON Design</span><span>V1 · 실시간 3D 렌더링</span></footer>
+<section class="projects" id="projects" aria-labelledby="t-projects">
+  <div class="projects-head">
+    <div><p class="eyebrow">PROJECTS</p><h2 id="t-projects">Selected work</h2></div>
+    <div class="filters" role="group" aria-label="프로젝트 분류">
+      <button type="button" data-filter="all" aria-pressed="true">ALL</button>
+      <button type="button" data-filter="clinic" aria-pressed="false">CLINIC</button>
+      <button type="button" data-filter="commercial" aria-pressed="false">COMMERCIAL</button>
+      <button type="button" data-filter="hospital" aria-pressed="false">HOSPITAL</button>
+    </div>
+  </div>
+  <div class="grid">
+    <article class="card" data-cat="clinic"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">CLINIC</span></div></article>
+    <article class="card" data-cat="hospital"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">HOSPITAL</span></div></article>
+    <article class="card" data-cat="commercial"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">COMMERCIAL</span></div></article>
+    <article class="card" data-cat="clinic"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">CLINIC</span></div></article>
+    <article class="card" data-cat="hospital"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">HOSPITAL</span></div></article>
+    <article class="card" data-cat="commercial"><div class="card-img">프로젝트 사진 · 추후 기재</div><div class="card-body"><span>프로젝트명</span><span class="card-cat">COMMERCIAL</span></div></article>
+  </div>
+  <p class="projects-note">포트폴리오 사진과 프로젝트명은 추후 기재 예정입니다.</p>
+</section>
+
+<footer class="site-foot" id="contact">
+  <div class="foot-grid">
+    <div><h3>INQUIRIES</h3><p>추후 기재</p></div>
+    <div><h3>LOCATION</h3><p>추후 기재</p></div>
+    <div><h3>FOLLOW</h3><p>추후 기재</p></div>
+  </div>
+  <div class="foot-base"><span>© ARON Design</span><span>V1 · 실시간 3D 렌더링</span></div>
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -374,24 +424,37 @@ const travTex = canvasTex(512, 512, (g, w, h) => {
   g.beginPath(); g.moveTo(w / 2, 0); g.lineTo(w / 2, h); g.moveTo(0, h / 2); g.lineTo(w, h / 2); g.stroke();
 });
 travTex.repeat.set(9, 4.5);
-const towerTex = canvasTex(64, 128, (g, w, h) => {
+const towerTex = canvasTex(64, 64, (g, w, h) => {
   g.fillStyle = '#4a5562'; g.fillRect(0, 0, w, h);
   for (let y = 4; y < h; y += 8) for (let x = 3; x < w; x += 7) { g.fillStyle = '#6f7f91'; g.fillRect(x, y, 4, 5); }
 });
-const towerLit = canvasTex(64, 128, (g, w, h) => {
+const towerLit = canvasTex(64, 64, (g, w, h) => {
   g.fillStyle = '#000'; g.fillRect(0, 0, w, h);
   for (let y = 4; y < h; y += 8) for (let x = 3; x < w; x += 7) if (rand() < 0.38) { g.fillStyle = rand() < 0.7 ? '#ffd9a0' : '#cfe2ff'; g.fillRect(x, y, 4, 5); }
 });
-const bandTex = canvasTex(64, 64, (g, w, h) => {
-  g.fillStyle = '#1d232b'; g.fillRect(0, 0, w, h); g.fillStyle = '#39424e'; g.fillRect(0, 0, w, 6);
+const streetTex = canvasTex(256, 256, (g, w, h) => {
+  g.fillStyle = '#2b2e33'; g.fillRect(0, 0, w, h);                       // asphalt
+  g.fillStyle = '#5b5d5f'; g.fillRect(18, 18, w - 36, h - 36);            // pavement around the block
+  g.fillStyle = '#4a4d4f'; g.fillRect(26, 26, w - 52, h - 52);            // plot
+  g.strokeStyle = 'rgba(230,230,220,0.35)'; g.setLineDash([10, 10]); g.lineWidth = 2;
+  g.beginPath(); g.moveTo(0, 9); g.lineTo(w, 9); g.moveTo(9, 0); g.lineTo(9, h); g.stroke();
 });
-bandTex.repeat.set(12, 30);
+streetTex.repeat.set(36, 36);
+towerTex.repeat.set(2, 2); towerLit.repeat.set(2, 2);
+// facade of an ordinary 상가 building: stone spandrel + ribbon window per floor
+const bandTex = canvasTex(64, 64, (g, w, h) => {
+  g.fillStyle = '#b8b1a5'; g.fillRect(0, 0, w, h);
+  g.fillStyle = '#2b3340'; g.fillRect(0, 22, w, 34);
+  g.fillStyle = '#58616d'; for (let x = 0; x < w; x += 16) g.fillRect(x, 22, 2, 34);
+  g.fillStyle = 'rgba(0,0,0,0.12)'; g.fillRect(0, 20, w, 2);
+});
+bandTex.repeat.set(9, 3);
 
 /* ---------- materials ---------- */
 const M = {
   concrete: new THREE.MeshStandardMaterial({ map: concreteTex, roughness: 0.95, envMapIntensity: 0.3 }),
   slabEdge: new THREE.MeshStandardMaterial({ color: 0x3b3a38, roughness: 0.9 }),
-  tower: new THREE.MeshStandardMaterial({ map: bandTex, roughness: 0.4, metalness: 0.5 }),
+  tower: new THREE.MeshStandardMaterial({ map: bandTex, roughness: 0.7, metalness: 0.1 }),
   wall: new THREE.MeshStandardMaterial({ color: 0x9c978f, roughness: 0.92, side: THREE.DoubleSide, envMapIntensity: 0.4 }),
   trav: new THREE.MeshStandardMaterial({ map: travTex, roughness: 0.35, envMapIntensity: 0.5 }),
   gold: new THREE.MeshStandardMaterial({ color: 0xc9a46a, metalness: 1, roughness: 0.28 }),
@@ -409,7 +472,7 @@ const M = {
   sign: new THREE.MeshStandardMaterial({ color: 0xc9a46a, metalness: 1, roughness: 0.25, emissive: 0xffd9a0, emissiveIntensity: 0 }),
   door: new THREE.MeshStandardMaterial({ color: 0x1a1c1f, roughness: 0.8 }),
   city: new THREE.MeshStandardMaterial({ map: towerTex, emissiveMap: towerLit, emissive: 0xffffff, emissiveIntensity: 1, roughness: 0.6, metalness: 0.3 }),
-  ground: new THREE.MeshStandardMaterial({ color: 0x23262b, roughness: 1 }),
+  ground: new THREE.MeshStandardMaterial({ map: streetTex, roughness: 1 }),
   route: new THREE.MeshBasicMaterial({ color: 0xe9c48a, transparent: true, opacity: 0, depthWrite: false }),
 };
 const PLASTER = new THREE.Color(0xf0e9df), DRYWALL = new THREE.Color(0x9c978f);
@@ -481,22 +544,34 @@ function rounded(w, h, d, r, mat, x, y, z, opts = {}) {
 block(X1 - X0 + 0.6, 0.6, Z1 - Z0 + 0.6, M.slabEdge, 0, -0.6, (Z0 + Z1) / 2, 'bottom', { shadow: false });
 const floorShell = new THREE.Mesh(new THREE.PlaneGeometry(X1 - X0, Z1 - Z0), M.concrete);
 floorShell.rotation.x = -Math.PI / 2; floorShell.position.set(0, 0.001, (Z0 + Z1) / 2); floorShell.receiveShadow = true; scene.add(floorShell);
-block(X1 - X0, 119.4, Z1 - Z0, M.tower, 0, -120, (Z0 + Z1) / 2, 'bottom', { shadow: false, receive: false });
+block(X1 - X0, 12.4, Z1 - Z0, M.tower, 0, -13, (Z0 + Z1) / 2, 'bottom', { shadow: false, receive: false });
 const ground = new THREE.Mesh(new THREE.PlaneGeometry(1400, 1400), M.ground);
-ground.rotation.x = -Math.PI / 2; ground.position.y = -120; scene.add(ground);
+ground.rotation.x = -Math.PI / 2; ground.position.y = -13; scene.add(ground);
 
-// city
+// city: half office blocks (window grid), half 상가 buildings (stone bands + ribbon windows)
 {
-  const n = 170, g = new THREE.BoxGeometry(1, 1, 1); g.translate(0, 0.5, 0);
-  const im = new THREE.InstancedMesh(g, M.city, n); const o = new THREE.Object3D(); let k = 0;
-  while (k < n) {
-    const a = rand() * Math.PI * 2, d = 75 + Math.pow(rand(), 0.8) * 260;
-    const x = Math.cos(a) * d, z = Math.sin(a) * d;
-    if (Math.abs(x) < 50 && Math.abs(z) < 40) continue;
-    o.position.set(x, -120, z); o.scale.set(10 + rand() * 18, 35 + Math.pow(rand(), 1.6) * (d > 180 ? 150 : 105), 10 + rand() * 18); o.rotation.y = (rand() - 0.5) * 0.3;
-    o.updateMatrix(); im.setMatrixAt(k++, o.matrix);
+  const sangaTex = canvasTex(64, 64, (g, w, h) => {
+    g.fillStyle = '#a49c90'; g.fillRect(0, 0, w, h); g.fillStyle = '#323a46'; g.fillRect(0, 24, w, 30);
+  });
+  const sangaLit = canvasTex(64, 64, (g, w, h) => {
+    g.fillStyle = '#000'; g.fillRect(0, 0, w, h);
+    for (let x = 0; x < w; x += 8) if (rand() < 0.5) { g.fillStyle = '#ffd9a0'; g.fillRect(x + 1, 26, 6, 26); }
+  });
+  sangaTex.repeat.set(3, 4); sangaLit.repeat.set(3, 4);
+  M.sanga = new THREE.MeshStandardMaterial({ map: sangaTex, emissiveMap: sangaLit, emissive: 0xffffff, emissiveIntensity: 1, roughness: 0.8 });
+  const n = 120, g = new THREE.BoxGeometry(1, 1, 1); g.translate(0, 0.5, 0);
+  for (const mat of [M.city, M.sanga]) {
+    const im = new THREE.InstancedMesh(g, mat, n); const o = new THREE.Object3D(); let k = 0;
+    while (k < n) {
+      const a = rand() * Math.PI * 2, d = 34 + Math.pow(rand(), 0.9) * 280;
+      const x = Math.cos(a) * d, z = Math.sin(a) * d;
+      if (Math.abs(x) < 36 && Math.abs(z) < 28) continue;
+      // mostly 2–8 storeys, a few taller ones further out
+      o.position.set(x, -13, z); o.scale.set(12 + rand() * 16, 7 + Math.pow(rand(), 1.6) * (d < 100 ? 16 : d < 190 ? 26 : 40), 12 + rand() * 16); o.rotation.y = (rand() - 0.5) * 0.3;
+      o.updateMatrix(); im.setMatrixAt(k++, o.matrix);
+    }
+    scene.add(im);
   }
-  scene.add(im);
 }
 
 // columns, core, window walls
@@ -675,11 +750,11 @@ const view = { work: 0, lights: 0, signGlow: 0 };
 /* ---------- views ---------- */
 const heroCam = { az: -0.75, el: 1.0, r: 78, tx: 0, ty: 0, tz: -1, tod: 0, sx: 0 };
 const PRESETS = [
-  { px: 0, py: 50, pz: 13, tx: -2, ty: 0, tz: -1, tod: 0.96, sx: 1 },             // plan, from above
-  { px: 13.6, py: 2.4, pz: 7.8, tx: 7.4, ty: 1.0, tz: -0.6, tod: 0.92, sx: -1 },   // materials: reception desk + travertine
-  { px: 7.0, py: 1.65, pz: 5.2, tx: 13, ty: 1.8, tz: 1.6, tod: 0.94, sx: 1 },      // branding: entrance + sign
-  { px: -36, py: 22, pz: 30, tx: -2, ty: 0, tz: -1, tod: 0.86, sx: -1 },           // schedule: wide, other side
-  { px: -10.5, py: 1.6, pz: -2.4, tx: -10.5, ty: 1.15, tz: -10, tod: 1, sx: 1 },   // consult: inside a treatment room
+  { px: 7.0, py: 1.65, pz: 5.2, tx: 13, ty: 1.8, tz: 1.6, tod: 0.94, sx: 1 },      // survey: standing at the entrance
+  { px: 0, py: 50, pz: 13, tx: -2, ty: 0, tz: -1, tod: 0.96, sx: -1 },            // plan: from above, patient route drawn
+  { px: 13.6, py: 2.4, pz: 7.8, tx: 7.4, ty: 1.0, tz: -0.6, tod: 0.92, sx: 1 },    // design: reception desk + travertine
+  { px: -36, py: 22, pz: 30, tx: -2, ty: 0, tz: -1, tod: 0.86, sx: -1 },           // build: wide, other side
+  { px: -10.5, py: 1.6, pz: -2.4, tx: -10.5, ty: 1.15, tz: -10, tod: 1, sx: 1 },   // care: inside a treatment room
 ];
 const secCam = { ...PRESETS[0] };
 
@@ -728,16 +803,16 @@ if (!CAPTURE) {
 }
 
 /* ---------- chapters ---------- */
-const handover = CAPTURE ? { progress: 0 } : ScrollTrigger.create({ trigger: '#plan', start: 'top bottom', end: 'top 35%' });
+const handover = CAPTURE ? { progress: 0 } : ScrollTrigger.create({ trigger: '#survey', start: 'top bottom', end: 'top 35%' });
 const chapters = gsap.utils.toArray('.chapter');
 const navLinks = gsap.utils.toArray('.nav a');
 chapters.forEach((ch) => gsap.set(ch.querySelectorAll('.reveal'), { autoAlpha: 0, y: 30 }));
-function setNav(i) { navLinks.forEach((a, j) => a.classList.toggle('is-active', j === i)); }
+function setNav(i) { navLinks.forEach((a, j) => a.classList.toggle('is-active', j === 0 && i >= 0)); }   // INTERIOR covers the five process chapters
 function activate(i) {
   const ch = chapters[i];
   gsap.to(secCam, { ...PRESETS[i], duration: reduceMotion ? 0.01 : 2.2, ease: 'power3.inOut', overwrite: 'auto' });
   gsap.to(ch.querySelectorAll('.reveal'), { autoAlpha: 1, y: 0, duration: 1, stagger: 0.08, ease: 'power3.out', overwrite: true, delay: 0.15 });
-  gsap.to(routeState, { p: i === 0 ? 1 : 0, duration: i === 0 ? 2.4 : 0.6, ease: 'power2.inOut', delay: i === 0 ? 0.8 : 0, overwrite: true });
+  gsap.to(routeState, { p: i === 1 ? 1 : 0, duration: i === 1 ? 2.4 : 0.6, ease: 'power2.inOut', delay: i === 1 ? 0.8 : 0, overwrite: true });
   setNav(i);
 }
 function deactivate(i) {
@@ -751,6 +826,15 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('cli
   const t = document.querySelector(a.getAttribute('href')); if (!t) return;
   e.preventDefault(); t.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
 }));
+
+/* ---------- portfolio filter (menu ALL / CLINIC / COMMERCIAL / HOSPITAL) ---------- */
+const cards = [...document.querySelectorAll('.card')], fbtns = [...document.querySelectorAll('.filters button')];
+function setFilter(f) {
+  fbtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === f)));
+  cards.forEach((c) => { c.hidden = f !== 'all' && c.dataset.cat !== f; });
+}
+fbtns.forEach((b) => b.addEventListener('click', () => setFilter(b.dataset.filter)));
+document.querySelectorAll('.nav a[data-filter]').forEach((a) => a.addEventListener('click', () => setFilter(a.dataset.filter)));
 
 /* ---------- frame loop ---------- */
 const camPos = new THREE.Vector3(), camTarget = new THREE.Vector3(), wantPos = new THREE.Vector3(), wantTarget = new THREE.Vector3();
@@ -773,6 +857,7 @@ function applyTod(t) {
   scene.fog.color.copy(skyU.uHor.value);
   renderer.toneMappingExposure = lerp(a.exp, b.exp, f);
   M.city.emissiveIntensity = lerp(a.city, b.city, f) * 1.4;
+  M.sanga.emissiveIntensity = lerp(a.city, b.city, f) * 1.4;
   const night = 1 - smooth(0.45, 0.95, t);
   const env = lerp(0.12, 0.7, 1 - night);
   for (const k of ['wall', 'trav', 'boucle', 'white', 'oak', 'taupe']) M[k].envMapIntensity = env;
