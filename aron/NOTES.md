@@ -1,0 +1,46 @@
+# ARON 랜딩페이지 진행 메모
+
+아론 디자인(병의원·상업 공간 인테리어 스튜디오) 홈페이지 작업 기록. 다음 작업은 여기서 이어 간다.
+
+## 파일
+| 파일 | 내용 |
+| --- | --- |
+| `v1-3d.html` | **현재 메인.** Three.js 3D 버전 |
+| `v2-video.html` | 영상 스크럽 버전. **보류 중** (메뉴·패널은 V1 이전 버전 기준, 영상은 임시본) |
+| `hero-sequence.mp4`, `hero-poster.jpg` | V2용 임시 영상 (V1 3D 녹화본) |
+| `build-hero.sh` | 드리미나 영상 2개를 이어 붙여 V2 영상 만드는 ffmpeg 스크립트 |
+| `hub.html` | V1/V2 선택 첫 화면 (첫 Vercel 배포 때 사용) |
+
+## 배포
+- Claude 링크(V1): https://claude.ai/artifact/XHrjPpxhbB9HDZPomp968Z
+- Vercel: 폴더를 끌어다 놓는 방식으로 배포. 최신은 `aron2` 폴더 (`index.html` = V1, `og.jpg` = 카톡 미리보기 이미지)
+- Vercel 토큰 방식은 보안 입력 카드가 앱에서 뜨지 않아 쓰지 않음. 만든 토큰 "아론"은 2026-11-26 자동 만료
+
+## V1 현재 구성
+1. **인트로:** 안개 + 가운데 ARON 로고 → 스크롤하면 안개가 걷히고 건물이 드러남
+2. **메뉴:** 왼쪽에 ARON 로고(따로), 가운데에 INTERIOR ▾ · CONTACT · FOLLOW
+   - INTERIOR 하위: ALL · CLINIC · COMMERCIAL · HOSPITAL → 포트폴리오 필터
+   - CONTACT → 푸터 INQUIRIES, FOLLOW → 푸터 FOLLOW
+3. **히어로:** *More than a space. A place where care begins.* / 아론은 병원과 상업 공간을 디자인하고 시공하는 인테리어 스튜디오입니다.
+4. **3D 시공 장면:** 5~6층 상가 건물 4층, 밤의 빈 층 → 도면 → 벽체 → 조명 → 마감 → 아침에 완성 (PROCESS 01~06)
+5. **패널 5개 (인테리어 스튜디오 관점):** SPACE · DESIGN · MATERIAL · LIGHT & DETAIL · CONSTRUCTION(문의하기 버튼)
+6. **포트폴리오:** HOSPITAL에 경희온생한의원, 광명마디원정형외과, 다산에이아이정형외과 (사진 준비 중). CLINIC과 COMMERCIAL은 "준비 중"
+7. **푸터:** INQUIRIES · LOCATION · FOLLOW (내용 "추후 기재")
+
+## 답을 기다리는 결정 (사용자에게 먼저 물어보고 진행할 것)
+- **아론의 느낌 문구 위치:** A 히어로 제목 / B 새 ABOUT 섹션 / C 기존 패널 안 / D 포트폴리오 위 / E 푸터 위 (추천 A+B+D)
+- **영어 문구 후보:** 1 *Shaped by curves, drawn by light.* / 2 *Soft lines. Layered light. Honest texture.* / 3 *Any palette. The same calm.* / 4 *We design how light touches a space.*
+- **아론의 느낌 (참고 사진: 다산에이아이정형외과 로비):** 곡선(CURVE) · 간접 조명의 선(LIGHT) · 매트한 석재 벽과 광택 바닥의 대비(TEXTURE) · 정돈된 디테일(SEAMLESS). 화이트톤 전용으로 보이지 않게, 톤은 바뀌어도 아론다운 분위기는 같다는 메시지로.
+- **3D 장면을 참고 사진 느낌으로 다듬을지:** 천장 곡선 간접 조명, 데스크 하부 조명, 광택 바닥, 석재 질감 벽
+- **휴대폰 메뉴:** 지금은 오른쪽 정렬 (가운데에 두면 로고와 겹침). 가운데를 원하면 로고를 줄이는 방법이 있음
+
+## 받아야 할 자료
+- 병원별 사진 약 10장씩 (경희온생한의원, 광명마디원정형외과, 다산에이아이정형외과) + 대표 사진 + 한 줄 소개 → 카드 대표 사진과 갤러리
+- 푸터: INQUIRIES(전화·이메일·카톡 채널), LOCATION(주소·지도), FOLLOW(인스타·블로그 등)
+- 실제 일정 정보 (현재 패널에서는 기간 숫자를 뺐음)
+
+## 사용자 선호
+- 혼자 결정하지 말고 후보를 보여 준 뒤 물어보고 다음 단계로 넘어갈 것
+- 메뉴와 섹션 라벨은 영어, 본문은 한국어
+- 현실적인 느낌 (로컬 의원부터 강남까지 어색하지 않게)
+- 개원 컨설팅이 아니라 인테리어 스튜디오의 말투
