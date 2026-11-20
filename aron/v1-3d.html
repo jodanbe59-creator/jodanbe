@@ -171,7 +171,54 @@ h1 {
 }
 
 .display-en { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; letter-spacing: 0; }
-.projects { position: relative; z-index: 2; background: var(--ivory); color: var(--ink); padding: clamp(56px, 8vw, 110px) var(--gutter); }
+.projects {   /* portfolio: hidden, opens as a full-screen layer from the INTERIOR menu */
+  position: fixed; inset: 0; z-index: 30; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--ivory); color: var(--ink); padding: clamp(84px, 9vw, 120px) var(--gutter) clamp(40px, 6vw, 80px);
+  opacity: 0; visibility: hidden; transform: translateY(16px); transition: opacity .45s, transform .45s, visibility .45s;
+}
+.projects.open { opacity: 1; visibility: visible; transform: none; }
+.projects-close {
+  all: unset; box-sizing: border-box; cursor: pointer; position: fixed; top: 18px; right: clamp(14px, 3vw, 36px); z-index: 31;
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--rule); background: var(--ivory); color: var(--ink); font-size: 1.4rem; line-height: 1;
+}
+.projects-close:hover { background: var(--ink); color: var(--ivory); }
+.projects-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+html.layer-open { overflow: hidden; }
+
+/* symbol works: photos in a zigzag */
+.symbols { position: relative; z-index: 2; background: var(--ivory); color: var(--ink); padding: clamp(64px, 9vw, 130px) var(--gutter) clamp(48px, 7vw, 100px); }
+.symbols-head { max-width: 1240px; margin: 0 auto clamp(32px, 5vw, 64px); }
+.symbols-head .eyebrow { color: var(--gold); letter-spacing: 0.14em; }
+.symbols-head h2 { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; margin: 0; }
+.zigzag { max-width: 1240px; margin: 0 auto; display: grid; gap: clamp(28px, 5vw, 64px); }
+.zig { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(16px, 3vw, 40px); align-items: end; }
+.zig:nth-child(even) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.zig:nth-child(even) .zig-img { order: 2; }
+.zig-img { aspect-ratio: 4 / 3; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, #e7dfd3, #d8cdbd); color: var(--ink-soft); font-size: 0.875rem; }
+.zig-cap { padding-bottom: 8px; }
+.zig-cap .num { font-family: "Cormorant Garamond", var(--font-display); font-size: 2rem; color: var(--gold); line-height: 1; }
+.zig-cap p { margin: 8px 0 0; color: var(--ink-soft); font-size: 0.9375rem; }
+
+/* client logos: an endless horizontal band */
+.clients { position: relative; z-index: 2; background: var(--ivory); color: var(--ink); padding: 0 0 clamp(56px, 8vw, 110px); overflow: hidden; }
+.clients-label { max-width: 1240px; margin: 0 auto 20px; padding: 0 var(--gutter); font-size: 0.8125rem; letter-spacing: 0.2em; color: var(--gold); }
+.marquee { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: clamp(20px, 3vw, 34px) 0; overflow: hidden; }
+.marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-set { display: flex; align-items: center; flex: none; }
+.client { flex: none; padding: 0 clamp(28px, 4vw, 56px); font-family: var(--font-display); font-size: clamp(1.25rem, 2.2vw, 1.75rem); white-space: nowrap; color: var(--ink); }
+.client-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-soft); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (max-width: 760px) { .zig, .zig:nth-child(even) { grid-template-columns: minmax(0, 1fr); } .zig:nth-child(even) .zig-img { order: 0; } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+/* footer contact details */
+.foot-grid a { color: var(--ivory); text-decoration: none; border-bottom: 1px solid rgba(246, 241, 234, 0.25); }
+.foot-grid a:hover { border-color: var(--gold-soft); }
+.foot-grid p + p { margin-top: 6px; }
+.foot-grid .k { display: inline-block; min-width: 4.2em; color: rgba(246, 241, 234, 0.45); }
+.foot-grid .v { color: var(--ivory); }
 .projects-head { max-width: 1240px; margin: 0 auto 32px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; }
 .projects-head .eyebrow { color: var(--gold); letter-spacing: 0.14em; }
 .projects-head h2 { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; margin: 0; }
@@ -215,9 +262,9 @@ h1 {
   .spec > div { grid-template-columns: 6.5em minmax(0, 1fr); padding: 8px 0; font-size: 0.875rem; }
 }
 @media (prefers-reduced-motion: reduce) { .scroll-cue .mouse i, .loader-bar i { animation: none; } }
-body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .scrim, body.capture .projects { display: none; }
+body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .scrim, body.capture .projects, body.capture .symbols, body.capture .clients, body.capture .splash { display: none; }
 /* ---------- intro: ARON in the mist, cleared by scrolling ---------- */
-#intro { height: 100vh; height: 100svh; }
+#intro { height: 70vh; height: 70svh; }
 .mist {
   position: fixed; inset: 0; z-index: 4; display: grid; place-items: center; pointer-events: none; overflow: hidden;
   background: radial-gradient(ellipse at 50% 55%, #ecebe7 0%, #dcdad5 55%, #c9c6c0 100%);
@@ -230,7 +277,11 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .mist::before { left: -30vmax; top: 10%; }
 .mist::after { right: -30vmax; bottom: 5%; animation-duration: 23s; animation-direction: alternate-reverse; }
 @keyframes drift { from { transform: translateX(-6vmax); } to { transform: translateX(10vmax); } }
-.mist-inner { position: relative; text-align: center; color: var(--ink); }
+.mist-inner { position: relative; z-index: 1; text-align: center; color: var(--ink); }
+.mist { --r: -30vmax; --sx: 50%; --sy: 50%;
+  -webkit-mask-image: radial-gradient(circle at var(--sx) var(--sy), transparent var(--r), #000 calc(var(--r) + 22vmax));
+          mask-image: radial-gradient(circle at var(--sx) var(--sy), transparent var(--r), #000 calc(var(--r) + 22vmax)); }
+.splash { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none; }
 .mist-logo { margin: 0; font-family: "Cormorant Garamond", var(--font-display); font-weight: 300; font-size: clamp(3.4rem, 12vw, 9rem); line-height: 1; letter-spacing: 0.42em; padding-left: 0.42em; }
 .mist-sub { margin: 18px 0 0; font-size: 0.75rem; letter-spacing: 0.32em; padding-left: 0.32em; color: var(--ink-soft); }
 .intro-cue { position: fixed; left: 50%; bottom: clamp(18px, 4vh, 36px); transform: translateX(-50%); z-index: 5; }
@@ -259,6 +310,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 <div class="scrim"></div>
 
 <div class="mist" aria-hidden="true"><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
+<canvas class="splash" aria-hidden="true"></canvas>
 <button type="button" class="scroll-cue intro-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
 <a class="logo" href="#intro" aria-label="ARON, 맨 위로">ARON</a>
 <header class="topbar">
@@ -280,30 +332,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 <main>
   <section id="intro" aria-label="ARON"></section>
 
-  <section id="hero" aria-label="소개">
-    <div class="hero-sticky">
-      <div class="hero-copy">
-        <p class="eyebrow">CLINIC &amp; HOSPITAL INTERIOR</p>
-        <h1 class="display-en">
-          <span class="hero-line"><span>More than a space.</span></span>
-          <span class="hero-line"><span>A place where <em>care</em> begins.</span></span>
-        </h1>
-        <p class="hero-sub">아론은 병원과 상업 공간을 디자인하고 시공하는 인테리어 스튜디오입니다.</p>
-      </div>
-      <aside class="build-log" aria-label="공정 진행">
-        <div class="log-head"><span>PROCESS</span><span class="log-day">01</span></div>
-        <div class="log-bar"><i></i></div>
-        <ol class="log-list">
-          <li><b>01</b><span>빈 공간</span></li>
-          <li><b>02</b><span>도면</span></li>
-          <li><b>03</b><span>벽체 · 아치</span></li>
-          <li><b>04</b><span>조명</span></li>
-          <li><b>05</b><span>마감 · 가구</span></li>
-          <li><b>06</b><span>완성</span></li>
-        </ol>
-      </aside>
-    </div>
-  </section>
+
 
   <section class="chapter" id="survey" aria-labelledby="t-survey">
     <div class="chapter-sticky"><article class="panel">
@@ -326,7 +355,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
       <p class="lede reveal">로고는 간판에만 있지 않습니다. 리셉션 뒤 벽, 입구, 안내 사인까지 병원의 심볼이 공간 안에 자연스럽게 녹아들도록 위치와 재질, 빛을 함께 설계합니다.</p>
       <dl class="spec reveal">
         <div><dt>로고 월</dt><dd>리셉션 뒤 메인 사인</dd></div>
-        <div><dt>재질</dt><dd>메탈, 아크릴, 레터 사인</dd></div>
+        <div><dt>재질</dt><dd>공간과 어울리는 사인 소재</dd></div>
         <div><dt>조명</dt><dd>은은한 후광 간접조명</dd></div>
         <div><dt>안내</dt><dd>실 번호와 안내 사인</dd></div>
       </dl>
@@ -350,13 +379,13 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
   <section class="chapter chapter--right" id="build" aria-labelledby="t-build">
     <div class="chapter-sticky"><article class="panel">
       <p class="eyebrow reveal">MATERIAL · 벽재</p>
-      <h2 class="reveal" id="t-build">손끝에 닿는 모든 것을 고릅니다.</h2>
-      <p class="lede reveal">빛을 머금는 매트한 석재 질감의 벽과 빛을 비추는 광택 바닥이 대비를 이루며 공간에 깊이를 만듭니다. 문은 벽과 하나처럼 이어지게 마감합니다.</p>
+      <h2 class="reveal" id="t-build">오래 머물러도 편안한 소재를 고릅니다.</h2>
+      <p class="lede reveal">매일 소독하고 오래 쓰는 공간이기에, 보기 좋은 소재보다 몸에 좋고 오래가는 소재를 먼저 고릅니다. 손에 닿는 촉감과 빛이 비치는 느낌까지 살펴 공간에 깊이를 더합니다.</p>
       <dl class="spec reveal">
-        <div><dt>벽</dt><dd>석재 질감 패널</dd></div>
-        <div><dt>바닥</dt><dd>대형 포세린 타일, 대리석 패턴</dd></div>
-        <div><dt>문</dt><dd>아치형 히든 도어</dd></div>
-        <div><dt>위생</dt><dd>항균 · 내오염 마감</dd></div>
+        <div><dt>친환경</dt><dd>유해 물질을 줄인 친환경 소재</dd></div>
+        <div><dt>내구성</dt><dd>오래 써도 변함없는 튼튼한 소재</dd></div>
+        <div><dt>위생</dt><dd>관리와 소독이 쉬운 마감</dd></div>
+        <div><dt>질감</dt><dd>손끝에 닿는 촉감까지 고려</dd></div>
       </dl>
     </article></div>
   </section>
@@ -376,9 +405,29 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
     </article></div>
   </section>
 
+  <section class="symbols" id="symbols" aria-labelledby="t-symbols">
+    <div class="symbols-head"><p class="eyebrow">SYMBOL WORKS</p><h2 id="t-symbols">Spaces with a signature</h2></div>
+    <div class="zigzag">
+    <figure class="zig"><div class="zig-img">심볼 사진 01 · 추후 기재</div><figcaption class="zig-cap"><span class="num">01</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
+    <figure class="zig"><div class="zig-img">심볼 사진 02 · 추후 기재</div><figcaption class="zig-cap"><span class="num">02</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
+    <figure class="zig"><div class="zig-img">심볼 사진 03 · 추후 기재</div><figcaption class="zig-cap"><span class="num">03</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
+    <figure class="zig"><div class="zig-img">심볼 사진 04 · 추후 기재</div><figcaption class="zig-cap"><span class="num">04</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
+    <figure class="zig"><div class="zig-img">심볼 사진 05 · 추후 기재</div><figcaption class="zig-cap"><span class="num">05</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
+    <figure class="zig"><div class="zig-img">심볼 사진 06 · 추후 기재</div><figcaption class="zig-cap"><span class="num">06</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="clients" aria-label="함께한 병원">
+    <p class="clients-label">CLIENTS</p>
+    <div class="marquee"><div class="marquee-track">
+      <div class="marquee-set"><span class="client">경희온생한의원</span><span class="client-dot" aria-hidden="true"></span><span class="client">광명마디원정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">다산에이아이정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">경희온생한의원</span><span class="client-dot" aria-hidden="true"></span><span class="client">광명마디원정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">다산에이아이정형외과</span><span class="client-dot" aria-hidden="true"></span></div>
+      <div class="marquee-set" aria-hidden="true"><span class="client">경희온생한의원</span><span class="client-dot" aria-hidden="true"></span><span class="client">광명마디원정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">다산에이아이정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">경희온생한의원</span><span class="client-dot" aria-hidden="true"></span><span class="client">광명마디원정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">다산에이아이정형외과</span><span class="client-dot" aria-hidden="true"></span></div>
+    </div></div>
+  </section>
 </main>
 
-<section class="projects" id="projects" aria-labelledby="t-projects">
+<section class="projects" id="projects" aria-labelledby="t-projects" aria-hidden="true">
+  <button type="button" class="projects-close" aria-label="포트폴리오 닫기">×</button>
   <div class="projects-head">
     <div><p class="eyebrow">PROJECTS</p><h2 id="t-projects">Selected work</h2></div>
     <div class="filters" role="group" aria-label="프로젝트 분류">
@@ -398,11 +447,14 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 
 <footer class="site-foot" id="contact">
   <div class="foot-grid">
-    <div><h3>INQUIRIES</h3><p>추후 기재</p></div>
+    <div><h3>INQUIRIES</h3>
+      <p><span class="k">Tel</span><a href="tel:01042593537">010-4259-3537</a></p>
+      <p><span class="k">Mail</span><a href="mailto:aron_design@naver.com">aron_design@naver.com</a></p>
+      <p><span class="k">상담</span><span class="v">평일 08:00 – 18:00</span></p></div>
     <div><h3>LOCATION</h3><p>추후 기재</p></div>
-    <div id="follow"><h3>FOLLOW</h3><p>추후 기재</p></div>
+    <div id="follow"><h3>FOLLOW</h3><p><span class="k">Instagram</span><a href="https://www.instagram.com/aron_design/" target="_blank" rel="noopener">@aron_design</a></p></div>
   </div>
-  <div class="foot-base"><span>© ARON Design</span><span>V1 · 실시간 3D 렌더링</span></div>
+  <div class="foot-base"><span>© ARON Design · 대표 김경범</span><span>Architecture · Interior · Space</span></div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -808,7 +860,7 @@ for (const [x, z, face] of [[5.6, -1.75, 1], [5.6, 3.75, 1], [2, 0.6, 1], [2, 2.
 // lounge facing the windows
 for (const x of [5.2, 10]) { F(rounded(2.6, 0.72, 0.95, 0.3, M.boucle, x, 0, -6.2)); footprint(x, -6.2, 2.6, 0.95); }
 for (const x of [5.2, 10]) F(mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.4, 24).translate(0, 0.2, 0), M.trav, x, 0, -7.7, { track: true }));
-for (const [x, z] of [[3, -9.2], [12.3, -9.2], [-17, -2.4], [12.2, -3.0], [12.3, 7.2], [6.4, 6.9]]) {
+for (const [x, z] of [[3, -9.2], [12.3, -9.2], [-17, -2.4], [12.2, -3.0], [6.4, 6.9]]) {
   F(mesh(new THREE.CylinderGeometry(0.35, 0.3, 0.55, 16).translate(0, 0.275, 0), M.white, x, 0, z, { track: true }));
   F(mesh(new THREE.IcosahedronGeometry(0.6, 0).translate(0, 1.1, 0), M.leaf, x, 0, z, { track: true }));
 }
@@ -917,12 +969,6 @@ build
   .to(heroCam, { px: 10.8, py: 1.35, pz: 4.4, tx: 6.5, ty: 2.9, tz: -0.6, tod: 0.62, duration: 1.5, ease: 'sine.inOut' }, 4.8) // look up as lights come on
   .to(heroCam, { px: 11.6, py: 0.75, pz: 5.2, tx: 5.8, ty: 0.9, tz: 0.4, tod: 0.82, duration: 2.1, ease: 'sine.inOut' }, 6.3) // low, over the new floor
   .to(heroCam, { px: 12.6, py: 1.65, pz: 1.0, tx: 5.7, ty: 1.45, tz: 1.0, tod: 1, duration: 1.6, ease: 'sine.inOut' }, 8.4);  // the finished lobby
-if (!CAPTURE) build.to('.hero-copy', { autoAlpha: 0, y: -40, duration: 1, ease: 'power1.in' }, 0.3);
-build.to('.log-bar i', { scaleX: 1, duration: 10, ease: 'none' }, 0);
-STARTS.forEach((s, i) => {
-  build.to(logItems[i], { opacity: 1, duration: 0.25, ease: 'none', onStart: () => { dayEl.textContent = DAYS[i]; }, onReverseComplete: () => { dayEl.textContent = DAYS[Math.max(i - 1, 0)]; } }, Math.max(s - 0.1, 0));
-  if (i < STARTS.length - 1) build.to(logItems[i], { opacity: 0.38, duration: 0.25, ease: 'none' }, STARTS[i + 1] - 0.1);
-});
 // 1 shell: work lights on
 build.to(view, { work: 1, duration: 1, ease: 'power1.out' }, 0.2);
 // 2 plan lines draw across the concrete
@@ -949,11 +995,11 @@ build.to(sign.scale, { x: 1, y: 1, z: 1, duration: 0.7, ease: 'back.out(1.8)' },
 
 const SCRUB = reduceMotion ? true : 1;
 if (!CAPTURE) {
-  ScrollTrigger.create({ trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: SCRUB, animation: build });
+  build.progress(1);   // the build sequence was cut after meeting 1: the page opens on the finished lobby
 }
 
 /* ---------- chapters ---------- */
-const handover = CAPTURE ? { progress: 0 } : ScrollTrigger.create({ trigger: '#survey', start: 'top bottom', end: 'top 35%' });
+const handover = { progress: CAPTURE ? 0 : 1 };   // camera always follows the chapter views
 const chapters = gsap.utils.toArray('.chapter');
 const navLinks = gsap.utils.toArray('.has-sub > .menu-link');
 chapters.forEach((ch) => gsap.set(ch.querySelectorAll('.reveal'), { autoAlpha: 0, y: 30 }));
@@ -979,26 +1025,106 @@ function deactivate(i) {
 }
 if (!CAPTURE) {
   chapters.forEach((ch, i) => ScrollTrigger.create({ trigger: ch, start: 'top 55%', end: 'bottom 55%', onToggle: (s) => (s.isActive ? activate(i) : deactivate(i)) }));
-  ScrollTrigger.create({ trigger: '#hero', start: 'top top', end: 'bottom 55%', onToggle: (s) => { if (s.isActive) { setNav(-1); gsap.to(routeState, { p: 0, duration: 0.5, overwrite: true }); } } });
 }
 document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+  if (a.dataset.filter) return;   // portfolio links open the layer instead
   const t = document.querySelector(a.getAttribute('href')); if (!t) return;
   e.preventDefault(); t.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
 }));
 
 /* ---------- scroll icon: click to move one screen into the build ---------- */
-document.querySelector('.intro-cue').addEventListener('click', () => document.getElementById('hero').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }));
-
-/* ---------- intro: the mist clears as you scroll; the 3D fog thins with it ---------- */
+/* ---------- intro: a water drop falls on ARON, splashes, and the mist clears outward from the impact ---------- */
 const mistState = { p: CAPTURE ? 1 : 0 };
-if (!CAPTURE) {
-  gsap.timeline({ scrollTrigger: { trigger: '#intro', start: 'top top', end: 'bottom top', scrub: reduceMotion ? true : 0.6 } })
-    .to(mistState, { p: 1, duration: 1, ease: 'none' }, 0)
-    .to('.mist-inner', { scale: 1.18, y: -30, autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 0)
-    .to('.intro-cue', { autoAlpha: 0, duration: 0.25, ease: 'none' }, 0)
-    .to('.mist', { autoAlpha: 0, duration: 0.6, ease: 'power1.inOut' }, 0.05)
-    .to('.logo', { autoAlpha: 1, duration: 0.3, ease: 'none' }, 0.7);
+const mistEl = document.querySelector('.mist'), splashCv = document.querySelector('.splash'), sctx = splashCv.getContext('2d');
+const drops = [], rings = [], drop = { on: false, x: 0, y: 0, ty: 0 };
+let splashed = false, splashTl = null, sdpr = 1;
+const hole = { r: 0 };
+function sizeSplash() { sdpr = Math.min(devicePixelRatio || 1, 2); splashCv.width = innerWidth * sdpr; splashCv.height = innerHeight * sdpr; }
+sizeSplash(); addEventListener('resize', sizeSplash);
+function setHole() { mistEl.style.setProperty('--r', hole.r.toFixed(1) + 'px'); }
+function impactPoint() { const r = document.querySelector('.mist-logo').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height * 0.62 }; }
+function burst(x, y) {
+  for (let i = 0; i < 90; i++) {
+    const a = Math.PI * (0.06 + 0.88 * Math.random()), sp = 180 + Math.random() * 620, big = Math.random() < 0.18;
+    drops.push({ x, y, vx: Math.cos(a) * sp * (Math.random() < 0.5 ? 1 : -1) * 0.9, vy: -Math.sin(a) * sp, r: big ? 3 + Math.random() * 3 : 1 + Math.random() * 2.2, life: 0.55 + Math.random() * 0.7, t: 0 });
+  }
+  for (let i = 0; i < 3; i++) rings.push({ x, y, t: -i * 0.12, life: 1.1 });
 }
+let lastS = 0;
+gsap.ticker.add((time) => {
+  const dt = Math.min(time - lastS, 0.05); lastS = time;
+  if (!drop.on && !drops.length && !rings.length) return;
+  const w = splashCv.width, h = splashCv.height;
+  sctx.setTransform(sdpr, 0, 0, sdpr, 0, 0); sctx.clearRect(0, 0, w, h);
+  if (drop.on) {   // falling teardrop
+    sctx.save(); sctx.translate(drop.x, drop.y);
+    const g = sctx.createLinearGradient(0, -22, 0, 8); g.addColorStop(0, 'rgba(255,255,255,0.15)'); g.addColorStop(1, 'rgba(225,235,242,0.95)');
+    sctx.fillStyle = g; sctx.strokeStyle = 'rgba(80,92,104,0.55)'; sctx.lineWidth = 1;
+    sctx.beginPath(); sctx.moveTo(0, -22); sctx.bezierCurveTo(5, -8, 8, -2, 8, 2); sctx.arc(0, 2, 8, 0, Math.PI, false); sctx.bezierCurveTo(-8, -2, -5, -8, 0, -22); sctx.fill(); sctx.stroke();
+    sctx.fillStyle = 'rgba(255,255,255,0.9)'; sctx.beginPath(); sctx.arc(-2.5, 0, 1.8, 0, Math.PI * 2); sctx.fill(); sctx.restore();
+  }
+  for (let i = rings.length - 1; i >= 0; i--) {   // ripple rings on the surface
+    const r = rings[i]; r.t += dt; if (r.t < 0) continue;
+    const k = r.t / r.life; if (k >= 1) { rings.splice(i, 1); continue; }
+    const rx = 20 + k * Math.min(innerWidth, 900) * 0.42;
+    sctx.strokeStyle = `rgba(70,82,94,${0.45 * (1 - k)})`; sctx.lineWidth = 1.6 * (1 - k) + 0.4;
+    sctx.beginPath(); sctx.ellipse(r.x, r.y, rx, rx * 0.22, 0, 0, Math.PI * 2); sctx.stroke();
+  }
+  for (let i = drops.length - 1; i >= 0; i--) {   // flying droplets
+    const d = drops[i]; d.t += dt; if (d.t >= d.life) { drops.splice(i, 1); continue; }
+    d.vy += 1500 * dt; d.x += d.vx * dt; d.y += d.vy * dt;
+    const a = 1 - d.t / d.life;
+    sctx.fillStyle = `rgba(232,240,246,${0.95 * a})`; sctx.strokeStyle = `rgba(70,82,94,${0.6 * a})`; sctx.lineWidth = 0.8;
+    sctx.beginPath(); sctx.ellipse(d.x, d.y, d.r, d.r * (1 + Math.min(Math.abs(d.vy) / 900, 0.8)), Math.atan2(d.vy, d.vx) - Math.PI / 2, 0, Math.PI * 2); sctx.fill(); sctx.stroke();
+  }
+  if (!drop.on && !drops.length && !rings.length) sctx.clearRect(0, 0, w, h);
+});
+function splash() {
+  if (splashed) return; splashed = true;
+  const p = impactPoint();
+  mistEl.style.setProperty('--sx', p.x + 'px'); mistEl.style.setProperty('--sy', p.y + 'px');
+  const maxR = Math.hypot(innerWidth, innerHeight) * 1.1;
+  hole.r = -0.3 * Math.max(innerWidth, innerHeight); setHole();
+  splashTl = gsap.timeline();
+  if (reduceMotion) {
+    splashTl.to('.mist', { autoAlpha: 0, duration: 0.4 }).to(mistState, { p: 1, duration: 0.4 }, 0).to('.intro-cue', { autoAlpha: 0, duration: 0.2 }, 0).to('.logo', { autoAlpha: 1, duration: 0.3 }, 0.2);
+    return;
+  }
+  Object.assign(drop, { on: true, x: p.x, y: -30 });
+  splashTl
+    .to('.intro-cue', { autoAlpha: 0, duration: 0.2 }, 0)
+    .to(drop, { y: p.y, duration: 0.42, ease: 'power2.in', onComplete: () => { drop.on = false; burst(p.x, p.y); } }, 0)
+    .to('.mist-logo', { scaleY: 0.9, scaleX: 1.04, duration: 0.08, ease: 'power2.out' }, 0.42)
+    .to('.mist-logo', { scaleY: 1, scaleX: 1, duration: 0.5, ease: 'elastic.out(1, 0.35)' }, 0.5)
+    .to(hole, { r: maxR, duration: 1.5, ease: 'power2.out', onUpdate: setHole }, 0.46)
+    .to('.mist-inner', { autoAlpha: 0, scale: 1.1, duration: 0.7, ease: 'power1.in' }, 0.75)
+    .to(mistState, { p: 1, duration: 1.2, ease: 'power1.out' }, 0.46)
+    .set('.mist', { autoAlpha: 0 }, 2.0)
+    .to('.logo', { autoAlpha: 1, duration: 0.5 }, 1.5);
+}
+function resetSplash() {
+  if (!splashed) return; splashed = false;
+  if (splashTl) splashTl.kill();
+  drops.length = 0; rings.length = 0; drop.on = false; sctx.clearRect(0, 0, splashCv.width, splashCv.height);
+  hole.r = -0.3 * Math.max(innerWidth, innerHeight); setHole();
+  mistState.p = 0;
+  gsap.set('.mist', { autoAlpha: 1 }); gsap.set('.mist-inner', { autoAlpha: 1, scale: 1 }); gsap.set('.mist-logo', { scale: 1 });
+  gsap.set('.intro-cue', { autoAlpha: 1 }); gsap.set('.logo', { autoAlpha: 0 });
+}
+if (!CAPTURE) {
+  ScrollTrigger.create({ trigger: '#intro', start: 'top top-=4', onEnter: splash, onLeaveBack: resetSplash });
+  if (scrollY > 4) requestAnimationFrame(splash);
+}
+document.querySelector('.intro-cue').addEventListener('click', () => {
+  splash();
+  setTimeout(() => document.getElementById('survey').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }), reduceMotion ? 0 : 900);
+});
+
+/* ---------- symbol works: zigzag reveal ---------- */
+gsap.utils.toArray('.zig').forEach((el, i) => gsap.from(el, {
+  autoAlpha: 0, x: i % 2 ? 60 : -60, duration: 1, ease: 'power3.out',
+  scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' },
+}));
 
 /* ---------- portfolio filter (menu ALL / CLINIC / COMMERCIAL / HOSPITAL) ---------- */
 const cards = [...document.querySelectorAll('.card')], fbtns = [...document.querySelectorAll('.filters button')];
@@ -1008,7 +1134,21 @@ function setFilter(f) {
   document.querySelector('.projects-empty').hidden = cards.some((c) => !c.hidden);
 }
 fbtns.forEach((b) => b.addEventListener('click', () => setFilter(b.dataset.filter)));
-document.querySelectorAll('.sub a[data-filter]').forEach((a) => a.addEventListener('click', () => { setFilter(a.dataset.filter); closeSub(); }));
+const layer = document.getElementById('projects'), layerClose = layer.querySelector('.projects-close');
+let layerReturn = null;
+function openLayer(f) {
+  setFilter(f); layerReturn = subBtn;
+  layer.classList.add('open'); layer.setAttribute('aria-hidden', 'false'); document.documentElement.classList.add('layer-open');
+  layer.scrollTop = 0; setTimeout(() => layerClose.focus(), 50);
+}
+function closeLayer() {
+  if (!layer.classList.contains('open')) return;
+  layer.classList.remove('open'); layer.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('layer-open');
+  if (layerReturn) layerReturn.focus();
+}
+layerClose.addEventListener('click', closeLayer);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLayer(); });
+document.querySelectorAll('.sub a[data-filter]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); closeSub(); openLayer(a.dataset.filter); }));
 
 /* ---------- INTERIOR submenu: click/tap to toggle, hover on desktop, Esc or outside click closes ---------- */
 const hasSub = document.querySelector('.has-sub'), subBtn = hasSub.querySelector('.menu-link');
