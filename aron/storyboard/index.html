@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아론 랜딩페이지 스토리보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Noto+Serif+KR:wght@400;500&family=Noto+Sans+KR:wght@400;500&display=swap">
+<style>
+/* VOICE  calm meeting document: the page reads top to bottom like the site scrolls.
+   IDEA   a film storyboard sheet: numbered frames in acts, each with what the viewer sees and what moves.
+   PICTURE real screenshots of the V1 site, frame by frame.
+   COLOUR and TYPE ARON ivory, ink and the logo's beige stroke; Cormorant for numbers, Noto Serif/Sans KR.
+   LAYOUT cover with logo and one-line idea, flow strip, four acts of frames, the next film, the agenda. */
+:root{color-scheme:light dark;
+  --bg:light-dark(#f6f1ea,#14130f);--card:light-dark(#fffdf9,#1d1b17);--ink:light-dark(#2a2520,#efe8dc);
+  --soft:light-dark(#6c635a,#b3a99c);--rule:light-dark(rgba(42,37,32,.14),rgba(239,232,220,.14));
+  --gold:light-dark(#9c7b4c,#d2b78c);--wash:light-dark(#ece4d8,#262320)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Noto Sans KR","Apple SD Gothic Neo",sans-serif;overflow-x:clip;word-break:keep-all}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+h1,h2,h3{font-family:"Noto Serif KR",serif;font-weight:500;line-height:1.25;text-wrap:balance;margin:0}
+.num{font-family:"Cormorant Garamond",serif;font-weight:500}
+a{color:var(--gold)}
+
+/* cover */
+.cover{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.logo{width:min(380px,80%);height:auto;display:block;margin-bottom:28px}
+:root[data-theme=dark] .logo{filter:invert(1) hue-rotate(180deg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .logo{filter:invert(1) hue-rotate(180deg)}}
+.cover h1{font-size:clamp(2rem,4vw,2.9rem);margin-bottom:14px}
+.cover p{margin:0 0 10px;color:var(--soft);max-width:34em}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:.875rem;color:var(--soft)}
+.meta b{color:var(--ink);font-weight:500}
+.hero-shot{border-radius:14px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(0,0,0,.45)}
+.hero-shot img{display:block;width:100%;height:auto}
+
+/* flow strip */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:8px}
+.step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:14px 16px}
+.step .num{font-size:1.5rem;color:var(--gold);line-height:1}
+.step h3{font-size:1rem;margin:6px 0 4px}
+.step p{margin:0;font-size:.875rem;color:var(--soft)}
+
+/* acts and frames */
+.act{margin-top:clamp(36px,5vw,64px)}
+.act-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:18px}
+.act-head .num{font-size:2.2rem;color:var(--gold);line-height:1}
+.act-head h2{font-size:clamp(1.35rem,2.4vw,1.75rem)}
+.act-head p{margin:0;color:var(--soft);flex-basis:100%}
+.frames{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.frame{background:var(--card);border:1px solid var(--rule);border-radius:14px;overflow:hidden;break-inside:avoid}
+.frame figure{margin:0;position:relative;aspect-ratio:16/9;background:var(--wash)}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.frame .tag{position:absolute;left:10px;top:10px;background:rgba(20,18,16,.72);color:#f6f1ea;font-size:.8125rem;padding:2px 10px;border-radius:999px}
+.frame .body{padding:14px 16px 16px}
+.frame h3{font-size:1.0625rem;margin-bottom:6px}
+.frame p{margin:0;font-size:.9375rem;color:var(--soft)}
+.frame .move{margin-top:8px;font-size:.8125rem;color:var(--gold)}
+
+/* next film */
+.sketch{aspect-ratio:16/9;display:grid;place-items:center;text-align:center;padding:16px;
+  background:repeating-linear-gradient(135deg,var(--wash) 0 14px,transparent 14px 28px);color:var(--soft);font-size:.875rem}
+.sketch b{display:block;font-family:"Cormorant Garamond",serif;font-size:2rem;color:var(--gold);font-weight:500;line-height:1}
+
+/* agenda */
+.agenda{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.box{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:20px 22px}
+.box h3{font-size:1.125rem;margin-bottom:10px}
+.box ol,.box ul{margin:0;padding-left:1.2em}
+.box li{margin:6px 0;font-size:.9375rem}
+.box li span{color:var(--soft)}
+.note{margin-top:14px;font-size:.8125rem;color:var(--soft)}
+footer{border-top:1px solid var(--rule);font-size:.8125rem;color:var(--soft)}
+
+@media (max-width:900px){.frames,.agenda{grid-template-columns:repeat(2,minmax(0,1fr))}.flow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){.cover{grid-template-columns:minmax(0,1fr)}.frames,.agenda,.flow{grid-template-columns:minmax(0,1fr)}}
+@media print{body{background:#fff}.band{padding:16px 0}.frame,.box,.step{break-inside:avoid}.act{break-before:auto}}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap cover">
+    <div>
+      <img class="logo" src="img/logo.png" alt="ARON DESIGN · Architecture · Interior · Space">
+      <h1>아론 랜딩페이지 스토리보드</h1>
+      <p>빈 상가 한 층이 스크롤에 따라 아론의 공간으로 지어지는 원페이지 사이트입니다. 화면 순서대로 장면을 정리했습니다.</p>
+      <p>모든 장면은 지금 완성된 V1(실시간 3D)의 실제 화면입니다.</p>
+      <div class="meta"><span><b>회의용</b> · 2026년 11월 20일</span><span><b>버전</b> V1 (3D)</span><span><a href="https://claude.ai/artifact/XHrjPpxhbB9HDZPomp968Z">V1 직접 보기</a></span></div>
+    </div>
+    <div class="hero-shot"><img src="img/03-hero.jpg" alt="히어로 화면: 밤의 도심 위 빈 층과 More than a space 제목"></div>
+  </div>
+</header>
+
+<main class="band" style="padding-top:0">
+<div class="wrap">
+
+  <section aria-labelledby="flow-t">
+    <h2 id="flow-t" style="font-size:1.35rem;margin-bottom:12px">전체 흐름</h2>
+    <div class="flow">
+      <div class="step"><span class="num">01</span><h3>인트로</h3><p>안개 속 ARON 로고, 스크롤하면 안개가 걷힘</p></div>
+      <div class="step"><span class="num">02</span><h3>시공</h3><p>빈 층 → 도면 → 벽 → 조명 → 마감, 밤에서 아침으로</p></div>
+      <div class="step"><span class="num">03</span><h3>아론의 일</h3><p>패널 5개: 공간 · 디자인 · 소재 · 조명 · 시공</p></div>
+      <div class="step"><span class="num">04</span><h3>포트폴리오</h3><p>ALL · CLINIC · COMMERCIAL · HOSPITAL 필터</p></div>
+      <div class="step"><span class="num">05</span><h3>문의</h3><p>INQUIRIES · LOCATION · FOLLOW</p></div>
+    </div>
+  </section>
+
+  <section class="act" aria-labelledby="a1">
+    <div class="act-head"><span class="num">I</span><h2 id="a1">인트로: 안개가 걷히며</h2><p>첫 화면은 로고 하나만. 스크롤을 시작하면 안개가 걷히고 건물이 실루엣부터 드러납니다.</p></div>
+    <div class="frames">
+      <article class="frame"><figure><img src="img/01-intro.jpg" alt="안개 속 ARON 로고" loading="lazy"><span class="tag">01</span></figure><div class="body"><h3>안개 속 ARON</h3><p>밝은 안개와 가운데 로고, 아래에 스크롤 아이콘.</p><p class="move">로고가 천천히 모이며 등장 · 안개가 흐르듯 움직임</p></div></article>
+      <article class="frame"><figure><img src="img/02-mist.jpg" alt="안개가 걷히며 드러나는 건물" loading="lazy"><span class="tag">02</span></figure><div class="body"><h3>안개가 걷힘</h3><p>로고가 커지며 사라지고, 3D 안개도 옅어져 건물이 드러남.</p><p class="move">스크롤 1화면 분량</p></div></article>
+      <article class="frame"><figure><img src="img/03-hero.jpg" alt="히어로 제목" loading="lazy"><span class="tag">03</span></figure><div class="body"><h3>히어로</h3><p><i>More than a space. A place where care begins.</i> 왼쪽 위에 로고, 가운데 메뉴.</p><p class="move">오른쪽에 PROCESS 01~06 진행 표시</p></div></article>
+    </div>
+  </section>
+
+  <section class="act" aria-labelledby="a2">
+    <div class="act-head"><span class="num">II</span><h2 id="a2">시공: 빈 층이 공간이 되기까지</h2><p>스크롤에 맞춰 공정이 한 단계씩 진행됩니다. 빛은 밤의 작업등에서 새벽을 거쳐 아침 햇살로 바뀝니다.</p></div>
+    <div class="frames">
+      <article class="frame"><figure><img src="img/04-shell.jpg" alt="밤의 빈 콘크리트 층" loading="lazy"><span class="tag">04 · 빈 공간</span></figure><div class="body"><h3>빈 공간</h3><p>상가 건물 4층의 빈 콘크리트 층, 노출 덕트, 작업등.</p></div></article>
+      <article class="frame"><figure><img src="img/05-plan.jpg" alt="바닥에 그려지는 평면선" loading="lazy"><span class="tag">05 · 도면</span></figure><div class="body"><h3>도면</h3><p>바닥 위에 평면선이 빛나며 그려짐.</p></div></article>
+      <article class="frame"><figure><img src="img/06-walls.jpg" alt="솟아오르는 벽과 아치" loading="lazy"><span class="tag">06 · 벽체</span></figure><div class="body"><h3>벽체 · 아치</h3><p>선을 따라 벽과 곡면 벽, 아치 개구부가 솟아오름.</p></div></article>
+      <article class="frame"><figure><img src="img/07-light.jpg" alt="간접조명이 켜지는 새벽" loading="lazy"><span class="tag">07 · 조명</span></figure><div class="body"><h3>조명</h3><p>간접조명 띠와 펜던트가 켜지고 새벽이 옴.</p></div></article>
+      <article class="frame"><figure><img src="img/08-finish.jpg" alt="마감과 가구" loading="lazy"><span class="tag">08 · 마감</span></figure><div class="body"><h3>마감 · 가구</h3><p>트래버틴 바닥이 깔리고, 벽이 웜 화이트로, 가구가 자리 잡음.</p></div></article>
+      <article class="frame"><figure><img src="img/09-complete.jpg" alt="아침에 완성된 공간" loading="lazy"><span class="tag">09 · 완성</span></figure><div class="body"><h3>완성</h3><p>아침 햇살 아래 완성된 공간, 입구 로고 사인 점등.</p></div></article>
+    </div>
+  </section>
+
+  <section class="act" aria-labelledby="a3">
+    <div class="act-head"><span class="num">III</span><h2 id="a3">아론의 일: 패널 다섯 개</h2><p>정해진 스크롤 위치마다 카메라가 공간의 한 장면으로 이동하고, 그 장면에 맞는 패널이 나타납니다.</p></div>
+    <div class="frames">
+      <article class="frame"><figure><img src="img/10-space.jpg" alt="SPACE 패널과 위에서 본 평면" loading="lazy"><span class="tag">10 · SPACE</span></figure><div class="body"><h3>공간의 첫인상을 설계합니다</h3><p>위에서 본 평면, 방문객 동선이 금색 선으로 그려짐.</p></div></article>
+      <article class="frame"><figure><img src="img/11-design.jpg" alt="DESIGN 패널과 입구 로고" loading="lazy"><span class="tag">11 · DESIGN</span></figure><div class="body"><h3>브랜드가 머무는 공간을 만듭니다</h3><p>입구와 로고 사인 장면.</p></div></article>
+      <article class="frame"><figure><img src="img/12-material.jpg" alt="MATERIAL 패널과 리셉션" loading="lazy"><span class="tag">12 · MATERIAL</span></figure><div class="body"><h3>손끝에 닿는 모든 것을 고릅니다</h3><p>리셉션 데스크와 바닥 소재.</p></div></article>
+      <article class="frame"><figure><img src="img/13-light.jpg" alt="LIGHT & DETAIL 패널과 라운지 펜던트" loading="lazy"><span class="tag">13 · LIGHT &amp; DETAIL</span></figure><div class="body"><h3>빛과 디테일이 완성도를 만듭니다</h3><p>라운지 펜던트 조명과 창밖 풍경.</p></div></article>
+      <article class="frame"><figure><img src="img/14-construction.jpg" alt="CONSTRUCTION 패널과 완성된 층" loading="lazy"><span class="tag">14 · CONSTRUCTION</span></figure><div class="body"><h3>설계한 그대로, 현장에서 완성합니다</h3><p>완성된 층 전체와 문의하기 버튼.</p><p class="move">시공 여부는 대표님 확인 필요</p></div></article>
+    </div>
+  </section>
+
+  <section class="act" aria-labelledby="a4">
+    <div class="act-head"><span class="num">IV</span><h2 id="a4">포트폴리오와 문의</h2><p>메뉴의 INTERIOR에서 분류를 고르면 이 섹션으로 내려옵니다. CONTACT와 FOLLOW는 푸터로 이동합니다.</p></div>
+    <div class="frames">
+      <article class="frame"><figure><img src="img/15-projects.jpg" alt="포트폴리오 섹션" loading="lazy"><span class="tag">15 · PROJECTS</span></figure><div class="body"><h3>Selected work</h3><p>HOSPITAL: 경희온생한의원, 광명마디원정형외과, 다산에이아이정형외과.</p><p class="move">사진 받으면 대표 사진 + 갤러리</p></div></article>
+      <article class="frame"><figure><img src="img/16-footer.jpg" alt="푸터" loading="lazy"><span class="tag">16 · FOOTER</span></figure><div class="body"><h3>INQUIRIES · LOCATION · FOLLOW</h3><p>내용은 대표님 자료를 받아서 채움.</p></div></article>
+    </div>
+  </section>
+
+  <section class="act" aria-labelledby="a5">
+    <div class="act-head"><span class="num">V</span><h2 id="a5">다음 기획: 실내 중심 로비 영상 (V2, 초안)</h2><p>건물 밖에서 안으로 들어가 웅장한 로비를 만나는 영상입니다. 드리미나로 장면별 사진을 만들고, 시작과 끝 프레임으로 영상을 이어 붙일 예정입니다.</p></div>
+    <div class="frames">
+      <article class="frame"><div class="sketch"><span><b>A</b>이미지 생성 전</span></div><div class="body"><h3>외부</h3><p>거리에서 상가 건물로 다가가 위층을 올려다봄.</p></div></article>
+      <article class="frame"><div class="sketch"><span><b>B</b>이미지 생성 전</span></div><div class="body"><h3>입구</h3><p>엘리베이터 문이 열리고 유리문과 로고 벽이 정면에.</p></div></article>
+      <article class="frame"><div class="sketch"><span><b>C</b>이미지 생성 전</span></div><div class="body"><h3>로비 공개 (메인)</h3><p>낮은 카메라로 들어서면 넓게 펼쳐지는 로비.</p><p class="move">곡선 간접조명 라인 · 광택 바닥 · 대칭 구도</p></div></article>
+      <article class="frame"><div class="sketch"><span><b>D</b>이미지 생성 전</span></div><div class="body"><h3>로비 둘러보기</h3><p>곡선 데스크와 빛의 라인을 따라 천천히 회전. 패널 구간.</p></div></article>
+      <article class="frame"><div class="sketch"><span><b>E</b>이미지 생성 전</span></div><div class="body"><h3>진료실</h3><p>복도를 지나 진료실로 들어가며 마무리.</p></div></article>
+    </div>
+  </section>
+
+  <section class="act" aria-labelledby="a6">
+    <div class="act-head"><span class="num">VI</span><h2 id="a6">회의 안건</h2></div>
+    <div class="agenda">
+      <div class="box"><h3>정할 것</h3><ol>
+        <li>로고 위치 <span>· 첫 화면 전체 로고 또는 ARON만, 왼쪽 위, 탭 아이콘</span></li>
+        <li>아론의 느낌 문구 <span>· 위치와 영어 문구</span></li>
+        <li>3D를 로비 사진 느낌으로 다듬을지</li>
+        <li>로비 영상 <span>· 시공 장면 포함, 시간대, 로비 톤, 끝 장면</span></li>
+      </ol></div>
+      <div class="box"><h3>대표님께 받을 것</h3><ul>
+        <li>회사 정보 <span>· 상호, 주소, 연락처, SNS</span></li>
+        <li>병원 3곳 사진과 공개 동의</li>
+        <li>시공을 직접 하는지, 자주 쓰는 자재</li>
+        <li>로고·BI 작업 사례</li>
+        <li>도메인 주소</li>
+      </ul></div>
+      <div class="box"><h3>공개까지</h3><ol>
+        <li>결정 사항 반영</li>
+        <li>자료 반영 <span>· 로고, 푸터, 포트폴리오 갤러리</span></li>
+        <li>실제 휴대폰에서 확인</li>
+        <li>대표님 검수</li>
+        <li>Vercel 공개, 도메인 연결</li>
+      </ol></div>
+    </div>
+    <p class="note">패널의 자재명 등 일부 내용은 참고 사진을 보고 추정한 예시입니다. 대표님 확인 후 바꿉니다.</p>
+  </section>
+
+</div>
+</main>
+
+<footer class="band"><div class="wrap">© ARON Design · 랜딩페이지 스토리보드 · V1 기준</div></footer>
+</body>
+</html>
