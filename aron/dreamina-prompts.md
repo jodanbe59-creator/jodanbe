@@ -1,87 +1,83 @@
-# 아론 · 드리미나 프롬프트 모음
+# 아론 · 드리미나 프롬프트 모음 (v2 · 아론의 결로 통일)
+
+**원칙**
+- 레퍼런스는 **구도와 색감만** 참고하고, 설치물·가구·소재는 가져오지 않아요.
+- 모든 장면은 **아론 로비(물 미디어월 · 물방울 샹들리에 · 흰 아치)와 같은 결**로 만들어요. → 한 회사가 만든 공간들처럼 보이게.
+- 아론의 결 = **흰 미장 곡선과 아치 · 물과 물방울 모티프 · 은은한 간접조명 · 흰 대리석 · 고요하고 화려한 빛**
 
 **공통 설정**
-- 이미지: AI 이미지 · Seedream 5.0 Pro · 16:9 · 최고 화질 · 해당 레퍼런스 사진 첨부
+- 이미지: AI 이미지 · Seedream 5.0 Pro · 16:9 · 최고 화질
+- 레퍼런스 첨부: ① 아론 로비 이미지(물 미디어월 로비) + ② 해당 장면의 레퍼런스(구도·색감용)
 - 영상: AI 비디오 · 첫 프레임 = 해당 이미지 · 5초 · 소리 끄기
-- 사람, 글자, 로고가 나오면 마지막 줄(No text…)을 맨 앞으로 옮겨 다시 생성
-- 좁게 나오면 비율 21:9로 생성하거나 레퍼런스를 빼고 한 번 더
 
----
-
-## 로비 01 · 원형 게이트 (흰 대리석 아트리움)
-레퍼런스: 원형 창 + 우주 영상 로비 사진
+**모든 프롬프트 맨 앞에 붙이는 문장 (아론 스타일)**
 ```
-Use the reference image only for its architecture and mood. Do NOT copy the person, the logo or the galaxy image.
-Photorealistic ultra-wide interior photograph of a grand, spacious medical clinic lobby with a double-height atrium, shot from a low camera at the entrance with a perfectly symmetrical one-point perspective. Tall white ceiling with long recessed linear light slots running toward the back. Layered white walls and balconies stepping up on both sides, warm vertical oak panels at ground level. Centered at the back: a monumental white marble wall with a large perfectly circular moon-gate opening, framing a softly glowing video of calm, rippling pale-blue water. In front of it, a long low white marble reception desk with a warm light line beneath it. In the open floor in front of the desk, a lounge grouping: a low cream three-seat sofa with soft cushions, a round light-oak coffee table, an L-shaped cream sectional sofa on the left, a cream lounge armchair with a small oak side table on the right, all on a large soft beige rug. Light polished stone floor. Beautiful, serene, luxurious, gallery-like. High-end architectural interior photography, ultra-detailed.
-No text, no letters, no logos, no people, no television.
+Design in the same signature style as the first reference image (the ARON lobby): smooth white plaster curves and arches, a water and droplet motif, soft hidden indirect light, white marble, serene yet luxurious. Use the second reference image ONLY for camera composition and color palette. Do NOT copy its furniture, installations, materials or any people, text or logos.
 ```
 
-## 로비 02 · 물방울 조명 (원목 슬랫, 다크 & 웜)
-레퍼런스: 물방울 펜던트 + 흰 조약돌 데스크 사진
+**모든 프롬프트 끝에 붙이는 문장**
 ```
-Use the reference image only for its architecture, materials and lighting. Do NOT include the person, the elevators or any doors.
-Photorealistic ultra-wide interior photograph of a spacious, beautiful premium medical clinic lobby, symmetrical view from a low camera at the entrance. The ceiling and back wall are clad in warm horizontal walnut wood slats with dark charcoal panels, the back wall continuous with no doors or elevators. From the ceiling hangs a dramatic sculptural chandelier made of hundreds of glowing droplet-shaped pendant lights on fine black cords, forming a flowing wave-like curved surface. Below it, a seamless pebble-shaped glossy white reception desk with soft rounded edges. In the open floor in front of the desk, a lounge grouping: a low cream three-seat sofa with soft cushions, a round light-oak coffee table, an L-shaped cream sectional sofa on the left, a cream lounge armchair with a small side table on the right, all on a large soft beige rug. Warm wide-plank wood floor. Elegant, warm, luxurious, beautiful. High-end architectural interior photography, ultra-detailed.
-No text, no letters, no logos, no people, no television, no doors, no elevators.
-```
-
-## 로비 03 · 체인 커튼 (블루 포인트)
-레퍼런스: 원형 체인 커튼 + 네이비 소파 사진
-```
-Use the reference image only for its design language, materials and colors. Do NOT include any people.
-Photorealistic ultra-wide interior photograph of a spacious, beautiful medical clinic lobby with a double-height ceiling and a clean smooth white ceiling, symmetrical view from a low camera at the entrance. From the high ceiling hang several tall cylindrical curtains of fine silver and soft blue metal chain mesh, each topped by a glowing circular light ring, flowing down like gentle streams of water. A sculptural white reception desk with rounded edges at the back, set against warm vertical oak slat walls with deep navy blue panels. In the open floor, a lounge grouping: a curved modular deep navy velvet sofa flowing in a soft wave shape, round camel leather lounge chairs, small round white tables, on a large circular rug with a subtle water-ripple pattern in navy and white. Light polished concrete floor. Fresh, elegant, modern, beautiful. High-end architectural interior photography, ultra-detailed.
-No text, no letters, no logos, no people, no television.
+Photorealistic, high-end architectural interior photography, ultra-detailed, beautiful. No text, no letters, no logos, no numbers, no people, no monitors, no television.
 ```
 
 ---
 
-## 복도 01 · S자 곡선 복도
-레퍼런스: 원목 슬랫 + 곡선 간접조명 복도 사진
+## 로비 01 · 아치 아트리움 (화이트)
+구도·색감 레퍼런스: 원형 창 로비 (대칭, 높은 천장, 흰 대리석)
 ```
-Use the reference image only for its shapes, materials and light.
-Photorealistic wide interior photograph of a beautiful, spacious clinic corridor that gently curves like a flowing S-shaped wave, shot at eye level from the center of the corridor looking ahead. One side: a curved wall of fine vertical light-oak slats. The other side: a smooth curved warm-white plaster wall. A continuous soft indirect light line follows the curved edge of the ceiling, leading the eye around the bend. Wide warm oak plank floor. The corridor curves out of sight, inviting you forward. A few tall arched flush doors set into the plaster wall. Warm beige and oak palette, serene, elegant, beautiful. High-end architectural interior photography.
-No text, no logos, no people, no television.
+A grand double-height clinic lobby, perfectly symmetrical one-point view from a low camera. Tall white ceiling with fine linear light slots. At the back, a monumental white plaster wall with a large circular opening glowing with a calm rippling water video. A long, low, softly curved white reception desk with a light line beneath it. In front, a lounge grouping: a low cream sofa, a round pale oak coffee table, an L-shaped cream sofa on the left, a cream armchair on the right, on a soft ivory rug. White marble floor. Palette: white, ivory, pale blue light.
 ```
 
-## 복도 02 · 복도형 대기실
-레퍼런스: 원목 아치 캐노피 + 붙박이 소파 사진
+## 로비 02 · 물방울 빛 (웜 다크)
+구도·색감 레퍼런스: 물방울 조명 로비 (정면, 따뜻한 짙은 톤)
 ```
-Use the reference image only for its design language, materials and light. Do NOT include any text, signs or people.
-Photorealistic wide interior photograph of a beautiful corridor-style waiting area in a premium medical clinic, one-point perspective down the corridor at eye level. Along the right wall, a long built-in beige upholstered bench with small stone side tables, under a rhythm of curved walnut wood canopies that repeat like gentle waves, each softly lit from within. Behind the bench, textured art panels with fine abstract line patterns between slim marble columns. Along the left side, a curved wall of vertical slats glowing with soft backlight and a curved stone reception counter. Warm dark oak plank floor, smooth warm-white ceiling with a slim linear light, the corridor curving softly at the far end. Calm, warm, refined, beautiful. High-end architectural interior photography, ultra-detailed.
-No text, no letters, no logos, no people, no television.
+A warm, dramatic clinic lobby in a deeper palette, symmetrical frontal view. Walls of warm taupe plaster with soft arches, a dark walnut-toned ceiling. Above the reception, a sculptural chandelier of hundreds of crystal water droplets forming a gentle wave. A smooth pebble-like white reception desk glowing at its base. In front, a lounge grouping: a low cream sofa, a round dark oak coffee table, an L-shaped cream sofa on the left, a cream armchair on the right, on a soft beige rug. Polished warm stone floor. Palette: warm brown, cream, golden light.
 ```
 
-## 복도 03 · 화이트 복도
-레퍼런스: 흰 벽 + 원목 슬랫 띠 + 1인 소파 복도 사진
+## 로비 03 · 물빛 블루
+구도·색감 레퍼런스: 체인 커튼 로비 (높은 천장, 블루 포인트)
 ```
-Use the reference image only for its layout, materials and light. Do NOT include any people, room numbers or signs.
-Photorealistic one-point perspective photograph down a bright, clean, beautiful clinic corridor. Smooth white wall panels with a long band of warm oak slats along the top, slim linear lights set into the slats, cream upholstered armchairs placed along the wall, a few tall green plants in concrete planters, light large-format tile floor, bright white ceiling with long linear lights, a glass door at the far end. Fresh, airy, calm, beautiful. High-end architectural interior photography.
-No text, no letters, no numbers, no logos, no people.
+A bright, airy double-height clinic lobby with a touch of blue. White plaster arches and curved walls, a clean white ceiling. Tall, softly glowing water-light columns rise near the arches, like falling streams of water lit from within. A curved white reception desk. In front, a lounge grouping: a curved deep navy velvet sofa, round cream armchairs, a round white marble coffee table, on a round rug with a subtle ripple pattern. Light polished stone floor. Palette: white, deep navy, water blue.
 ```
 
 ---
 
-## 진료실 01 · 아치 유리 진료실
-레퍼런스: 아치형 유리 상담실 3개 사진
+## 복도 01 · 물결 곡선 (베이지)
+구도·색감 레퍼런스: S자 곡선 복도 (눈높이, 휘어지는 길)
 ```
-Use the reference image only for its design language, materials and light. Do NOT include any text, room numbers, signs, monitors or people.
-Photorealistic wide symmetrical interior photograph of a row of three beautiful glass consultation rooms in a premium medical clinic, seen from the waiting area. Each room has a tall arched opening in a smooth greige plaster wall, closed by a clear glass door with a soft curved frosted film pattern and a round walnut handle. Inside each room: a clean white desk, two cream upholstered consultation chairs, sheer linen curtains glowing with soft daylight, a soft grey carpet and warm downlights. Above the rooms, a long continuous indirect light line under a dark walnut ceiling. Light oak plank floor in front, the corner of a soft fabric sofa in the foreground. Calm, refined, elegant, beautiful. High-end architectural interior photography, ultra-detailed.
-No text, no letters, no logos, no numbers, no people, no monitors, no television.
+A clinic corridor that curves gently like a flowing wave, eye-level view looking ahead. Smooth warm-white plaster walls curving on both sides, tall arched flush doors set into them. A continuous soft light line follows the curved ceiling edge around the bend. Pale oak floor. Palette: warm white, beige, soft golden light.
 ```
 
-## 진료실 02 · 갤러리형
-레퍼런스: 곡면 벽 + 먹물 아트월 사진
+## 복도 02 · 아치 대기 복도 (웜)
+구도·색감 레퍼런스: 복도형 대기실 (원근, 따뜻한 원목 톤)
 ```
-Use the reference image only for its design language, materials and light. Do NOT include any text or people.
-Spacious photorealistic wide interior photograph of a beautiful, gallery-like private consultation room in a premium medical clinic. Sculptural warm-ivory plaster walls that curve and lean at bold angles, wrapping the room. One wall features a large black-and-white abstract ink-wash mural, like ink drops spreading in water, with slim glass shelves holding a few small cream ceramic vases. A clean ivory stone desk with a sculptural cream upholstered chair, a curved cream sofa with taupe cushions, and a round dark charcoal coffee table with a single ceramic vase. Polished ivory stone floor, soft recessed downlights, calm warm light. Serene, artistic, elegant, beautiful. High-end architectural interior photography, ultra-detailed.
-No text, no letters, no logos, no people, no monitors, no television.
+A corridor-style waiting area, one-point perspective at eye level. A rhythm of white plaster arches repeating down the corridor like ripples, each softly lit from within. Along one side, a long built-in cream upholstered bench beneath the arches, small white marble side tables. Warm oak floor, smooth white ceiling. Palette: warm white, cream, oak, golden light.
 ```
 
-## 진료실 03 · 원장실형
-레퍼런스: 물결 조명 천장 + 원목 책상 사진
+## 복도 03 · 밝은 화이트 복도
+구도·색감 레퍼런스: 화이트 복도 (밝고 긴 원근)
 ```
-Use the reference image only for its design language, materials and light. Do NOT include any text, people or computer monitors.
-Spacious photorealistic wide-angle interior photograph from the doorway of a beautiful, refined doctor's consultation room in a premium medical clinic. The ceiling is a glowing stretch-fabric light panel printed with flowing white and soft grey wave lines, like ripples spreading across water. A warm walnut desk with a pale stone top and a brown leather chair, a long built-in walnut cabinet along the back wall, a framed abstract art panel of fine black lines softly backlit, slim metal shelves, warm beige textured wallpaper, walnut wainscot panels, soft grey carpet, warm downlights. Calm, warm, elegant, beautiful. High-end architectural interior photography, ultra-detailed.
-No text, no letters, no logos, no people, no monitors, no keyboard, no television.
+A bright, long clinic corridor, one-point perspective. Smooth white plaster walls with a soft curved upper edge glowing with hidden light, arched flush doors along both sides, a few cream armchairs placed in shallow arched niches, a glass door glowing with daylight at the far end. Light white marble floor. Palette: white, ivory, daylight.
+```
+
+---
+
+## 진료실 01 · 아치 유리 진료실 (그레이지)
+구도·색감 레퍼런스: 아치 유리 상담실 (정면, 세 개가 나란히)
+```
+A row of three consultation rooms seen from the waiting area, symmetrical frontal view. Each room has a tall white plaster arch with a clear glass door. Inside each: a curved white desk, two cream chairs, sheer curtains glowing with soft daylight. A long indirect light line above the arches. Pale floor in front. Palette: greige, white, warm light.
+```
+
+## 진료실 02 · 물빛 갤러리 진료실 (아이보리)
+구도·색감 레퍼런스: 갤러리형 진료실 (아이보리, 흑백 대비 하나)
+```
+A gallery-like consultation room with sculptural curved ivory plaster walls. One wall holds a large abstract artwork of ink drops spreading in water, in soft black and white. A curved white stone desk with a sculptural cream chair, a small curved cream sofa, a round dark coffee table with a single vase. White marble floor, soft downlights. Palette: ivory, cream, one touch of ink black.
+```
+
+## 진료실 03 · 물결 천장 진료실 (웜)
+구도·색감 레퍼런스: 원장실형 진료실 (문에서 본 구도, 원목 톤)
+```
+A doctor's consultation room seen from the doorway. The ceiling is a softly glowing panel of flowing water-ripple lines. A curved pale oak desk with a white stone top and a cream leather chair, a long built-in cabinet with rounded edges, smooth warm-white plaster walls with a gentle arch behind the desk. Soft carpet, warm downlights. Palette: warm white, pale oak, cream.
 ```
 
 ---
@@ -89,5 +85,5 @@ No text, no letters, no logos, no people, no monitors, no keyboard, no televisio
 ## 복도 영상 (01 · 02 · 03 공통, 선택)
 첫 프레임 = 각 복도 이미지
 ```
-One continuous cinematic shot, no cuts, beginning exactly on the provided image. The camera performs ONE smooth continuous glide forward at eye level down the corridor, perfectly steady, following the corridor as the ceiling light leads the way. Ultra-smooth, weightless, seamless, photorealistic. No people, no text.
+One continuous cinematic shot, no cuts, beginning exactly on the provided image. The camera performs ONE smooth continuous glide forward at eye level down the corridor, perfectly steady, following the corridor as the light leads the way. Ultra-smooth, weightless, seamless, photorealistic. No people, no text.
 ```
