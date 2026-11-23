@@ -275,3 +275,7 @@
   - Stillness — 고요가 흐르는 자리. / 물소리 사이로 마음이 천천히 가라앉습니다.
   - Light — 빛이 쏟아지는 곳. / 숨을 고르는 순간, 아름다움이 번집니다.
 - 로비 섹션 구조: 빌드 영상 3개(빈 공간→로비) 스크롤 스크럽 + 옆 패널(좌·우 번갈아). 영상 받으면 합본·all-intra 변환
+- **로비 섹션 문구 → 영어 (사용자):** 소제목 + 영어 설명, 스크롤 시 단어별로 옅음→진함 (opacity 0.14→1). 테스트: https://claude.ai/artifact/ (ARON · Spaces text reveal), 원본 scratchpad/lobbytext
+  - Warmth — The first moment you step inside, warmth greets you before anyone does — soft, earthen, and quietly embracing.
+  - Stillness — Between the sound of water and a halo of light, the mind slowly settles into calm.
+  - Light — Take a breath, and let beauty spread through the room like a ripple across still water.
