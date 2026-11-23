@@ -1178,30 +1178,25 @@ if (!CAPTURE) {
     vctx.globalCompositeOperation = 'source-over'; vctx.clearRect(0, 0, W, H);
     if (V.open >= 0.999) return;
     vctx.fillStyle = '#fff'; vctx.fillRect(0, 0, W, H);
-    // fine ink ripples on the paper, elliptical like water seen at an angle
-    for (let k = 0; k < 3; k++) {
-      const q = Math.min(Math.max((V.ripple - k * 0.12) / 0.7, 0), 1);
-      if (q <= 0 || q >= 1) continue;
-      const rx = 14 + q * Math.min(W, 1100) * 0.36;
-      vctx.strokeStyle = `rgba(20,22,26,${0.22 * (1 - q) * (1 - V.open)})`; vctx.lineWidth = 1;
-      vctx.beginPath(); vctx.ellipse(cx, cy, rx, rx * 0.34, 0, 0, Math.PI * 2); vctx.stroke();
-    }
     if (V.open <= 0.001) return;
-    // the opening: an organic blob with a wide feathered edge (drawn as a blurred shadow, works in every browser)
-    const maxR = Math.hypot(W, H) * 0.75, r = Math.pow(V.open, 1.25) * maxR, feather = 40 + 120 * V.open, off = 10000;
+    // the white lifts like morning mist, from the bottom of the screen to the top
+    const feather = H * 0.45, edge = H + feather - V.open * (H + feather * 2);   // soft boundary moving upward
     vctx.globalCompositeOperation = 'destination-out';
-    vctx.shadowColor = '#000'; vctx.shadowBlur = feather; vctx.shadowOffsetX = off;
-    vctx.beginPath();
-    for (let i = 0; i <= 96; i++) {
-      const a = (i / 96) * Math.PI * 2;
-      const w = 1 + 0.06 * Math.sin(a * 3 + time * 0.6) + 0.04 * Math.sin(a * 5 - time * 0.9) + 0.03 * Math.sin(a * 8 + time * 1.3);
-      const x = cx + Math.cos(a) * r * w * 1.18 - off, y = cy + Math.sin(a) * r * w * 0.82;
-      i ? vctx.lineTo(x, y) : vctx.moveTo(x, y);
+    const g = vctx.createLinearGradient(0, edge - feather, 0, edge + feather);
+    g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,1)');
+    vctx.fillStyle = g; vctx.fillRect(0, 0, W, H);
+    // a few drifting wisps of mist linger along the boundary so the edge never reads as a straight line
+    vctx.globalCompositeOperation = 'source-over';
+    for (let k = 0; k < 7; k++) {
+      const x = ((k * 0.19 + time * (0.012 + k * 0.003)) % 1.3 - 0.15) * W, y = edge + Math.sin(time * 0.5 + k * 1.7) * feather * 0.25;
+      const rx = W * (0.22 + 0.06 * (k % 3)), ry = feather * 0.35;
+      const wg = vctx.createRadialGradient(x, y, 0, x, y, rx);
+      wg.addColorStop(0, `rgba(255,255,255,${0.55 * (1 - V.open)})`); wg.addColorStop(1, 'rgba(255,255,255,0)');
+      vctx.save(); vctx.translate(x, y); vctx.scale(1, ry / rx); vctx.translate(-x, -y);
+      vctx.fillStyle = wg; vctx.beginPath(); vctx.arc(x, y, rx, 0, Math.PI * 2); vctx.fill(); vctx.restore();
     }
-    vctx.closePath(); vctx.fill();
-    vctx.shadowColor = 'transparent'; vctx.shadowBlur = 0; vctx.shadowOffsetX = 0;
   }
-  gsap.ticker.add((t) => { if (V.open < 0.999 || V.ripple > 0) drawVeil(t); });
+  gsap.ticker.add((t) => { if (V.open < 0.999) drawVeil(t); });
   ScrollTrigger.create({
     trigger: '#statement', start: 'top top', end: 'bottom bottom', scrub: reduceMotion ? true : 1.2,
     onUpdate: (st) => {
@@ -1212,12 +1207,11 @@ if (!CAPTURE) {
       lineEl.style.height = Math.max(0, len - landed * (land - top)) + 'px';  // on impact the line drains into the drop
       lineEl.style.top = (top + landed * (land - top)) + 'px';
       gsap.set(dropEl, { top: top + len, scale: 1 + 0.4 * landed - 1.4 * smooth(0.56, 0.62, p), opacity: 1 - smooth(0.58, 0.64, p) });
-      V.ripple = smooth(0.54, 0.9, p);
-      V.open = smooth(0.6, 0.97, p);
+      V.open = smooth(0.58, 0.98, p);
       gsap.set('.st-text, .st-tick', { opacity: 1 - smooth(0.6, 0.76, p), y: -12 * smooth(0.6, 0.76, p) });
       // the lobby comes into focus as it is uncovered
-      const f = smooth(0.6, 1, p);
-      gsap.set(conceptImg, { scale: 1.08 - 0.08 * f, filter: `blur(${(6 * (1 - f)).toFixed(2)}px)` });
+      const f = smooth(0.58, 1, p);
+      gsap.set(conceptImg, { scale: 1.04 - 0.04 * f, filter: `blur(${(3 * (1 - f)).toFixed(2)}px)` });
     },
   });
 
