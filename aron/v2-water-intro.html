@@ -306,6 +306,13 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .about-body p { margin: 0 0 1.4em; font-family: Inter, var(--font-body); font-size: clamp(1.05rem, 1.35vw, 1.2rem); line-height: 1.6; color: #2b2b2b; }
 @media (max-width: 760px) { .about-row { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
 /* real photographs take over from the sketch; chapters read like magazine spreads */
+.fx-switch { position: fixed; left: 14px; bottom: 14px; z-index: 40; display: grid; gap: 4px; padding: 10px; background: rgba(255,255,255,0.92); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; box-shadow: 0 10px 30px -12px rgba(0,0,0,0.25); font-family: var(--font-body); }
+.fx-switch p { margin: 0 0 4px; font-size: 0.75rem; color: #777; }
+.fx-switch button { all: unset; cursor: pointer; display: flex; gap: 8px; align-items: center; min-height: 34px; padding: 0 10px; border-radius: 8px; font-size: 0.8125rem; color: #222; }
+.fx-switch button b { font-weight: 500; color: #999; width: 1em; }
+.fx-switch button[aria-pressed="true"] { background: #1a1a1a; color: #fff; }
+.fx-switch button[aria-pressed="true"] b { color: #bea286; }
+.fx-switch button:focus-visible { outline: 2px solid #bea286; }
 .photo-stage { position: fixed; inset: 0; z-index: 1; opacity: 1; pointer-events: none; background: #1c1a17; }
 .photo-stage figure { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 1.2s ease; overflow: hidden; }
 .photo-stage figure.on { opacity: 1; }
@@ -1329,18 +1336,39 @@ function splash() {
     splashTl.to('.mist', { autoAlpha: 0, duration: 0.4 }).to(mistState, { p: 1, duration: 0.4 }, 0).to('.intro-cue', { autoAlpha: 0, duration: 0.2 }, 0).to('.logo', { autoAlpha: 1, duration: 0.3 }, 0.2);
     return;
   }
-  if (mistEl.classList.contains('video-intro')) {   // looping film: the logo lifts away and the view opens from the centre
-    const c = { x: innerWidth / 2, y: innerHeight * 0.48 };
-    mistEl.style.setProperty('--sx', c.x + 'px'); mistEl.style.setProperty('--sy', c.y + 'px');
-    splashTl
-      .to('.intro-cue', { autoAlpha: 0, duration: 0.2 }, 0)
-      .to('.mist-inner', { autoAlpha: 0, scale: 1.08, duration: 0.7, ease: 'power1.in' }, 0)
-      .to(hole, { r: maxR, duration: 1.6, ease: 'power2.inOut', onUpdate: setHole }, 0.2)
-      .to(mistState, { p: 1, duration: 1.2, ease: 'power1.out' }, 0.2)
-      .set('.mist', { autoAlpha: 0 }, 1.9)
-      .to('.logo', { autoAlpha: 1, duration: 0.6 }, 1.6)
-      .call(() => video.pause(), null, 1.95)
-      ;
+  if (mistEl.classList.contains('video-intro')) {   // looping film: hand over with the effect chosen in the preview switcher
+    splashTl.to('.intro-cue', { autoAlpha: 0, duration: 0.2 }, 0);
+    const T = splashTl, st = '.st-text, .st-tick';
+    gsap.set(st, { clearProps: 'filter' });
+    switch (heroFx) {
+      case 1:   // curtain lift: the film slides up and away, the statement rises in
+        T.to('.mist-inner', { y: -60, autoAlpha: 0, duration: 0.8, ease: 'power2.in' }, 0)
+         .to('.mist', { yPercent: -100, duration: 1.5, ease: 'power3.inOut' }, 0.15)
+         .from(st, { y: 60, autoAlpha: 0, duration: 1.2, ease: 'power3.out' }, 0.8);
+        break;
+      case 2:   // bloom: the water brightens into light, and that light is the white page
+        T.to('.mist-inner', { autoAlpha: 0, duration: 0.8, ease: 'power1.in' }, 0)
+         .to(video, { scale: 1.18, duration: 1.9, ease: 'power2.in' }, 0)
+         .to(fxWhite, { opacity: 1, duration: 1.7, ease: 'power2.in' }, 0.2)   // light floods in over the water
+         .from(st, { autoAlpha: 0, duration: 1.0, ease: 'power2.out' }, 1.7);
+        break;
+      case 3:   // blur dissolve: the water loses focus while the statement comes into focus
+        T.to('.mist-inner', { autoAlpha: 0, filter: 'blur(10px)', duration: 0.9, ease: 'power1.in' }, 0)
+         .to('.mist', { filter: 'blur(28px)', autoAlpha: 0, duration: 1.6, ease: 'power2.inOut' }, 0.1)
+         .fromTo(st, { filter: 'blur(14px)', autoAlpha: 0 }, { filter: 'blur(0px)', autoAlpha: 1, duration: 1.4, ease: 'power2.out' }, 0.7);
+        break;
+      case 4:   // split open: the film parts along a horizontal line that becomes the falling vertical line
+        T.to('.mist-inner', { autoAlpha: 0, duration: 0.5 }, 0)
+         .to(split, { g: 52, duration: 1.5, ease: 'power3.inOut', onUpdate: setSplit }, 0.2)
+         .from(st, { autoAlpha: 0, y: 20, duration: 1.0, ease: 'power2.out' }, 1.1);
+        break;
+      default:  // 5 frame shrink: the film becomes a framed picture on white, then lifts away
+        T.to('.mist-inner', { autoAlpha: 0, duration: 0.6 }, 0)
+         .to('.mist', { scale: 0.42, borderRadius: 4, boxShadow: '0 30px 80px -30px rgba(0,0,0,0.35)', duration: 1.2, ease: 'power3.inOut' }, 0.1)
+         .to('.mist', { yPercent: -140, autoAlpha: 0, duration: 1.0, ease: 'power3.in' }, 1.35)
+         .from(st, { autoAlpha: 0, y: 30, duration: 1.0, ease: 'power3.out' }, 1.8);
+    }
+    T.set('.mist', { autoAlpha: 0 }).to('.logo', { autoAlpha: 1, duration: 0.6 }, '-=0.4').call(() => video.pause());
     return;
   }
   Object.assign(drop, { on: true, x: p.x, y: -30 });
@@ -1355,6 +1383,15 @@ function splash() {
     .set('.mist', { autoAlpha: 0 }, 2.0)
     .to('.logo', { autoAlpha: 1, duration: 0.5 }, 1.5);
 }
+let heroFx = 1;
+const fxWhite = document.createElement('div');
+fxWhite.style.cssText = 'position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%, #fff 0%, #fff 45%, rgba(255,255,255,0.92) 100%);opacity:0;pointer-events:none;z-index:2';
+mistEl.appendChild(fxWhite);
+const split = { g: 0 };
+function setSplit() {   // a gap that opens from the middle line
+  const g = split.g.toFixed(2) + '%', m = split.g > 0 ? `linear-gradient(to bottom, #000 calc(50% - ${g}), transparent calc(50% - ${g}), transparent calc(50% + ${g}), #000 calc(50% + ${g}))` : '';
+  mistEl.style.webkitMaskImage = m; mistEl.style.maskImage = m;
+}
 function resetSplash() {
   if (!splashed) return; splashed = false;
   if (splashTl) splashTl.kill();
@@ -1363,11 +1400,28 @@ function resetSplash() {
   mistState.p = 0;
   gsap.set('.mist', { autoAlpha: 1 }); gsap.set('.mist-inner', { autoAlpha: 1, scale: 1, xPercent: video ? -50 : 0, yPercent: video ? -40 : 0 }); gsap.set('.mist-logo', { scale: 1 });
   gsap.set('.intro-cue', { autoAlpha: 1 }); gsap.set('.logo', { autoAlpha: 0 });
+  gsap.set('.mist', { clearProps: 'transform,filter,borderRadius,boxShadow' }); gsap.set('.mist', { autoAlpha: 1 });
+  if (video) gsap.set(video, { clearProps: 'transform,filter' }); gsap.set(fxWhite, { opacity: 0 }); split.g = 0; setSplit();
+  gsap.set('.mist-inner', { clearProps: 'filter,transform' }); gsap.set('.mist-inner', { xPercent: video ? -50 : 0, yPercent: video ? -40 : 0, y: 0 }); gsap.set('.st-text, .st-tick', { clearProps: 'filter,transform,opacity,visibility' });
   if (video) { gsap.set('.mist-logo', { autoAlpha: 1, y: 0, scaleX: 1, scaleY: 1 }); gsap.set('.mist-sub', { autoAlpha: 1, y: 0 }); video.play().catch(() => {}); }
 }
 if (!CAPTURE) {
   ScrollTrigger.create({ trigger: '#intro', start: 'top top-=4', onEnter: splash, onLeaveBack: resetSplash });
   if (scrollY > 4) requestAnimationFrame(splash);
+}
+// ---- preview only: choose the hero transition ----
+{
+  const NAMES = ['커튼 리프트', '빛으로 하얘지기', '블러 디졸브', '스플릿 오픈', '프레임 축소'];
+  const box = document.createElement('div'); box.className = 'fx-switch';
+  box.innerHTML = '<p>전환 효과 미리보기</p>' + NAMES.map((n, i) => `<button type="button" data-fx="${i + 1}" aria-pressed="${i === 0}"><b>${i + 1}</b>${n}</button>`).join('');
+  document.body.appendChild(box);
+  box.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    heroFx = +b.dataset.fx;
+    box.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    resetSplash(); window.scrollTo({ top: 0, behavior: 'auto' });
+    setTimeout(() => window.scrollTo({ top: Math.round(innerHeight * 0.06), behavior: 'auto' }), 700);   // replay it
+  });
 }
 document.querySelector('.intro-cue').addEventListener('click', () => {
   splash();
