@@ -8,7 +8,7 @@
 
 ---
 
-## 로비 01 · 아치 아트리움 (화이트)
+## 로비 01 · ✅ 확정 (aron/photos/lobby-01.jpg) · 아치 아트리움 (화이트)
 ② 레퍼런스: 원형 창 로비 (대칭, 높은 천장, 흰 대리석)
 ```
 Design in the same signature style as the first reference image (the ARON lobby): smooth white plaster curves and arches, a water and droplet motif, soft hidden indirect light, white marble, serene yet luxurious. Use the second reference image ONLY for camera composition and color palette. Do NOT copy its furniture, installations, materials or any people, text or logos.
@@ -18,7 +18,31 @@ A grand double-height clinic lobby, perfectly symmetrical one-point view from a 
 Photorealistic, high-end architectural interior photography, ultra-detailed, beautiful. No text, no letters, no logos, no numbers, no people, no monitors, no television.
 ```
 
-## 로비 02 · 물방울 빛 (웜 다크)
+## 로비 02 · 물방울 빛 (웜 다크) — v3 확정본 (2026-11-23)
+② 레퍼런스: 물방울 조명 로비 (색감·분위기만)
+```
+Design in the same refined spirit as the first reference image (the ARON lobby): smooth plaster curves, soft hidden indirect light, natural stone, serene yet luxurious. Use the second reference image ONLY for color palette and mood. Do NOT copy its furniture, installations, materials, people, text or logos.
+
+SUBJECT: a vast, open, warm medical clinic lobby, deeper warm palette.
+
+CAMERA: ultra-wide 16mm lens, camera height 1.4 m, positioned at the front-left corner of the room, looking toward the reception at a 30-degree angle. Verticals perfectly straight, horizon level, no distortion of walls. 16:9 landscape.
+
+COMPOSITION: reception desk and chandelier placed on the right third of the frame. The left third is calm open space (soft wall and floor) so a headline can sit there. Lounge seating in the lower middle foreground. Lots of empty floor between areas so the room feels spacious.
+
+ARCHITECTURE: a high, smooth ceiling with one large flowing wave-shaped cove whose curved edge glows with soft golden indirect light. Behind the reception, one long sweeping curved feature wall in warm taupe plaster, gently backlit along its top edge. The right side of the room is one continuous smooth curved plaster wall. NO columns, NO arches, NO doors, NO openings, NO wall decorations. Clean, uninterrupted surfaces.
+
+FEATURES: above the reception, one sculptural chandelier of hundreds of clear crystal water droplets forming a gentle wave. One smooth pebble-shaped white reception desk with a soft light line at its base.
+
+FURNITURE: one low cream three-seat sofa, one L-shaped cream sectional sofa, one cream lounge armchair, one round dark oak coffee table, all on one large soft beige rug. Nothing else.
+
+MATERIALS & LIGHT: warm taupe plaster walls, polished warm beige stone floor with soft reflections, golden indirect light from hidden coves, no visible light fixtures except the chandelier. Evening mood, warm and calm.
+
+PALETTE: warm brown, taupe, cream, soft gold.
+
+Photorealistic, high-end architectural interior photography, ultra-detailed, beautiful. No text, no letters, no logos, no numbers, no people, no monitors, no television, no columns, no pillars, no arches, no doors, no plants, no wall decorations.
+```
+
+## (이전) 로비 02 · 물방울 빛 (웜 다크)
 ② 레퍼런스: 물방울 조명 로비 (정면, 따뜻한 짙은 톤)
 ```
 Design in the same signature style as the first reference image (the ARON lobby): smooth white plaster curves and arches, a water and droplet motif, soft hidden indirect light, white marble, serene yet luxurious. Use the second reference image ONLY for camera composition and color palette. Do NOT copy its furniture, installations, materials or any people, text or logos.
