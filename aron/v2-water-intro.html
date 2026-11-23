@@ -1362,10 +1362,10 @@ function splash() {
          .to(split, { g: 52, duration: 1.5, ease: 'power3.inOut', onUpdate: setSplit }, 0.2)
          .from(st, { autoAlpha: 0, y: 20, duration: 1.0, ease: 'power2.out' }, 1.1);
         break;
-      default:  // 5 frame shrink: the film becomes a framed picture on white, then lifts away
+      default:  // 5 frame shrink: the film becomes a framed picture on white, then fades in place
         T.to('.mist-inner', { autoAlpha: 0, duration: 0.6 }, 0)
          .to('.mist', { scale: 0.42, borderRadius: 4, boxShadow: '0 30px 80px -30px rgba(0,0,0,0.35)', duration: 1.2, ease: 'power3.inOut' }, 0.1)
-         .to('.mist', { yPercent: -140, autoAlpha: 0, duration: 1.0, ease: 'power3.in' }, 1.35)
+         .to('.mist', { autoAlpha: 0, duration: 0.9, ease: 'power1.inOut' }, 1.45)   // no upward exit: the framed picture just fades where it is
          .from(st, { autoAlpha: 0, y: 30, duration: 1.0, ease: 'power3.out' }, 1.8);
     }
     T.set('.mist', { autoAlpha: 0 }).to('.logo', { autoAlpha: 1, duration: 0.6 }, '-=0.4').call(() => video.pause());
@@ -1411,9 +1411,9 @@ if (!CAPTURE) {
 }
 // ---- preview only: choose the hero transition ----
 {
-  const NAMES = ['커튼 리프트', '빛으로 하얘지기', '블러 디졸브', '스플릿 오픈', '프레임 축소'];
+  const NAMES = { 1: '커튼 리프트', 2: '빛으로 하얘지기', 3: '블러 디졸브', 5: '프레임 축소' };   // 4 split open removed
   const box = document.createElement('div'); box.className = 'fx-switch';
-  box.innerHTML = '<p>전환 효과 미리보기</p>' + NAMES.map((n, i) => `<button type="button" data-fx="${i + 1}" aria-pressed="${i === 0}"><b>${i + 1}</b>${n}</button>`).join('');
+  box.innerHTML = '<p>전환 효과 미리보기</p>' + Object.entries(NAMES).map(([k, n], i) => `<button type="button" data-fx="${k}" aria-pressed="${i === 0}"><b>${i + 1}</b>${n}</button>`).join('');
   document.body.appendChild(box);
   box.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
