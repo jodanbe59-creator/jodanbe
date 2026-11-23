@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ARON 미리보기 · 안 4 메디고라운드 색감</title>
+<title>ARON 미리보기 · 스케치 카메라 무빙</title>
 <meta name="description" content="아론 디자인: 병의원 인테리어. More than a space. A place where care begins.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -287,12 +287,11 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .mist.video-intro .mist-inner { position: absolute; left: 50%; top: 48%; }
 .mist.video-intro .mist-logo { text-shadow: 0 1px 0 rgba(255,255,255,0.35); }
 .mist.video-intro .mist-veil { background: radial-gradient(ellipse at 50% 48%, rgba(246,243,238,0.5), rgba(246,243,238,0.1) 40%, rgba(246,243,238,0) 65%); }
-#sketch { height: 320vh; position: relative; }
+#sketch { height: 720vh; position: relative; }
 .sketch-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: end center; padding-bottom: clamp(48px, 12vh, 120px); pointer-events: none; }
 .sketch-cap { grid-area: 1 / 1; margin: 0; text-align: center; opacity: 0; transform: translateY(14px); }
 .sketch-cap .ko { display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--font-body); font-weight: 500; font-size: clamp(1.5rem, 3vw, 2.4rem); color: #222; letter-spacing: -0.01em; }
-.sketch-cap .tri { width: 0.8em; height: auto; }
-.sketch-mark { grid-area: 1 / 1; align-self: center; width: min(22vw, 200px); height: auto; mix-blend-mode: multiply; opacity: 0; }
+
 .sketch-cap .en { display: block; margin-top: 8px; font-size: clamp(0.85rem, 1.3vw, 1rem); letter-spacing: 0.16em; text-transform: uppercase; color: #6b6b6b; }
 .sketch-cap.cap-2 .ko { text-shadow: 0 1px 18px rgba(255, 255, 255, 0.8); }
 .splash { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none; }
@@ -303,12 +302,13 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .intro-cue .mouse { border-color: rgba(42, 37, 32, 0.55); }
 .logo {
   position: fixed; top: 12px; left: clamp(14px, 3vw, 36px); z-index: 21; height: 58px; display: flex; align-items: center;
-  font-family: "Cormorant Garamond", var(--font-display); font-size: 1.4rem; letter-spacing: 0.4em; color: var(--gold-soft); text-decoration: none; text-shadow: 0 1px 14px rgba(10, 12, 18, 0.75);
-  opacity: 0; visibility: hidden;
+  text-decoration: none;
 }
+.logo img { display: block; height: 22px; width: auto; filter: drop-shadow(0 1px 8px rgba(255, 255, 255, 0.55)); }
 .logo:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 6px; }
 @media (max-width: 600px) {
-  .logo { top: 8px; height: 54px; font-size: 1.15rem; letter-spacing: 0.26em; left: 14px; }
+  .logo { top: 8px; height: 54px; left: 14px; }
+  .logo img { height: 17px; }
   .topbar { left: auto; right: 8px; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) { .mist::before, .mist::after { animation: none; } }
@@ -326,7 +326,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 <div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" poster="intro-drop.jpg" muted loop playsinline preload="auto"></video><div class="mist-veil"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
 <canvas class="splash" aria-hidden="true"></canvas>
 <button type="button" class="scroll-cue intro-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
-<a class="logo" href="#intro" aria-label="ARON, 맨 위로">ARON</a>
+<a class="logo" href="#intro" aria-label="ARON, 맨 위로"><img src="aron-logo.png" alt="ARON"></a>
 <header class="topbar">
   <nav class="menu" aria-label="메뉴">
     <div class="has-sub">
@@ -348,9 +348,8 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 
   <section id="sketch" aria-label="한 장의 스케치에서 하나뿐인 공간으로">
     <div class="sketch-sticky">
-      <img class="sketch-mark" src="medigo-triangle.png" alt="" aria-hidden="true">
-      <p class="sketch-cap cap-1"><span class="ko"><img class="tri" src="medigo-triangle-mark.png" alt="">한 장의 스케치에서,</span><span class="en">From a single sketch</span></p>
-      <p class="sketch-cap cap-2"><span class="ko"><img class="tri" src="medigo-triangle-mark.png" alt="">하나뿐인 공간으로.</span><span class="en">to a space like no other</span></p>
+      <p class="sketch-cap cap-1"><span class="ko">한 장의 스케치에서,</span><span class="en">From a single sketch</span></p>
+      <p class="sketch-cap cap-2"><span class="ko">하나뿐인 공간으로.</span><span class="en">to a space like no other</span></p>
     </div>
   </section>
 
@@ -491,6 +490,9 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { LineSegments2 } from 'three/addons/lines/LineSegments2.js';
+import { LineSegmentsGeometry } from 'three/addons/lines/LineSegmentsGeometry.js';
+import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 
 const { gsap, ScrollTrigger } = window;
 gsap.registerPlugin(ScrollTrigger);
@@ -1030,60 +1032,84 @@ const paperMat = new THREE.MeshBasicMaterial({ color: 0xf8f7f4, transparent: tru
 paperMat.toneMapped = false;
 paperScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), paperMat));
 const lineScene = new THREE.Scene();
-const sketchMat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, depthFunc: THREE.LessEqualDepth });
+// lines have real width in metres, so near strokes read thick and far ones thin; far strokes also fade into the paper
+const sketchMat = new LineMaterial({ vertexColors: true, linewidth: 0.014, worldUnits: true, transparent: true, depthTest: true, fog: true });
 sketchMat.toneMapped = false;
+lineScene.fog = new THREE.FogExp2(0xf8f7f4, 0.075);
+// camera path for the sketch: close along the reception desk, up along the curved cove line, then back to the wide lobby
+const PATH_KEYS = [
+  [[9.7, 1.15, -2.2], [8.6, 1.02, 0.4]],
+  [[9.75, 1.2, 0.8], [8.55, 1.02, 3.0]],
+  [[10.3, 1.75, 3.6], [9.6, 2.6, 6.2]],
+  [[11.2, 2.25, 5.4], [7.9, 2.72, 6.75]],
+  [[12.9, 1.75, 7.5], [6.6, 1.5, 1.2]],
+  [[12.7, 1.3, 6.9], [6.2, 1.25, 0.4]],          // = the LOBBY view the chapters start from
+].map(([p, t]) => [new THREE.Vector3(...p), new THREE.Vector3(...t)]);
+const camCurve = new THREE.CatmullRomCurve3(PATH_KEYS.map((k) => k[0]), false, 'centripetal');
+const tgtCurve = new THREE.CatmullRomCurve3(PATH_KEYS.map((k) => k[1]), false, 'centripetal');
+const sketchCam = { on: !CAPTURE, t: 0 };
 let sketchGeo = null, sketchCount = 0;
 // medigoround palette: the watercolour triangle (red top-left, yellow top-right, blue bottom-left, green/teal bottom-right)
 const PAL = { tl: new THREE.Color('#db4019'), tr: new THREE.Color('#e4c52d'), bl: new THREE.Color('#1f80bf'), br: new THREE.Color('#2a9d7f'), mid: new THREE.Color('#e3731e') };
 function buildSketch() {
-  const P = PRESETS[0], eye = new THREE.Vector3(P.px, P.py, P.pz);
-  const cam = camera.clone(); cam.position.copy(eye); cam.lookAt(P.tx, P.ty, P.tz); cam.updateMatrixWorld(); cam.updateProjectionMatrix();
+  const samples = camCurve.getSpacedPoints(80), tsamp = tgtCurve.getSpacedPoints(80);
   const v = new THREE.Vector3(), segs = [];
   const take = (m) => {
     if (!m.geometry || m.isInstancedMesh) return;
     m.updateMatrixWorld(true);
     const e = new THREE.EdgesGeometry(m.geometry, 28).applyMatrix4(m.matrixWorld), a = e.attributes.position.array;
-    for (let i = 0; i < a.length; i += 6) {   // keep segments that land on screen; order them from the centre outward
-      const mx = (a[i] + a[i + 3]) / 2, my = (a[i + 1] + a[i + 4]) / 2, mz = (a[i + 2] + a[i + 5]) / 2;
-      if (Math.hypot(mx - eye.x, my - eye.y, mz - eye.z) > 18) continue;
-      v.set(mx, my, mz).project(cam);
-      if (v.z > 1 || Math.abs(v.x) > 1.3 || Math.abs(v.y) > 1.3) continue;
-      segs.push({ r: Math.hypot(v.x, v.y * 0.8), a: Array.prototype.slice.call(a, i, i + 6) });
+    for (let i = 0; i < a.length; i += 6) {
+      v.set((a[i] + a[i + 3]) / 2, (a[i + 1] + a[i + 4]) / 2, (a[i + 2] + a[i + 5]) / 2);
+      // each stroke appears when the camera's gaze passes nearest to it, so the drawing follows the camera
+      let best = 1e9, bi = 0;
+      for (let k = 0; k < samples.length; k++) {
+        const d = Math.min(v.distanceTo(tsamp[k]), v.distanceTo(samples[k]) * 1.4);
+        if (d < best) { best = d; bi = k; }
+      }
+      if (best > 9) continue;
+      segs.push({ key: bi / (samples.length - 1) - 0.06 + best * 0.004, a: Array.prototype.slice.call(a, i, i + 6) });
     }
   };
   for (const w of walls) take(w);
   scene.traverse((o) => { if (o.isMesh && !walls.includes(o) && o.material !== M.glass && o !== sky && o.material !== M.city && o.material !== M.ground && o.material !== M.tower) take(o); });
   ceilGroup.traverse((o) => { if (o.isMesh && !o.isInstancedMesh) take(o); });
-  segs.sort((p, q) => p.r - q.r);
-  const pos = new Float32Array(segs.length * 6), col = new Float32Array(segs.length * 6), c = new THREE.Color(), top = new THREE.Color(), bot = new THREE.Color();
+  segs.sort((p, q) => p.key - q.key);
+  const hue = [PAL.tl, PAL.mid, PAL.tr, new THREE.Color('#6ab974'), PAL.br, PAL.bl];   // the rainbow runs along the journey
+  const pos = new Float32Array(segs.length * 6), col = new Float32Array(segs.length * 6), c = new THREE.Color();
   segs.forEach((sg, k) => {
     pos.set(sg.a, k * 6);
-    for (let j = 0; j < 2; j++) {   // colour each end by where it sits on screen, like the triangle's wash
-      v.set(sg.a[j * 3], sg.a[j * 3 + 1], sg.a[j * 3 + 2]).project(cam);
-      const u = Math.min(Math.max((v.x + 1) / 2, 0), 1), w = Math.min(Math.max((v.y + 1) / 2, 0), 1);
-      top.copy(PAL.tl).lerp(PAL.tr, u); bot.copy(PAL.bl).lerp(PAL.br, u); c.copy(bot).lerp(top, w);
-      c.lerp(PAL.mid, 0.25 * Math.max(0, 1 - Math.hypot(v.x, v.y)));   // a warm heart where the triangle was
-      col.set([c.r, c.g, c.b], k * 6 + j * 3);
-    }
+    const t = Math.min(Math.max(sg.key, 0), 0.999) * (hue.length - 1), i0 = Math.floor(t);
+    c.copy(hue[i0]).lerp(hue[i0 + 1], t - i0);
+    col.set([c.r, c.g, c.b, c.r, c.g, c.b], k * 6);
   });
-  sketchGeo = new THREE.BufferGeometry();
-  sketchGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); sketchGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-  sketchCount = segs.length * 2;
-  lineScene.add(new THREE.LineSegments(sketchGeo, sketchMat));
+  sketchKeys = segs.map((sg) => sg.key);
+  sketchGeo = new LineSegmentsGeometry(); sketchGeo.setPositions(pos); sketchGeo.setColors(col);
+  sketchCount = segs.length;
+  lineScene.add(new LineSegments2(sketchGeo, sketchMat));
+}
+let sketchKeys = [];
+function drawnUpTo(t) {   // how many strokes have keys below t (binary search)
+  let lo = 0, hi = sketchKeys.length;
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (sketchKeys[mid] < t) lo = mid + 1; else hi = mid; }
+  return lo;
 }
 if (!CAPTURE) {
+  // push every surface very slightly back in depth, so strokes lying exactly on a surface are never cut into dashes
+  scene.traverse((o) => { const ms = o.material ? (Array.isArray(o.material) ? o.material : [o.material]) : [];
+    for (const m of ms) if (m && !m.isShaderMaterial) { m.polygonOffset = true; m.polygonOffsetFactor = 1; m.polygonOffsetUnits = 4; } });
   gsap.set('.scrim', { opacity: 0 });
   buildSketch();
   ScrollTrigger.create({
     trigger: '#sketch', start: 'top top', end: 'bottom bottom', scrub: reduceMotion ? true : 0.8,
     onUpdate: (st) => {
       const p = st.progress;
-      SK.draw = smooth(0.1, 0.6, p); SK.paper = 1 - smooth(0.6, 0.86, p); SK.line = 1 - smooth(0.78, 0.98, p);
-      const c1 = smooth(0.04, 0.12, p) * (1 - smooth(0.5, 0.58, p)), c2 = smooth(0.66, 0.74, p) * (1 - smooth(0.93, 0.99, p));
+      sketchCam.t = smooth(0.03, 0.8, p);                                    // camera journey
+      SK.draw = Math.min(1, sketchCam.t * 1.04 + 0.1 * smooth(0.0, 0.05, p)); // strokes just ahead of the camera
+      SK.paper = 1 - smooth(0.74, 0.9, p); SK.line = 1 - smooth(0.86, 0.99, p);
+      sketchCam.on = p < 0.995;
+      const c1 = smooth(0.04, 0.1, p) * (1 - smooth(0.42, 0.5, p)), c2 = smooth(0.78, 0.85, p) * (1 - smooth(0.95, 0.995, p));
       gsap.set('.cap-1', { opacity: c1, y: 14 * (1 - c1) }); gsap.set('.cap-2', { opacity: c2, y: 14 * (1 - c2) });
       gsap.set('.scrim', { opacity: 1 - SK.paper });   // no dark vignette over the paper
-      const tIn = smooth(0.0, 0.07, p), tOut = smooth(0.12, 0.34, p);
-      gsap.set('.sketch-mark', { opacity: tIn * (1 - tOut), scale: 0.85 + 0.15 * tIn + 1.4 * tOut, filter: `blur(${(tOut * 10).toFixed(1)}px)` });
     },
   });
 }
@@ -1196,7 +1222,7 @@ function splash() {
       .to(mistState, { p: 1, duration: 1.2, ease: 'power1.out' }, 0.2)
       .set('.mist', { autoAlpha: 0 }, 1.9)
       .call(() => video.pause(), null, 1.95)
-      .to('.logo', { autoAlpha: 1, duration: 0.5 }, 1.4);
+      ;
     return;
   }
   Object.assign(drop, { on: true, x: p.x, y: -30 });
@@ -1218,7 +1244,7 @@ function resetSplash() {
   hole.r = -0.3 * Math.max(innerWidth, innerHeight); setHole();
   mistState.p = 0;
   gsap.set('.mist', { autoAlpha: 1 }); gsap.set('.mist-inner', { autoAlpha: 1, scale: 1, xPercent: video ? -50 : 0, yPercent: video ? -40 : 0 }); gsap.set('.mist-logo', { scale: 1 });
-  gsap.set('.intro-cue', { autoAlpha: 1 }); gsap.set('.logo', { autoAlpha: 0 });
+  gsap.set('.intro-cue', { autoAlpha: 1 });
   if (video) { gsap.set('.mist-logo', { autoAlpha: 1, y: 0, scaleX: 1, scaleY: 1 }); gsap.set('.mist-sub', { autoAlpha: 1, y: 0 }); video.play().catch(() => {}); }
 }
 if (!CAPTURE) {
@@ -1317,6 +1343,8 @@ function frame(time, deltaMs) {
   let wantTod;
   if (override.on) {
     wantPos.copy(override.pos); wantTarget.copy(override.target); wantTod = override.tod;
+  } else if (sketchCam.on) {
+    camCurve.getPoint(sketchCam.t, wantPos); tgtCurve.getPoint(sketchCam.t, wantTarget); wantTod = PRESETS[0].tod;
   } else {
     const hx = heroCam.px, hy = heroCam.py, hz = heroCam.pz;
     const m = smooth(0, 1, handover.progress);
@@ -1342,7 +1370,7 @@ function frame(time, deltaMs) {
   const ci = 1 - smooth(3.0, 5.0, camera.position.y);
   ceilGroup.visible = ci > 0.01; M.ceil.opacity = ci;
 
-  const offX = isSmall || override.on ? 0 : -shift.x * 0.16 * innerWidth;
+  const offX = isSmall || override.on || sketchCam.on ? 0 : -shift.x * 0.16 * innerWidth;
   const offY = isSmall && !override.on ? smooth(0, 1, handover.progress) * 0.18 * innerHeight : 0;
   if (Math.abs(offX - shift.ox) > 0.5 || Math.abs(offY - shift.oy) > 0.5) {
     shift.ox = offX; shift.oy = offY;
@@ -1368,7 +1396,7 @@ function frame(time, deltaMs) {
   if (SK.paper > 0.001 || SK.line > 0.001) {   // sketch passes: paper over the scene, then the gold lines (hidden lines removed by the scene's depth)
     renderer.autoClear = false;
     paperMat.opacity = SK.paper; if (SK.paper > 0.001) renderer.render(paperScene, paperCam);
-    if (sketchGeo && SK.line > 0.001) { sketchGeo.setDrawRange(0, Math.floor(SK.draw * sketchCount / 2) * 2); sketchMat.opacity = SK.line; renderer.render(lineScene, camera); }
+    if (sketchGeo && SK.line > 0.001) { sketchGeo.instanceCount = drawnUpTo(SK.draw); sketchMat.opacity = SK.line; sketchMat.resolution.set(innerWidth, innerHeight); renderer.render(lineScene, camera); }
     renderer.autoClear = true;
   }
 }
