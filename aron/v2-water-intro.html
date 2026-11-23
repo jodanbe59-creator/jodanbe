@@ -264,7 +264,7 @@ html.layer-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .scroll-cue .mouse i, .loader-bar i { animation: none; } }
 body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .scrim, body.capture .projects, body.capture .symbols, body.capture .clients, body.capture .splash { display: none; }
 /* ---------- intro: ARON in the mist, cleared by scrolling ---------- */
-#intro { height: 70vh; height: 70svh; }
+#intro { height: 260vh; }   /* the hero film is scrubbed by scroll over this distance */
 .mist {
   position: fixed; inset: 0; z-index: 4; display: grid; place-items: center; pointer-events: none; overflow: hidden;
   background: radial-gradient(ellipse at 50% 55%, #ecebe7 0%, #dcdad5 55%, #c9c6c0 100%);
@@ -376,7 +376,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 </div>
 <div class="scrim"></div>
 
-<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" poster="intro-drop.jpg" muted loop playsinline preload="auto"></video><div class="mist-veil"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
+<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" poster="intro-drop.jpg" muted playsinline preload="auto"></video><div class="mist-veil"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
 <canvas class="splash" aria-hidden="true"></canvas>
 <button type="button" class="scroll-cue intro-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
 <a class="logo" href="#intro" aria-label="ARON, 맨 위로">ARON</a>
@@ -1405,27 +1405,39 @@ function resetSplash() {
   gsap.set('.mist-inner', { clearProps: 'filter,transform' }); gsap.set('.mist-inner', { xPercent: video ? -50 : 0, yPercent: video ? -40 : 0, y: 0 }); gsap.set('.st-text, .st-tick', { clearProps: 'filter,transform,opacity,visibility' });
   if (video) { gsap.set('.mist-logo', { autoAlpha: 1, y: 0, scaleX: 1, scaleY: 1 }); gsap.set('.mist-sub', { autoAlpha: 1, y: 0 }); video.play().catch(() => {}); }
 }
+/* ---------- hero: the drop falls as you scroll, then the water blurs away (blur dissolve) ----------
+   film: calm water 0.05–1.3 s loops until the first scroll; the drop enters at 1.47 s and lands at 1.8 s */
+const HERO = { scrub: 0, target: 0.05, shown: 0.05 };
+const heroT = (p) => p < 0.3 ? lerp(1.3, 1.9, smooth(0, 0.3, p)) : lerp(1.9, 6.0, smooth(0.3, 0.92, p));   // the fall gets a long stretch of scroll
+gsap.ticker.add(() => {
+  if (!video || !video.duration) return;
+  if (HERO.scrub <= 0.001) {                                   // before scrolling: the calm loop plays by itself
+    if (video.paused) video.play().catch(() => {});
+    if (video.currentTime > 1.3) video.currentTime = 0.05;
+    HERO.shown = video.currentTime; return;
+  }
+  if (!video.paused) video.pause();
+  HERO.shown += (HERO.target - HERO.shown) * 0.25;               // seek-chase, eased
+  if (!video.seeking && Math.abs(video.currentTime - HERO.shown) > 0.02) video.currentTime = HERO.shown;
+});
 if (!CAPTURE) {
-  ScrollTrigger.create({ trigger: '#intro', start: 'top top-=4', onEnter: splash, onLeaveBack: resetSplash });
-  if (scrollY > 4) requestAnimationFrame(splash);
-}
-// ---- preview only: choose the hero transition ----
-{
-  const NAMES = { 1: '커튼 리프트', 2: '빛으로 하얘지기', 3: '블러 디졸브', 5: '프레임 축소' };   // 4 split open removed
-  const box = document.createElement('div'); box.className = 'fx-switch';
-  box.innerHTML = '<p>전환 효과 미리보기</p>' + Object.entries(NAMES).map(([k, n], i) => `<button type="button" data-fx="${k}" aria-pressed="${i === 0}"><b>${i + 1}</b>${n}</button>`).join('');
-  document.body.appendChild(box);
-  box.addEventListener('click', (e) => {
-    const b = e.target.closest('button'); if (!b) return;
-    heroFx = +b.dataset.fx;
-    box.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    resetSplash(); window.scrollTo({ top: 0, behavior: 'auto' });
-    setTimeout(() => window.scrollTo({ top: Math.round(innerHeight * 0.06), behavior: 'auto' }), 700);   // replay it
+  ScrollTrigger.create({
+    trigger: '#intro', start: 'top top', end: 'bottom top', scrub: reduceMotion ? true : 0.5,
+    onUpdate: (st) => {
+      const p = st.progress;
+      HERO.scrub = p; HERO.target = heroT(p);
+      gsap.set('.intro-cue', { autoAlpha: 1 - smooth(0, 0.05, p) });
+      // blur dissolve: the water and ARON lose focus while the statement below comes into focus
+      const d = smooth(0.7, 1, p);
+      gsap.set('.mist', { filter: `blur(${(28 * d).toFixed(1)}px)`, autoAlpha: 1 - smooth(0.78, 1, p) });
+      gsap.set('.mist-inner', { filter: `blur(${(10 * smooth(0.62, 0.9, p)).toFixed(1)}px)`, autoAlpha: 1 - smooth(0.62, 0.9, p) });
+      gsap.set('.st-text, .st-tick', { filter: `blur(${(14 * (1 - d)).toFixed(1)}px)`, autoAlpha: d });
+      gsap.set('.logo', { autoAlpha: smooth(0.88, 1, p) });
+    },
   });
 }
 document.querySelector('.intro-cue').addEventListener('click', () => {
-  splash();
-  setTimeout(() => document.getElementById('survey').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }), reduceMotion ? 0 : (video ? 1500 : 900));
+  window.scrollTo({ top: document.getElementById('statement').offsetTop, behavior: reduceMotion ? 'auto' : 'smooth' });
 });
 
 /* ---------- symbol works: zigzag reveal ---------- */
