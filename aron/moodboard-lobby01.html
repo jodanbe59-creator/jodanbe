@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARON · Lobby 01 Mood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3eee7; --ink:#2b2420; --mute:#8a7d72; --line:rgba(43,36,32,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:Inter,'Noto Sans KR',sans-serif;font-weight:300}
+  .mood{max-width:1440px;margin:0 auto;padding:120px 56px}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:48px}
+  .eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--mute)}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,88px);line-height:.95;margin-top:14px}
+  h2 i{font-style:italic;color:#9a4630}
+  .num{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--mute);letter-spacing:.1em}
+
+  .board{display:grid;grid-template-columns:1.25fr 1fr 1fr .55fr;grid-template-rows:repeat(6,96px);gap:14px}
+  .tile{position:relative;overflow:hidden;background:#ddd}
+  .tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .tile:hover img{transform:scale(1.06)}
+  .tile span{position:absolute;left:12px;bottom:10px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+  .t-hero{grid-column:1;grid-row:1/7}
+  .t-brick{grid-column:2;grid-row:1/4}
+  .t-ripple{grid-column:3;grid-row:1/3}
+  .t-trav{grid-column:3;grid-row:3/5}
+  .t-desk{grid-column:2;grid-row:4/7}
+  .t-velvet{grid-column:3;grid-row:5/7}
+  .t-card{grid-column:4;grid-row:1/7;background:#fbf8f3;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:26px 0}
+  .t-card .word{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;writing-mode:vertical-rl;letter-spacing:.12em;color:#9a4630}
+  .sw{display:flex;flex-direction:column;gap:14px;align-items:center}
+  .sw div{width:46px;height:46px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
+
+  .below{display:grid;grid-template-columns:1.25fr 2.55fr;gap:14px;margin-top:48px}
+  .desc{font-family:'Noto Sans KR',sans-serif;font-size:15px;line-height:1.95;color:#4a403a;max-width:520px}
+  .desc strong{font-weight:400;color:var(--ink)}
+  .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 32px;border-top:1px solid var(--line);padding-top:24px}
+  .spec h4{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--mute);font-weight:400;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .spec h4 b{width:12px;height:12px;border-radius:50%;display:inline-block}
+  .spec p{font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.75;color:#4a403a}
+  .spec .en{display:block;font-family:Inter;font-size:11px;color:var(--mute);margin-top:4px}
+
+  @media(max-width:900px){
+    .mood{padding:80px 20px}
+    .board{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:150px}
+    .t-hero{grid-column:1/3;grid-row:auto/span 2}
+    .t-brick,.t-ripple,.t-trav,.t-desk,.t-velvet{grid-column:auto;grid-row:auto}
+    .t-card{grid-column:1/3;grid-row:auto;flex-direction:row;padding:0 22px}
+    .t-card .word{writing-mode:horizontal-tb}
+    .sw{flex-direction:row}
+    .below{grid-template-columns:1fr}
+    .specs{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<section class="mood" id="mood-lobby-01">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Lobby 01 · Material &amp; Mood</div>
+      <h2>Terracotta <i>&amp;</i> Travertine</h2>
+    </div>
+    <div class="num">01 / 03</div>
+  </div>
+
+  <div class="board">
+    <div class="tile t-hero"><img src="photos/lobby-01.jpg" alt="" style="object-position:28% 50%"><span>Reception</span></div>
+    <div class="tile t-brick"><img src="photos/mood/l01-brick.jpg" alt=""><span>Breeze brick</span></div>
+    <div class="tile t-ripple"><img src="photos/mood/l01-ripple.jpg" alt=""><span>Ripple film</span></div>
+    <div class="tile t-trav"><img src="photos/mood/l01-travertine.jpg" alt=""><span>Travertine</span></div>
+    <div class="tile t-desk"><img src="photos/mood/l01-desk.jpg" alt=""><span>Floating desk</span></div>
+    <div class="tile t-velvet"><img src="photos/mood/l01-velvet.jpg" alt=""><span>Rust velvet</span></div>
+    <div class="tile t-card">
+      <div class="word">warm · calm</div>
+      <div class="sw">
+        <div style="background:#9a4630"></div>
+        <div style="background:#b5654a"></div>
+        <div style="background:#6e2c1c"></div>
+        <div style="background:#d8c9b5"></div>
+        <div style="background:#efe7db"></div>
+        <div style="background:#b9d3ec"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="below">
+    <p class="desc">
+      <strong>따뜻한 흙과 고요한 돌, 그 사이로 퍼지는 물결.</strong><br>
+      테라코타 벽돌이 리셉션을 감싸 하나의 방을 만들고, 그 안에서 물방울의 파문이 조용히 퍼집니다.
+      아이보리 트래버틴 데스크는 바닥에서 떠 있듯 가볍게 놓여, 단단한 소재 속에서도 부드러운 아름다움이 느껴지도록 했습니다.
+    </p>
+    <div class="specs">
+      <div class="spec"><h4><b style="background:#9a4630"></b>Terracotta</h4><p>물결 리듬으로 쌓은 타공 벽돌과 천장 캐노피<span class="en">Breeze brick · canopy</span></p></div>
+      <div class="spec"><h4><b style="background:#d8c9b5"></b>Travertine</h4><p>가로 띠로 쌓은 아이보리 트래버틴 플로팅 데스크<span class="en">Honed ivory travertine</span></p></div>
+      <div class="spec"><h4><b style="background:#b9d3ec"></b>Water</h4><p>박스 안 스크린에 흐르는 물방울 파문 영상<span class="en">Ripple film screen</span></p></div>
+      <div class="spec"><h4><b style="background:#6e2c1c"></b>Velvet</h4><p>러스트 벨벳 라운지 체어와 테라코타 도자기 램프<span class="en">Rust velvet · ceramic</span></p></div>
+      <div class="spec"><h4><b style="background:#efe7db"></b>Bouclé</h4><p>둥근 곡선의 아이보리 부클레 소파<span class="en">Ivory bouclé sofa</span></p></div>
+      <div class="spec"><h4><b style="background:#c9a98a"></b>Light</h4><p>벽돌 속 빛 라인, 데스크 아래 간접광<span class="en">Hidden warm light lines</span></p></div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
