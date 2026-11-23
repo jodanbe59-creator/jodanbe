@@ -7,7 +7,7 @@
 <meta name="description" content="아론 디자인: 병의원 인테리어. More than a space. A place where care begins.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Jost:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
 <style>
 /* VOICE  calm, private, clinical-luxury: few hues, lots of air.
    IDEA   an architect's cutaway model of one clinic floor, built in front of the client.
@@ -295,15 +295,16 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .st-veil { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .st-tick { position: absolute; left: 50%; top: 7vh; width: 1px; height: 44px; background: #555; transform: translateX(-50%); }
 .st-text { position: absolute; left: 50%; top: 15vh; transform: translateX(-50%); width: min(92vw, 780px); margin: 0; text-align: center;
-  font-family: Inter, var(--font-body); font-weight: 300; font-size: clamp(1.45rem, 2.5vw, 2.15rem); line-height: 1.45; letter-spacing: -0.01em; color: #1a1a1a; }
+  font-family: Jost, var(--font-body); font-weight: 200; font-size: clamp(1.6rem, 2.8vw, 2.5rem); line-height: 1.35; letter-spacing: -0.01em; color: #1a1a1a; }
+.st-text em, .sp-desc em { font-family: "Cormorant Garamond", serif; font-style: normal; font-weight: 500; letter-spacing: -0.01em; }
 .st-line { position: absolute; left: 50%; top: 30vh; width: 1px; height: 0; background: #555; transform: translateX(-50%); }
 .st-fx { position: absolute; inset: 0; pointer-events: none; }
 .st-drop { position: absolute; left: 50%; top: 30vh; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #333; }
 .st-ring { display: none; }
 .about { position: relative; z-index: 3; background: #fff; color: #111; padding: clamp(80px, 12vw, 160px) var(--gutter); }
 .about-row { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 0.6fr); gap: 32px; }
-.about h2 { margin: 0; font-family: Inter, var(--font-body); font-weight: 500; font-size: 1rem; letter-spacing: 0; }
-.about-body p { margin: 0 0 1.4em; font-family: Inter, var(--font-body); font-size: clamp(1.05rem, 1.35vw, 1.2rem); line-height: 1.6; color: #2b2b2b; }
+.about h2 { margin: 0; font-family: Jost, var(--font-body); font-weight: 400; font-size: 1rem; letter-spacing: 0; }
+.about-body p { margin: 0 0 1.4em; font-family: Jost, var(--font-body); font-weight: 300; font-size: clamp(1.05rem, 1.35vw, 1.2rem); line-height: 1.6; color: #2b2b2b; }
 @media (max-width: 760px) { .about-row { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
 /* real photographs take over from the sketch; chapters read like magazine spreads */
 .fx-switch { position: fixed; left: 14px; bottom: 14px; z-index: 40; display: grid; gap: 4px; padding: 10px; background: rgba(255,255,255,0.92); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; box-shadow: 0 10px 30px -12px rgba(0,0,0,0.25); font-family: var(--font-body); }
@@ -389,8 +390,8 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 .sp--r .sp-stage::after { background: linear-gradient(270deg, rgba(246,243,238,.9) 0%, rgba(246,243,238,.7) 30%, rgba(246,243,238,0) 58%); }
 .sp-copy { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); width: min(440px, 80vw); }
 .sp--l .sp-copy { left: 7vw; } .sp--r .sp-copy { right: 7vw; }
-.sp-word { margin: 0 0 26px; font-family: "Cormorant Garamond", var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(46px, 6vw, 84px); line-height: 1; color: #1f1b18; }
-.sp-desc { margin: 0; font-family: Inter, sans-serif; font-weight: 300; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6; color: #1f1b18; }
+.sp-word { margin: 0 0 26px; font-family: "Cormorant Garamond", var(--font-display); font-weight: 500; font-style: normal; font-size: clamp(46px, 6vw, 84px); line-height: 1; color: #1f1b18; }
+.sp-desc { margin: 0; font-family: Jost, sans-serif; font-weight: 300; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6; color: #1f1b18; }
 .sp-word span, .sp-desc span { opacity: 0; transition: opacity .25s linear; }
 @media (max-width: 800px) {
   .sp--l .sp-stage::after, .sp--r .sp-stage::after { background: linear-gradient(0deg, rgba(246,243,238,.95) 0%, rgba(246,243,238,.8) 40%, rgba(246,243,238,0) 70%); }
@@ -442,7 +443,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
       <div class="st-paper">
         <canvas class="st-veil"></canvas>
         <span class="st-tick" aria-hidden="true"></span>
-        <p class="st-text">We design spaces where care begins&nbsp;—<br>calm, considered, and made to last.</p>
+        <p class="st-text">We design spaces where <em>care</em> begins&nbsp;—<br>calm, considered, and made to last.</p>
         <span class="st-line" aria-hidden="true"></span>
       </div>
       <div class="st-fx" aria-hidden="true">
@@ -456,17 +457,17 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
     <section class="sp sp--l"><div class="sp-stage">
       <img class="sp-poster" src="space-01.jpg" alt=""><video data-src="space-01.mp4" muted playsinline preload="auto"></video>
       <div class="sp-copy"><h2 class="sp-word">Warmth</h2>
-      <p class="sp-desc">The first moment you step inside, warmth greets you before anyone does — soft, earthen, and quietly embracing.</p></div>
+      <p class="sp-desc" data-em="warmth">The first moment you step inside, warmth greets you before anyone does — soft, earthen, and quietly embracing.</p></div>
     </div></section>
     <section class="sp sp--r"><div class="sp-stage">
       <img class="sp-poster" src="space-02.jpg" alt=""><video data-src="space-02.mp4" muted playsinline preload="auto"></video>
       <div class="sp-copy"><h2 class="sp-word">Stillness</h2>
-      <p class="sp-desc">Between the sound of water and a halo of light, the mind slowly settles into calm.</p></div>
+      <p class="sp-desc" data-em="calm">Between the sound of water and a halo of light, the mind slowly settles into calm.</p></div>
     </div></section>
     <section class="sp sp--l"><div class="sp-stage">
       <img class="sp-poster" src="space-03.jpg" alt=""><video data-src="space-03.mp4" muted playsinline preload="auto"></video>
       <div class="sp-copy"><h2 class="sp-word">Light</h2>
-      <p class="sp-desc">Take a breath, and let beauty spread through the room like a ripple across still water.</p></div>
+      <p class="sp-desc" data-em="beauty">Take a breath, and let beauty spread through the room like a ripple across still water.</p></div>
     </div></section>
   </div>
 
@@ -1712,7 +1713,8 @@ ready.then(() => {
   const clamp = (v) => Math.min(1, Math.max(0, v));
   const items = secs.map((sec) => {
     sec.querySelectorAll('.sp-word, .sp-desc').forEach((el) => {
-      el.innerHTML = el.textContent.trim().split(/\s+/).map((w) => '<span>' + w + '</span>').join(' ');
+      const em = el.dataset.em;   // one word set in serif, like a quiet accent
+      el.innerHTML = el.textContent.trim().split(/\s+/).map((w) => '<span>' + (em && w.toLowerCase().replace(/[^a-z]/g, '') === em ? '<em>' + w + '</em>' : w) + '</span>').join(' ');
     });
     const v = sec.querySelector('video'), poster = sec.querySelector('.sp-poster');
     const it = { sec, v, poster, words: [...sec.querySelectorAll('.sp-word span, .sp-desc span')], target: 0, shown: -1, ready: false };
