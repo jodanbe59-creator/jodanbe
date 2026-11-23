@@ -284,9 +284,9 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .mist-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .mist-veil { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(246,243,238,0.55), rgba(246,243,238,0.12) 60%, rgba(246,243,238,0) 80%); }
 .mist.video-intro::before, .mist.video-intro::after { display: none; }
-.mist.video-intro .mist-inner { position: absolute; left: var(--lx, 50%); top: var(--ly, 48%); }
-.mist.video-intro .mist-logo { filter: url(#melt); text-shadow: 0 1px 0 rgba(255,255,255,0.35); }
-.mist.video-intro .mist-veil { background: radial-gradient(ellipse at var(--lx, 50%) var(--ly, 74%), rgba(246,243,238,0.5), rgba(246,243,238,0.1) 40%, rgba(246,243,238,0) 65%); }
+.mist.video-intro .mist-inner { position: absolute; left: 50%; top: 48%; }
+.mist.video-intro .mist-logo { text-shadow: 0 1px 0 rgba(255,255,255,0.35); }
+.mist.video-intro .mist-veil { background: radial-gradient(ellipse at 50% 48%, rgba(246,243,238,0.5), rgba(246,243,238,0.1) 40%, rgba(246,243,238,0) 65%); }
 .splash { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none; }
 .mist-logo { margin: 0; font-family: "Cormorant Garamond", var(--font-display); font-weight: 300; font-size: clamp(3.4rem, 12vw, 9rem); line-height: 1; letter-spacing: 0.42em; padding-left: 0.42em; }
 .mist-sub { margin: 18px 0 0; font-size: 0.75rem; letter-spacing: 0.32em; padding-left: 0.32em; color: var(--ink-soft); }
@@ -315,8 +315,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 <canvas id="scene" aria-label="빈 상가 한 층이 피부과로 지어지는 실시간 3D 장면"></canvas>
 <div class="scrim"></div>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="melt" x="-20%" y="-60%" width="140%" height="220%"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.05" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
-<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" poster="intro-drop.jpg" muted playsinline preload="auto"></video><div class="mist-veil"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
+<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" poster="intro-drop.jpg" muted loop playsinline preload="auto"></video><div class="mist-veil"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
 <canvas class="splash" aria-hidden="true"></canvas>
 <button type="button" class="scroll-cue intro-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
 <a class="logo" href="#intro" aria-label="ARON, 맨 위로">ARON</a>
@@ -1087,45 +1086,13 @@ gsap.ticker.add((time) => {
   if (!drop.on && !drops.length && !rings.length) sctx.clearRect(0, 0, w, h);
 });
 const video = document.querySelector('.mist-video');
-const IMPACT = { t: 1.80, x: 0.49, y: 0.48 };     // top-down film: the drop lands dead centre at 1.8 s
-let waitingImpact = false;
-const meltMap = document.querySelector('#melt feDisplacementMap'), meltNoise = document.querySelector('#melt feTurbulence');
-function filmToScreen(nx, ny) {   // object-fit: cover mapping
-  const W = innerWidth, H = innerHeight, vw = video.videoWidth || 1280, vh = video.videoHeight || 720;
-  const k = Math.max(W / vw, H / vh), dw = vw * k, dh = vh * k;
-  return { x: (W - dw) / 2 + nx * dw, y: (H - dh) / 2 + ny * dh };
-}
-function placeLogo() {
-  if (!video) return;
-  const p = filmToScreen(IMPACT.x, IMPACT.y);
-  mistEl.style.setProperty('--lx', p.x + 'px'); mistEl.style.setProperty('--ly', p.y + 'px');
-}
 if (video) {
   // load the short film whole, so seeking works on any host (no HTTP range requests needed)
   const startFilm = (src) => { video.src = src; video.play().catch(() => {}); };
   fetch(video.dataset.src).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
     .then((b) => startFilm(URL.createObjectURL(b))).catch(() => startFilm(video.dataset.src));
   gsap.set('.mist-inner', { xPercent: -50, yPercent: -40 });
-  placeLogo(); video.addEventListener('loadedmetadata', placeLogo); addEventListener('resize', placeLogo);
-  gsap.ticker.add(() => {
-    if (!splashed && video.currentTime > 1.3) video.currentTime = 0.05;           // calm water loop until the visitor scrolls (drop enters at 1.46 s)
-    if (waitingImpact && video.currentTime >= IMPACT.t) { waitingImpact = false; melt(); }
-  });
-}
-function melt() {
-  const p = filmToScreen(IMPACT.x, IMPACT.y);
-  mistEl.style.setProperty('--sx', p.x + 'px'); mistEl.style.setProperty('--sy', p.y + 'px');
-  const maxR = Math.hypot(innerWidth, innerHeight) * 1.1;
-  const m = { s: 0, f: 0.05 };
-  splashTl = gsap.timeline()
-    .to('.mist-logo', { scaleY: 0.86, scaleX: 1.06, duration: 0.07, ease: 'power2.out' }, 0)
-    .to(m, { s: 140, f: 0.12, duration: 1.1, ease: 'power2.in', onUpdate: () => { meltMap.setAttribute('scale', m.s.toFixed(1)); meltNoise.setAttribute('baseFrequency', `0.008 ${m.f.toFixed(3)}`); } }, 0.05)
-    .to('.mist-logo', { scaleY: 1.35, scaleX: 1.02, y: 26, autoAlpha: 0, filter: 'url(#melt) blur(6px)', duration: 1.1, ease: 'power2.in' }, 0.1)
-    .to('.mist-sub', { autoAlpha: 0, y: 10, duration: 0.5 }, 0.05)
-    .to(hole, { r: maxR, duration: 1.8, ease: 'power2.inOut', onUpdate: setHole }, 1.4)
-    .to(mistState, { p: 1, duration: 1.2, ease: 'power1.out' }, 1.4)
-    .set('.mist', { autoAlpha: 0 }, 3.3)
-    .to('.logo', { autoAlpha: 1, duration: 0.5 }, 2.8);
+  // the whole film loops (loop attribute) until the visitor scrolls
 }
 function splash() {
   if (splashed) return; splashed = true;
@@ -1138,10 +1105,17 @@ function splash() {
     splashTl.to('.mist', { autoAlpha: 0, duration: 0.4 }).to(mistState, { p: 1, duration: 0.4 }, 0).to('.intro-cue', { autoAlpha: 0, duration: 0.2 }, 0).to('.logo', { autoAlpha: 1, duration: 0.3 }, 0.2);
     return;
   }
-  if (mistEl.classList.contains('video-intro')) {   // the film's drop lands on the logo; the logo melts into the water
-    video.currentTime = 1.32; video.play().catch(() => {});
-    waitingImpact = true;
-    splashTl.to('.intro-cue', { autoAlpha: 0, duration: 0.2 }, 0);
+  if (mistEl.classList.contains('video-intro')) {   // looping film: the logo lifts away and the view opens from the centre
+    const c = { x: innerWidth / 2, y: innerHeight * 0.48 };
+    mistEl.style.setProperty('--sx', c.x + 'px'); mistEl.style.setProperty('--sy', c.y + 'px');
+    splashTl
+      .to('.intro-cue', { autoAlpha: 0, duration: 0.2 }, 0)
+      .to('.mist-inner', { autoAlpha: 0, scale: 1.08, duration: 0.7, ease: 'power1.in' }, 0)
+      .to(hole, { r: maxR, duration: 1.6, ease: 'power2.inOut', onUpdate: setHole }, 0.2)
+      .to(mistState, { p: 1, duration: 1.2, ease: 'power1.out' }, 0.2)
+      .set('.mist', { autoAlpha: 0 }, 1.9)
+      .call(() => video.pause(), null, 1.95)
+      .to('.logo', { autoAlpha: 1, duration: 0.5 }, 1.4);
     return;
   }
   Object.assign(drop, { on: true, x: p.x, y: -30 });
@@ -1164,7 +1138,7 @@ function resetSplash() {
   mistState.p = 0;
   gsap.set('.mist', { autoAlpha: 1 }); gsap.set('.mist-inner', { autoAlpha: 1, scale: 1, xPercent: video ? -50 : 0, yPercent: video ? -40 : 0 }); gsap.set('.mist-logo', { scale: 1 });
   gsap.set('.intro-cue', { autoAlpha: 1 }); gsap.set('.logo', { autoAlpha: 0 });
-  if (video) { waitingImpact = false; meltMap.setAttribute('scale', '0'); gsap.set('.mist-logo', { autoAlpha: 1, y: 0, scaleX: 1, scaleY: 1, filter: 'url(#melt)' }); gsap.set('.mist-sub', { autoAlpha: 1, y: 0 }); video.currentTime = 0.05; video.play().catch(() => {}); }
+  if (video) { gsap.set('.mist-logo', { autoAlpha: 1, y: 0, scaleX: 1, scaleY: 1 }); gsap.set('.mist-sub', { autoAlpha: 1, y: 0 }); video.play().catch(() => {}); }
 }
 if (!CAPTURE) {
   ScrollTrigger.create({ trigger: '#intro', start: 'top top-=4', onEnter: splash, onLeaveBack: resetSplash });
@@ -1172,7 +1146,7 @@ if (!CAPTURE) {
 }
 document.querySelector('.intro-cue').addEventListener('click', () => {
   splash();
-  setTimeout(() => document.getElementById('survey').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }), reduceMotion ? 0 : (video ? 3400 : 900));
+  setTimeout(() => document.getElementById('survey').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }), reduceMotion ? 0 : (video ? 1500 : 900));
 });
 
 /* ---------- symbol works: zigzag reveal ---------- */
