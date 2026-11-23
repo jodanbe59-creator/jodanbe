@@ -1319,7 +1319,7 @@ gsap.ticker.add((time) => {
 const video = document.querySelector('.mist-video');
 if (video) {
   // load the short film whole, so seeking works on any host (no HTTP range requests needed)
-  const startFilm = (src) => { video.src = src; video.play().catch(() => {}); };
+  const startFilm = (src) => { video.src = src; video.play().catch(() => {}); scrubVideo.src = src; scrubVideo.load(); };
   fetch(video.dataset.src).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
     .then((b) => startFilm(URL.createObjectURL(b))).catch(() => startFilm(video.dataset.src));
   gsap.set('.mist-inner', { xPercent: -50, yPercent: -40 });
@@ -1405,27 +1405,33 @@ function resetSplash() {
   gsap.set('.mist-inner', { clearProps: 'filter,transform' }); gsap.set('.mist-inner', { xPercent: video ? -50 : 0, yPercent: video ? -40 : 0, y: 0 }); gsap.set('.st-text, .st-tick', { clearProps: 'filter,transform,opacity,visibility' });
   if (video) { gsap.set('.mist-logo', { autoAlpha: 1, y: 0, scaleX: 1, scaleY: 1 }); gsap.set('.mist-sub', { autoAlpha: 1, y: 0 }); video.play().catch(() => {}); }
 }
+const scrubVideo = video ? video.cloneNode() : null;
+if (scrubVideo) {
+  scrubVideo.removeAttribute('data-src'); scrubVideo.muted = true; scrubVideo.style.opacity = '0';
+  video.after(scrubVideo); video.loop = true;               // the loop film never stops before the visitor scrolls
+}
 /* ---------- hero: the drop falls as you scroll, then the water blurs away (blur dissolve) ----------
    film: calm water 0.05–1.3 s loops until the first scroll; the drop enters at 1.47 s and lands at 1.8 s */
-const HERO = { scrub: 0, target: 0.05, shown: 0.05 };
+const HERO = { scrub: 0, target: 1.3, shown: 1.3, on: false };
 const heroT = (p) => p < 0.3 ? lerp(1.3, 1.9, smooth(0, 0.3, p)) : lerp(1.9, 6.0, smooth(0.3, 0.92, p));   // the fall gets a long stretch of scroll
+function heroMode(on) {   // cross-dissolve between the looping film and the scroll-driven one (both show water, so it reads as one shot)
+  if (on === HERO.on || !scrubVideo) return; HERO.on = on;
+  if (on) { HERO.shown = 1.3; scrubVideo.currentTime = 1.3; gsap.to(scrubVideo, { opacity: 1, duration: 0.6, ease: 'power1.inOut', onComplete: () => video.pause() }); }
+  else { video.play().catch(() => {}); gsap.to(scrubVideo, { opacity: 0, duration: 0.6, ease: 'power1.inOut' }); }
+}
 gsap.ticker.add(() => {
-  if (!video || !video.duration) return;
-  if (HERO.scrub <= 0.001) {                                   // before scrolling: the calm loop plays by itself
-    if (video.paused) video.play().catch(() => {});
-    if (video.currentTime > 1.3) video.currentTime = 0.05;
-    HERO.shown = video.currentTime; return;
-  }
-  if (!video.paused) video.pause();
+  if (!scrubVideo) return;
+  if (!HERO.on) { if (video.paused && video.readyState > 1) video.play().catch(() => {}); return; }
+  if (!scrubVideo.duration) return;
   HERO.shown += (HERO.target - HERO.shown) * 0.25;               // seek-chase, eased
-  if (!video.seeking && Math.abs(video.currentTime - HERO.shown) > 0.02) video.currentTime = HERO.shown;
+  if (!scrubVideo.seeking && Math.abs(scrubVideo.currentTime - HERO.shown) > 0.02) scrubVideo.currentTime = HERO.shown;
 });
 if (!CAPTURE) {
   ScrollTrigger.create({
     trigger: '#intro', start: 'top top', end: 'bottom top', scrub: reduceMotion ? true : 0.5,
     onUpdate: (st) => {
       const p = st.progress;
-      HERO.scrub = p; HERO.target = heroT(p);
+      HERO.scrub = p; HERO.target = heroT(p); heroMode(p > 0.002);
       gsap.set('.intro-cue', { autoAlpha: 1 - smooth(0, 0.05, p) });
       // blur dissolve: the water and ARON lose focus while the statement below comes into focus
       const d = smooth(0.7, 1, p);
