@@ -280,3 +280,4 @@
   - Stillness — Between the sound of water and a halo of light, the mind slowly settles into calm.
   - Light — Take a breath, and let beauty spread through the room like a ripple across still water.
 - **빌드 영상 1차(720p) 받음 → 다시 만들기로 (사용자, 1080P).** 큰 AI 배지·숫자는 스토리보드에서 온 것 → 깨끗한 스토리보드 3장 전달(scratchpad/deliver). 재생성 영상 오면: 구석 AI 표시 지우기(tools/clean.py 방식, 60fps 디코딩 주의) → all-intra 변환 → 로비 섹션(영어 문구, 단어별 진해짐)
+- **로비 섹션(Spaces) 반영:** statement 다음, about 앞. 빌드 영상 1080p(구석 AI 표시 제거) → space-01/02/03.mp4 (30fps, g5, crf23, 각 ~5.5MB, blob 로드 후 스크롤 스크럽). 섹션 320vh: 영상 p 0.04–0.66, 글자 쪽 밝은 막 p 0.5–0.62, 영어 단어별 진해짐 p 0.6–0.9. Warmth(좌) / Stillness(우) / Light(좌)

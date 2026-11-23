@@ -378,6 +378,24 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 .frost { position:absolute; inset:0; pointer-events:none; opacity:.1; mix-blend-mode: overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
 @media (prefers-reduced-motion: reduce) { .aurora i { animation:none; } }
+
+/* ── spaces: three interiors materialise as you scroll (build films scrubbed by scroll) ── */
+.spaces { position: relative; z-index: 2; background: #f6f3ee; }
+.sp { position: relative; height: 320vh; }
+.sp-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #f3f1ee; }
+.sp-stage video, .sp-stage .sp-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.sp-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: var(--veil, 0); transition: opacity .2s linear; }
+.sp--l .sp-stage::after { background: linear-gradient(90deg, rgba(246,243,238,.9) 0%, rgba(246,243,238,.7) 30%, rgba(246,243,238,0) 58%); }
+.sp--r .sp-stage::after { background: linear-gradient(270deg, rgba(246,243,238,.9) 0%, rgba(246,243,238,.7) 30%, rgba(246,243,238,0) 58%); }
+.sp-copy { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); width: min(440px, 80vw); }
+.sp--l .sp-copy { left: 7vw; } .sp--r .sp-copy { right: 7vw; }
+.sp-word { margin: 0 0 26px; font-family: "Cormorant Garamond", var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(46px, 6vw, 84px); line-height: 1; color: #1f1b18; }
+.sp-desc { margin: 0; font-family: Inter, sans-serif; font-weight: 300; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.6; color: #1f1b18; }
+.sp-word span, .sp-desc span { opacity: 0; transition: opacity .25s linear; }
+@media (max-width: 800px) {
+  .sp--l .sp-stage::after, .sp--r .sp-stage::after { background: linear-gradient(0deg, rgba(246,243,238,.95) 0%, rgba(246,243,238,.8) 40%, rgba(246,243,238,0) 70%); }
+  .sp-copy { top: auto; bottom: 9vh; transform: none; left: 7vw !important; right: auto !important; }
+}
 </style>
 </head>
 <body>
@@ -432,6 +450,25 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
       </div>
     </div>
   </section>
+
+
+  <div class="spaces" aria-label="Spaces">
+    <section class="sp sp--l"><div class="sp-stage">
+      <img class="sp-poster" src="space-01.jpg" alt=""><video data-src="space-01.mp4" muted playsinline preload="auto"></video>
+      <div class="sp-copy"><h2 class="sp-word">Warmth</h2>
+      <p class="sp-desc">The first moment you step inside, warmth greets you before anyone does — soft, earthen, and quietly embracing.</p></div>
+    </div></section>
+    <section class="sp sp--r"><div class="sp-stage">
+      <img class="sp-poster" src="space-02.jpg" alt=""><video data-src="space-02.mp4" muted playsinline preload="auto"></video>
+      <div class="sp-copy"><h2 class="sp-word">Stillness</h2>
+      <p class="sp-desc">Between the sound of water and a halo of light, the mind slowly settles into calm.</p></div>
+    </div></section>
+    <section class="sp sp--l"><div class="sp-stage">
+      <img class="sp-poster" src="space-03.jpg" alt=""><video data-src="space-03.mp4" muted playsinline preload="auto"></video>
+      <div class="sp-copy"><h2 class="sp-word">Light</h2>
+      <p class="sp-desc">Take a breath, and let beauty spread through the room like a ripple across still water.</p></div>
+    </div></section>
+  </div>
 
   <section class="about" aria-labelledby="t-about">
     <div class="about-row">
@@ -1666,6 +1703,47 @@ ready.then(() => {
   }
   window.__aronReady = true;
 });
+</script>
+
+<script>
+/* spaces: each build film is scrubbed by scroll (empty room → finished interior), then the words fill in */
+(() => {
+  const secs = [...document.querySelectorAll('.sp')];
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const items = secs.map((sec) => {
+    sec.querySelectorAll('.sp-word, .sp-desc').forEach((el) => {
+      el.innerHTML = el.textContent.trim().split(/\s+/).map((w) => '<span>' + w + '</span>').join(' ');
+    });
+    const v = sec.querySelector('video'), poster = sec.querySelector('.sp-poster');
+    const it = { sec, v, poster, words: [...sec.querySelectorAll('.sp-word span, .sp-desc span')], target: 0, shown: -1, ready: false };
+    fetch(v.dataset.src).then((r) => r.blob()).then((b) => { v.src = URL.createObjectURL(b); })
+      .catch(() => { v.src = v.dataset.src; });
+    v.addEventListener('loadeddata', () => { it.ready = true; v.pause(); poster.style.opacity = 0; });
+    return it;
+  });
+  function onScroll() {
+    const vh = innerHeight;
+    items.forEach((it) => {
+      const r = it.sec.getBoundingClientRect(), total = it.sec.offsetHeight - vh;
+      const p = clamp(-r.top / total);
+      it.target = clamp((p - 0.04) / 0.62);                    // film plays over 4%–66% of the section
+      const q = clamp((p - 0.6) / 0.3) * (it.words.length + 2); // words fill in over 60%–90%
+      it.words.forEach((w, i) => { w.style.opacity = (0.12 + 0.88 * clamp(q - i)) * clamp((p - 0.5) / 0.08); });
+      it.sec.querySelector('.sp-stage').style.setProperty('--veil', clamp((p - 0.5) / 0.12).toFixed(3));
+    });
+  }
+  function tick() {
+    items.forEach((it) => {
+      if (!it.ready || !it.v.duration) return;
+      const want = it.target * (it.v.duration - 0.05);
+      it.shown = it.shown < 0 ? want : it.shown + (want - it.shown) * 0.5;
+      if (!it.v.seeking && Math.abs(it.v.currentTime - it.shown) > 0.015) it.v.currentTime = it.shown;
+    });
+    requestAnimationFrame(tick);
+  }
+  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll);
+  onScroll(); requestAnimationFrame(tick);
+})();
 </script>
 </body>
 </html>
