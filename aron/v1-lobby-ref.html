@@ -923,7 +923,7 @@ for (const [x, z, face] of [[2, 6.55, 1], [2, 7.45, 1]]) {
   const door = F(mesh(new THREE.ShapeGeometry(archShape, 12), M.flush, x + off + 0.008 * face, 0, z, { shadow: false, track: true })); door.rotation.y = Math.PI / 2;
   F(mesh(new THREE.BoxGeometry(0.03, 0.03, 0.16), M.duct, x + off + 0.03 * face, 1.0, z - 0.3, { shadow: false, track: true }));
 }
-for (const [x, z] of [[3, -9.2], [12.3, -9.2], [-17, -2.4], [3.0, -2.6], [3.0, 5.0]]) {
+for (const [x, z] of [[3, -9.2], [12.3, -9.2], [-17, -2.4]]) {   // no plants beside the water wall
   F(mesh(new THREE.CylinderGeometry(0.35, 0.3, 0.55, 16).translate(0, 0.275, 0), M.white, x, 0, z, { track: true }));
   F(mesh(new THREE.IcosahedronGeometry(0.6, 0).translate(0, 1.1, 0), M.leaf, x, 0, z, { track: true }));
 }
@@ -954,7 +954,7 @@ M.media.map = mediaTex; M.media.toneMapped = false;
   const g = new THREE.ExtrudeGeometry(sh, { depth: 0.35, bevelEnabled: false, curveSegments: 18 });
   const frame = mesh(g, M.wall, 2.25, 0, cz, { track: true }); frame.rotation.y = Math.PI / 2;
   walls.push(frame);
-  const glow = mesh(new THREE.PlaneGeometry(MW + 0.3, 0.08), M.cove, 2.5, 0.2, cz, { shadow: false }); glow.rotation.y = Math.PI / 2; glow.rotation.x = -Math.PI / 2;
+  mesh(new THREE.PlaneGeometry(0.08, MW + 0.3).rotateX(-Math.PI / 2), M.cove, 2.66, 0.012, cz, { shadow: false });   // light line on the floor along the wall
 }
 // ---- entrance facade on the core (reference 3): glass door in a slim metal grid, nested arched windows, bronze sign band ----
 const sign = new THREE.Group(); scene.add(sign);   // kept for the opening timeline: the sign band lights up
