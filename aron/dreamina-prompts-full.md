@@ -42,6 +42,39 @@ PALETTE: warm brown, taupe, cream, soft gold.
 Photorealistic, high-end architectural interior photography, ultra-detailed, beautiful. No text, no letters, no logos, no numbers, no people, no monitors, no television, no columns, no pillars, no arches, no doors, no plants, no wall decorations.
 ```
 
+## 로비 03 · 물빛 블루 — v3 확정본 (2026-11-23, 구도 OK)
+② 레퍼런스: 블루 로비 (색감·분위기만)
+```
+Design in the same refined spirit as the first reference image (the ARON lobby): smooth white plaster curves, soft hidden indirect light, natural stone, serene yet luxurious. Use the second reference image ONLY for color palette and mood. Do NOT copy its installations, chain curtains, materials, people, text or logos.
+
+SUBJECT: a vast, bright, airy medical clinic lobby with a fresh blue accent, furnished like a luxury hotel lounge.
+
+CAMERA: ultra-wide 16mm lens, camera height 1.3 m, positioned slightly right of center at the entrance, looking toward the reception with a gentle 15-degree angle. Verticals perfectly straight, horizon level. 16:9 landscape.
+
+COMPOSITION: reception desk and the hanging light sculpture on the right third of the frame. The left wall carries one large artwork. Seating lines the edges of the lounge in a U-shape, leaving the center open and spacious.
+
+ARCHITECTURE: a double-height smooth white ceiling with one large circular cove glowing with soft cool-white indirect light. Behind the reception, one wide curved white plaster wall washed with pale blue light from below. Continuous smooth white plaster side walls. NO columns, NO pillars, NO arches, NO doors, NO openings.
+
+WALL ART: on the long left wall, ONE single very large framed abstract artwork that fills about half of the wall, soft flowing water-ripple brushstrokes in pale blue, ivory and a touch of navy, in a slim brushed-metal frame, lit evenly by soft wall-washer light from above.
+
+FEATURES: hanging from the high ceiling above the reception, one tall sculptural cascade of fine glass threads glowing in soft water-blue light, like a gentle stream of falling water. One smooth curved white reception desk with a soft light line at its base.
+
+FURNITURE (sofa style and layout):
+- Sofas: very low, long, modular platform sofas with deep navy upholstered seats and a few large loose square cushions, each sitting on a slim brushed stainless-steel metal plinth base with a satin silver finish that slightly extends beyond the seat. Straight, clean, right-angled lines.
+- Layout: one long backless platform bench along the left wall below the artwork; a longer platform sofa with cushions along the back of the lounge; an L-shaped platform sofa along the right side. Together they form a U around an open center.
+- Center: two low square coffee tables with pale stone tops and slim brushed-metal frames, placed in a line one behind the other.
+- Between the sofas: small brushed-metal side tables with stone tops built into the plinths, two with a soft white fabric table lamp.
+- Nothing else. No armchairs.
+
+FLOOR: no rugs. One continuous, large-format polished light stone floor, softly reflecting the furniture, the metal plinths, the glowing cascade and the daylight.
+
+MATERIALS & LIGHT: white plaster walls, bright natural daylight mixed with cool-white indirect light and the warm glow of the table lamps. Fresh, calm, daytime mood.
+
+PALETTE: white, ivory, deep navy, brushed silver, soft water blue.
+
+Photorealistic, high-end architectural interior photography, ultra-detailed, beautiful. No text, no letters, no logos, no numbers, no people, no monitors, no television, no columns, no pillars, no arches, no doors, no plants, no chains, no rugs, no carpets, no armchairs, no wooden bases.
+```
+
 ## (이전) 로비 02 · 물방울 빛 (웜 다크)
 ② 레퍼런스: 물방울 조명 로비 (정면, 따뜻한 짙은 톤)
 ```
