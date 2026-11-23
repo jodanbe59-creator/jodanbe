@@ -359,20 +359,24 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none; }
 
 
-/* ── frosted-glass aurora light (experiment) ── */
-.aurora { position:absolute; inset:-10%; pointer-events:none; mix-blend-mode: soft-light; filter: blur(70px) saturate(1.5); opacity:.95; }
-.aurora.glow { mix-blend-mode: screen; opacity:.30; filter: blur(90px) saturate(1.3); }
+/* ── frosted-glass aurora light (experiment) · warm pearl palette ── */
+/* 1) warm the water: cool steel-blue → warm pearl / champagne */
+.mist-video { filter: sepia(.32) saturate(1.15) hue-rotate(-8deg) brightness(1.1) contrast(.88); }
+.warm { position:absolute; inset:0; pointer-events:none; background: linear-gradient(160deg, #fbe9da 0%, #f6e3d3 45%, #efdccd 100%); mix-blend-mode: multiply; opacity:.45; }
+/* 2) soft light blooms, all in one warm family + one quiet mint for depth */
+.aurora { position:absolute; inset:-10%; pointer-events:none; mix-blend-mode: soft-light; filter: blur(80px) saturate(1.2); opacity:.9; }
+.aurora.glow { mix-blend-mode: screen; opacity:.22; filter: blur(100px); }
 .aurora i { position:absolute; border-radius:50%; display:block; will-change:transform; }
-.aurora i:nth-child(1){ width:46vmax;height:46vmax; left:-6%; top:28%; background:#ff8a3d; animation:a1 19s ease-in-out infinite alternate; }
-.aurora i:nth-child(2){ width:40vmax;height:40vmax; left:30%; top:-8%; background:#2ec4b6; animation:a2 23s ease-in-out infinite alternate; }
-.aurora i:nth-child(3){ width:34vmax;height:34vmax; right:-4%; top:20%; background:#d9f04a; animation:a3 17s ease-in-out infinite alternate; }
-.aurora i:nth-child(4){ width:42vmax;height:42vmax; left:20%; bottom:-14%; background:#1f6fd1; animation:a4 26s ease-in-out infinite alternate; }
-.aurora i:nth-child(5){ width:28vmax;height:28vmax; right:12%; bottom:2%; background:#ff5f8a; animation:a1 21s ease-in-out infinite alternate-reverse; }
+.aurora i:nth-child(1){ width:50vmax;height:50vmax; left:-8%; top:30%; background:#ffad7a; animation:a1 21s ease-in-out infinite alternate; }   /* apricot */
+.aurora i:nth-child(2){ width:40vmax;height:40vmax; left:34%; top:-12%; background:#ffd98a; animation:a2 25s ease-in-out infinite alternate; }  /* butter light */
+.aurora i:nth-child(3){ width:36vmax;height:36vmax; right:-6%; top:24%; background:#f3a1a6; animation:a3 19s ease-in-out infinite alternate; } /* dusty rose */
+.aurora i:nth-child(4){ width:38vmax;height:38vmax; left:26%; bottom:-18%; background:#9fd8c6; animation:a4 28s ease-in-out infinite alternate; } /* soft mint */
+.aurora i:nth-child(5){ display:none; }
 @keyframes a1 { to { transform: translate(14vw,-10vh) scale(1.15); } }
 @keyframes a2 { to { transform: translate(-12vw,14vh) scale(.9); } }
 @keyframes a3 { to { transform: translate(-16vw,8vh) scale(1.2); } }
 @keyframes a4 { to { transform: translate(10vw,-14vh) scale(1.1); } }
-.frost { position:absolute; inset:0; pointer-events:none; opacity:.18; mix-blend-mode: overlay;
+.frost { position:absolute; inset:0; pointer-events:none; opacity:.14; mix-blend-mode: overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
 @media (prefers-reduced-motion: reduce) { .aurora i { animation:none; } }
 </style>
@@ -393,7 +397,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 </div>
 <div class="scrim"></div>
 
-<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" poster="intro-drop.jpg" muted playsinline preload="auto"></video><div class="mist-veil"></div><div class="aurora"><i></i><i></i><i></i><i></i><i></i></div><div class="aurora glow"><i></i><i></i><i></i><i></i><i></i></div><div class="frost"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
+<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" poster="intro-drop.jpg" muted playsinline preload="auto"></video><div class="mist-veil"></div><div class="warm"></div><div class="aurora"><i></i><i></i><i></i><i></i><i></i></div><div class="aurora glow"><i></i><i></i><i></i><i></i><i></i></div><div class="frost"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
 <canvas class="splash" aria-hidden="true"></canvas>
 <button type="button" class="scroll-cue intro-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
 <a class="logo" href="#intro" aria-label="ARON, 맨 위로">ARON</a>

@@ -253,3 +253,4 @@
 - **로비 02 보류 (사용자 "잠시보류"):** 최신 프롬프트는 dreamina-prompts-full.md 맨 아래. 포인트 색 세이지 그린 (01 테라코타 / 02 세이지 / 03 네이비). 드리미나 프롬프트는 5000자 이내로 써야 함
 - **무드보드 섹션 (나중에):** aron/moodboard-lobby01.html (https://claude.ai/artifact/XXQRxJ7NMWyWuHfsxzeu1z), 사용자 "나중에하자"
 - **히어로 빛 실험 (오로라):** aron/v2-water-aurora.html (원본 v2-water-intro.html 그대로). 젖빛 유리 너머 주황·청록·라임·블루·핑크 빛 덩어리가 천천히 움직임 (soft-light + screen 블렌드, blur, 노이즈). https://claude.ai/artifact/MR9KgoVMcB1K3ADjZMZuzF
+- 오로라 v2 (웜 펄): 물 영상을 sepia/웜 multiply로 펄·샴페인 톤으로, 빛은 살구·버터·더스티 로즈 + 민트 하나
