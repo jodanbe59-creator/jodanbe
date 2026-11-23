@@ -361,8 +361,8 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 
 /* ── frosted-glass aurora light (experiment) · v3: original colors + white-grey water ── */
 /* water: cool steel-blue → refined neutral white-grey (no blue cast) */
-.mist-video { filter: grayscale(1) brightness(1.32) contrast(.7); }
-.warm { position:absolute; inset:0; pointer-events:none; background:#efefed; opacity:.42; }  /* soft milky haze, like a pale pool */
+.mist-video { filter: grayscale(1) brightness(1.16) contrast(1.05); }
+.warm { position:absolute; inset:0; pointer-events:none; background:#efefed; opacity:.22; }  /* soft milky haze, like a pale pool */
 .aurora { position:absolute; inset:-10%; pointer-events:none; mix-blend-mode: soft-light; filter: blur(90px) saturate(1.1); opacity:.5; }
 .aurora.glow { mix-blend-mode: screen; opacity:.1; filter: blur(110px); }
 .aurora i { position:absolute; border-radius:50%; display:block; will-change:transform; }
@@ -396,7 +396,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 </div>
 <div class="scrim"></div>
 
-<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" poster="intro-drop.jpg" muted playsinline preload="auto"></video><div class="mist-veil"></div><div class="warm"></div><div class="aurora"><i></i><i></i><i></i><i></i><i></i></div><div class="aurora glow"><i></i><i></i><i></i><i></i><i></i></div><div class="frost"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
+<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" data-loop="intro-loop.mp4" poster="intro-drop.jpg" muted playsinline preload="auto"></video><div class="mist-veil"></div><div class="warm"></div><div class="aurora"><i></i><i></i><i></i><i></i><i></i></div><div class="aurora glow"><i></i><i></i><i></i><i></i><i></i></div><div class="frost"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
 <canvas class="splash" aria-hidden="true"></canvas>
 <button type="button" class="scroll-cue intro-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
 <a class="logo" href="#intro" aria-label="ARON, 맨 위로">ARON</a>
@@ -1339,9 +1339,13 @@ gsap.ticker.add((time) => {
 const video = document.querySelector('.mist-video');
 if (video) {
   // load the short film whole, so seeking works on any host (no HTTP range requests needed)
-  const startFilm = (src) => { video.src = src; video.play().catch(() => {}); scrubVideo.src = src; scrubVideo.load(); };
-  fetch(video.dataset.src).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
-    .then((b) => startFilm(URL.createObjectURL(b))).catch(() => startFilm(video.dataset.src));
+  // before scroll: a seamless ripple-only loop (intro-loop.mp4) keeps the water moving the whole time
+  const startLoop = (src) => { video.src = src; video.play().catch(() => {}); };
+  const startScrub = (src) => { scrubVideo.src = src; scrubVideo.load(); };
+  const blobOf = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); }).then((b) => URL.createObjectURL(b));
+  blobOf(video.dataset.loop).then(startLoop).catch(() => startLoop(video.dataset.loop));
+  // on scroll: the full film (drop → ripples) is scrubbed
+  blobOf(video.dataset.src).then(startScrub).catch(() => startScrub(video.dataset.src));
   gsap.set('.mist-inner', { xPercent: -50, yPercent: -40 });
   // the whole film loops (loop attribute) until the visitor scrolls
 }
