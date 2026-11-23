@@ -162,3 +162,37 @@ Photorealistic, high-end architectural interior photography, ultra-detailed, bea
 ```
 One continuous cinematic shot, no cuts, beginning exactly on the provided image. The camera performs ONE smooth continuous glide forward at eye level down the corridor, perfectly steady, following the corridor as the light leads the way. Ultra-smooth, weightless, seamless, photorealistic. No people, no text.
 ```
+
+---
+
+## 로비 02 · 보류 중 (최신안) · 세이지 그린 + LED 물결 테이블
+요점: 일자 LED 물결 테이블(얇은 상판 4cm, 대리석 테두리 2cm, 깊이 들인 받침) · 알라바스터 디스크 샹들리에 · 사선으로 깎은 베인컷 실버 트래버틴 모노리스 데스크 · 세이지→화이트 그라데이션 아크릴 벽 · 세이지 벨벳 일자 소파 · 메탈 없음 · 테이블 위 오브제 없음 · 5000자 이내
+```
+Design a vast, serene medical clinic lobby lounge in refined European-modern style, keeping ARON's signature: calm water ripples, soft hidden indirect light, natural stone. No people, text or logos.
+
+CAMERA: ultra-wide 18mm lens, camera height 1.5 m, centered, symmetrical frontal one-point view, slightly elevated so the table top is clearly visible. Verticals straight, horizon level. 16:9.
+
+COMPOSITION: a long straight table runs through the center from the foreground toward the back. Above it floats an alabaster disc chandelier. Two long straight low sofas sit parallel on both sides, facing each other. Behind, the reception desk is centered in front of a glowing gradient acrylic wall. Very wide, open, symmetrical, uncluttered.
+
+LED WATER TABLE: a long, low, light and elegant rectangular table, 5 m long, 90 cm wide. The top is a slim slab only 4 cm thick: a flush clear glass pane over a glowing LED surface showing calm water with soft gentle ripples and delicate light caustics in pale aqua, silver and white, framed by a very thin 2 cm rim of honed warm-grey marble. The slim top floats on a narrow, deeply recessed base set far back from the edges, hidden in shadow, so the glowing water surface seems to hover above the floor. Light, refined, minimal. Nothing on top. No real water.
+
+RECEPTION DESK: a long, straight monolithic block of vein-cut silver-grey travertine marble with strong flowing horizontal wavy veins in warm grey, taupe, ivory and charcoal, like rippling water. Crisp rectangular top. The lower front is cut back at a sharp diagonal and both ends have angled chamfered cuts at the bottom, so the heavy block seems to float. A hidden light line glows beneath it. Nothing on top.
+
+CHANDELIER: nine to twelve thin round alabaster discs, 60 cm to 2 m wide, floating horizontally in overlapping layers at varied heights along the table, like ripples. Each glows warmly from within, showing honey, cream and ivory stone veins. Nearly invisible fine cables.
+
+SOFAS: two long, straight, low sofas in soft sage-green velvet with rounded edges, on recessed warm-grey stone plinths, a few ivory linen cushions.
+
+BACK WALL: the entire wall, floor to ceiling, of tall translucent backlit acrylic panels with a smooth vertical gradient: sage green at the bottom fading through pale mint-grey to milky white at the top, like looking up through calm water. Frosted, softly glowing, no frames, no artwork.
+
+SIDE WALLS: warm-grey limestone in large vertical panels, one soft alabaster sconce on each side.
+
+CEILING: very high, smooth warm-white, soft hidden cove light around the edges.
+
+FLOOR: large honed warm-grey limestone tiles, no rugs, softly reflecting the glowing wall, discs and table.
+
+LIGHT & MATERIALS: travertine, marble, limestone, glass over LED, gradient acrylic, sage velvet, linen, alabaster. No visible metal. Warm honey glow from the alabaster, soft glow from the acrylic wall, shimmering aqua light from the table.
+
+PALETTE: warm grey, greige, taupe, sage green, mint-grey, ivory, honey, pale aqua. Calm, natural, elegant.
+
+Photorealistic, high-end architectural interior photography, ultra-detailed. No text, no logos, no watermark, no people, no monitors, no television, no metal, no real water, no fountain, no stones or pebbles on the table, no objects on the table, no thick table, no curved or S-shaped table, no curved or fluted desk, no wood, no vases, no books, no crystal strands, no glass rings, no artwork, no columns, no statues, no plants, no rugs, no floor lamps, no orange, no navy.
+```
