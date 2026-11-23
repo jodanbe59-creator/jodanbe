@@ -1449,12 +1449,12 @@ gsap.ticker.add(() => {
   if (!scrubVideo) return;
   if (!HERO.on) { if (video.paused && video.readyState > 1) video.play().catch(() => {}); return; }
   if (!scrubVideo.duration) return;
-  HERO.shown += (HERO.target - HERO.shown) * 0.25;               // seek-chase, eased
+  HERO.shown += (HERO.target - HERO.shown) * 0.6;                // seek-chase, near-direct
   if (!scrubVideo.seeking && Math.abs(scrubVideo.currentTime - HERO.shown) > 0.02) scrubVideo.currentTime = HERO.shown;
 });
 if (!CAPTURE) {
   ScrollTrigger.create({
-    trigger: '#intro', start: 'top top', end: 'bottom top', scrub: reduceMotion ? true : 0.5,
+    trigger: '#intro', start: 'top top', end: 'bottom top', scrub: reduceMotion ? true : 0.12,   // tight: the visitor conducts the drop
     onUpdate: (st) => {
       const p = st.progress;
       HERO.scrub = p; HERO.target = heroT(p); heroMode(p > 0.002);
@@ -1462,7 +1462,9 @@ if (!CAPTURE) {
       // blur dissolve: the water and ARON lose focus while the statement below comes into focus
       const d = smooth(0.7, 1, p);
       gsap.set('.mist', { filter: `blur(${(28 * d).toFixed(1)}px)`, autoAlpha: 1 - smooth(0.78, 1, p) });
-      gsap.set('.mist-inner', { filter: `blur(${(10 * smooth(0.62, 0.9, p)).toFixed(1)}px)`, autoAlpha: 1 - smooth(0.62, 0.9, p) });
+      // the drop hits ARON at p≈0.21 (film 1.8 s): from that moment the logo spreads out of focus and dissolves
+      const hit = smooth(0.2, 0.42, p);
+      gsap.set('.mist-inner', { filter: `blur(${(16 * hit).toFixed(1)}px)`, autoAlpha: 1 - hit, scale: 1 + 0.08 * hit });
       gsap.set('.st-text, .st-tick', { filter: `blur(${(14 * (1 - d)).toFixed(1)}px)`, autoAlpha: d });
       gsap.set('.logo', { autoAlpha: smooth(0.88, 1, p) });
     },
