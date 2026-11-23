@@ -57,17 +57,17 @@ a { color: inherit; }
   position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 20;
   width: max-content; max-width: calc(100% - 24px);
   padding: 6px clamp(10px, 2vw, 18px);
-  background: rgba(250, 248, 244, 0.72); border: 1px solid rgba(42, 37, 32, 0.08);
-  border-radius: 999px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  background: none; border: 0;
 }
 .menu { display: flex; align-items: center; justify-content: center; gap: clamp(6px, 2.6vw, 34px); }
 .menu-link, .menu .brand-name {
   all: unset; box-sizing: border-box; cursor: pointer; position: relative;
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 clamp(6px, 1vw, 10px);
-  font-size: 0.8125rem; letter-spacing: 0.16em; color: rgba(42, 37, 32, 0.62); transition: color .3s;
+  font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: 1.05rem; letter-spacing: 0.24em; color: rgba(26, 24, 22, 0.72); transition: color .3s;
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.6);
 }
 .menu .brand-name { font-family: "Cormorant Garamond", var(--font-display); font-size: 1.2rem; letter-spacing: 0.4em; color: var(--gold-soft); padding-right: 0.2em; }
-.menu-link::after { content: ""; position: absolute; left: clamp(6px, 1vw, 10px); right: clamp(6px, 1vw, 10px); bottom: 9px; height: 1px; background: #bea286; transform: scaleX(0); transition: transform .4s; }
+.menu-link::after { display: none; content: ""; position: absolute; left: clamp(6px, 1vw, 10px); right: clamp(6px, 1vw, 10px); bottom: 9px; height: 1px; background: #bea286; transform: scaleX(0); transition: transform .4s; }
 .menu-link:hover, .menu-link.is-active, .menu-link[aria-expanded="true"] { color: var(--ink); }
 .menu-link:hover::after, .menu-link.is-active::after, .menu-link[aria-expanded="true"]::after { transform: scaleX(1); }
 .menu-link:focus-visible, .menu .brand-name:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
@@ -286,7 +286,7 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .mist.video-intro::before, .mist.video-intro::after { display: none; }
 .mist.video-intro .mist-inner { position: absolute; left: 50%; top: 48%; }
 .mist.video-intro .mist-logo { text-shadow: 0 1px 0 rgba(255,255,255,0.35); }
-.mist.video-intro .mist-veil { background: radial-gradient(ellipse at 50% 48%, rgba(246,243,238,0.5), rgba(246,243,238,0.1) 40%, rgba(246,243,238,0) 65%); }
+.mist.video-intro .mist-veil { display: none; background: radial-gradient(ellipse at 50% 48%, rgba(246,243,238,0.5), rgba(246,243,238,0.1) 40%, rgba(246,243,238,0) 65%); }
 #intro { position: relative; z-index: 3; background: #fff; }
 /* white statement: a single line of type, a falling drop, and the white page opening onto the lobby */
 #statement { height: 300vh; position: relative; z-index: 3; }
@@ -311,7 +311,7 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .photo-stage figure.on { opacity: 1; }
 .photo-stage img { width: 100%; height: 100%; object-fit: cover; display: block; will-change: transform, filter; transform: scale(1.07); transition: transform 7s cubic-bezier(.2,.6,.2,1); }
 .photo-stage figure.on img { transform: scale(1); }
-.photo-stage figure[data-k="concept"] img { transition: none; }
+.photo-stage figure[data-k="concept"] img { transition: none; transform-origin: 50% 40%; }   /* zoom pivots on the media wall's water */
 .photo-stage .ph { width: 100%; height: 100%; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 40%, #e9e3d9, #cfc6b8); color: #7b7166; font-size: 0.9375rem; letter-spacing: 0.04em; }
 .photo-stage::after { content: ""; position: absolute; inset: 0; transition: background .9s; background: linear-gradient(90deg, rgba(18,16,14,0.62) 0%, rgba(18,16,14,0.18) 45%, rgba(18,16,14,0) 70%), linear-gradient(0deg, rgba(18,16,14,0.35), rgba(18,16,14,0) 35%); }
 .photo-stage.right::after { background: linear-gradient(270deg, rgba(18,16,14,0.62) 0%, rgba(18,16,14,0.18) 45%, rgba(18,16,14,0) 70%), linear-gradient(0deg, rgba(18,16,14,0.35), rgba(18,16,14,0) 35%); }
@@ -339,7 +339,7 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .intro-cue .mouse { border-color: rgba(42, 37, 32, 0.55); }
 .logo {
   position: fixed; top: 12px; left: clamp(14px, 3vw, 36px); z-index: 21; height: 58px; display: flex; align-items: center;
-  text-decoration: none;
+  text-decoration: none; opacity: 0; visibility: hidden;   /* hidden while the hero's big ARON is on screen */
 }
 .logo { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: 1.35rem; letter-spacing: 0.42em; color: var(--ink); text-shadow: 0 1px 10px rgba(255, 255, 255, 0.6); }   /* same lettering as the hero ARON */
 .logo:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 6px; }
@@ -1210,8 +1210,9 @@ if (!CAPTURE) {
       V.open = smooth(0.58, 0.98, p);
       gsap.set('.st-text, .st-tick', { opacity: 1 - smooth(0.6, 0.76, p), y: -12 * smooth(0.6, 0.76, p) });
       // the lobby comes into focus as it is uncovered
-      const f = smooth(0.58, 1, p);
-      gsap.set(conceptImg, { scale: 1.04 - 0.04 * f, filter: `blur(${(3 * (1 - f)).toFixed(2)}px)` });
+      // start close on the water wall, then pull back while the mist lifts: sofas, desk and wall, then ceiling and chandelier
+      const f = smooth(0.5, 1, p), z = 2.5 - 1.5 * (1 - Math.pow(1 - f, 2.2));
+      gsap.set(conceptImg, { scale: z, filter: `blur(${(2 * (1 - smooth(0.58, 0.9, p))).toFixed(2)}px)` });
     },
   });
 
@@ -1337,6 +1338,7 @@ function splash() {
       .to(hole, { r: maxR, duration: 1.6, ease: 'power2.inOut', onUpdate: setHole }, 0.2)
       .to(mistState, { p: 1, duration: 1.2, ease: 'power1.out' }, 0.2)
       .set('.mist', { autoAlpha: 0 }, 1.9)
+      .to('.logo', { autoAlpha: 1, duration: 0.6 }, 1.6)
       .call(() => video.pause(), null, 1.95)
       ;
     return;
@@ -1360,7 +1362,7 @@ function resetSplash() {
   hole.r = -0.3 * Math.max(innerWidth, innerHeight); setHole();
   mistState.p = 0;
   gsap.set('.mist', { autoAlpha: 1 }); gsap.set('.mist-inner', { autoAlpha: 1, scale: 1, xPercent: video ? -50 : 0, yPercent: video ? -40 : 0 }); gsap.set('.mist-logo', { scale: 1 });
-  gsap.set('.intro-cue', { autoAlpha: 1 });
+  gsap.set('.intro-cue', { autoAlpha: 1 }); gsap.set('.logo', { autoAlpha: 0 });
   if (video) { gsap.set('.mist-logo', { autoAlpha: 1, y: 0, scaleX: 1, scaleY: 1 }); gsap.set('.mist-sub', { autoAlpha: 1, y: 0 }); video.play().catch(() => {}); }
 }
 if (!CAPTURE) {
