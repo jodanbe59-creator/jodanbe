@@ -304,11 +304,11 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
   position: fixed; top: 12px; left: clamp(14px, 3vw, 36px); z-index: 21; height: 58px; display: flex; align-items: center;
   text-decoration: none;
 }
-.logo img { display: block; height: 22px; width: auto; filter: drop-shadow(0 1px 8px rgba(255, 255, 255, 0.55)); }
+.logo { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: 1.35rem; letter-spacing: 0.42em; color: var(--ink); text-shadow: 0 1px 10px rgba(255, 255, 255, 0.6); }   /* same lettering as the hero ARON */
 .logo:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 6px; }
 @media (max-width: 600px) {
   .logo { top: 8px; height: 54px; left: 14px; }
-  .logo img { height: 17px; }
+  .logo { font-size: 1.1rem; letter-spacing: 0.3em; }
   .topbar { left: auto; right: 8px; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) { .mist::before, .mist::after { animation: none; } }
@@ -326,7 +326,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 <div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" poster="intro-drop.jpg" muted loop playsinline preload="auto"></video><div class="mist-veil"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
 <canvas class="splash" aria-hidden="true"></canvas>
 <button type="button" class="scroll-cue intro-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
-<a class="logo" href="#intro" aria-label="ARON, 맨 위로"><img src="aron-logo.png" alt="ARON"></a>
+<a class="logo" href="#intro" aria-label="ARON, 맨 위로">ARON</a>
 <header class="topbar">
   <nav class="menu" aria-label="메뉴">
     <div class="has-sub">
