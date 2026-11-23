@@ -289,7 +289,7 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .mist.video-intro .mist-veil { display: none; background: radial-gradient(ellipse at 50% 48%, rgba(246,243,238,0.5), rgba(246,243,238,0.1) 40%, rgba(246,243,238,0) 65%); }
 #intro { position: relative; z-index: 3; background: #fff; }
 /* white statement: a single line of type, a falling drop, and the white page opening onto the lobby */
-#statement { height: 300vh; position: relative; z-index: 3; }
+#statement { height: 220vh; position: relative; z-index: 3; }
 .st-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; }
 .st-paper { position: absolute; inset: 0; }
 .st-veil { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -1272,8 +1272,7 @@ if (!CAPTURE) {
       lineEl.style.height = Math.max(0, len - landed * (land - top)) + 'px';  // on impact the line drains into the drop
       lineEl.style.top = (top + landed * (land - top)) + 'px';
       gsap.set(dropEl, { top: top + len, scale: 1 + 0.4 * landed - 1.4 * smooth(0.56, 0.62, p), opacity: 1 - smooth(0.58, 0.64, p) });
-      V.open = smooth(0.58, 0.98, p);
-      gsap.set('.st-text, .st-tick', { opacity: 1 - smooth(0.6, 0.76, p), y: -12 * smooth(0.6, 0.76, p) });
+      V.open = 0;   // no reveal after the statement: the page goes straight on to the spaces
       // the lobby comes into focus as it is uncovered
       // start close on the water wall, then pull back while the mist lifts: sofas, desk and wall, then ceiling and chandelier
       const f = smooth(0.5, 1, p), z = 2.5 - 1.5 * (1 - Math.pow(1 - f, 2.2));
