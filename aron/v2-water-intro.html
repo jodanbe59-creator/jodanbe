@@ -1340,7 +1340,9 @@ const video = document.querySelector('.mist-video');
 if (video) {
   // load the short film whole, so seeking works on any host (no HTTP range requests needed)
   // before scroll: a seamless ripple-only loop (intro-loop.mp4) keeps the water moving the whole time
-  const startLoop = (src) => { video.src = src; video.play().catch(() => {}); };
+  const LOOP_SPEED = 1.4;   // pre-scroll ripple loop plays a little faster
+  const startLoop = (src) => { video.src = src; video.defaultPlaybackRate = LOOP_SPEED; video.playbackRate = LOOP_SPEED; video.play().catch(() => {}); };
+  video.addEventListener('play', () => { video.playbackRate = LOOP_SPEED; });
   const startScrub = (src) => { scrubVideo.src = src; scrubVideo.load(); };
   const blobOf = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); }).then((b) => URL.createObjectURL(b));
   blobOf(video.dataset.loop).then(startLoop).catch(() => startLoop(video.dataset.loop));
