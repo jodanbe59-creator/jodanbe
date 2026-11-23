@@ -1440,7 +1440,10 @@ if (scrubVideo) {
    film: calm water 0.05–1.3 s loops until the first scroll; the drop enters at 1.47 s and lands at 1.8 s */
 const HERO = { scrub: 0, target: 1.3, shown: 1.3, on: false };
 // the fall is linear, so scrolling moves the drop 1:1 (enters 1.47 s at p≈0.11, touches the water 1.76 s at p=0.3)
-const heroT = (p) => p < 0.3 ? 1.3 + 0.46 * (p / 0.3) : lerp(1.76, 6.0, smooth(0.3, 0.92, p));
+// then the splash jumps up (1.76→3.0 s over p 0.3–0.5, also 1:1), and the ripples spread (3.0→6.0 s)
+const heroT = (p) => p < 0.3 ? 1.3 + 0.46 * (p / 0.3)
+  : p < 0.5 ? 1.76 + 1.24 * ((p - 0.3) / 0.2)
+  : 3.0 + 3.0 * Math.min(1, (p - 0.5) / 0.42);
 function heroMode(on) {   // cross-dissolve between the looping film and the scroll-driven one (both show water, so it reads as one shot)
   if (on === HERO.on || !scrubVideo) return; HERO.on = on;
   if (on) { HERO.shown = 1.3; scrubVideo.currentTime = 1.3; gsap.to(scrubVideo, { opacity: 1, duration: 0.6, ease: 'power1.inOut', onComplete: () => video.pause() }); }
@@ -1463,8 +1466,8 @@ if (!CAPTURE) {
       // blur dissolve: the water and ARON lose focus while the statement below comes into focus
       const d = smooth(0.7, 1, p);
       gsap.set('.mist', { filter: `blur(${(28 * d).toFixed(1)}px)`, autoAlpha: 1 - smooth(0.78, 1, p) });
-      // the drop hits ARON at p=0.3 (film 1.76 s): from that moment the logo spreads out of focus and dissolves
-      const hit = smooth(0.29, 0.5, p);
+      // the drop hits ARON at p=0.3 (film 1.76 s), the water jumps up, then the logo spreads out of focus and dissolves
+      const hit = smooth(0.48, 0.66, p);   // after the splash peaks (≈3.0 s), as the droplet falls back
       gsap.set('.mist-inner', { filter: `blur(${(16 * hit).toFixed(1)}px)`, autoAlpha: 1 - hit, scale: 1 + 0.08 * hit });
       gsap.set('.st-text, .st-tick', { filter: `blur(${(14 * (1 - d)).toFixed(1)}px)`, autoAlpha: d });
       gsap.set('.logo', { autoAlpha: smooth(0.88, 1, p) });
