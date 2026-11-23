@@ -1033,8 +1033,26 @@ paperMat.toneMapped = false;
 paperScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), paperMat));
 const lineScene = new THREE.Scene();
 // lines have real width in metres, so near strokes read thick and far ones thin; far strokes also fade into the paper
-const sketchMat = new LineMaterial({ vertexColors: true, linewidth: 0.014, worldUnits: true, transparent: true, depthTest: true, fog: true });
-sketchMat.toneMapped = false;
+// Each stroke grows from one end as the scroll reaches it (thin → full width), and a soft watercolour wash
+// spreads around the strokes; scrolling faster makes the wash bleed wider, stopping lets it settle.
+const SKU = { uDraw: { value: 0 }, uSpan: { value: 0.016 } };   // short span: strokes finish one after another, so curves read as one continuous line
+function growable(mat, widthK, alphaK) {
+  mat.userData.uWidthK = { value: widthK }; mat.userData.uAlphaK = { value: alphaK };
+  mat.onBeforeCompile = (sh) => {
+    Object.assign(sh.uniforms, SKU, { uWidthK: mat.userData.uWidthK, uAlphaK: mat.userData.uAlphaK });
+    sh.vertexShader = 'attribute float instanceKey;\nuniform float uDraw;\nuniform float uSpan;\nuniform float uWidthK;\nvarying float vGrow;\n' + sh.vertexShader
+      .replace('vec4 end = modelViewMatrix * vec4( instanceEnd, 1.0 );',
+        'float g = clamp( ( uDraw - instanceKey ) / uSpan, 0.0, 1.0 ); vGrow = g;\n vec4 end = modelViewMatrix * vec4( mix( instanceStart, instanceEnd, g ), 1.0 );')
+      .replace('float hw = linewidth * 0.5;', 'float hw = linewidth * 0.5 * uWidthK * ( 0.25 + 0.75 * g );');
+    sh.fragmentShader = 'uniform float uAlphaK;\nvarying float vGrow;\n' + sh.fragmentShader
+      .replace('float alpha = opacity;', 'float alpha = opacity * uAlphaK * smoothstep( 0.0, 0.3, vGrow );');
+  };
+  return mat;
+}
+const sketchMat = growable(new LineMaterial({ vertexColors: true, linewidth: 0.014, worldUnits: true, transparent: true, depthTest: true, fog: true }), 1, 1);
+const washMat = growable(new LineMaterial({ vertexColors: true, linewidth: 0.06, worldUnits: true, transparent: true, depthTest: false, depthWrite: false, fog: true }), 1, 0.12);   // a soft wash, not cut by surfaces
+sketchMat.toneMapped = false; washMat.toneMapped = false;
+const bleed = { v: 0, target: 0 };
 lineScene.fog = new THREE.FogExp2(0xf8f7f4, 0.075);
 // camera path for the sketch: close along the reception desk, up along the curved cove line, then back to the wide lobby
 const PATH_KEYS = [
@@ -1084,8 +1102,11 @@ function buildSketch() {
   });
   sketchKeys = segs.map((sg) => sg.key);
   sketchGeo = new LineSegmentsGeometry(); sketchGeo.setPositions(pos); sketchGeo.setColors(col);
+  sketchGeo.setAttribute('instanceKey', new THREE.InstancedBufferAttribute(new Float32Array(segs.map((sg) => sg.key)), 1));
   sketchCount = segs.length;
-  lineScene.add(new LineSegments2(sketchGeo, sketchMat));
+  const wash = new LineSegments2(sketchGeo, washMat); wash.renderOrder = 0;
+  const core = new LineSegments2(sketchGeo, sketchMat); core.renderOrder = 1;
+  lineScene.add(wash, core);
 }
 let sketchKeys = [];
 function drawnUpTo(t) {   // how many strokes have keys below t (binary search)
@@ -1107,6 +1128,7 @@ if (!CAPTURE) {
       SK.draw = Math.min(1, sketchCam.t * 1.04 + 0.1 * smooth(0.0, 0.05, p)); // strokes just ahead of the camera
       SK.paper = 1 - smooth(0.74, 0.9, p); SK.line = 1 - smooth(0.86, 0.99, p);
       sketchCam.on = p < 0.995;
+      bleed.target = Math.min(Math.abs(st.getVelocity()) / 2200, 1);   // faster scroll, wider bleed
       const c1 = smooth(0.04, 0.1, p) * (1 - smooth(0.42, 0.5, p)), c2 = smooth(0.78, 0.85, p) * (1 - smooth(0.95, 0.995, p));
       gsap.set('.cap-1', { opacity: c1, y: 14 * (1 - c1) }); gsap.set('.cap-2', { opacity: c2, y: 14 * (1 - c2) });
       gsap.set('.scrim', { opacity: 1 - SK.paper });   // no dark vignette over the paper
@@ -1396,7 +1418,14 @@ function frame(time, deltaMs) {
   if (SK.paper > 0.001 || SK.line > 0.001) {   // sketch passes: paper over the scene, then the gold lines (hidden lines removed by the scene's depth)
     renderer.autoClear = false;
     paperMat.opacity = SK.paper; if (SK.paper > 0.001) renderer.render(paperScene, paperCam);
-    if (sketchGeo && SK.line > 0.001) { sketchGeo.instanceCount = drawnUpTo(SK.draw); sketchMat.opacity = SK.line; sketchMat.resolution.set(innerWidth, innerHeight); renderer.render(lineScene, camera); }
+    if (sketchGeo && SK.line > 0.001) {
+      bleed.v += (bleed.target - bleed.v) * Math.min(dt * 4, 1); bleed.target *= Math.exp(-dt * 2.5);   // the wash settles when the scroll stops
+      SKU.uDraw.value = SK.draw; sketchGeo.instanceCount = drawnUpTo(SK.draw);
+      sketchMat.opacity = SK.line; washMat.opacity = SK.line;
+      washMat.userData.uWidthK.value = 1 + 1.8 * bleed.v; washMat.userData.uAlphaK.value = 0.1 + 0.16 * bleed.v;
+      sketchMat.resolution.set(innerWidth, innerHeight); washMat.resolution.set(innerWidth, innerHeight);
+      renderer.render(lineScene, camera);
+    }
     renderer.autoClear = true;
   }
 }
