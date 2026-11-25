@@ -461,6 +461,7 @@ body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
 .mood-it.is-in figcaption { opacity: 1; transform: none; }
 .mood-note { opacity: 0; transform: translateY(16px); transition: opacity 1.2s ease, transform 1.2s ease; }
 .mood-note.is-in { opacity: 1; transform: none; }
+.mood-note--l { margin-left: 2%; }
 @media (prefers-reduced-motion: reduce) { .mood-it .mood-frame { clip-path: none; } .mood-it img { transform: none; } .mood-it figcaption, .mood-note { opacity: 1; transform: none; } }
 </style>
 </head>
@@ -563,6 +564,7 @@ body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
         <figure class="mood-it" style="--w:32%;--mt:0vw"><div class="mood-frame"><img src="photos/palette-moss.jpg" alt="" style="aspect-ratio:5/4"></div><figcaption><i style="background:#6D705A"></i><b>STONE MOSS</b><span>#6D705A</span></figcaption></figure>
         <figure class="mood-it" style="--w:22%;--mt:13vw"><div class="mood-frame"><img src="photos/palette-pebble.jpg" alt="" style="aspect-ratio:1/1"></div><figcaption><i style="background:#C8C0B3"></i><b>WARM PEBBLE</b><span>#C8C0B3</span></figcaption></figure>
       </div>
+      <p class="mood-note mood-note--l">Textures you can almost touch —<br>stone, leaf, and the slow work of time.</p>
       <div class="mood-row">
         <figure class="mood-it" style="--w:26%;--mt:2vw"><div class="mood-frame"><img src="photos/palette-cream.jpg" alt="" style="aspect-ratio:4/5"></div><figcaption><i style="background:#E4DBD1"></i><b>IVORY SAND</b><span>#E4DBD1</span></figcaption></figure>
         <figure class="mood-it" style="--w:18%;--mt:12vw"><div class="mood-frame"><img src="photos/palette-oat.jpg" alt="" style="aspect-ratio:3/4"></div><figcaption><i style="background:#BBAA85"></i><b>GOLDEN OAT</b><span>#E3E3DC</span></figcaption></figure>
@@ -1767,7 +1769,7 @@ ready.then(() => {
   const speeds = [0.06, -0.05, 0.1, -0.04, 0.07, -0.08, 0.05, -0.1, 0.04];
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: 0.18 });
   items.forEach((el, i) => { el.style.transitionDelay = (i % 3) * 0.12 + 's'; el.querySelector('.mood-frame').style.transitionDelay = (i % 3) * 0.12 + 's'; io.observe(el); });
-  if (note) io.observe(note);
+  document.querySelectorAll('.mood-note').forEach((n) => io.observe(n));
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || innerWidth < 760) return;
   const upd = () => { const vh = innerHeight;
     items.forEach((el, i) => { const r = el.parentElement.getBoundingClientRect(); const c = (r.top + r.height / 2 - vh / 2);

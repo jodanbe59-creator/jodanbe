@@ -293,3 +293,4 @@
 - **푸터 검정(#0e0e0e) + 병원 로고 흐름:** ARON DESIGN 줄 → 병원 로고 3개(경희온생한의원/마디원정형외과/다산 에이아이 정형외과, aron/logos/*.png 흰색 단색 변환) 마키. 둘째 줄 블러 글자는 짙은 회색, 하단 글자 #EEE9E4. 푸터 위에선 상단 메뉴·로고 밝은색(body.on-dark). House Mental Clinic 이미지는 레퍼런스(로고 미포함)
 - 09 TONES~CLIENTS 삭제(심볼 사진 자리 6칸 + 병원 이름 띠). PALETTE FROM NATURE 배경 검정(#0e0e0e), 글자 밝게. 검정 구간(팔레트·푸터)에선 상단 메뉴 밝은색
 - 무드보드 모션: 화면 들어올 때 사진이 아래→위로 열림(clip-path) + 1.18→1 줌, 캡션 뒤따라 등장, 줄마다 0.12s 간격. 스크롤 패럴랙스(사진마다 속도 다름, 모바일·모션 줄이기 설정에선 끔)
+- 무드보드 둘째 줄 아래(PORCELAIN VEIL 밑, 왼쪽) 문구: 'Textures you can almost touch — stone, leaf, and the slow work of time.' (같은 세리프, 스르륵 등장)
