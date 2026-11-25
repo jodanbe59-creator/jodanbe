@@ -449,6 +449,19 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 /* over the black footer the top bar turns light */
 body.on-dark .logo, body.on-dark .menu a, body.on-dark .menu button, body.on-dark .menu .brand-name { color: #EEE9E4 !important; text-shadow: none !important; }
 body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
+
+/* moodboard motion: each photo unveils upward, then the board drifts at different speeds */
+.mood-it { will-change: transform; }
+.mood-it .mood-frame { overflow: hidden; clip-path: inset(100% 0 0 0); transition: clip-path 1.4s cubic-bezier(.7,0,.2,1); }
+.mood-it img { transform: scale(1.18); transition: transform 2.2s cubic-bezier(.2,.7,.2,1); }
+.mood-it figcaption { opacity: 0; transform: translateY(10px); transition: opacity .9s ease .5s, transform .9s ease .5s; }
+.mood-it.is-in .mood-frame { clip-path: inset(0 0 0 0); }
+.mood-it.is-in img { transform: scale(1); }
+.mood-it.is-in:hover img { transform: scale(1.04); }
+.mood-it.is-in figcaption { opacity: 1; transform: none; }
+.mood-note { opacity: 0; transform: translateY(16px); transition: opacity 1.2s ease, transform 1.2s ease; }
+.mood-note.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .mood-it .mood-frame { clip-path: none; } .mood-it img { transform: none; } .mood-it figcaption, .mood-note { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
@@ -540,20 +553,20 @@ body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
       <p class="symbols-lede">Every tone we use begins outside — in stone, leaf and weathered wood.</p></div>
     <div class="mood">
       <div class="mood-row">
-        <figure class="mood-it" style="--w:36%;--mt:0vw"><img src="photos/palette-sky.jpg" alt="" style="aspect-ratio:4/3"><figcaption><i style="background:#8EA2A4"></i><b>STONE BEIGE</b><span>#A69E90</span></figcaption></figure>
-        <figure class="mood-it" style="--w:20%;--mt:11vw"><img src="photos/palette-cherry.jpg" alt="" style="aspect-ratio:3/4"><figcaption><i style="background:#51272E"></i><b>MOSSED SLATE</b><span>#42402C</span></figcaption></figure>
-        <figure class="mood-it" style="--w:22%;--mt:3vw"><img src="photos/palette-cotton.jpg" alt="" style="aspect-ratio:1/1"><figcaption><i style="background:#DDDDDD"></i><b>WASHED COTTON</b><span>#EBEAE6</span></figcaption></figure>
+        <figure class="mood-it" style="--w:36%;--mt:0vw"><div class="mood-frame"><img src="photos/palette-sky.jpg" alt="" style="aspect-ratio:4/3"></div><figcaption><i style="background:#8EA2A4"></i><b>STONE BEIGE</b><span>#A69E90</span></figcaption></figure>
+        <figure class="mood-it" style="--w:20%;--mt:11vw"><div class="mood-frame"><img src="photos/palette-cherry.jpg" alt="" style="aspect-ratio:3/4"></div><figcaption><i style="background:#51272E"></i><b>MOSSED SLATE</b><span>#42402C</span></figcaption></figure>
+        <figure class="mood-it" style="--w:22%;--mt:3vw"><div class="mood-frame"><img src="photos/palette-cotton.jpg" alt="" style="aspect-ratio:1/1"></div><figcaption><i style="background:#DDDDDD"></i><b>WASHED COTTON</b><span>#EBEAE6</span></figcaption></figure>
       </div>
       <p class="mood-note">Nature chose the colors.<br>We only listened.</p>
       <div class="mood-row">
-        <figure class="mood-it" style="--w:22%;--mt:7vw"><img src="photos/palette-porcelain.jpg" alt="" style="aspect-ratio:4/5"><figcaption><i style="background:#EEE9E4"></i><b>PORCELAIN VEIL</b><span>#EEE9E4</span></figcaption></figure>
-        <figure class="mood-it" style="--w:32%;--mt:0vw"><img src="photos/palette-moss.jpg" alt="" style="aspect-ratio:5/4"><figcaption><i style="background:#6D705A"></i><b>STONE MOSS</b><span>#6D705A</span></figcaption></figure>
-        <figure class="mood-it" style="--w:22%;--mt:13vw"><img src="photos/palette-pebble.jpg" alt="" style="aspect-ratio:1/1"><figcaption><i style="background:#C8C0B3"></i><b>WARM PEBBLE</b><span>#C8C0B3</span></figcaption></figure>
+        <figure class="mood-it" style="--w:22%;--mt:7vw"><div class="mood-frame"><img src="photos/palette-porcelain.jpg" alt="" style="aspect-ratio:4/5"></div><figcaption><i style="background:#EEE9E4"></i><b>PORCELAIN VEIL</b><span>#EEE9E4</span></figcaption></figure>
+        <figure class="mood-it" style="--w:32%;--mt:0vw"><div class="mood-frame"><img src="photos/palette-moss.jpg" alt="" style="aspect-ratio:5/4"></div><figcaption><i style="background:#6D705A"></i><b>STONE MOSS</b><span>#6D705A</span></figcaption></figure>
+        <figure class="mood-it" style="--w:22%;--mt:13vw"><div class="mood-frame"><img src="photos/palette-pebble.jpg" alt="" style="aspect-ratio:1/1"></div><figcaption><i style="background:#C8C0B3"></i><b>WARM PEBBLE</b><span>#C8C0B3</span></figcaption></figure>
       </div>
       <div class="mood-row">
-        <figure class="mood-it" style="--w:26%;--mt:2vw"><img src="photos/palette-cream.jpg" alt="" style="aspect-ratio:4/5"><figcaption><i style="background:#E4DBD1"></i><b>IVORY SAND</b><span>#E4DBD1</span></figcaption></figure>
-        <figure class="mood-it" style="--w:18%;--mt:12vw"><img src="photos/palette-oat.jpg" alt="" style="aspect-ratio:3/4"><figcaption><i style="background:#BBAA85"></i><b>GOLDEN OAT</b><span>#E3E3DC</span></figcaption></figure>
-        <figure class="mood-it" style="--w:32%;--mt:5vw"><img src="photos/palette-fern.jpg" alt="" style="aspect-ratio:4/3"><figcaption><i style="background:#606969"></i><b>URBAN FERN</b><span>#606969</span></figcaption></figure>
+        <figure class="mood-it" style="--w:26%;--mt:2vw"><div class="mood-frame"><img src="photos/palette-cream.jpg" alt="" style="aspect-ratio:4/5"></div><figcaption><i style="background:#E4DBD1"></i><b>IVORY SAND</b><span>#E4DBD1</span></figcaption></figure>
+        <figure class="mood-it" style="--w:18%;--mt:12vw"><div class="mood-frame"><img src="photos/palette-oat.jpg" alt="" style="aspect-ratio:3/4"></div><figcaption><i style="background:#BBAA85"></i><b>GOLDEN OAT</b><span>#E3E3DC</span></figcaption></figure>
+        <figure class="mood-it" style="--w:32%;--mt:5vw"><div class="mood-frame"><img src="photos/palette-fern.jpg" alt="" style="aspect-ratio:4/3"></div><figcaption><i style="background:#606969"></i><b>URBAN FERN</b><span>#606969</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -1742,6 +1755,23 @@ ready.then(() => {
     af.style.setProperty('--af', (1 - Math.pow(1 - p, 2)).toFixed(3));
     const dark = [af, document.querySelector('.symbols')].some((el) => { if (!el) return false; const b = el.getBoundingClientRect(); return b.top < 70 && b.bottom > 70; });
     document.body.classList.toggle('on-dark', dark); };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
+})();
+</script>
+
+<script>
+/* moodboard: unveil on enter, then gentle parallax (each photo its own speed) */
+(() => {
+  const items = [...document.querySelectorAll('.mood-it')], note = document.querySelector('.mood-note');
+  if (!items.length) return;
+  const speeds = [0.06, -0.05, 0.1, -0.04, 0.07, -0.08, 0.05, -0.1, 0.04];
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: 0.18 });
+  items.forEach((el, i) => { el.style.transitionDelay = (i % 3) * 0.12 + 's'; el.querySelector('.mood-frame').style.transitionDelay = (i % 3) * 0.12 + 's'; io.observe(el); });
+  if (note) io.observe(note);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || innerWidth < 760) return;
+  const upd = () => { const vh = innerHeight;
+    items.forEach((el, i) => { const r = el.parentElement.getBoundingClientRect(); const c = (r.top + r.height / 2 - vh / 2);
+      el.style.transform = 'translate3d(0,' + (-c * speeds[i % speeds.length]).toFixed(1) + 'px,0)'; }); };
   addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
 })();
 </script>
