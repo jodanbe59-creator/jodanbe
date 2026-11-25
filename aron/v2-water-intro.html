@@ -187,9 +187,9 @@ h1 {
 html.layer-open { overflow: hidden; }
 
 /* symbol works: photos in a zigzag */
-.symbols { position: relative; z-index: 2; background: #EEE9E4; color: var(--ink); padding: clamp(64px, 9vw, 130px) var(--gutter) clamp(48px, 7vw, 100px); }
+.symbols { position: relative; z-index: 2; background: #0e0e0e; color: #EEE9E4; padding: clamp(64px, 9vw, 130px) var(--gutter) clamp(48px, 7vw, 100px); }
 .symbols-head { max-width: 1240px; margin: 0 auto clamp(32px, 5vw, 64px); }
-.symbols-head .eyebrow { color: #6D705A; letter-spacing: 0.14em; }
+.symbols-head .eyebrow { color: #a9ac94; letter-spacing: 0.14em; }
 .symbols-head h2 { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; margin: 0; }
 .zigzag { max-width: 1240px; margin: 0 auto; display: grid; gap: clamp(28px, 5vw, 64px); }
 .zig { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(16px, 3vw, 40px); align-items: end; }
@@ -420,7 +420,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 @media (prefers-reduced-motion: reduce) { .af-track { animation: none; } }
 
 /* palette from nature: texture + its colour */
-.symbols-lede { margin: 18px 0 0; max-width: 520px; font-family: Jost, sans-serif; font-weight: 300; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: #4a453f; }
+.symbols-lede { margin: 18px 0 0; max-width: 520px; font-family: Jost, sans-serif; font-weight: 300; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: #b9b3aa; }
 .palette { max-width: 1240px; margin: 0 auto clamp(56px, 8vw, 110px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 22px); }
 .pal { margin: 0; }
 .pal img { display: block; width: 100%; aspect-ratio: 6 / 5; object-fit: cover; }
@@ -435,11 +435,11 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 .mood-it { margin: var(--mt) 0 0; width: var(--w); }
 .mood-it img { display: block; width: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
 .mood-it:hover img { transform: scale(1.03); }
-.mood-it figcaption { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-family: Jost, sans-serif; color: #2a2622; }
-.mood-it figcaption i { width: 16px; height: 16px; flex: none; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+.mood-it figcaption { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-family: Jost, sans-serif; color: #EEE9E4; }
+.mood-it figcaption i { width: 16px; height: 16px; flex: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.15); }
 .mood-it figcaption b { font-weight: 400; font-size: 12.5px; letter-spacing: 0.08em; }
-.mood-it figcaption span { margin-left: auto; font-size: 10.5px; letter-spacing: 0.08em; color: #8a8278; }
-.mood-note { margin: calc(-1 * clamp(20px, 4vw, 60px)) 0 clamp(48px, 7vw, 100px) 58%; font-family: "Cormorant Garamond", serif; font-size: clamp(22px, 2.2vw, 32px); line-height: 1.25; color: #3c3832; }
+.mood-it figcaption span { margin-left: auto; font-size: 10.5px; letter-spacing: 0.08em; color: #8f8a83; }
+.mood-note { margin: calc(-1 * clamp(20px, 4vw, 60px)) 0 clamp(48px, 7vw, 100px) 58%; font-family: "Cormorant Garamond", serif; font-size: clamp(22px, 2.2vw, 32px); line-height: 1.25; color: #d9d4cc; }
 .mood-count { margin: 0; text-align: center; font-family: Jost, sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: #6D705A; }
 @media (max-width: 760px) {
   .mood-row { flex-wrap: wrap; gap: 28px 6%; margin-bottom: 28px; } .mood-it { width: 47% !important; margin-top: 0 !important; }
@@ -555,25 +555,10 @@ body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
         <figure class="mood-it" style="--w:18%;--mt:12vw"><img src="photos/palette-oat.jpg" alt="" style="aspect-ratio:3/4"><figcaption><i style="background:#BBAA85"></i><b>GOLDEN OAT</b><span>#E3E3DC</span></figcaption></figure>
         <figure class="mood-it" style="--w:32%;--mt:5vw"><img src="photos/palette-fern.jpg" alt="" style="aspect-ratio:4/3"><figcaption><i style="background:#606969"></i><b>URBAN FERN</b><span>#606969</span></figcaption></figure>
       </div>
-      <p class="mood-count">09 tones</p>
-    </div>
-    <div class="zigzag">
-    <figure class="zig"><div class="zig-img">심볼 사진 01 · 추후 기재</div><figcaption class="zig-cap"><span class="num">01</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
-    <figure class="zig"><div class="zig-img">심볼 사진 02 · 추후 기재</div><figcaption class="zig-cap"><span class="num">02</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
-    <figure class="zig"><div class="zig-img">심볼 사진 03 · 추후 기재</div><figcaption class="zig-cap"><span class="num">03</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
-    <figure class="zig"><div class="zig-img">심볼 사진 04 · 추후 기재</div><figcaption class="zig-cap"><span class="num">04</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
-    <figure class="zig"><div class="zig-img">심볼 사진 05 · 추후 기재</div><figcaption class="zig-cap"><span class="num">05</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
-    <figure class="zig"><div class="zig-img">심볼 사진 06 · 추후 기재</div><figcaption class="zig-cap"><span class="num">06</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
     </div>
   </section>
 
-  <section class="clients" aria-label="함께한 병원">
-    <p class="clients-label">CLIENTS</p>
-    <div class="marquee"><div class="marquee-track">
-      <div class="marquee-set"><span class="client">경희온생한의원</span><span class="client-dot" aria-hidden="true"></span><span class="client">광명마디원정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">다산에이아이정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">경희온생한의원</span><span class="client-dot" aria-hidden="true"></span><span class="client">광명마디원정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">다산에이아이정형외과</span><span class="client-dot" aria-hidden="true"></span></div>
-      <div class="marquee-set" aria-hidden="true"><span class="client">경희온생한의원</span><span class="client-dot" aria-hidden="true"></span><span class="client">광명마디원정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">다산에이아이정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">경희온생한의원</span><span class="client-dot" aria-hidden="true"></span><span class="client">광명마디원정형외과</span><span class="client-dot" aria-hidden="true"></span><span class="client">다산에이아이정형외과</span><span class="client-dot" aria-hidden="true"></span></div>
-    </div></div>
-  </section>
+
 </main>
 
 <section class="projects" id="projects" aria-labelledby="t-projects" aria-hidden="true">
@@ -1755,7 +1740,8 @@ ready.then(() => {
   const upd = () => { const r = af.getBoundingClientRect(), vh = innerHeight;
     const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.95)));
     af.style.setProperty('--af', (1 - Math.pow(1 - p, 2)).toFixed(3));
-    document.body.classList.toggle('on-dark', r.top < 70); };
+    const dark = [af, document.querySelector('.symbols')].some((el) => { if (!el) return false; const b = el.getBoundingClientRect(); return b.top < 70 && b.bottom > 70; });
+    document.body.classList.toggle('on-dark', dark); };
   addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
 })();
 </script>
