@@ -284,3 +284,4 @@
 - **폰트 (아베크 참고, 사이트 직접 접속은 막혀 스크린샷 기준):** 영어 본문 Jost(얇은 기하 산세리프, statement 200 / 설명 300) + 한 단어만 Cormorant Garamond 500 강조 (care / warmth / calm / beauty). Spaces 제목도 Cormorant 500 정자체. 히어로 ARON 로고·메뉴는 그대로
 - statement 다음 안개 리빌(옛 concept-lobby 이미지) 삭제 (사용자). V.open=0, 문장 유지, #statement 220vh → 바로 Spaces
 - About 다음 챕터 5개(survey/plan/design/build/care) 삭제 → About 다음 바로 Symbol works. About 문구 인테리어 디자인 전용으로 수정
+- **푸터 (carme.framer.website/about 참고):** 가운데 떨어지는 선 + 물방울 원(스크롤에 따라 내려옴), 뒤로 흐르는 큰 옅은 글자 2줄(ARON DESIGN / CLINIC & HOSPITAL INTERIOR, 둘째 줄 블러, 반대 방향), 하단 3단(©2026 · 인스타·전화 · 이메일). 네트워크에 carme.framer.website, framerusercontent.com, avec.or.kr 허용 추가

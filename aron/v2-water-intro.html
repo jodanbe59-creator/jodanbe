@@ -7,7 +7,7 @@
 <meta name="description" content="아론 디자인: 병의원 인테리어. More than a space. A place where care begins.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Jost:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Jost:wght@200;300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap">
 <style>
 /* VOICE  calm, private, clinical-luxury: few hues, lots of air.
    IDEA   an architect's cutaway model of one clinic floor, built in front of the client.
@@ -397,6 +397,25 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
   .sp--l .sp-stage::after, .sp--r .sp-stage::after { background: linear-gradient(0deg, rgba(246,243,238,.95) 0%, rgba(246,243,238,.8) 40%, rgba(246,243,238,0) 70%); }
   .sp-copy { top: auto; bottom: 9vh; transform: none; left: 7vw !important; right: auto !important; }
 }
+
+/* ── footer (after carme): a falling line ends in a drop, giant pale words drift behind ── */
+.af { position: relative; z-index: 2; height: 100vh; min-height: 620px; overflow: hidden; background: #fff; color: #111; font-family: Jost, Inter, sans-serif; }
+.af-drop { position: absolute; left: 50%; top: 0; height: 64%; width: 24px; transform: translateX(-50%); z-index: 2; }
+.af-line { position: absolute; left: 50%; top: 0; width: 1.5px; height: calc(var(--af, 0) * (100% - 22px)); background: #111; transform: translateX(-50%); }
+.af-dot { position: absolute; left: 50%; top: calc(var(--af, 0) * (100% - 22px)); width: 22px; height: 22px; border: 1.5px solid #111; border-radius: 50%; transform: translateX(-50%); background: #fff; }
+.af-marquee { position: absolute; left: 0; right: 0; bottom: 4vh; z-index: 1; pointer-events: none; }
+.af-row { overflow: hidden; white-space: nowrap; line-height: .86; }
+.af-track { display: inline-flex; animation: af-left 60s linear infinite; }
+.af-row--2 .af-track { animation: af-right 70s linear infinite; }
+.af-track span { font-family: Jost, sans-serif; font-weight: 600; font-size: clamp(90px, 15vw, 240px); letter-spacing: -0.02em; color: #f1f1f1; padding-right: .35em; }
+.af-row--2 span { filter: blur(7px); color: #f3f3f3; }
+@keyframes af-left { to { transform: translateX(-50%); } }
+@keyframes af-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.af-base { position: absolute; left: 40px; right: 40px; bottom: 38px; z-index: 3; display: flex; justify-content: space-between; align-items: flex-end; font-size: 16px; font-weight: 400; line-height: 1.5; }
+.af-base p { margin: 0; } .af-base a { color: inherit; text-decoration: none; } .af-base a:hover { opacity: .6; }
+.af-col--c { text-align: center; } .af-col--r { text-align: right; }
+@media (max-width: 760px) { .af-base { flex-direction: column; align-items: center; gap: 18px; text-align: center; } .af-col--r { text-align: center; } }
+@media (prefers-reduced-motion: reduce) { .af-track { animation: none; } }
 </style>
 </head>
 <body>
@@ -523,16 +542,17 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
   <p class="projects-empty" hidden>이 분류의 프로젝트는 준비 중입니다.</p>
 </section>
 
-<footer class="site-foot" id="contact">
-  <div class="foot-grid">
-    <div><h3>INQUIRIES</h3>
-      <p><span class="k">Tel</span><a href="tel:01042593537">010-4259-3537</a></p>
-      <p><span class="k">Mail</span><a href="mailto:aron_design@naver.com">aron_design@naver.com</a></p>
-      <p><span class="k">상담</span><span class="v">평일 08:00 – 18:00</span></p></div>
-    <div><h3>LOCATION</h3><p>추후 기재</p></div>
-    <div id="follow"><h3>FOLLOW</h3><p><span class="k">Instagram</span><a href="https://www.instagram.com/aron_design/" target="_blank" rel="noopener">@aron_design</a></p></div>
+<footer class="af" id="contact">
+  <div class="af-drop" aria-hidden="true"><i class="af-line"></i><i class="af-dot"></i></div>
+  <div class="af-marquee" aria-hidden="true">
+    <div class="af-row af-row--1"><div class="af-track"><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span></div></div>
+    <div class="af-row af-row--2"><div class="af-track"><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span></div></div>
   </div>
-  <div class="foot-base"><span>© ARON Design · 대표 김경범</span><span>Architecture · Interior · Space</span></div>
+  <div class="af-base">
+    <div class="af-col"><p>&copy;2026 ARON Design</p><p>All rights reserved</p></div>
+    <div class="af-col af-col--c" id="follow"><p><a href="https://www.instagram.com/aron_design/" target="_blank" rel="noopener">Instagram @aron_design</a></p><p><a href="tel:01042593537">010-4259-3537</a></p></div>
+    <div class="af-col af-col--r"><p>Feel free to contact us</p><p><a href="mailto:aron_design@naver.com">aron_design@naver.com</a></p></div>
+  </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -1673,6 +1693,17 @@ ready.then(() => {
   }
   addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll);
   onScroll(); requestAnimationFrame(tick);
+})();
+</script>
+
+<script>
+/* footer: the line falls as the footer scrolls into view and ends in the drop */
+(() => {
+  const af = document.querySelector('.af'); if (!af) return;
+  const upd = () => { const r = af.getBoundingClientRect(), vh = innerHeight;
+    const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.95)));
+    af.style.setProperty('--af', (1 - Math.pow(1 - p, 2)).toFixed(3)); };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
 })();
 </script>
 </body>
