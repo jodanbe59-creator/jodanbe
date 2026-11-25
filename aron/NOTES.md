@@ -287,3 +287,4 @@
 - **푸터 (carme.framer.website/about 참고):** 가운데 떨어지는 선 + 물방울 원(스크롤에 따라 내려옴), 뒤로 흐르는 큰 옅은 글자 2줄(ARON DESIGN / CLINIC & HOSPITAL INTERIOR, 둘째 줄 블러, 반대 방향), 하단 3단(©2026 · 인스타·전화 · 이메일). 네트워크에 carme.framer.website, framerusercontent.com, avec.or.kr 허용 추가
 - Symbol works·Clients 배경 #eeeeec (히어로 화이트 그레이 물빛과 맞춘 미스트 그레이), 사진 자리 스톤 그레이. 푸터 세로 줄·원 삭제
 - **Symbol works → PALETTE FROM NATURE:** 'Colors, borrowed from nature' + 'Every tone we use begins outside — in stone, leaf and weathered wood.' 팔레트 3칸(질감 사진+색: PORCELAIN VEIL #EEE9E4 / STONE MOSS #6D705A / WARM PEBBLE #C8C0B3, 사용자 제공 이미지에서 잘라 photos/palette-*.jpg). 배경 #EEE9E4, 아이브로우 Stone Moss
+- 팔레트 2줄째 추가 (사용자 이미지 원본 색 그대로): STONE BEIGE(하늘) / WASHED COTTON(안스리움) / MOSSED SLATE(체리). 이름·코드는 이미지 표기 그대로, 칸 색은 이미지에서 추출. Ivory Sand·Golden Oat·Urban Fern 팔레트는 파일 없어 미추가
