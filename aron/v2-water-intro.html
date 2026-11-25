@@ -426,6 +426,19 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 .pal b { display: block; font-weight: 400; font-size: clamp(15px, 1.3vw, 19px); letter-spacing: 0.02em; }
 .pal span { display: block; margin-top: 4px; font-size: 11px; letter-spacing: 0.06em; opacity: .8; }
 @media (max-width: 760px) { .palette { grid-template-columns: 1fr; } }
+
+/* palette as a moodboard collage */
+.moodboard { max-width: 1240px; margin: 0 auto clamp(56px, 8vw, 110px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: clamp(54px, 5.6vw, 82px); gap: clamp(8px, 1vw, 14px); }
+.mb-ph { overflow: hidden; } .mb-ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
+.mb-ph:hover img { transform: scale(1.05); }
+.mb-chip { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; padding: 0 16px 12px; font-family: Jost, sans-serif; }
+.mb-chip b { font-weight: 400; font-size: clamp(12px, 1vw, 15px); letter-spacing: 0.04em; } .mb-chip span { font-size: 10px; letter-spacing: 0.08em; opacity: .8; }
+.mb-note { align-self: center; margin: 0; padding-left: 8px; font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: clamp(20px, 2vw, 30px); line-height: 1.25; color: #3c3832; }
+.mb-count { align-self: end; margin: 0; font-family: Jost, sans-serif; font-size: 11px; letter-spacing: 0.28em; color: #6D705A; text-transform: uppercase; }
+@media (max-width: 760px) {
+  .moodboard { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
+  .moodboard > * { grid-area: auto !important; } .mb-ph { aspect-ratio: 4/5; } .mb-chip { min-height: 54px; } .mb-note, .mb-count { grid-column: 1 / -1 !important; }
+}
 </style>
 </head>
 <body>
@@ -515,16 +528,27 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
   <section class="symbols" id="symbols" aria-labelledby="t-symbols">
     <div class="symbols-head"><p class="eyebrow">PALETTE FROM NATURE</p><h2 id="t-symbols">Colors, borrowed from nature</h2>
       <p class="symbols-lede">Every tone we use begins outside — in stone, leaf and weathered wood.</p></div>
-    <div class="palette">
-      <figure class="pal"><img src="photos/palette-porcelain.jpg" alt=""><figcaption style="--c:#EEE9E4;box-shadow:inset 0 0 0 1px rgba(60,55,48,.12)"><b>PORCELAIN VEIL</b><span>#EEE9E4</span></figcaption></figure>
-      <figure class="pal"><img src="photos/palette-moss.jpg" alt=""><figcaption style="--c:#6D705A;color:#f4f2ec"><b>STONE MOSS</b><span>#6D705A</span></figcaption></figure>
-      <figure class="pal"><img src="photos/palette-pebble.jpg" alt=""><figcaption style="--c:#C8C0B3"><b>WARM PEBBLE</b><span>#C8C0B3</span></figcaption></figure>
-      <figure class="pal"><img src="photos/palette-sky.jpg" alt=""><figcaption style="--c:#8EA2A4;color:#f6f4f0"><b>STONE BEIGE</b><span>#A69E90</span></figcaption></figure>
-      <figure class="pal"><img src="photos/palette-cotton.jpg" alt=""><figcaption style="--c:#DDDDDD"><b>WASHED COTTON</b><span>#EBEAE6</span></figcaption></figure>
-      <figure class="pal"><img src="photos/palette-cherry.jpg" alt=""><figcaption style="--c:#51272E;color:#f4ece9"><b>MOSSED SLATE</b><span>#42402C</span></figcaption></figure>
-      <figure class="pal"><img src="photos/palette-cream.jpg" alt=""><figcaption style="--c:#E4DBD1"><b>IVORY SAND</b><span>#E4DBD1</span></figcaption></figure>
-      <figure class="pal"><img src="photos/palette-oat.jpg" alt=""><figcaption style="--c:#BBAA85"><b>GOLDEN OAT</b><span>#E3E3DC</span></figcaption></figure>
-      <figure class="pal"><img src="photos/palette-fern.jpg" alt=""><figcaption style="--c:#606969;color:#f2f2ef"><b>URBAN FERN</b><span>#606969</span></figcaption></figure>
+    <div class="moodboard">
+      <div class="mb-ph" style="grid-area:1/1/span 4/span 5"><img src="photos/palette-sky.jpg" alt=""></div>
+      <div class="mb-chip" style="grid-area:5/1/span 1/span 5;background:#8EA2A4;color:#f6f4f0"><b>STONE BEIGE</b><span>#A69E90</span></div>
+      <div class="mb-ph" style="grid-area:1/6/span 4/span 3"><img src="photos/palette-cherry.jpg" alt=""></div>
+      <div class="mb-chip" style="grid-area:5/6/span 1/span 3;background:#51272E;color:#f4ece9"><b>MOSSED SLATE</b><span>#42402C</span></div>
+      <div class="mb-ph" style="grid-area:1/9/span 3/span 4"><img src="photos/palette-cotton.jpg" alt=""></div>
+      <div class="mb-chip" style="grid-area:4/9/span 1/span 4;background:#DDDDDD;color:#1c1a17"><b>WASHED COTTON</b><span>#EBEAE6</span></div>
+      <div class="mb-ph" style="grid-area:6/1/span 3/span 3"><img src="photos/palette-porcelain.jpg" alt=""></div>
+      <div class="mb-chip" style="grid-area:9/1/span 1/span 3;background:#EEE9E4;color:#1c1a17;box-shadow:inset 0 0 0 1px rgba(60,55,48,.12)"><b>PORCELAIN VEIL</b><span>#EEE9E4</span></div>
+      <div class="mb-ph" style="grid-area:6/4/span 4/span 5"><img src="photos/palette-moss.jpg" alt=""></div>
+      <div class="mb-chip" style="grid-area:10/4/span 1/span 5;background:#6D705A;color:#f4f2ec"><b>STONE MOSS</b><span>#6D705A</span></div>
+      <div class="mb-ph" style="grid-area:6/9/span 3/span 4"><img src="photos/palette-pebble.jpg" alt=""></div>
+      <div class="mb-chip" style="grid-area:9/9/span 1/span 4;background:#C8C0B3;color:#1c1a17"><b>WARM PEBBLE</b><span>#C8C0B3</span></div>
+      <div class="mb-ph" style="grid-area:11/1/span 4/span 4"><img src="photos/palette-cream.jpg" alt=""></div>
+      <div class="mb-chip" style="grid-area:15/1/span 1/span 4;background:#E4DBD1;color:#1c1a17"><b>IVORY SAND</b><span>#E4DBD1</span></div>
+      <div class="mb-ph" style="grid-area:11/5/span 3/span 3"><img src="photos/palette-oat.jpg" alt=""></div>
+      <div class="mb-chip" style="grid-area:14/5/span 1/span 3;background:#BBAA85;color:#1c1a17"><b>GOLDEN OAT</b><span>#E3E3DC</span></div>
+      <div class="mb-ph" style="grid-area:11/8/span 4/span 5"><img src="photos/palette-fern.jpg" alt=""></div>
+      <div class="mb-chip" style="grid-area:15/8/span 1/span 5;background:#606969;color:#f2f2ef"><b>URBAN FERN</b><span>#606969</span></div>
+      <p class="mb-note" style="grid-area:5/9/span 1/span 4">Nature chose the colors.<br>We only listened.</p>
+      <p class="mb-count" style="grid-area:14/5/span 2/span 3">09 tones</p>
     </div>
     <div class="zigzag">
     <figure class="zig"><div class="zig-img">심볼 사진 01 · 추후 기재</div><figcaption class="zig-cap"><span class="num">01</span><p>프로젝트명 · 추후 기재</p></figcaption></figure>
