@@ -187,7 +187,7 @@ h1 {
 html.layer-open { overflow: hidden; }
 
 /* symbol works: photos in a zigzag */
-.symbols { position: relative; z-index: 2; background: var(--ivory); color: var(--ink); padding: clamp(64px, 9vw, 130px) var(--gutter) clamp(48px, 7vw, 100px); }
+.symbols { position: relative; z-index: 2; background: #eeeeec; color: var(--ink); padding: clamp(64px, 9vw, 130px) var(--gutter) clamp(48px, 7vw, 100px); }
 .symbols-head { max-width: 1240px; margin: 0 auto clamp(32px, 5vw, 64px); }
 .symbols-head .eyebrow { color: var(--gold); letter-spacing: 0.14em; }
 .symbols-head h2 { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; margin: 0; }
@@ -195,13 +195,13 @@ html.layer-open { overflow: hidden; }
 .zig { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(16px, 3vw, 40px); align-items: end; }
 .zig:nth-child(even) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 .zig:nth-child(even) .zig-img { order: 2; }
-.zig-img { aspect-ratio: 4 / 3; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, #e7dfd3, #d8cdbd); color: var(--ink-soft); font-size: 0.875rem; }
+.zig-img { aspect-ratio: 4 / 3; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, #e4e3df, #d5d3ce); color: var(--ink-soft); font-size: 0.875rem; }
 .zig-cap { padding-bottom: 8px; }
 .zig-cap .num { font-family: "Cormorant Garamond", var(--font-display); font-size: 2rem; color: var(--gold); line-height: 1; }
 .zig-cap p { margin: 8px 0 0; color: var(--ink-soft); font-size: 0.9375rem; }
 
 /* client logos: an endless horizontal band */
-.clients { position: relative; z-index: 2; background: var(--ivory); color: var(--ink); padding: 0 0 clamp(56px, 8vw, 110px); overflow: hidden; }
+.clients { position: relative; z-index: 2; background: #eeeeec; color: var(--ink); padding: 0 0 clamp(56px, 8vw, 110px); overflow: hidden; }
 .clients-label { max-width: 1240px; margin: 0 auto 20px; padding: 0 var(--gutter); font-size: 0.8125rem; letter-spacing: 0.2em; color: var(--gold); }
 .marquee { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: clamp(20px, 3vw, 34px) 0; overflow: hidden; }
 .marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
@@ -228,7 +228,7 @@ html.layer-open { overflow: hidden; }
 .grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .card { border-radius: 18px; overflow: hidden; background: #ece5da; }
 .card[hidden] { display: none; }
-.card-img { aspect-ratio: 4 / 3; display: grid; place-items: center; background: linear-gradient(135deg, #e7dfd3, #d8cdbd); color: var(--ink-soft); font-size: 0.875rem; }
+.card-img { aspect-ratio: 4 / 3; display: grid; place-items: center; background: linear-gradient(135deg, #e4e3df, #d5d3ce); color: var(--ink-soft); font-size: 0.875rem; }
 .card-body { padding: 14px 18px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 0.9375rem; }
 .card-cat { font-size: 0.75rem; letter-spacing: 0.14em; color: var(--gold); }
 .projects-empty { max-width: 1240px; margin: 0 auto; padding: 48px 0; text-align: center; color: var(--ink-soft); border: 1px dashed var(--rule); border-radius: 18px; }
@@ -543,7 +543,6 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 </section>
 
 <footer class="af" id="contact">
-  <div class="af-drop" aria-hidden="true"><i class="af-line"></i><i class="af-dot"></i></div>
   <div class="af-marquee" aria-hidden="true">
     <div class="af-row af-row--1"><div class="af-track"><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span></div></div>
     <div class="af-row af-row--2"><div class="af-track"><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span></div></div>
