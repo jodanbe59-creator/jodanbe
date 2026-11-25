@@ -290,3 +290,4 @@
 - 팔레트 2줄째 추가 (사용자 이미지 원본 색 그대로): STONE BEIGE(하늘) / WASHED COTTON(안스리움) / MOSSED SLATE(체리). 이름·코드는 이미지 표기 그대로, 칸 색은 이미지에서 추출. 3줄째 IVORY SAND(크림) / GOLDEN OAT(유리병) / URBAN FERN(꽃) 추가 — 총 9칸
 - 팔레트 → 무드보드 콜라주 (12칸 그리드, 사진 크기 제각각 + 사진 밑 색 바 이름·코드, 'Nature chose the colors. We only listened.' 문구, '09 TONES', 의도된 여백). 모바일 2열
 - 무드보드 다시 (사용자: 너무 몰려있음): 3줄×3장, 크기·높이 엇갈림(margin-top vw), 큰 여백, 색은 작은 사각 칩 + 이름·코드 캡션. 첫 줄 뒤 문구, 맨 끝 09 TONES
+- **푸터 검정(#0e0e0e) + 병원 로고 흐름:** ARON DESIGN 줄 → 병원 로고 3개(경희온생한의원/마디원정형외과/다산 에이아이 정형외과, aron/logos/*.png 흰색 단색 변환) 마키. 둘째 줄 블러 글자는 짙은 회색, 하단 글자 #EEE9E4. 푸터 위에선 상단 메뉴·로고 밝은색(body.on-dark). House Mental Clinic 이미지는 레퍼런스(로고 미포함)

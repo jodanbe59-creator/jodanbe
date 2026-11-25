@@ -399,7 +399,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 }
 
 /* ── footer (after carme): a falling line ends in a drop, giant pale words drift behind ── */
-.af { position: relative; z-index: 2; height: 100vh; min-height: 620px; overflow: hidden; background: #fff; color: #111; font-family: Jost, Inter, sans-serif; }
+.af { position: relative; z-index: 2; height: 100vh; min-height: 620px; overflow: hidden; background: #0e0e0e; color: #EEE9E4; font-family: Jost, Inter, sans-serif; }
 .af-drop { position: absolute; left: 50%; top: 0; height: 64%; width: 24px; transform: translateX(-50%); z-index: 2; }
 .af-line { position: absolute; left: 50%; top: 0; width: 1.5px; height: calc(var(--af, 0) * (100% - 22px)); background: #111; transform: translateX(-50%); }
 .af-dot { position: absolute; left: 50%; top: calc(var(--af, 0) * (100% - 22px)); width: 22px; height: 22px; border: 1.5px solid #111; border-radius: 50%; transform: translateX(-50%); background: #fff; }
@@ -408,7 +408,9 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 .af-track { display: inline-flex; animation: af-left 60s linear infinite; }
 .af-row--2 .af-track { animation: af-right 70s linear infinite; }
 .af-track span { font-family: Jost, sans-serif; font-weight: 600; font-size: clamp(90px, 15vw, 240px); letter-spacing: -0.02em; color: #f1f1f1; padding-right: .35em; }
-.af-row--2 span { filter: blur(7px); color: #f3f3f3; }
+.af-row--2 span { filter: blur(7px); color: #1d1d1c; }
+.af-logos { align-items: center; gap: clamp(70px, 9vw, 150px); padding-right: clamp(70px, 9vw, 150px); margin-bottom: clamp(26px, 4vw, 56px); }
+.af-logos img { height: clamp(44px, 5.6vw, 84px); width: auto; opacity: .82; }
 @keyframes af-left { to { transform: translateX(-50%); } }
 @keyframes af-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 .af-base { position: absolute; left: 40px; right: 40px; bottom: 38px; z-index: 3; display: flex; justify-content: space-between; align-items: flex-end; font-size: 16px; font-weight: 400; line-height: 1.5; }
@@ -443,6 +445,10 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
   .mood-row { flex-wrap: wrap; gap: 28px 6%; margin-bottom: 28px; } .mood-it { width: 47% !important; margin-top: 0 !important; }
   .mood-it:nth-child(3) { width: 100% !important; } .mood-note { margin: 10px 0 36px; }
 }
+
+/* over the black footer the top bar turns light */
+body.on-dark .logo, body.on-dark .menu a, body.on-dark .menu button, body.on-dark .menu .brand-name { color: #EEE9E4 !important; text-shadow: none !important; }
+body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
 </style>
 </head>
 <body>
@@ -591,7 +597,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 
 <footer class="af" id="contact">
   <div class="af-marquee" aria-hidden="true">
-    <div class="af-row af-row--1"><div class="af-track"><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span></div></div>
+    <div class="af-row af-row--1"><div class="af-track af-logos"><img src="logos/kyunghee-onsaeng.png" alt="경희온생한의원"><img src="logos/madione.png" alt="마디원정형외과"><img src="logos/dasan-ai.png" alt="다산 에이아이 정형외과 의원"><img src="logos/kyunghee-onsaeng.png" alt="경희온생한의원"><img src="logos/madione.png" alt="마디원정형외과"><img src="logos/dasan-ai.png" alt="다산 에이아이 정형외과 의원"><img src="logos/kyunghee-onsaeng.png" alt="경희온생한의원"><img src="logos/madione.png" alt="마디원정형외과"><img src="logos/dasan-ai.png" alt="다산 에이아이 정형외과 의원"><img src="logos/kyunghee-onsaeng.png" alt="경희온생한의원"><img src="logos/madione.png" alt="마디원정형외과"><img src="logos/dasan-ai.png" alt="다산 에이아이 정형외과 의원"></div></div>
     <div class="af-row af-row--2"><div class="af-track"><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span></div></div>
   </div>
   <div class="af-base">
@@ -1748,7 +1754,8 @@ ready.then(() => {
   const af = document.querySelector('.af'); if (!af) return;
   const upd = () => { const r = af.getBoundingClientRect(), vh = innerHeight;
     const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.95)));
-    af.style.setProperty('--af', (1 - Math.pow(1 - p, 2)).toFixed(3)); };
+    af.style.setProperty('--af', (1 - Math.pow(1 - p, 2)).toFixed(3));
+    document.body.classList.toggle('on-dark', r.top < 70); };
   addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
 })();
 </script>
