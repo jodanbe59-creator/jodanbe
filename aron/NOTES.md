@@ -286,3 +286,4 @@
 - About 다음 챕터 5개(survey/plan/design/build/care) 삭제 → About 다음 바로 Symbol works. About 문구 인테리어 디자인 전용으로 수정
 - **푸터 (carme.framer.website/about 참고):** 가운데 떨어지는 선 + 물방울 원(스크롤에 따라 내려옴), 뒤로 흐르는 큰 옅은 글자 2줄(ARON DESIGN / CLINIC & HOSPITAL INTERIOR, 둘째 줄 블러, 반대 방향), 하단 3단(©2026 · 인스타·전화 · 이메일). 네트워크에 carme.framer.website, framerusercontent.com, avec.or.kr 허용 추가
 - Symbol works·Clients 배경 #eeeeec (히어로 화이트 그레이 물빛과 맞춘 미스트 그레이), 사진 자리 스톤 그레이. 푸터 세로 줄·원 삭제
+- **Symbol works → PALETTE FROM NATURE:** 'Colors, borrowed from nature' + 'Every tone we use begins outside — in stone, leaf and weathered wood.' 팔레트 3칸(질감 사진+색: PORCELAIN VEIL #EEE9E4 / STONE MOSS #6D705A / WARM PEBBLE #C8C0B3, 사용자 제공 이미지에서 잘라 photos/palette-*.jpg). 배경 #EEE9E4, 아이브로우 Stone Moss
