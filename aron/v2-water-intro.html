@@ -613,15 +613,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 <a class="logo" href="#intro" aria-label="ARON, 맨 위로"><svg class="aron-mark am-top" viewBox="-8 20 826 240" role="img" aria-label="ARON" shape-rendering="geometricPrecision"><defs><linearGradient id="amg-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--on1)"/><stop offset=".55" style="stop-color:var(--on2)"/><stop offset="1" style="stop-color:var(--on3)"/></linearGradient></defs><path d="M93.32 40.00 L106.68 40.00 L23.34 240.00 L16.66 240.00 Z M92.66 40.00 L115.34 40.00 L189.20 240.00 L178.80 240.00 Z" fill="currentColor"/><path d="M230 46.075 H300 A43.925 43.925 0 0 1 300 133.925 H274" fill="none" stroke="currentColor" stroke-width="12.15"/><path d="M230.00 40.00 L300.00 40.00 L300.00 52.15 L230.00 55.19 Z" fill="currentColor"/><path d="" fill="currentColor" fill-rule="evenodd"/><path d="M0 0" fill="currentColor"/><path d="M0 0" fill="none" stroke="currentColor" stroke-width="4.95"/><path d="M281.61 133.93 L302.39 133.93 L359.67 240.00 L348.33 240.00 Z" fill="currentColor"/><g transform="translate(0,0)"><path d="M400 140 A96 100 0 1 0 592 140 A96 100 0 1 0 400 140 Z M427.74 170.39 A74.72 90.10 -24.0 1 1 564.26 109.61 A74.72 90.10 -24.0 1 1 427.74 170.39 Z" fill="url(#amg-top)" fill-rule="evenodd"/><path d="M638.00 40.00 L643.40 40.00 L647.00 240.00 L638.00 240.00 Z M762.60 40.00 L768.00 40.00 L768.00 240.00 L759.00 240.00 Z M638.00 40.00 L654.80 40.00 L768.00 240.00 L747.00 240.00 Z" fill="url(#amg-top)"/><path d="M0 0" fill="url(#amg-top)"/></g></svg></a>
 <header class="topbar">
   <nav class="menu" aria-label="메뉴">
-    <div class="has-sub">
-      <button type="button" class="menu-link" aria-expanded="false" aria-controls="sub-interior">INTERIOR<span class="caret" aria-hidden="true">▾</span></button>
-      <div class="sub" id="sub-interior">
-        <a href="#projects" data-filter="all">ALL</a>
-        <a href="#projects" data-filter="clinic">CLINIC</a>
-        <a href="#projects" data-filter="commercial">COMMERCIAL</a>
-        <a href="#projects" data-filter="hospital">HOSPITAL</a>
-      </div>
-    </div>
+    <a class="menu-link" href="#about">ABOUT</a>
     <a class="menu-link" href="#contact">CONTACT</a>
     <a class="menu-link" href="#follow">FOLLOW</a>
   </nav>
@@ -654,7 +646,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 
 
-  <section class="sky" aria-labelledby="t-sky">
+  <section class="sky" id="about" aria-labelledby="t-sky">
     <div class="sky-card"><div class="sky-bars" aria-hidden="true"><i class="sky-bar" style="--c:#EDEDEB;--w:0.46;--n:0"></i><i class="sky-bar" style="--c:#BDBDBA;--w:0.78;--n:1"></i><i class="sky-bar" style="--c:#9FC3F1;--w:1.0;--n:2"></i><i class="sky-bar" style="--c:#CCDFF8;--w:0.22;--n:3"></i><i class="sky-bar" style="--c:#FF50BF;--w:0.56;--n:4"></i></div><div class="sky-text">
       <h2 id="t-sky" class="sky-h">About</h2>
       <p>ARON Design is an interior design studio for clinics, hospitals and commercial spaces. We shape every project around the people who will use it&nbsp;— the patient who walks in a little nervous, and the doctor who works there every day.</p>
@@ -1658,17 +1650,6 @@ function closeLayer() {
 }
 layerClose.addEventListener('click', closeLayer);
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLayer(); });
-document.querySelectorAll('.sub a[data-filter]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); closeSub(); openLayer(a.dataset.filter); }));
-
-/* ---------- INTERIOR submenu: click/tap to toggle, hover on desktop, Esc or outside click closes ---------- */
-const hasSub = document.querySelector('.has-sub'), subBtn = hasSub.querySelector('.menu-link');
-function openSub() { hasSub.classList.add('open'); subBtn.setAttribute('aria-expanded', 'true'); }
-function closeSub() { hasSub.classList.remove('open'); subBtn.setAttribute('aria-expanded', 'false'); }
-let hoverOpenedAt = 0;   // a click right after hover-open should keep the menu open, not toggle it shut
-subBtn.addEventListener('click', () => (hasSub.classList.contains('open') && performance.now() - hoverOpenedAt > 500 ? closeSub() : openSub()));
-if (!isCoarse) { hasSub.addEventListener('mouseenter', () => { if (!hasSub.classList.contains('open')) hoverOpenedAt = performance.now(); openSub(); }); hasSub.addEventListener('mouseleave', closeSub); }
-document.addEventListener('click', (e) => { if (!hasSub.contains(e.target)) closeSub(); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeSub(); subBtn.focus(); } });
 
 /* ---------- frame loop ---------- */
 const camPos = new THREE.Vector3(), camTarget = new THREE.Vector3(), wantPos = new THREE.Vector3(), wantTarget = new THREE.Vector3();
