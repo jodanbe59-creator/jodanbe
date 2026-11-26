@@ -323,3 +323,4 @@
 - 히어로 ARON 밑 'CLINIC & HOSPITAL INTERIOR' 다시 넣음 (사용자)
 - 히어로 ARON 로고 10px 작게 (am-hero width calc(42vw - 10px), max 630px)
 - **About 아래 carme.framer.website 홈 구성 추가 (사용자 답 없어 추천안: 팔레트·검정 푸터 유지):** ① Recent Work — 2단 엇갈린 그리드 4장(N° — 01~04, 호버 시 제목: Warmth/Stillness/Light/Dasan AI Orthopedics), 사진 work-01~03(빌드 영상 마지막 프레임)+dasan-lobby, More Work 알약 버튼+화살표 원 ② Stories — 왼쪽 'Stories', 오른쪽 번호 목록 5개(제목+분류, 구분선), More Stories. Inter, 흰 배경, 등장 페이드업
+- Recent Work에서 로비 1·2·3 삭제(위 Spaces와 중복). 4칸은 실제 다산 에이아이 정형외과 사진(lobby/symbol/material/light)으로 채움 — 실제 WORKS 사진 오면 교체
