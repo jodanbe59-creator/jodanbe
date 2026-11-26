@@ -339,3 +339,5 @@
 - Recent Work N° — 01 = 사용자 제공 이미지(모눈종이 위 자, photos/work-01.jpg, 800×450). 채팅으로 받아 정지 이미지 — 영상(GIF)이면 파일로 다시 받기
 - N° — 01 영상으로 교체 (사용자 제공 N-01.mp4, 1.6초 자 영상, 자동 반복)
 - **N° — 03 = 연필 소묘 스케치(사용자 요청으로 제작):** 병원 로비 1점 투시(진료실 문 2개+명패·손잡이, 모니터 있는 접수 데스크, 대기 의자 3개, 천장 다운라이트, 화분, 바닥 타일, 해칭 그림자). 인라인 SVG, 칸이 보이면 선이 하나씩 그려짐(stroke-dashoffset). 원본 photos/work-03-sketch.svg, 생성 스크립트 photos/work-03-sketch.py
+- statement ↔ About 간격 축소: statement 112vh, sticky 52vh, ScrollTrigger end 'bottom 52%', About 위 여백 축소. 옛 고정 배경(photo-stage concept-lobby, scrim) 숨김 — 그 사진은 사용자에게 전달
+- **UI/UX 정리 (사용자: 디자이너로서 알아서):** 히어로 아래 전체 웜 페이퍼 배경 #F7F5F1, 글꼴 Jost로 통일(강조 단어만 세리프), 섹션 라벨 'ABOUT/STORIES' 소문자 대문자+짧은 선, 히어로 지나면 반투명 흐림 상단 바 + 아래 1px 스크롤 진행선, 문장·About 단어별 블러→또렷 등장, 작업 칸 아래→위 커튼 등장+줌 정착, Stories 구분선이 그려지고 호버 시 제목 밀림+↗, 알약 버튼 호버 시 잉크색 채움. stories.html도 같은 톤
