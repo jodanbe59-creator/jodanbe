@@ -569,6 +569,12 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .cl-list b { font-family: "Cormorant Garamond", serif; font-weight: 700; letter-spacing: -.01em; }
 .cl-list i { font-family: Jost, sans-serif; font-style: normal; font-weight: 200; letter-spacing: .01em; }
 @media (prefers-reduced-motion: reduce) { .cl-list li { opacity: var(--o); transform: none; } }
+
+
+/* footer row 1: client names drift by in place of ARON DESIGN (bold serif + thin sans) */
+.af-names span { padding-right: .6em; }
+.af-names b { font-family: "Cormorant Garamond", serif; font-weight: 700; letter-spacing: -.01em; }
+.af-names i { font-family: Jost, sans-serif; font-style: normal; font-weight: 200; }
 </style>
 </head>
 <body>
@@ -682,13 +688,10 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 </section>
 
 
-  <section class="clientlist" aria-label="Clients">
-    <ul class="cl-list"><li style="--o:1;--n:0"><b>Kyunghee Onsaeng</b> <i>Korean Medicine</i></li><li style="--o:0.62;--n:1"><i>Gwangmyeong Madione</i> <b>Orthopedics</b></li><li style="--o:0.32;--n:2"><i>Dasan AI</i> <b>Orthopedics</b></li></ul>
-  </section>
 <footer class="af" id="contact">
   <div class="af-drop" aria-hidden="true"><i class="af-line"></i><i class="af-dot"></i></div>
   <div class="af-marquee" aria-hidden="true">
-    <div class="af-row af-row--1"><div class="af-track"><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span></div></div>
+    <div class="af-row af-row--1"><div class="af-track af-names"><span><b>Kyunghee Onsaeng</b> <i>Korean Medicine</i></span><span><i>Gwangmyeong Madione</i> <b>Orthopedics</b></span><span><i>Dasan AI</i> <b>Orthopedics</b></span><span><b>Kyunghee Onsaeng</b> <i>Korean Medicine</i></span><span><i>Gwangmyeong Madione</i> <b>Orthopedics</b></span><span><i>Dasan AI</i> <b>Orthopedics</b></span></div></div>
     <div class="af-row af-row--2"><div class="af-track"><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span></div></div>
   </div>
   <div class="af-base">
