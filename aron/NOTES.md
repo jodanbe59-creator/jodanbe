@@ -296,3 +296,4 @@
 - 무드보드 둘째 줄 아래(PORCELAIN VEIL 밑, 왼쪽) 문구: 'Textures you can almost touch — stone, leaf, and the slow work of time.' (같은 세리프, 스르륵 등장)
 - 히어로 빛(오로라 색 빛 + 유리 노이즈) 삭제 (사용자). 화이트 그레이 물 + 옅은 헤이즈만 남김. 동작 그대로
 - **로고 재디자인 시안 (aron/logo-v2):** 기존 글자 형태만(가로획 없는 A, 기둥 없는 R, 둥근 O, N), DESIGN·가로줄·베이지 사선·작은 영어 삭제. 01 Refined / 02 Ripple(O 안 동심원) / 03 Drop(O 안 물방울). SVG 밝은·어두운 배경. 사용자 선택 대기
+- 로고 시안 2 (레퍼런스: 겹쳐 쌓은 디도네 세리프 모노그램): logo-v2/serif.html — Bodoni Moda(opsz 11, 500). 01 Stacked(AR/ON) / 02 Wordmark / 03 Square monogram. 이전 산세리프 시안은 logo-v2/sans.html
