@@ -335,3 +335,4 @@
 - PALETTE FROM NATURE 섹션 삭제 (사용자)
 - **푸터 → carme 홈 푸터:** 흰 배경, 가운데 떨어지는 선+원(스크롤), 뒤로 흐르는 큰 옅은 글자 2줄(ARON DESIGN / CLINIC & HOSPITAL INTERIOR, 둘째 줄 블러), 하단 3단. 병원 로고 흐름 빠짐(필요시 복구). 검정 구간 메뉴 반전 끔
 - **Stories 페이지 (aron/stories.html, carme /stories 참고):** More Stories 버튼 → stories.html. 상단 로고·메뉴, 가운데 문구 'Stories about the spaces we design and the details behind them' + 선·원, 왼쪽 Stories / 오른쪽 목록 8개, 같은 푸터. 글 제목은 임시
+- Recent Work N° — 02 = 사용자 제공 COSMOS 영상(팔레트 나이프로 벽에 핑크·블루 페인트 바르는 영상, photos/work-02.mp4, 소리 없음·자동 반복). 출처 COSMOS — 공개 게시 저작권 주의 안내함
