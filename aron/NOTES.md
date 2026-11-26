@@ -298,3 +298,4 @@
 - **로고 재디자인 시안 (aron/logo-v2):** 기존 글자 형태만(가로획 없는 A, 기둥 없는 R, 둥근 O, N), DESIGN·가로줄·베이지 사선·작은 영어 삭제. 01 Refined / 02 Ripple(O 안 동심원) / 03 Drop(O 안 물방울). SVG 밝은·어두운 배경. 사용자 선택 대기
 - 로고 시안 2 (레퍼런스: 겹쳐 쌓은 디도네 세리프 모노그램): logo-v2/serif.html — Bodoni Moda(opsz 11, 500). 01 Stacked(AR/ON) / 02 Wordmark / 03 Square monogram. 이전 산세리프 시안은 logo-v2/sans.html
 - 로고: ON 회색 그라데이션 (밝은 배경: 위 #5f5c58 → 아래 #d3cfc8, 어두운 배경: 위 밝게 → 아래 어둡게). AR은 단색
+- 로고: A의 굵은 오른쪽 획에 스텐실(슬릿) 컷 — 기존 로고의 '잘린 느낌' 계승. 세 시안 모두 적용

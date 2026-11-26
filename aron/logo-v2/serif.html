@@ -16,13 +16,16 @@ h1{font-weight:300;font-size:34px;letter-spacing:.06em}p.lead{color:#6b645c;marg
 .sq span:nth-child(3){margin-left:.18em}.sq span:nth-child(4){margin-left:-.1em}
 .on{background:linear-gradient(180deg,#5f5c58 0%,#a7a39d 55%,#d3cfc8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .dk .on{background:linear-gradient(180deg,#e2ddd5 0%,#9d9993 55%,#5a5753 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.cut{position:relative;display:inline-block}
+.cut::after{content:"";position:absolute;left:51.5%;top:4%;width:.03em;height:94%;background:#fff;transform:rotate(-19deg);transform-origin:50% 0;}
+.dk .cut::after{background:#0e0e0e}
 @media(max-width:800px){.row{grid-template-columns:1fr}}
 </style></head><body>
 <h1>ARON · Logo (Serif)</h1><p class="lead">보내주신 레퍼런스처럼 대비가 강한 세리프(Bodoni)로, 글자를 겹치듯 쌓은 모노그램 시안이에요. ON은 회색 계열 그라데이션으로 처리했어요.</p>
 <section class="opt"><h2>01 · STACKED</h2><p>AR 위, ON 아래. 줄 간격을 좁혀 글자가 살짝 겹치게, 아랫줄은 반 글자 오른쪽으로 — 레퍼런스와 같은 구성</p><div class="row">
-<div class="tile"><div class="bod stack"><span>AR</span><span class="on">ON</span></div></div><div class="tile dk"><div class="bod stack"><span>AR</span><span class="on">ON</span></div></div></div></section>
+<div class="tile"><div class="bod stack"><span><span class="cut">A</span>R</span><span class="on">ON</span></div></div><div class="tile dk"><div class="bod stack"><span><span class="cut">A</span>R</span><span class="on">ON</span></div></div></div></section>
 <section class="opt"><h2>02 · WORDMARK</h2><p>한 줄 ARON. 자간을 바짝 좁혀 글자가 맞닿게 — 사이트 상단·푸터용</p><div class="row">
-<div class="tile"><div class="bod line">AR<span class="on">ON</span></div></div><div class="tile dk"><div class="bod line">AR<span class="on">ON</span></div></div></div></section>
+<div class="tile"><div class="bod line"><span class="cut">A</span>R<span class="on">ON</span></div></div><div class="tile dk"><div class="bod line"><span class="cut">A</span>R<span class="on">ON</span></div></div></div></section>
 <section class="opt"><h2>03 · SQUARE MONOGRAM</h2><p>A R / O N 네 글자를 정사각형으로 모아 O가 R 아래로 파고들게 — 프로필·파비콘용</p><div class="row">
-<div class="tile"><div class="bod sq"><span>A</span><span>R</span><span class="on">O</span><span class="on">N</span></div></div><div class="tile dk"><div class="bod sq"><span>A</span><span>R</span><span class="on">O</span><span class="on">N</span></div></div></div></section>
+<div class="tile"><div class="bod sq"><span><span class="cut">A</span></span><span>R</span><span class="on">O</span><span class="on">N</span></div></div><div class="tile dk"><div class="bod sq"><span><span class="cut">A</span></span><span>R</span><span class="on">O</span><span class="on">N</span></div></div></div></section>
 </body></html>
