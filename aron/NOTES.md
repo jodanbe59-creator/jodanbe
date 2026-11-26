@@ -329,3 +329,4 @@
 - 로고 끝부분 웨지 디테일(레퍼런스): A 꼭짓점·R 윗가로획 왼쪽 끝·N 두 세로획 위에 왼쪽으로 뾰족한 날개(오목 곡선). 'Final · bold AR + wedge' → 사이트 3곳 적용. 파일 logo-v2/aron-thin-final-bold-ar-wedge-*.svg
 - 웨지 디테일 취소 (사용자). 사이트 로고 = Final · bold AR 로 되돌림
 - 작은 로고 깨짐 해결: 상단·로딩 로고는 작은 크기 전용 SVG(획 굵게 t1 9 / t2 14 / AR 1.35배, logo-v2/aron-small-light.svg)로 교체. 히어로는 기존 Final · bold AR
+- Spaces 첫 번째 로비 영상(Warmth, space-01) 삭제 (사용자). 이제 Stillness(왼쪽 글) → Light(오른쪽 글). space-01.mp4 파일은 레포에 보관
