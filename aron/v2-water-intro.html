@@ -589,6 +589,11 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 /* footer row 1 in Korean: bold serif + thin sans */
 .af-ko b { font-family: "Noto Serif KR", serif !important; font-weight: 700; letter-spacing: -.02em; }
 .af-ko i { font-family: "Noto Sans KR", sans-serif !important; font-weight: 200; letter-spacing: -.01em; }
+/* ABOUT: only visible from the menu, as its own full-screen layer */
+.about-layer { position: fixed; inset: 0; z-index: 40; background: #fff; overflow-y: auto; overscroll-behavior: contain; display: grid; align-items: center;
+  opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility .5s; }
+.about-layer.open { opacity: 1; visibility: visible; }
+.about-layer .about-close { z-index: 41; background: #fff; }
 </style>
 </head>
 <body>
@@ -613,7 +618,8 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 <a class="logo" href="#intro" aria-label="ARON, 맨 위로"><svg class="aron-mark am-top" viewBox="-8 20 826 240" role="img" aria-label="ARON" shape-rendering="geometricPrecision"><defs><linearGradient id="amg-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--on1)"/><stop offset=".55" style="stop-color:var(--on2)"/><stop offset="1" style="stop-color:var(--on3)"/></linearGradient></defs><path d="M93.32 40.00 L106.68 40.00 L23.34 240.00 L16.66 240.00 Z M92.66 40.00 L115.34 40.00 L189.20 240.00 L178.80 240.00 Z" fill="currentColor"/><path d="M230 46.075 H300 A43.925 43.925 0 0 1 300 133.925 H274" fill="none" stroke="currentColor" stroke-width="12.15"/><path d="M230.00 40.00 L300.00 40.00 L300.00 52.15 L230.00 55.19 Z" fill="currentColor"/><path d="" fill="currentColor" fill-rule="evenodd"/><path d="M0 0" fill="currentColor"/><path d="M0 0" fill="none" stroke="currentColor" stroke-width="4.95"/><path d="M281.61 133.93 L302.39 133.93 L359.67 240.00 L348.33 240.00 Z" fill="currentColor"/><g transform="translate(0,0)"><path d="M400 140 A96 100 0 1 0 592 140 A96 100 0 1 0 400 140 Z M427.74 170.39 A74.72 90.10 -24.0 1 1 564.26 109.61 A74.72 90.10 -24.0 1 1 427.74 170.39 Z" fill="url(#amg-top)" fill-rule="evenodd"/><path d="M638.00 40.00 L643.40 40.00 L647.00 240.00 L638.00 240.00 Z M762.60 40.00 L768.00 40.00 L768.00 240.00 L759.00 240.00 Z M638.00 40.00 L654.80 40.00 L768.00 240.00 L747.00 240.00 Z" fill="url(#amg-top)"/><path d="M0 0" fill="url(#amg-top)"/></g></svg></a>
 <header class="topbar">
   <nav class="menu" aria-label="메뉴">
-    <a class="menu-link" href="#about">ABOUT</a>
+    <button type="button" class="menu-link" data-open="about" aria-controls="about">ABOUT</button>
+    <a class="menu-link" href="#work">WORK</a>
     <a class="menu-link" href="#contact">CONTACT</a>
     <a class="menu-link" href="#follow">FOLLOW</a>
   </nav>
@@ -646,15 +652,8 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 
 
-  <section class="sky" id="about" aria-labelledby="t-sky">
-    <div class="sky-card"><div class="sky-bars" aria-hidden="true"><i class="sky-bar" style="--c:#EDEDEB;--w:0.46;--n:0"></i><i class="sky-bar" style="--c:#BDBDBA;--w:0.78;--n:1"></i><i class="sky-bar" style="--c:#9FC3F1;--w:1.0;--n:2"></i><i class="sky-bar" style="--c:#CCDFF8;--w:0.22;--n:3"></i><i class="sky-bar" style="--c:#FF50BF;--w:0.56;--n:4"></i></div><div class="sky-text">
-      <h2 id="t-sky" class="sky-h">About</h2>
-      <p>ARON Design is an interior design studio for clinics, hospitals and commercial spaces. We shape every project around the people who will use it&nbsp;— the patient who walks in a little nervous, and the doctor who works there every day.</p>
-      <p>Soft curves, layered light and honest, lasting materials are how we make a space feel calm, whatever its palette. From the first idea to the final detail, we design every part of it with care.</p>
-    </div></div>
-  </section>
 
-  <section class="c-work" aria-label="Recent Work">
+  <section class="c-work" id="work" aria-label="Recent Work">
     <h2 class="c-sr">Recent Work</h2>
     <div class="cw-grid"><div class="cw-col"><div class="cw-card" style="aspect-ratio:16/11"><video src="photos/work-01.mp4" poster="photos/work-01.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="cw-no">N° — 01</span></div><div class="cw-card cw-sketch" style="aspect-ratio:4/5"><svg class="sketch plan" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Clinic interior floor plan">
 <rect width="400" height="500" fill="#f4f2ed"/><g stroke="#2f2d2a" stroke-opacity=".05" stroke-width=".5"><path d="M0 0V500"/><path d="M20 0V500"/><path d="M40 0V500"/><path d="M60 0V500"/><path d="M80 0V500"/><path d="M100 0V500"/><path d="M120 0V500"/><path d="M140 0V500"/><path d="M160 0V500"/><path d="M180 0V500"/><path d="M200 0V500"/><path d="M220 0V500"/><path d="M240 0V500"/><path d="M260 0V500"/><path d="M280 0V500"/><path d="M300 0V500"/><path d="M320 0V500"/><path d="M340 0V500"/><path d="M360 0V500"/><path d="M380 0V500"/><path d="M400 0V500"/><path d="M0 0H400"/><path d="M0 20H400"/><path d="M0 40H400"/><path d="M0 60H400"/><path d="M0 80H400"/><path d="M0 100H400"/><path d="M0 120H400"/><path d="M0 140H400"/><path d="M0 160H400"/><path d="M0 180H400"/><path d="M0 200H400"/><path d="M0 220H400"/><path d="M0 240H400"/><path d="M0 260H400"/><path d="M0 280H400"/><path d="M0 300H400"/><path d="M0 320H400"/><path d="M0 340H400"/><path d="M0 360H400"/><path d="M0 380H400"/><path d="M0 400H400"/><path d="M0 420H400"/><path d="M0 440H400"/><path d="M0 460H400"/><path d="M0 480H400"/><path d="M0 500H400"/></g>
@@ -674,6 +673,16 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 </main>
 
+<div class="about-layer" id="about" role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
+  <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
+  <section class="sky" aria-labelledby="t-sky">
+    <div class="sky-card"><div class="sky-bars" aria-hidden="true"><i class="sky-bar" style="--c:#EDEDEB;--w:0.46;--n:0"></i><i class="sky-bar" style="--c:#BDBDBA;--w:0.78;--n:1"></i><i class="sky-bar" style="--c:#9FC3F1;--w:1.0;--n:2"></i><i class="sky-bar" style="--c:#CCDFF8;--w:0.22;--n:3"></i><i class="sky-bar" style="--c:#FF50BF;--w:0.56;--n:4"></i></div><div class="sky-text">
+      <h2 id="t-sky" class="sky-h">About</h2>
+      <p>ARON Design is an interior design studio for clinics, hospitals and commercial spaces. We shape every project around the people who will use it&nbsp;— the patient who walks in a little nervous, and the doctor who works there every day.</p>
+      <p>Soft curves, layered light and honest, lasting materials are how we make a space feel calm, whatever its palette. From the first idea to the final detail, we design every part of it with care.</p>
+    </div></div>
+  </section>
+</div>
 <section class="projects" id="projects" aria-labelledby="t-projects" aria-hidden="true">
   <button type="button" class="projects-close" aria-label="포트폴리오 닫기">×</button>
   <div class="projects-head">
@@ -729,6 +738,7 @@ gsap.registerPlugin(ScrollTrigger);
 // smooth (inertia) scrolling — the page glides and eases to a stop; drives ScrollTrigger from the same clock
 const lenis = (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches)
   ? new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, smoothWheel: true, anchors: true }) : null;
+window.__lenis = lenis;
 if (lenis) { lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add((t) => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
 
 const CAPTURE = location.hash === '#capture';   // used to record the placeholder video for V2
@@ -1888,9 +1898,13 @@ ready.then(() => {
   io.observe(cl); })();
 </script>
 <script>
-(() => { const sk = document.querySelector('.sky'); if (!sk) return;
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { sk.classList.add('is-in'); io.disconnect(); } }), { threshold: 0.25 });
-  io.observe(sk); })();
+(() => { const L = document.getElementById('about'); if (!L) return;
+  const sk = L.querySelector('.sky'), btn = document.querySelector('[data-open="about"]'), x = L.querySelector('.about-close');
+  function open() { L.classList.add('open'); L.setAttribute('aria-hidden', 'false'); document.documentElement.classList.add('layer-open'); if (window.__lenis) window.__lenis.stop();
+    L.scrollTop = 0; sk.classList.remove('is-in'); void sk.offsetWidth; requestAnimationFrame(() => sk.classList.add('is-in')); setTimeout(() => x.focus(), 50); }
+  function close() { if (!L.classList.contains('open')) return; L.classList.remove('open'); L.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('layer-open'); if (window.__lenis) window.__lenis.start(); btn.focus(); }
+  btn.addEventListener('click', open); x.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); }); })();
 </script>
 <script>
 (() => { const st = document.getElementById('statement'); if (!st) return;

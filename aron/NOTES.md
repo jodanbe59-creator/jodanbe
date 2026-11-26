@@ -373,3 +373,4 @@
 - 푸터 1행 고객사명 한글로 교체: 경희온생 한의원 / 광명마디원 정형외과 / 다산에이아이 정형외과 (Noto Serif KR 700 + Noto Sans KR 200). 2행 블러·색·움직임 유지.
 - 푸터 위아래 모두 영어 고객사명으로 (2행은 블러·색·반대방향 유지, 굵기 조합만 엇갈리게).
 - 메뉴 INTERIOR → ABOUT (#about = .sky 섹션으로 스크롤). 하위메뉴(ALL/CLINIC/COMMERCIAL/HOSPITAL)와 드롭다운 JS 삭제.
+- ABOUT 섹션을 홈에서 빼고 메뉴 ABOUT 전용 화면(.about-layer, ×/Esc로 닫기, 열 때마다 막대 애니메이션)으로 이동. 메뉴: ABOUT · WORK · CONTACT · FOLLOW (WORK는 #work로 스크롤).
