@@ -368,3 +368,4 @@
 - Stories 가운데 정렬: 제목 위, 목록(최대 520px)·글자 가운데, More Stories와 중심 일치
 - 푸터 둘째 줄(블러 처리된 CLINIC & HOSPITAL INTERIOR) → 첫 줄과 같은 스타일: 블러 제거, 굵은 세리프+얇은 산세리프 'Clinic & Hospital / Interior', 반대 방향으로 흐름
 - 푸터 둘째 줄 변경 취소 (사용자) → 원래의 블러 처리된 CLINIC & HOSPITAL INTERIOR로 복구
+- 푸터 둘째 줄: 블러·연한 색·움직임 유지, 폰트만 첫 줄처럼(굵은 세리프+얇은 산세리프, 'Clinic & Hospital / Interior')
