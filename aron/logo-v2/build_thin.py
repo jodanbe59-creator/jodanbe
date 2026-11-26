@@ -8,12 +8,15 @@ def letters(t1,t2,k):
     # k = how much heavier the bottom is (1 = even)
     L={}
     # A: apex at 102, feet at 20 / 184
-    L['A']=P(stroke(101,20+t1*k/2,t1*0.6,t1*k))+' '+P(stroke(103,184-t2*k/2,t2*0.6,t2*k*1.15))
+    # A gets heavier toward the TOP: wide near the apex, fine at the feet
+    L['A']=P(stroke(100,20,t1*k*1.1,t1*0.55))+' '+P(stroke(104,184,t2*k*1.2,t2*0.55))
     # R: thin top bar + bowl + middle bar (stroke), leg widening to a flat foot
     x0,xb,r=230,300,50
     L['Rs']=f'M{x0} {T+t1/2} H{xb} A{r-t1/2} {r-t1/2} 0 0 1 {xb} {T+2*r-t1/2} H{x0+44}'
     jy=T+2*r-t1/2; jx=xb-8
-    L['R']=P([(jx-t2*0.35,jy),(jx+t2*0.35,jy),(jx+62+t2*k*0.6,B),(jx+62-t2*k*0.6,B)])
+    # R also heavier at the top: a stronger top bar, and the leg tapers toward the foot
+    L['R']=P([(jx-t2*k*0.55,jy),(jx+t2*k*0.55,jy),(jx+62+t2*0.3,B),(jx+62-t2*0.3,B)])
+    L['Rt']=P([(x0,T),(xb,T),(xb,T+t1),(x0,T+t1*k*1.25)])
     # O: old-style diagonal stress — thick at lower-left and upper-right, thin at upper-left and lower-right
     cx,cy,rx,ry=496,140,96,100
     th=math.radians(-24); a=rx-t2*k*0.95; b=ry-t1*1.1
@@ -28,7 +31,7 @@ def letters(t1,t2,k):
     L['t1']=t1; return L
 def svg(L,ink,grad,gid):
     return (f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">{grad}</linearGradient></defs>'
-            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"]}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["R"]}" fill="{ink}"/>'
+            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"]}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["Rt"]}" fill="{ink}"/><path d="{L["R"]}" fill="{ink}"/>'
             f'<path d="{L["O"]}" fill="url(#{gid})" fill-rule="evenodd"/><path d="{L["N"]}" fill="url(#{gid})"/>')
 LIGHT='<stop offset="0" stop-color="#5f5c58"/><stop offset=".55" stop-color="#a7a39d"/><stop offset="1" stop-color="#d3cfc8"/>'
 DARK='<stop offset="0" stop-color="#e2ddd5"/><stop offset=".55" stop-color="#9d9993"/><stop offset="1" stop-color="#5a5753"/>'
@@ -45,7 +48,7 @@ html=f'''<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <style>*{{box-sizing:border-box;margin:0}}body{{background:#f3f1ee;font-family:Jost,"Noto Sans KR",sans-serif;color:#1b1a18;padding:56px 5vw 80px}}h1{{font-weight:300;font-size:34px;letter-spacing:.06em}}p{{color:#6b645c;margin:10px 0 24px;font-size:14px}}.cap{{font-size:12px;letter-spacing:.2em;color:#8a8278;margin:26px 0 10px}}
 .row{{display:grid;grid-template-columns:1fr 1fr;gap:16px}}.tile{{aspect-ratio:16/8;display:grid;place-items:center;padding:10% 14%}}.tile svg{{width:100%;height:auto}}@media(max-width:800px){{.row{{grid-template-columns:1fr}}}}</style></head><body>
-<h1>ARON · Wordmark (Thin)</h1><p>보내주신 O처럼 사선 방향으로 굵기가 바뀌는 올드스타일(가라몬드 계열) 대비 + 아래로 갈수록 굵어지는 획. 기존 로고 형태(가로획 없는 A, 깎인 R, O, N) 그대로, ON은 회색 그라데이션. 아래는 비교용 기존 Thin.</p>
+<h1>ARON · Wordmark (Thin)</h1><p>A와 R은 위로 갈수록 무겁게(꼭짓점·윗가로획이 굵고 아래는 가늘게), O와 N은 아래로 무겁게 — 위와 아래가 서로 균형을 잡아요. O는 사선 강세(가라몬드식). 기존 로고 형태(가로획 없는 A, 깎인 R, O, N) 그대로, ON은 회색 그라데이션. 아래는 비교용 기존 Thin.</p>
 {tiles}
 </body></html>'''
 open('thin.html','w').write(html)
