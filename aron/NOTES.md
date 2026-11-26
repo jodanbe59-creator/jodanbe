@@ -299,3 +299,4 @@
 - 로고 시안 2 (레퍼런스: 겹쳐 쌓은 디도네 세리프 모노그램): logo-v2/serif.html — Bodoni Moda(opsz 11, 500). 01 Stacked(AR/ON) / 02 Wordmark / 03 Square monogram. 이전 산세리프 시안은 logo-v2/sans.html
 - 로고: ON 회색 그라데이션 (밝은 배경: 위 #5f5c58 → 아래 #d3cfc8, 어두운 배경: 위 밝게 → 아래 어둡게). AR은 단색
 - 로고: A의 굵은 오른쪽 획에 스텐실(슬릿) 컷 — 기존 로고의 '잘린 느낌' 계승. 세 시안 모두 적용
+- **로고 모노그램 (레퍼런스: 단델리온 네일 DN, AVELY AD):** logo-v2/monogram.html. ① Circle: A(가는 왼획+굵은 오른획) + R(기둥이 A 꼭짓점에서, 다리=A 오른획), 얇은 원. ② Open: 원 없이 R 볼이 A 꼭짓점에서 나와 A 획에 닿고 다리가 바깥으로, 반짝임 별. 아래 ARON(Bodoni) + 아론 디자인(Noto Serif KR). 잉크/브론즈 #8a6f55, 밝은/어두운 배경. 이전 세리프 시안 serif.html
