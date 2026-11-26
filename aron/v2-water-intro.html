@@ -561,6 +561,9 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 @keyframes tick-run { 0% { top: -26px; opacity: 0; } 15% { opacity: .9; } 85% { opacity: .9; } 100% { top: 88px; opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .st-tick, .st-tick::after, .st-tick::before { animation: none; } }
 
+
+/* work photos one step smaller (user) */
+.cw-grid { max-width: min(80%, 1120px); margin: 0 auto; }
 </style>
 </head>
 <body>
