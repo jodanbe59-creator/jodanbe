@@ -30,6 +30,13 @@ def letters(t1,t2,k,ko=None,desk=None):
         L['Rd']=rrect(x0_,y0_,x1_,y1_,r)+' '+rrect(x0_+t1*1.2,y0_+t1*1.6,x1_-t1*1.6,y1_-t1,r-t1*1.3)
         L['Rd']+=' '+P([(x0_+22,y1_-1),(x0_+22+t1,y1_-1),(x0_+22+t1,B),(x0_+22,B)])                 # straight leg
         L['Rd']+=' '+P([(x1_-52,y1_-2),(x1_-52+t2,y1_-2),(x1_+14+t2*0.5,B),(x1_+14-t2*0.5,B)])      # R's diagonal leg
+    if desk=='horseshoe':   # the R's head is a horseshoe counter: round on the right, open to the left, on two legs
+        xL,xc,Ro,w=224,298,42,9
+        Ri=Ro-w; yb=T+2*Ro
+        L['Rs']=''; L['Rt']=''; L['R']=''
+        L['Rd']=(f'M{xL} {T} H{xc} A{Ro} {Ro} 0 0 1 {xc} {yb} H{xL} V{yb-w} H{xc} A{Ri} {Ri} 0 0 0 {xc} {T+w} H{xL} Z')
+        L['Rd']+=' '+P([(xL+16,yb-1),(xL+16+t1,yb-1),(xL+16+t1,B),(xL+16,B)])                    # straight leg under the open end
+        L['Rd']+=' '+P([(xc-8,yb-1),(xc-8+t2,yb-1),(xc+50+t2*0.5,B),(xc+50-t2*0.5,B)])            # R's diagonal leg
     if desk=='stem':     # cantilever desk: the stem is the leg, the top overhangs it on the left
         L['Rd']=P([(x0-22,T-1),(xb,T-1),(xb,T+t1*1.9),(x0-22,T+t1*1.9)])+' '+P([(x0+10,T),(x0+10+t1,T),(x0+10+t1,B),(x0+10,B)])
     # O: old-style diagonal stress — thick at lower-left and upper-right, thin at upper-left and lower-right
@@ -51,7 +58,7 @@ def svg(L,ink,grad,gid):
 LIGHT='<stop offset="0" stop-color="#5f5c58"/><stop offset=".55" stop-color="#a7a39d"/><stop offset="1" stop-color="#d3cfc8"/>'
 DARK='<stop offset="0" stop-color="#e2ddd5"/><stop offset=".55" stop-color="#9d9993"/><stop offset="1" stop-color="#5a5753"/>'
 VB='-10 20 806 240'
-sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('Desk · rounded',4.2,8.5,1.0,1.9,'round'),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
+sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('Desk · horseshoe',4.2,8.5,1.0,1.9,'horseshoe'),('Desk · rounded',4.2,8.5,1.0,1.9,'round'),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
 tiles=''
 for name,t1,t2,k,ko,dk in sets:
     L=letters(t1,t2,k,ko,dk); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
