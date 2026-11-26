@@ -548,6 +548,19 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 /* hero water tinted with the airy sky-blue gradient (same swatch as the About card) */
 .sky-tint { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, #9FC3F1 0%, #A3C6F2 30%, #AECDF4 55%, #BED7F6 80%, #CCDFF8 100%); mix-blend-mode: color; opacity: .85; }
 .sky-tint::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(159,195,241,.35), rgba(204,223,248,.15) 60%, rgba(255,255,255,.2)); mix-blend-mode: soft-light; }
+
+/* tick above the sentence: draws down when it arrives, then a drop keeps sliding down it */
+.st-tick { overflow: visible; transform-origin: 50% 0; animation: tick-draw 1.4s cubic-bezier(.7,0,.2,1) both; animation-play-state: paused; }
+#statement.tick-on .st-tick { animation-play-state: running; }
+.st-tick::after { content: ""; position: absolute; left: 50%; top: 0; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: #444; opacity: 0; animation: tick-drop 2.6s cubic-bezier(.55,0,.75,.4) 1.4s infinite; }
+.st-tick::before { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 26px; background: linear-gradient(180deg, rgba(85,85,85,0), #222 60%, rgba(85,85,85,0)); animation: tick-run 2.6s linear 1.4s infinite; opacity: 0; }
+@keyframes tick-draw { from { transform: translateX(-50%) scaleY(0); } to { transform: translateX(-50%) scaleY(1); } }
+@keyframes tick-drop { 0% { top: -4px; opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { top: 86px; opacity: 0; transform: scale(.6); } }
+@keyframes tick-run { 0% { top: -26px; opacity: 0; } 15% { opacity: .9; } 85% { opacity: .9; } 100% { top: 88px; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .st-tick, .st-tick::after, .st-tick::before { animation: none; } }
+
+/* hero ARON in white over the sky-blue water (ON keeps a soft white gradient) */
+.am-hero { color: #fff; --on1: #ffffff; --on2: rgba(255,255,255,.86); --on3: rgba(255,255,255,.66); filter: drop-shadow(0 1px 12px rgba(70,110,170,.18)); }
 </style>
 </head>
 <body>
@@ -1857,6 +1870,12 @@ ready.then(() => {
 (() => { const els = document.querySelectorAll('.c-work .cw-card, .cs-item, .c-more');
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: 0.15 });
   els.forEach((el, i) => { el.style.transitionDelay = (i % 2) * 0.08 + 's'; io.observe(el); }); })();
+</script>
+
+<script>
+(() => { const st = document.getElementById('statement'); if (!st) return;
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { st.classList.add('tick-on'); io.disconnect(); } }), { threshold: 0.05 });
+  io.observe(st); })();
 </script>
 </body>
 </html>
