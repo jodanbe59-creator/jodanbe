@@ -365,3 +365,4 @@
 - **병원 이름 목록 (레퍼런스: 굵은 세리프+얇은 산세리프 섞고 아래로 옅어짐):** Kyunghee Onsaeng Korean Medicine / Gwangmyeong Madione Orthopedics / Dasan AI Orthopedics. 위치: Stories 아래·푸터 바로 위(임시, 사용자 확인 필요). 진하기 1→.62→.32, 한 줄씩 떠오름
 - 병원 이름 목록 → 푸터 큰 글자 첫 줄(ARON DESIGN 자리)에 적용: 병원 이름이 굵은 세리프+얇은 산세리프로 옅게 흘러감. 별도 목록 섹션은 제거. 둘째 줄 CLINIC & HOSPITAL INTERIOR(블러)는 그대로
 - 푸터 병원 이름 글자 잘림 수정: 첫 줄 줄 높이 1.3 + 아래 여백(세리프 g 꼬리), 글자 크기 살짝 축소(최대 200px)
+- Stories 가운데 정렬: 제목 위, 목록(최대 520px)·글자 가운데, More Stories와 중심 일치
