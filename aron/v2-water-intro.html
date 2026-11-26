@@ -289,7 +289,7 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .mist.video-intro .mist-veil { display: none; background: radial-gradient(ellipse at 50% 48%, rgba(246,243,238,0.5), rgba(246,243,238,0.1) 40%, rgba(246,243,238,0) 65%); }
 #intro { position: relative; z-index: 3; background: #fff; }
 /* white statement: a single line of type, a falling drop, and the white page opening onto the lobby */
-#statement { height: 220vh; position: relative; z-index: 3; }
+#statement { height: 160vh; position: relative; z-index: 3; }
 .st-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; }
 .st-paper { position: absolute; inset: 0; }
 .st-veil { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -509,6 +509,8 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .c-work .cw-card, .cs-item, .c-more { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
 .is-in.cw-card, .cs-item.is-in, .c-more.is-in { opacity: 1; transform: none; }
 @media (max-width: 760px) { .cw-grid, .cs-wrap { grid-template-columns: 1fr; } .cs-label { margin-bottom: 24px; } .cw-t { opacity: 1; transform: none; } }
+
+.cw-empty { background: #ededeb; } .cw-empty .cw-no { color: #8a8780; text-shadow: none; }
 </style>
 </head>
 <body>
@@ -565,18 +567,6 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
   </section>
 
 
-  <div class="spaces" aria-label="Spaces">
-    <section class="sp sp--l"><div class="sp-stage">
-      <img class="sp-poster" src="space-02.jpg" alt=""><video data-src="space-02.mp4" muted playsinline preload="auto"></video>
-      <div class="sp-copy"><h2 class="sp-word">Stillness</h2>
-      <p class="sp-desc" data-em="calm">Between the sound of water and a halo of light, the mind slowly settles into calm.</p></div>
-    </div></section>
-    <section class="sp sp--r"><div class="sp-stage">
-      <img class="sp-poster" src="space-03.jpg" alt=""><video data-src="space-03.mp4" muted playsinline preload="auto"></video>
-      <div class="sp-copy"><h2 class="sp-word">Light</h2>
-      <p class="sp-desc" data-em="beauty">Take a breath, and let beauty spread through the room like a ripple across still water.</p></div>
-    </div></section>
-  </div>
 
   <section class="about" aria-labelledby="t-about">
     <div class="about-row">
@@ -593,7 +583,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
   <section class="c-work" aria-label="Recent Work">
     <h2 class="c-sr">Recent Work</h2>
-    <div class="cw-grid"><div class="cw-col"><a class="cw-card" href="#contact" style="aspect-ratio:16/11"><img src="photos/dasan-lobby.jpg" alt="" loading="lazy" style="object-position:50% 50%"><span class="cw-no">N° — 01</span><span class="cw-t"><b>Dasan AI Orthopedics</b><i>Lobby</i></span></a><a class="cw-card" href="#contact" style="aspect-ratio:4/5"><img src="photos/dasan-material.jpg" alt="" loading="lazy" style="object-position:40% 50%"><span class="cw-no">N° — 03</span><span class="cw-t"><b>Dasan AI Orthopedics</b><i>Material</i></span></a></div><div class="cw-col"><a class="cw-card" href="#contact" style="aspect-ratio:4/5"><img src="photos/dasan-symbol.jpg" alt="" loading="lazy" style="object-position:50% 50%"><span class="cw-no">N° — 02</span><span class="cw-t"><b>Dasan AI Orthopedics</b><i>Symbol</i></span></a><a class="cw-card" href="#contact" style="aspect-ratio:16/11"><img src="photos/dasan-light.jpg" alt="" loading="lazy" style="object-position:50% 50%"><span class="cw-no">N° — 04</span><span class="cw-t"><b>Dasan AI Orthopedics</b><i>Light</i></span></a></div></div>
+    <div class="cw-grid"><div class="cw-col"><div class="cw-card cw-empty" style="aspect-ratio:16/11"><span class="cw-no">N° — 01</span></div><div class="cw-card cw-empty" style="aspect-ratio:4/5"><span class="cw-no">N° — 03</span></div></div><div class="cw-col"><div class="cw-card cw-empty" style="aspect-ratio:4/5"><span class="cw-no">N° — 02</span></div><div class="cw-card cw-empty" style="aspect-ratio:16/11"><span class="cw-no">N° — 04</span></div></div></div>
     <div class="c-more"><a class="c-pill" href="#contact">More Work</a><a class="c-arrow" href="#contact" aria-label="More Work"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a></div>
   </section>
   <section class="c-stories" aria-labelledby="t-stories">

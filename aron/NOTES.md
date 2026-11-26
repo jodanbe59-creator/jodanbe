@@ -330,3 +330,5 @@
 - 웨지 디테일 취소 (사용자). 사이트 로고 = Final · bold AR 로 되돌림
 - 작은 로고 깨짐 해결: 상단·로딩 로고는 작은 크기 전용 SVG(획 굵게 t1 9 / t2 14 / AR 1.35배, logo-v2/aron-small-light.svg)로 교체. 히어로는 기존 Final · bold AR
 - Spaces 첫 번째 로비 영상(Warmth, space-01) 삭제 (사용자). 이제 Stillness(왼쪽 글) → Light(오른쪽 글). space-01.mp4 파일은 레포에 보관
+- Spaces 로비 영상 2·3도 삭제 → 로비 영상 섹션 전체 없음 (영상 파일은 레포에 보관). statement 높이 160vh로 줄여 빈 공간 정리
+- **규칙 (사용자):** 사진은 내가 정해서 넣지 말 것. 사용자가 넣으라고 할 때만. Recent Work 4칸은 빈 회색 틀(N° 번호만)로 형태만 유지
