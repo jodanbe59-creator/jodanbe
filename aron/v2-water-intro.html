@@ -472,6 +472,8 @@ body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
 .mist-logo { letter-spacing: 0 !important; padding-left: 0 !important; line-height: 1; }
 .logo { letter-spacing: 0 !important; }
 body.on-dark .aron-mark { color: #EEE9E4; --on1: #e2ddd5; --on2: #9d9993; --on3: #5a5753; }
+
+html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behavior: auto !important; } .lenis.lenis-stopped { overflow: hidden; }
 </style>
 </head>
 <body>
@@ -618,6 +620,7 @@ body.on-dark .aron-mark { color: #EEE9E4; --on1: #e2ddd5; --on2: #9d9993; --on3:
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
@@ -634,6 +637,10 @@ import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 
 const { gsap, ScrollTrigger } = window;
 gsap.registerPlugin(ScrollTrigger);
+// smooth (inertia) scrolling — the page glides and eases to a stop; drives ScrollTrigger from the same clock
+const lenis = (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches)
+  ? new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, smoothWheel: true, anchors: true }) : null;
+if (lenis) { lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add((t) => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
 
 const CAPTURE = location.hash === '#capture';   // used to record the placeholder video for V2
 if (CAPTURE) document.body.classList.add('capture');
@@ -1522,7 +1529,8 @@ if (!CAPTURE) {
   });
 }
 document.querySelector('.intro-cue').addEventListener('click', () => {
-  window.scrollTo({ top: document.getElementById('statement').offsetTop, behavior: reduceMotion ? 'auto' : 'smooth' });
+  const to = document.getElementById('statement').offsetTop;
+  if (lenis) lenis.scrollTo(to, { duration: 1.6 }); else window.scrollTo({ top: to, behavior: reduceMotion ? 'auto' : 'smooth' });
 });
 
 /* ---------- symbol works: zigzag reveal ---------- */

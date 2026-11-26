@@ -314,3 +314,4 @@
 - 로고: 다른 세션에서 레퍼런스 R을 벡터로 딴 logo-black.svg (브랜치 claude/amazing-mccarthy-pn4p2y) → logo-v2/traced-r-path.txt 로 가져와 R 자리에 그대로 사용. 'Traced R · thin letters' / 'Traced R · serif letters' 두 시안 (시안 페이지 2·3번째 행)
 - 히어로 ARON 밑 'CLINIC & HOSPITAL INTERIOR' 삭제 (사용자: 오른쪽 버전)
 - **규칙 (사용자):** 대화할 때는 영어 말고 한국어로. 중간 진행 안내 문장(예: '게시할게요')도 전부 한국어
+- **부드러운 스크롤(Lenis 1.1.20) 추가:** lerp 0.085, wheelMultiplier 0.9, anchors. GSAP ticker로 구동 + ScrollTrigger.update 연결. 모션 줄이기 설정이면 꺼짐. 테스트: 휠 3번 → 1080px까지 미끄러지듯 감속
