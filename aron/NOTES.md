@@ -304,3 +304,4 @@
 - **로고 워드마크 Thin (최신, logo-v2/thin.html + aron-thin-*.svg):** 기존 로고 형태(가로획 없는 A, 기둥 없이 깎인 R, O, N)를 얇은 선으로 직접 그림. 굵은 획/가는 획 대비 소폭. ON 회색 그라데이션. Thin(4.2/8.5) · Hairline(2.6/6) 두 굵기. 앞 단계: optima.html(Belleza 기반, 끝선 정리), monogram.html, serif.html
 - 로고 Thin 업데이트: 'Old-style'(추천, k1.5) — 아래로 갈수록 굵어지는 획 + O 사선 강세(가라몬드식, 좌하·우상 굵게). 비교: Weighted base(k1.9), Thin(균일). 생성 스크립트 logo-v2/build_thin.py
 - 로고 Old-style: A·R 위로 무겁게(A 꼭짓점 쪽 굵고 발끝 가늘게, R 윗가로획 굵게→볼로 가늘어짐, R 다리 위 굵고 아래 가늘게), O·N 아래로 무겁게 → 위아래 균형
+- **로고 최종 후보 (사용자 선택):** 'Final · Thin + O' = Thin 글자(A·R 균일 얇게) + O만 Weighted base(사선 강세 진하게, ko1.9). 파일 logo-v2/aron-thin-final-thin-o-light.svg / -dark.svg

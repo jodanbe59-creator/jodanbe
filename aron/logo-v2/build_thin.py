@@ -4,7 +4,8 @@ def P(pts): return 'M'+' L'.join(f'{x:.2f} {y:.2f}' for x,y in pts)+' Z'
 def stroke(xt,xb,wt,wb):
     # a straight stroke from top centre xt to bottom centre xb, width wt at the top and wb at the bottom (horizontal widths)
     return [(xt-wt/2,T),(xt+wt/2,T),(xb+wb/2,B),(xb-wb/2,B)]
-def letters(t1,t2,k):
+def letters(t1,t2,k,ko=None):
+    ko=ko or k
     # k = how much heavier the bottom is (1 = even)
     L={}
     # A: apex at 102, feet at 20 / 184
@@ -19,7 +20,7 @@ def letters(t1,t2,k):
     L['Rt']=P([(x0,T),(xb,T),(xb,T+t1),(x0,T+t1*k*1.25)])
     # O: old-style diagonal stress — thick at lower-left and upper-right, thin at upper-left and lower-right
     cx,cy,rx,ry=496,140,96,100
-    th=math.radians(-24); a=rx-t2*k*0.95; b=ry-t1*1.1
+    th=math.radians(-24); a=rx-t2*ko*0.95; b=ry-t1*1.1
     p1=(cx-a*math.cos(th),cy-a*math.sin(th)); p2=(cx+a*math.cos(th),cy+a*math.sin(th))
     rot=math.degrees(th)
     L['O']=(f'M{cx-rx} {cy} A{rx} {ry} 0 1 0 {cx+rx} {cy} A{rx} {ry} 0 1 0 {cx-rx} {cy} Z '
@@ -36,10 +37,10 @@ def svg(L,ink,grad,gid):
 LIGHT='<stop offset="0" stop-color="#5f5c58"/><stop offset=".55" stop-color="#a7a39d"/><stop offset="1" stop-color="#d3cfc8"/>'
 DARK='<stop offset="0" stop-color="#e2ddd5"/><stop offset=".55" stop-color="#9d9993"/><stop offset="1" stop-color="#5a5753"/>'
 VB='0 20 796 240'
-sets=[('Old-style',4.2,8.5,1.5),('Weighted base',4.2,8.5,1.9),('Thin',4.2,8.5,1.0)]
+sets=[('Final · Thin + O',4.2,8.5,1.0,1.9),('Thin',4.2,8.5,1.0,None),('Weighted base',4.2,8.5,1.9,None),('Old-style',4.2,8.5,1.5,None)]
 tiles=''
-for name,t1,t2,k in sets:
-    L=letters(t1,t2,k); key=name.lower().replace(' ','-')
+for name,t1,t2,k,ko in sets:
+    L=letters(t1,t2,k,ko); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
     a=svg(L,'#1b1a18',LIGHT,'g'+key+'l'); b=svg(L,'#EEE9E4',DARK,'g'+key+'d')
     open(f'aron-thin-{key}-light.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="796" height="240" viewBox="{VB}">{a}</svg>')
     open(f'aron-thin-{key}-dark.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="796" height="240" viewBox="{VB}"><rect x="0" y="20" width="796" height="240" fill="#0e0e0e"/>{b}</svg>')
