@@ -337,3 +337,4 @@
 - **Stories 페이지 (aron/stories.html, carme /stories 참고):** More Stories 버튼 → stories.html. 상단 로고·메뉴, 가운데 문구 'Stories about the spaces we design and the details behind them' + 선·원, 왼쪽 Stories / 오른쪽 목록 8개, 같은 푸터. 글 제목은 임시
 - Recent Work N° — 02 = 사용자 제공 COSMOS 영상(팔레트 나이프로 벽에 핑크·블루 페인트 바르는 영상, photos/work-02.mp4, 소리 없음·자동 반복). 출처 COSMOS — 공개 게시 저작권 주의 안내함
 - Recent Work N° — 01 = 사용자 제공 이미지(모눈종이 위 자, photos/work-01.jpg, 800×450). 채팅으로 받아 정지 이미지 — 영상(GIF)이면 파일로 다시 받기
+- N° — 01 영상으로 교체 (사용자 제공 N-01.mp4, 1.6초 자 영상, 자동 반복)
