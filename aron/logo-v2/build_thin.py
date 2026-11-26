@@ -4,7 +4,7 @@ def P(pts): return 'M'+' L'.join(f'{x:.2f} {y:.2f}' for x,y in pts)+' Z'
 def stroke(xt,xb,wt,wb):
     # a straight stroke from top centre xt to bottom centre xb, width wt at the top and wb at the bottom (horizontal widths)
     return [(xt-wt/2,T),(xt+wt/2,T),(xb+wb/2,B),(xb-wb/2,B)]
-def letters(t1,t2,k,ko=None):
+def letters(t1,t2,k,ko=None,desk=None):
     ko=ko or k
     # k = how much heavier the bottom is (1 = even)
     L={}
@@ -18,6 +18,11 @@ def letters(t1,t2,k,ko=None):
     # R also heavier at the top: a stronger top bar, and the leg tapers toward the foot
     L['R']=P([(jx-t2*k*0.55,jy),(jx+t2*k*0.55,jy),(jx+62+t2*0.3,B),(jx+62-t2*0.3,B)])
     L['Rt']=P([(x0,T),(xb,T),(xb,T+t1),(x0,T+t1*k*1.25)])
+    L['Rd']=''
+    if desk=='top':      # a slightly thicker table top that overhangs to the left, with a short leg at its end
+        L['Rd']=P([(x0-16,T-1),(xb,T-1),(xb,T+t1*1.9),(x0-16,T+t1*1.9)])+' '+P([(x0-12,T),(x0-12+t1,T),(x0-12+t1,T+58),(x0-12,T+58)])
+    if desk=='stem':     # cantilever desk: the stem is the leg, the top overhangs it on the left
+        L['Rd']=P([(x0-22,T-1),(xb,T-1),(xb,T+t1*1.9),(x0-22,T+t1*1.9)])+' '+P([(x0+10,T),(x0+10+t1,T),(x0+10+t1,B),(x0+10,B)])
     # O: old-style diagonal stress — thick at lower-left and upper-right, thin at upper-left and lower-right
     cx,cy,rx,ry=496,140,96,100
     th=math.radians(-24); a=rx-t2*ko*0.95; b=ry-t1*1.1
@@ -32,15 +37,15 @@ def letters(t1,t2,k,ko=None):
     L['t1']=t1; return L
 def svg(L,ink,grad,gid):
     return (f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">{grad}</linearGradient></defs>'
-            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"]}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["Rt"]}" fill="{ink}"/><path d="{L["R"]}" fill="{ink}"/>'
+            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"]}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["Rt"]}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}"/><path d="{L["R"]}" fill="{ink}"/>'
             f'<path d="{L["O"]}" fill="url(#{gid})" fill-rule="evenodd"/><path d="{L["N"]}" fill="url(#{gid})"/>')
 LIGHT='<stop offset="0" stop-color="#5f5c58"/><stop offset=".55" stop-color="#a7a39d"/><stop offset="1" stop-color="#d3cfc8"/>'
 DARK='<stop offset="0" stop-color="#e2ddd5"/><stop offset=".55" stop-color="#9d9993"/><stop offset="1" stop-color="#5a5753"/>'
-VB='0 20 796 240'
-sets=[('Final · Thin + O',4.2,8.5,1.0,1.9),('Thin',4.2,8.5,1.0,None),('Weighted base',4.2,8.5,1.9,None),('Old-style',4.2,8.5,1.5,None)]
+VB='-10 20 806 240'
+sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
 tiles=''
-for name,t1,t2,k,ko in sets:
-    L=letters(t1,t2,k,ko); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
+for name,t1,t2,k,ko,dk in sets:
+    L=letters(t1,t2,k,ko,dk); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
     a=svg(L,'#1b1a18',LIGHT,'g'+key+'l'); b=svg(L,'#EEE9E4',DARK,'g'+key+'d')
     open(f'aron-thin-{key}-light.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="796" height="240" viewBox="{VB}">{a}</svg>')
     open(f'aron-thin-{key}-dark.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="796" height="240" viewBox="{VB}"><rect x="0" y="20" width="796" height="240" fill="#0e0e0e"/>{b}</svg>')

@@ -306,3 +306,4 @@
 - 로고 Old-style: A·R 위로 무겁게(A 꼭짓점 쪽 굵고 발끝 가늘게, R 윗가로획 굵게→볼로 가늘어짐, R 다리 위 굵고 아래 가늘게), O·N 아래로 무겁게 → 위아래 균형
 - **로고 최종 후보 (사용자 선택):** 'Final · Thin + O' = Thin 글자(A·R 균일 얇게) + O만 Weighted base(사선 강세 진하게, ko1.9). 파일 logo-v2/aron-thin-final-thin-o-light.svg / -dark.svg
 - **새 로고 사이트 적용:** Final · Thin + O 를 인라인 SVG로 히어로 ARON / 상단 로고 / 로딩 화면에 교체. AR=currentColor, ON=그라데이션(CSS 변수, 검정 구간에선 밝은 버전 자동). 히어로 동작(물방울·블러 디졸브) 그대로
+- 로고 R=책상 아이디어 시안: 'Desk · table top'(두꺼운 상판이 왼쪽으로 살짝 튀어나오고 짧은 다리) / 'Desk · cantilever'(상판 + 기둥이 다리). Final 아래 행에 비교. 사용자 선택 대기 (사이트는 아직 Final)
