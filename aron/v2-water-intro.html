@@ -402,7 +402,7 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 }
 
 /* ── footer (after carme): a falling line ends in a drop, giant pale words drift behind ── */
-.af { position: relative; z-index: 2; height: 100vh; min-height: 620px; overflow: hidden; background: #0e0e0e; color: #EEE9E4; font-family: Jost, Inter, sans-serif; }
+.af { position: relative; z-index: 2; height: 100vh; min-height: 620px; overflow: hidden; background: #fff; color: #111; font-family: Inter, sans-serif; }
 .af-drop { position: absolute; left: 50%; top: 0; height: 64%; width: 24px; transform: translateX(-50%); z-index: 2; }
 .af-line { position: absolute; left: 50%; top: 0; width: 1.5px; height: calc(var(--af, 0) * (100% - 22px)); background: #111; transform: translateX(-50%); }
 .af-dot { position: absolute; left: 50%; top: calc(var(--af, 0) * (100% - 22px)); width: 22px; height: 22px; border: 1.5px solid #111; border-radius: 50%; transform: translateX(-50%); background: #fff; }
@@ -410,8 +410,8 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 .af-row { overflow: hidden; white-space: nowrap; line-height: .86; }
 .af-track { display: inline-flex; animation: af-left 60s linear infinite; }
 .af-row--2 .af-track { animation: af-right 70s linear infinite; }
-.af-track span { font-family: Jost, sans-serif; font-weight: 600; font-size: clamp(90px, 15vw, 240px); letter-spacing: -0.02em; color: #f1f1f1; padding-right: .35em; }
-.af-row--2 span { filter: blur(7px); color: #1d1d1c; }
+.af-track span { font-family: Inter, sans-serif; font-weight: 600; font-size: clamp(90px, 15vw, 240px); letter-spacing: -0.02em; color: #f1f1f1; padding-right: .35em; }
+.af-row--2 span { filter: blur(7px); color: #f3f3f3; }
 .af-logos { align-items: center; gap: clamp(70px, 9vw, 150px); padding-right: clamp(70px, 9vw, 150px); margin-bottom: clamp(26px, 4vw, 56px); }
 .af-logos img { height: clamp(44px, 5.6vw, 84px); width: auto; opacity: .82; }
 @keyframes af-left { to { transform: translateX(-50%); } }
@@ -588,32 +588,10 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
   </section>
   <section class="c-stories" aria-labelledby="t-stories">
     <div class="cs-wrap"><h2 id="t-stories" class="cs-label">Stories</h2><ol class="cs-list"><li class="cs-item"><span class="cs-no">N° — 01</span><h3>The first five seconds</h3><span class="cs-cat">Lobby</span></li><li class="cs-item"><span class="cs-no">N° — 02</span><h3>Light that calms</h3><span class="cs-cat">Light</span></li><li class="cs-item"><span class="cs-no">N° — 03</span><h3>Colors borrowed from nature</h3><span class="cs-cat">Material</span></li><li class="cs-item"><span class="cs-no">N° — 04</span><h3>Curves and comfort</h3><span class="cs-cat">Space</span></li><li class="cs-item"><span class="cs-no">N° — 05</span><h3>From an empty floor to a clinic</h3><span class="cs-cat">Process</span></li></ol></div>
-    <div class="c-more"><a class="c-pill" href="#contact">More Stories</a><a class="c-arrow" href="#contact" aria-label="More Stories"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a></div>
+    <div class="c-more"><a class="c-pill" href="stories.html">More Stories</a><a class="c-arrow" href="stories.html" aria-label="More Stories"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a></div>
   </section>
 
-  <section class="symbols" id="symbols" aria-labelledby="t-symbols">
-    <div class="symbols-head"><p class="eyebrow">PALETTE FROM NATURE</p><h2 id="t-symbols">Colors, borrowed from nature</h2>
-      <p class="symbols-lede">Every tone we use begins outside — in stone, leaf and weathered wood.</p></div>
-    <div class="mood">
-      <div class="mood-row">
-        <figure class="mood-it" style="--w:36%;--mt:0vw"><div class="mood-frame"><img src="photos/palette-sky.jpg" alt="" style="aspect-ratio:4/3"></div><figcaption><i style="background:#8EA2A4"></i><b>STONE BEIGE</b><span>#A69E90</span></figcaption></figure>
-        <figure class="mood-it" style="--w:20%;--mt:11vw"><div class="mood-frame"><img src="photos/palette-cherry.jpg" alt="" style="aspect-ratio:3/4"></div><figcaption><i style="background:#51272E"></i><b>MOSSED SLATE</b><span>#42402C</span></figcaption></figure>
-        <figure class="mood-it" style="--w:22%;--mt:3vw"><div class="mood-frame"><img src="photos/palette-cotton.jpg" alt="" style="aspect-ratio:1/1"></div><figcaption><i style="background:#DDDDDD"></i><b>WASHED COTTON</b><span>#EBEAE6</span></figcaption></figure>
-      </div>
-      <p class="mood-note">Nature chose the colors.<br>We only listened.</p>
-      <div class="mood-row">
-        <figure class="mood-it" style="--w:22%;--mt:7vw"><div class="mood-frame"><img src="photos/palette-porcelain.jpg" alt="" style="aspect-ratio:4/5"></div><figcaption><i style="background:#EEE9E4"></i><b>PORCELAIN VEIL</b><span>#EEE9E4</span></figcaption></figure>
-        <figure class="mood-it" style="--w:32%;--mt:0vw"><div class="mood-frame"><img src="photos/palette-moss.jpg" alt="" style="aspect-ratio:5/4"></div><figcaption><i style="background:#6D705A"></i><b>STONE MOSS</b><span>#6D705A</span></figcaption></figure>
-        <figure class="mood-it" style="--w:22%;--mt:13vw"><div class="mood-frame"><img src="photos/palette-pebble.jpg" alt="" style="aspect-ratio:1/1"></div><figcaption><i style="background:#C8C0B3"></i><b>WARM PEBBLE</b><span>#C8C0B3</span></figcaption></figure>
-      </div>
-      <p class="mood-note mood-note--l">Textures you can almost touch —<br>stone, leaf, and the slow work of time.</p>
-      <div class="mood-row">
-        <figure class="mood-it" style="--w:26%;--mt:2vw"><div class="mood-frame"><img src="photos/palette-cream.jpg" alt="" style="aspect-ratio:4/5"></div><figcaption><i style="background:#E4DBD1"></i><b>IVORY SAND</b><span>#E4DBD1</span></figcaption></figure>
-        <figure class="mood-it" style="--w:18%;--mt:12vw"><div class="mood-frame"><img src="photos/palette-oat.jpg" alt="" style="aspect-ratio:3/4"></div><figcaption><i style="background:#BBAA85"></i><b>GOLDEN OAT</b><span>#E3E3DC</span></figcaption></figure>
-        <figure class="mood-it" style="--w:32%;--mt:5vw"><div class="mood-frame"><img src="photos/palette-fern.jpg" alt="" style="aspect-ratio:4/3"></div><figcaption><i style="background:#606969"></i><b>URBAN FERN</b><span>#606969</span></figcaption></figure>
-      </div>
-    </div>
-  </section>
+
 
 
 </main>
@@ -638,8 +616,9 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 </section>
 
 <footer class="af" id="contact">
+  <div class="af-drop" aria-hidden="true"><i class="af-line"></i><i class="af-dot"></i></div>
   <div class="af-marquee" aria-hidden="true">
-    <div class="af-row af-row--1"><div class="af-track af-logos"><img src="logos/kyunghee-onsaeng.png" alt="경희온생한의원"><img src="logos/madione.png" alt="마디원정형외과"><img src="logos/dasan-ai.png" alt="다산 에이아이 정형외과 의원"><img src="logos/kyunghee-onsaeng.png" alt="경희온생한의원"><img src="logos/madione.png" alt="마디원정형외과"><img src="logos/dasan-ai.png" alt="다산 에이아이 정형외과 의원"><img src="logos/kyunghee-onsaeng.png" alt="경희온생한의원"><img src="logos/madione.png" alt="마디원정형외과"><img src="logos/dasan-ai.png" alt="다산 에이아이 정형외과 의원"><img src="logos/kyunghee-onsaeng.png" alt="경희온생한의원"><img src="logos/madione.png" alt="마디원정형외과"><img src="logos/dasan-ai.png" alt="다산 에이아이 정형외과 의원"></div></div>
+    <div class="af-row af-row--1"><div class="af-track"><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span></div></div>
     <div class="af-row af-row--2"><div class="af-track"><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span></div></div>
   </div>
   <div class="af-base">
@@ -1804,7 +1783,7 @@ ready.then(() => {
     const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.95)));
     af.style.setProperty('--af', (1 - Math.pow(1 - p, 2)).toFixed(3));
     const dark = [af, document.querySelector('.symbols')].some((el) => { if (!el) return false; const b = el.getBoundingClientRect(); return b.top < 70 && b.bottom > 70; });
-    document.body.classList.toggle('on-dark', dark); };
+    document.body.classList.toggle('on-dark', false); };
   addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
 })();
 </script>

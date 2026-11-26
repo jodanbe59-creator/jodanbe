@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stories — ARON Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@600&display=swap">
+<style>
+*{box-sizing:border-box} html,body{margin:0;background:#fff;color:#111;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:fixed;inset:0 0 auto 0;z-index:20;height:70px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.86);backdrop-filter:blur(10px)}
+.top .logo{position:absolute;left:clamp(16px,5vw,96px);display:flex;align-items:center}
+.aron-mark{display:block;height:auto;color:#1b1a18;--on1:#5f5c58;--on2:#a7a39d;--on3:#d3cfc8} .am-top{width:clamp(64px,4.8vw,96px)}
+.menu{display:flex;gap:clamp(18px,3vw,44px)}
+.menu a{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.05rem;letter-spacing:.24em;text-decoration:none;color:rgba(26,24,22,.82)}
+.menu a.on{color:#111}
+.intro{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+.intro .tick{width:1.5px;height:44px;background:#111;margin-bottom:40px}
+.intro p{margin:0;max-width:640px;font-size:clamp(22px,2.4vw,34px);line-height:1.35;font-weight:400;letter-spacing:-.01em;padding:0 20px}
+.intro .drop{position:relative;margin-top:70px;height:150px;width:24px}
+.intro .drop i{position:absolute;left:50%;transform:translateX(-50%)}
+.intro .drop .l{top:0;width:1.5px;height:calc(var(--d,0)*128px);background:#111}
+.intro .drop .c{top:calc(var(--d,0)*128px);width:22px;height:22px;border:1.5px solid #111;border-radius:50%;background:#fff}
+.list{padding:0 clamp(16px,2.8vw,40px) clamp(120px,14vw,200px)}
+.cs-wrap{display:grid;grid-template-columns:1fr 1fr;max-width:1360px}
+.cs-label{margin:0;font-weight:500;font-size:16px}
+.cs-list{list-style:none;margin:0;padding:0;max-width:500px}
+.cs-item{padding:18px 0 20px;border-bottom:1px solid #e6e6e6;cursor:pointer;opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.cs-item:first-child{padding-top:0} .cs-item.is-in{opacity:1;transform:none}
+.cs-no{display:block;font-size:12px;margin-bottom:8px}
+.cs-item h3{margin:0;font-weight:400;font-size:clamp(18px,1.6vw,22px);letter-spacing:-.01em;transition:opacity .3s} .cs-item:hover h3{opacity:.55}
+.cs-cat{display:block;margin-top:10px;font-size:12px;color:#8a8a8a}
+@media(max-width:760px){.cs-wrap{grid-template-columns:1fr}.cs-label{margin-bottom:24px}.menu a{font-size:.85rem;letter-spacing:.16em}}
+/* ── footer (after carme): a falling line ends in a drop, giant pale words drift behind ── */
+.af { position: relative; z-index: 2; height: 100vh; min-height: 620px; overflow: hidden; background: #fff; color: #111; font-family: Inter, sans-serif; }
+.af-drop { position: absolute; left: 50%; top: 0; height: 64%; width: 24px; transform: translateX(-50%); z-index: 2; }
+.af-line { position: absolute; left: 50%; top: 0; width: 1.5px; height: calc(var(--af, 0) * (100% - 22px)); background: #111; transform: translateX(-50%); }
+.af-dot { position: absolute; left: 50%; top: calc(var(--af, 0) * (100% - 22px)); width: 22px; height: 22px; border: 1.5px solid #111; border-radius: 50%; transform: translateX(-50%); background: #fff; }
+.af-marquee { position: absolute; left: 0; right: 0; bottom: 4vh; z-index: 1; pointer-events: none; }
+.af-row { overflow: hidden; white-space: nowrap; line-height: .86; }
+.af-track { display: inline-flex; animation: af-left 60s linear infinite; }
+.af-row--2 .af-track { animation: af-right 70s linear infinite; }
+.af-track span { font-family: Inter, sans-serif; font-weight: 600; font-size: clamp(90px, 15vw, 240px); letter-spacing: -0.02em; color: #f1f1f1; padding-right: .35em; }
+.af-row--2 span { filter: blur(7px); color: #f3f3f3; }
+.af-logos { align-items: center; gap: clamp(70px, 9vw, 150px); padding-right: clamp(70px, 9vw, 150px); margin-bottom: clamp(26px, 4vw, 56px); }
+.af-logos img { height: clamp(44px, 5.6vw, 84px); width: auto; opacity: .82; }
+@keyframes af-left { to { transform: translateX(-50%); } }
+@keyframes af-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.af-base { position: absolute; left: 40px; right: 40px; bottom: 38px; z-index: 3; display: flex; justify-content: space-between; align-items: flex-end; font-size: 16px; font-weight: 400; line-height: 1.5; }
+.af-base p { margin: 0; } .af-base a { color: inherit; text-decoration: none; } .af-base a:hover { opacity: .6; }
+.af-col--c { text-align: center; } .af-col--r { text-align: right; }
+@media (max-width: 760px) { .af-base { flex-direction: column; align-items: center; gap: 18px; text-align: center; } .af-col--r { text-align: center; } }
+@media (prefers-reduced-motion: reduce) { .af-track { animation: none; } }
+</style></head><body>
+<header class="top"><a class="logo" href="index.html" aria-label="ARON, 홈으로"><svg class="aron-mark am-top" viewBox="-8 20 826 240" role="img" aria-label="ARON" shape-rendering="geometricPrecision"><defs><linearGradient id="amg-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--on1)"/><stop offset=".55" style="stop-color:var(--on2)"/><stop offset="1" style="stop-color:var(--on3)"/></linearGradient></defs><path d="M93.32 40.00 L106.68 40.00 L23.34 240.00 L16.66 240.00 Z M92.66 40.00 L115.34 40.00 L189.20 240.00 L178.80 240.00 Z" fill="currentColor"/><path d="M230 46.075 H300 A43.925 43.925 0 0 1 300 133.925 H274" fill="none" stroke="currentColor" stroke-width="12.15"/><path d="M230.00 40.00 L300.00 40.00 L300.00 52.15 L230.00 55.19 Z" fill="currentColor"/><path d="" fill="currentColor" fill-rule="evenodd"/><path d="M0 0" fill="currentColor"/><path d="M0 0" fill="none" stroke="currentColor" stroke-width="4.95"/><path d="M281.61 133.93 L302.39 133.93 L359.67 240.00 L348.33 240.00 Z" fill="currentColor"/><g transform="translate(0,0)"><path d="M400 140 A96 100 0 1 0 592 140 A96 100 0 1 0 400 140 Z M427.74 170.39 A74.72 90.10 -24.0 1 1 564.26 109.61 A74.72 90.10 -24.0 1 1 427.74 170.39 Z" fill="url(#amg-top)" fill-rule="evenodd"/><path d="M638.00 40.00 L643.40 40.00 L647.00 240.00 L638.00 240.00 Z M762.60 40.00 L768.00 40.00 L768.00 240.00 L759.00 240.00 Z M638.00 40.00 L654.80 40.00 L768.00 240.00 L747.00 240.00 Z" fill="url(#amg-top)"/><path d="M0 0" fill="url(#amg-top)"/></g></svg></a>
+<nav class="menu"><a href="index.html#intro">INTERIOR</a><a href="#contact">CONTACT</a><a href="#follow">FOLLOW</a></nav></header>
+<section class="intro"><span class="tick"></span><p>Stories about the spaces we design and the details behind them</p><div class="drop" aria-hidden="true"><i class="l"></i><i class="c"></i></div></section>
+<section class="list"><div class="cs-wrap"><h2 class="cs-label">Stories</h2><ol class="cs-list"><li class="cs-item"><span class="cs-no">N° — 01</span><h3>The first five seconds</h3><span class="cs-cat">Lobby</span></li><li class="cs-item"><span class="cs-no">N° — 02</span><h3>Light that calms</h3><span class="cs-cat">Light</span></li><li class="cs-item"><span class="cs-no">N° — 03</span><h3>Colors borrowed from nature</h3><span class="cs-cat">Material</span></li><li class="cs-item"><span class="cs-no">N° — 04</span><h3>Curves and comfort</h3><span class="cs-cat">Space</span></li><li class="cs-item"><span class="cs-no">N° — 05</span><h3>From an empty floor to a clinic</h3><span class="cs-cat">Process</span></li><li class="cs-item"><span class="cs-no">N° — 06</span><h3>Quiet waiting rooms</h3><span class="cs-cat">Space</span></li><li class="cs-item"><span class="cs-no">N° — 07</span><h3>The sound of water</h3><span class="cs-cat">Concept</span></li><li class="cs-item"><span class="cs-no">N° — 08</span><h3>Details you can touch</h3><span class="cs-cat">Material</span></li></ol></div></section>
+<footer class="af" id="contact">
+  <div class="af-drop" aria-hidden="true"><i class="af-line"></i><i class="af-dot"></i></div>
+  <div class="af-marquee" aria-hidden="true">
+    <div class="af-row af-row--1"><div class="af-track"><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span></div></div>
+    <div class="af-row af-row--2"><div class="af-track"><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span><span>CLINIC &amp; HOSPITAL INTERIOR</span></div></div>
+  </div>
+  <div class="af-base">
+    <div class="af-col"><p>&copy;2026 ARON Design</p><p>All rights reserved</p></div>
+    <div class="af-col af-col--c" id="follow"><p><a href="https://www.instagram.com/aron_design/" target="_blank" rel="noopener">Instagram @aron_design</a></p><p><a href="tel:01042593537">010-4259-3537</a></p></div>
+    <div class="af-col af-col--r"><p>Feel free to contact us</p><p><a href="mailto:aron_design@naver.com">aron_design@naver.com</a></p></div>
+  </div>
+</footer>
+<script>
+(() => {
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: 0.15 });
+  document.querySelectorAll('.cs-item').forEach((el) => io.observe(el));
+  const intro = document.querySelector('.intro'), af = document.querySelector('.af');
+  const upd = () => { const vh = innerHeight;
+    const p = Math.min(1, Math.max(0, (scrollY + vh * 0.35) / (vh * 0.9))); intro.style.setProperty('--d', (1 - Math.pow(1 - p, 2)).toFixed(3));
+    const r = af.getBoundingClientRect(); const q = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.95))); af.style.setProperty('--af', (1 - Math.pow(1 - q, 2)).toFixed(3)); };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
+})();
+</script>
+</body></html>
