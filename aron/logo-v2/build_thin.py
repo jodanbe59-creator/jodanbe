@@ -18,7 +18,7 @@ def letters(t1,t2,k,ko=None,desk=None):
     # R also heavier at the top: a stronger top bar, and the leg tapers toward the foot
     L['R']=P([(jx-t2*k*0.55,jy),(jx+t2*k*0.55,jy),(jx+62+t2*0.3,B),(jx+62-t2*0.3,B)])
     L['Rt']=P([(x0,T),(xb,T),(xb,T+t1),(x0,T+t1*k*1.25)])
-    L['Rd']=''
+    L['Rd']=''; L['Rh']=''
     if desk=='top':      # a slightly thicker table top that overhangs to the left, with a short leg at its end
         L['Rd']=P([(x0-16,T-1),(xb,T-1),(xb,T+t1*1.9),(x0-16,T+t1*1.9)])+' '+P([(x0-12,T),(x0-12+t1,T),(x0-12+t1,T+58),(x0-12,T+58)])
     if desk=='round':    # the R's head becomes a wide, low desk counter with rounded corners, standing on two legs
@@ -37,6 +37,18 @@ def letters(t1,t2,k,ko=None,desk=None):
         L['Rd']=(f'M{xL} {T} H{xc} A{Ro} {Ro} 0 0 1 {xc} {yb} H{xL} V{yb-w} H{xc} A{Ri} {Ri} 0 0 0 {xc} {T+w} H{xL} Z')
         L['Rd']+=' '+P([(xL+16,yb-1),(xL+16+t1,yb-1),(xL+16+t1,B),(xL+16,B)])                    # straight leg under the open end
         L['Rd']+=' '+P([(xc-8,yb-1),(xc-8+t2,yb-1),(xc+50+t2*0.5,B),(xc+50-t2*0.5,B)])            # R's diagonal leg
+    if desk=='elegant':   # R from the reference: serifed stem, top bar into a stressed bowl, a hairline that drops and sweeps right
+        x0,sw=228,t2*0.95; xh=x0+34; xb=xh+30; r=48; yb=T+2*r; hl=t1*0.55
+        L['Rs']=''; L['Rt']=''; L['R']=''
+        d=P([(x0,T),(x0+sw,T),(x0+sw,B),(x0,B)])                                              # stem
+        d+=' '+P([(x0-9,T),(x0+sw+4,T),(x0+sw+4,T+hl*1.6),(x0-9,T+hl*1.6)])                    # top serif
+        d+=' '+P([(x0-9,B-hl*1.6),(x0+sw+9,B-hl*1.6),(x0+sw+9,B),(x0-9,B)])                    # foot serif
+        d+=' '+P([(x0,T),(xb,T),(xb,T+hl*1.8),(x0,T+hl*1.8)])                                   # top bar
+        # bowl: outer circle r, inner circle shifted left so the right side is heavy
+        d+=(f' M{xb} {T} A{r} {r} 0 0 1 {xb} {yb} L{xb} {yb-hl*1.6} A{r-t2*1.1} {r-hl*1.7} 0 0 0 {xb} {T+hl*1.8} Z')
+        d+=' '+P([(xh,yb-hl*1.6),(xb,yb-hl*1.6),(xb,yb),(xh,yb)])                                # bowl closes onto the hairline
+        L['Rd']=d
+        L['Rh']=f'M{xh+hl/2} {T} V{B-30} Q{xh+hl/2} {B-hl/2} {xh+34} {B-hl/2} H{xh+78}'           # hairline leg
     if desk=='stem':     # cantilever desk: the stem is the leg, the top overhangs it on the left
         L['Rd']=P([(x0-22,T-1),(xb,T-1),(xb,T+t1*1.9),(x0-22,T+t1*1.9)])+' '+P([(x0+10,T),(x0+10+t1,T),(x0+10+t1,B),(x0+10,B)])
     # O: old-style diagonal stress — thick at lower-left and upper-right, thin at upper-left and lower-right
@@ -53,12 +65,12 @@ def letters(t1,t2,k,ko=None,desk=None):
     L['t1']=t1; return L
 def svg(L,ink,grad,gid):
     return (f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">{grad}</linearGradient></defs>'
-            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"] or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["Rt"] or "M0 0"}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}" fill-rule="evenodd"/><path d="{L["R"] or "M0 0"}" fill="{ink}"/>'
+            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"] or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["Rt"] or "M0 0"}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}" fill-rule="evenodd"/><path d="{L.get("Rh") or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]*0.55}"/><path d="{L["R"] or "M0 0"}" fill="{ink}"/>'
             f'<path d="{L["O"]}" fill="url(#{gid})" fill-rule="evenodd"/><path d="{L["N"]}" fill="url(#{gid})"/>')
 LIGHT='<stop offset="0" stop-color="#5f5c58"/><stop offset=".55" stop-color="#a7a39d"/><stop offset="1" stop-color="#d3cfc8"/>'
 DARK='<stop offset="0" stop-color="#e2ddd5"/><stop offset=".55" stop-color="#9d9993"/><stop offset="1" stop-color="#5a5753"/>'
 VB='-10 20 806 240'
-sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('Desk · horseshoe',4.2,8.5,1.0,1.9,'horseshoe'),('Desk · rounded',4.2,8.5,1.0,1.9,'round'),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
+sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('R · elegant',4.2,8.5,1.0,1.9,'elegant'),('Desk · horseshoe',4.2,8.5,1.0,1.9,'horseshoe'),('Desk · rounded',4.2,8.5,1.0,1.9,'round'),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
 tiles=''
 for name,t1,t2,k,ko,dk in sets:
     L=letters(t1,t2,k,ko,dk); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
