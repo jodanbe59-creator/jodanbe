@@ -5,20 +5,22 @@ def P(pts): return 'M'+' L'.join(f'{x:.2f} {y:.2f}' for x,y in pts)+' Z'
 def stroke(xt,xb,wt,wb):
     # a straight stroke from top centre xt to bottom centre xb, width wt at the top and wb at the bottom (horizontal widths)
     return [(xt-wt/2,T),(xt+wt/2,T),(xb+wb/2,B),(xb-wb/2,B)]
-def letters(t1,t2,k,ko=None,desk=None):
+def letters(t1,t2,k,ko=None,desk=None,ar=1.0):
     ko=ko or k
+    a1,a2=t1*ar,t2*ar   # A and R stroke weights
     # k = how much heavier the bottom is (1 = even)
     L={}
     # A: apex at 102, feet at 20 / 184
     # A gets heavier toward the TOP: wide near the apex, fine at the feet
-    L['A']=P(stroke(100,20,t1*k*1.1,t1*0.55))+' '+P(stroke(104,184,t2*k*1.2,t2*0.55))
+    L['A']=P(stroke(100,20,a1*k*1.1,a1*0.55))+' '+P(stroke(104,184,a2*k*1.2,a2*0.55))
     # R: thin top bar + bowl + middle bar (stroke), leg widening to a flat foot
     x0,xb,r=230,300,50
-    L['Rs']=f'M{x0} {T+t1/2} H{xb} A{r-t1/2} {r-t1/2} 0 0 1 {xb} {T+2*r-t1/2} H{x0+44}'
-    jy=T+2*r-t1/2; jx=xb-8
+    L['Rs']=f'M{x0} {T+a1/2} H{xb} A{r-a1/2} {r-a1/2} 0 0 1 {xb} {T+2*r-a1/2} H{x0+44}'
+    jy=T+2*r-a1/2; jx=xb-8
     # R also heavier at the top: a stronger top bar, and the leg tapers toward the foot
-    L['R']=P([(jx-t2*k*0.55,jy),(jx+t2*k*0.55,jy),(jx+62+t2*0.3,B),(jx+62-t2*0.3,B)])
-    L['Rt']=P([(x0,T),(xb,T),(xb,T+t1),(x0,T+t1*k*1.25)])
+    L['R']=P([(jx-a2*k*0.55,jy),(jx+a2*k*0.55,jy),(jx+62+a2*0.3,B),(jx+62-a2*0.3,B)])
+    L['Rt']=P([(x0,T),(xb,T),(xb,T+a1),(x0,T+a1*k*1.25)])
+    L['tr']=a1
     L['Rd']=''; L['Rh']=''
     if desk=='top':      # a slightly thicker table top that overhangs to the left, with a short leg at its end
         L['Rd']=P([(x0-16,T-1),(xb,T-1),(xb,T+t1*1.9),(x0-16,T+t1*1.9)])+' '+P([(x0-12,T),(x0-12+t1,T),(x0-12+t1,T+58),(x0-12,T+58)])
@@ -84,16 +86,16 @@ def letters(t1,t2,k,ko=None,desk=None):
     L['t1']=t1; return L
 def svg(L,ink,grad,gid):
     return (f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">{grad}</linearGradient></defs>'
-            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"] or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["Rt"] or "M0 0"}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}" fill-rule="evenodd"/><path d="{L.get("Rh") or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]*0.55}"/><path d="{L["R"] or "M0 0"}" fill="{ink}"/>'
+            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"] or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L.get("tr",L["t1"])}"/><path d="{L["Rt"] or "M0 0"}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}" fill-rule="evenodd"/><path d="{L.get("Rh") or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]*0.55}"/><path d="{L["R"] or "M0 0"}" fill="{ink}"/>'
             + (f'<g fill="{ink}">{L["Rx"]}</g>' if L.get("Rx") else '')
             + f'<g transform="translate({L.get("shift",0)},0)"><path d="{L["O"]}" fill="url(#{gid})" fill-rule="evenodd"/><path d="{L["N"]}" fill="url(#{gid})"/></g>')
 LIGHT='<stop offset="0" stop-color="#5f5c58"/><stop offset=".55" stop-color="#a7a39d"/><stop offset="1" stop-color="#d3cfc8"/>'
 DARK='<stop offset="0" stop-color="#e2ddd5"/><stop offset=".55" stop-color="#9d9993"/><stop offset="1" stop-color="#5a5753"/>'
 VB='-6 20 822 240'
-sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('Traced R · thin letters',4.2,8.5,1.0,1.9,'traced'),('Traced R · serif letters',4.2,8.5,1.0,1.9,'traced_serif'),('Elegant · all letters',4.2,8.5,1.0,1.9,'elegant_all'),('R · elegant',4.2,8.5,1.0,1.9,'elegant'),('Desk · horseshoe',4.2,8.5,1.0,1.9,'horseshoe'),('Desk · rounded',4.2,8.5,1.0,1.9,'round'),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
+sets=[('Final · bold AR',4.2,8.5,1.0,1.9,None,1.6),('Final · Thin + O',4.2,8.5,1.0,1.9,None,1.0),('Traced R · thin letters',4.2,8.5,1.0,1.9,'traced',1.0),('Traced R · serif letters',4.2,8.5,1.0,1.9,'traced_serif',1.0),('Elegant · all letters',4.2,8.5,1.0,1.9,'elegant_all',1.0),('R · elegant',4.2,8.5,1.0,1.9,'elegant',1.0),('Desk · horseshoe',4.2,8.5,1.0,1.9,'horseshoe',1.0),('Desk · rounded',4.2,8.5,1.0,1.9,'round',1.0),('Desk · table top',4.2,8.5,1.0,1.9,'top',1.0),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem',1.0),('Thin',4.2,8.5,1.0,None,None,1.0),('Weighted base',4.2,8.5,1.9,None,None,1.0),('Old-style',4.2,8.5,1.5,None,None,1.0)]
 tiles=''
-for name,t1,t2,k,ko,dk in sets:
-    L=letters(t1,t2,k,ko,dk); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
+for name,t1,t2,k,ko,dk,ar in sets:
+    L=letters(t1,t2,k,ko,dk,ar); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
     a=svg(L,'#1b1a18',LIGHT,'g'+key+'l'); b=svg(L,'#EEE9E4',DARK,'g'+key+'d')
     open(f'aron-thin-{key}-light.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="796" height="240" viewBox="{VB}">{a}</svg>')
     open(f'aron-thin-{key}-dark.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="796" height="240" viewBox="{VB}"><rect x="0" y="20" width="796" height="240" fill="#0e0e0e"/>{b}</svg>')
