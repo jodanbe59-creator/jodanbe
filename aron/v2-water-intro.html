@@ -346,7 +346,7 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .intro-cue.scroll-cue:hover, .intro-cue.scroll-cue:focus-visible { transform: translate(-50%, -4px); }
 .intro-cue .mouse { border-color: rgba(42, 37, 32, 0.55); }
 .logo {
-  position: fixed; top: 12px; left: clamp(14px, 3vw, 36px); z-index: 21; height: 58px; display: flex; align-items: center;
+  position: fixed; top: 12px; left: clamp(16px, 5vw, 96px); z-index: 21; height: 58px; display: flex; align-items: center;
   text-decoration: none; opacity: 0; visibility: hidden;   /* hidden while the hero's big ARON is on screen */
 }
 .logo { font-family: "Cormorant Garamond", var(--font-display); font-weight: 400; font-size: 1.35rem; letter-spacing: 0.42em; color: var(--ink); text-shadow: 0 1px 10px rgba(255, 255, 255, 0.6); }   /* same lettering as the hero ARON */
@@ -469,8 +469,8 @@ body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
 
 /* ARON wordmark (final): AR in the text colour, ON in a grey gradient that flips on dark */
 .aron-mark { display: block; height: auto; color: #1b1a18; --on1: #5f5c58; --on2: #a7a39d; --on3: #d3cfc8; }
-.am-hero { width: clamp(230px, calc(42vw - 10px), 630px); margin: 0 auto; }
-.am-top { width: 92px; }
+.am-hero { width: clamp(220px, 29vw, 560px); margin: 0 auto; }   /* AVEC hero line ≈ 29% of the screen width */
+.am-top { width: clamp(64px, 4.8vw, 96px); }   /* AVEC top logo ≈ 4.8% of the screen width */
 .am-loader { width: 150px; color: #EEE9E4; --on1: #e2ddd5; --on2: #9d9993; --on3: #5a5753; }
 .mist-logo { letter-spacing: 0 !important; padding-left: 0 !important; line-height: 1; }
 .logo { letter-spacing: 0 !important; }
