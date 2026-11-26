@@ -289,17 +289,17 @@ body.capture .topbar, body.capture main, body.capture .site-foot, body.capture .
 .mist.video-intro .mist-veil { display: none; background: radial-gradient(ellipse at 50% 48%, rgba(246,243,238,0.5), rgba(246,243,238,0.1) 40%, rgba(246,243,238,0) 65%); }
 #intro { position: relative; z-index: 3; background: #fff; }
 /* white statement: a single line of type, a falling drop, and the white page opening onto the lobby */
-#statement { height: 112vh; position: relative; z-index: 3; background: #fff; }   /* white like the sentence area, so the dark page base never shows below the short sticky */
-.st-sticky { position: sticky; top: 0; height: 52vh; }   /* only as tall as the sentence + falling line, so About follows closely */
+#statement { height: calc(112vh + 44px); position: relative; z-index: 3; background: #fff; }   /* white like the sentence area, so the dark page base never shows below the short sticky */
+.st-sticky { position: sticky; top: 0; height: calc(52vh + 44px); }   /* only as tall as the sentence + falling line, so About follows closely */
 .st-paper { position: absolute; inset: 0; }
 .st-veil { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.st-tick { position: absolute; left: 50%; top: 7vh; width: 1px; height: 44px; background: #555; transform: translateX(-50%); }
-.st-text { position: absolute; left: 50%; top: 15vh; transform: translateX(-50%); width: min(92vw, 780px); margin: 0; text-align: center;
+.st-tick { position: absolute; left: 50%; top: 7vh; width: 1px; height: 88px; background: #555; transform: translateX(-50%); }
+.st-text { position: absolute; left: 50%; top: calc(15vh + 44px); transform: translateX(-50%); width: min(92vw, 780px); margin: 0; text-align: center;
   font-family: Jost, var(--font-body); font-weight: 200; font-size: clamp(1.6rem, 2.8vw, 2.5rem); line-height: 1.35; letter-spacing: -0.01em; color: #1a1a1a; }
 .st-text em, .sp-desc em { font-family: "Cormorant Garamond", serif; font-style: normal; font-weight: 500; letter-spacing: -0.01em; }
-.st-line { position: absolute; left: 50%; top: 30vh; width: 1px; height: 0; background: #555; transform: translateX(-50%); }
+.st-line { position: absolute; left: 50%; top: calc(30vh + 44px); width: 1px; height: 0; background: #555; transform: translateX(-50%); }
 .st-fx { position: absolute; inset: 0; pointer-events: none; }
-.st-drop { position: absolute; left: 50%; top: 30vh; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #333; }
+.st-drop { position: absolute; left: 50%; top: calc(30vh + 44px); width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #333; }
 .st-ring { display: none; }
 .about { position: relative; z-index: 3; background: #fff; color: #111; padding: clamp(40px, 5vw, 70px) var(--gutter) clamp(80px, 12vw, 160px); }
 .about-row { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 0.6fr); gap: 32px; }
@@ -1333,7 +1333,7 @@ if (!CAPTURE) {
   ScrollTrigger.create({
     trigger: '#statement', start: 'top top', end: 'bottom 52%', scrub: reduceMotion ? true : 1.2,
     onUpdate: (st) => {
-      const p = st.progress, vh = innerHeight, top = 0.3 * vh, land = LAND_Y * vh;
+      const p = st.progress, vh = innerHeight, top = 0.3 * vh + 44, land = LAND_Y * vh + 44;   // +44: room for the longer tick above the sentence
       const fall = Math.pow(smooth(0.05, 0.5, p), 1.6);                       // the line accelerates like a falling drop
       const len = (land - top) * fall;
       const landed = smooth(0.5, 0.56, p);
