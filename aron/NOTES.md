@@ -326,3 +326,4 @@
 - Recent Work에서 로비 1·2·3 삭제(위 Spaces와 중복). 4칸은 실제 다산 에이아이 정형외과 사진(lobby/symbol/material/light)으로 채움 — 실제 WORKS 사진 오면 교체
 - 로고 크기 = 아베크 비율: 히어로 ARON 폭 29vw(220~560px, 아베크 히어로 문구 폭과 같음), 상단 로고 폭 4.8vw(64~96px), 왼쪽 여백 5vw. 1895px 화면에서 히어로 550px·상단 91px로 레퍼런스(545·90px)와 일치
 - 로고 AR 굵기 1.6배 ('Final · bold AR', logo-v2/aron-thin-final-bold-ar-*.svg) → 사이트 히어로·상단·로딩 로고 교체. O·N 그대로
+- 로고 끝부분 웨지 디테일(레퍼런스): A 꼭짓점·R 윗가로획 왼쪽 끝·N 두 세로획 위에 왼쪽으로 뾰족한 날개(오목 곡선). 'Final · bold AR + wedge' → 사이트 3곳 적용. 파일 logo-v2/aron-thin-final-bold-ar-wedge-*.svg

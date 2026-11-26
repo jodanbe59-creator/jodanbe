@@ -5,7 +5,7 @@ def P(pts): return 'M'+' L'.join(f'{x:.2f} {y:.2f}' for x,y in pts)+' Z'
 def stroke(xt,xb,wt,wb):
     # a straight stroke from top centre xt to bottom centre xb, width wt at the top and wb at the bottom (horizontal widths)
     return [(xt-wt/2,T),(xt+wt/2,T),(xb+wb/2,B),(xb-wb/2,B)]
-def letters(t1,t2,k,ko=None,desk=None,ar=1.0):
+def letters(t1,t2,k,ko=None,desk=None,ar=1.0,wedge=False):
     ko=ko or k
     a1,a2=t1*ar,t2*ar   # A and R stroke weights
     # k = how much heavier the bottom is (1 = even)
@@ -83,19 +83,29 @@ def letters(t1,t2,k,ko=None,desk=None,ar=1.0):
     xl,xr=638,768
     L['N']=(P(stroke(xl+t1*0.3,xl+t1*k/2,t1*0.6,t1*k))+' '+P(stroke(xr-t1*0.3,xr-t1*k/2,t1*0.6,t1*k))+' '+
             P([(xl,T),(xl+t2*1.2,T),(xr,B),(xr-t2*k*1.5,B)]))
+    L['W']=''
+    if wedge:   # wedge serifs: stroke tops cut on a slant with a small pointed spur to the left (old-style detail)
+        def flag(x,y,sp,dy,tail):   # a small pointed spur: from (x,y) out-left to the tip, concave curve back to the stroke edge
+            return f'M{x:.2f} {y:.2f} L{x-sp:.2f} {y+dy:.2f} Q{x-sp*0.2:.2f} {y+dy*1.05:.2f} {x:.2f} {y+tail:.2f} Z'
+        W=[]
+        W.append(flag(100.5,T,13,4.5,15))            # A apex: Garamond-like spur pointing left
+        W.append(flag(x0,T,8,a1*1.4+3,a1*1.4+13))     # R top bar: left end with a spur hanging down-left
+        W.append(flag(xl+t1*0.0,T,9,3.5,13))          # N left stem
+        W.append(flag(xr-t1*1.0,T,8,3.5,12))          # N right stem
+        L['W']=' '.join(W)
     L['t1']=t1; return L
 def svg(L,ink,grad,gid):
     return (f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">{grad}</linearGradient></defs>'
-            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"] or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L.get("tr",L["t1"])}"/><path d="{L["Rt"] or "M0 0"}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}" fill-rule="evenodd"/><path d="{L.get("Rh") or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]*0.55}"/><path d="{L["R"] or "M0 0"}" fill="{ink}"/>'
+            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"] or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L.get("tr",L["t1"])}"/><path d="{L["Rt"] or "M0 0"}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}" fill-rule="evenodd"/><path d="{' '.join(L['W'].split(' Z ')[:2]) + (' Z' if L['W'] else '') or 'M0 0'}" fill="{ink}"/><path d="{L.get("Rh") or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]*0.55}"/><path d="{L["R"] or "M0 0"}" fill="{ink}"/>'
             + (f'<g fill="{ink}">{L["Rx"]}</g>' if L.get("Rx") else '')
-            + f'<g transform="translate({L.get("shift",0)},0)"><path d="{L["O"]}" fill="url(#{gid})" fill-rule="evenodd"/><path d="{L["N"]}" fill="url(#{gid})"/></g>')
+            + f'<g transform="translate({L.get("shift",0)},0)"><path d="{L["O"]}" fill="url(#{gid})" fill-rule="evenodd"/><path d="{L["N"]}" fill="url(#{gid})"/><path d="{(' Z '.join(L['W'].split(' Z ')[2:])) if L['W'] else 'M0 0'}" fill="url(#{gid})"/></g>')
 LIGHT='<stop offset="0" stop-color="#5f5c58"/><stop offset=".55" stop-color="#a7a39d"/><stop offset="1" stop-color="#d3cfc8"/>'
 DARK='<stop offset="0" stop-color="#e2ddd5"/><stop offset=".55" stop-color="#9d9993"/><stop offset="1" stop-color="#5a5753"/>'
 VB='-6 20 822 240'
-sets=[('Final · bold AR',4.2,8.5,1.0,1.9,None,1.6),('Final · Thin + O',4.2,8.5,1.0,1.9,None,1.0),('Traced R · thin letters',4.2,8.5,1.0,1.9,'traced',1.0),('Traced R · serif letters',4.2,8.5,1.0,1.9,'traced_serif',1.0),('Elegant · all letters',4.2,8.5,1.0,1.9,'elegant_all',1.0),('R · elegant',4.2,8.5,1.0,1.9,'elegant',1.0),('Desk · horseshoe',4.2,8.5,1.0,1.9,'horseshoe',1.0),('Desk · rounded',4.2,8.5,1.0,1.9,'round',1.0),('Desk · table top',4.2,8.5,1.0,1.9,'top',1.0),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem',1.0),('Thin',4.2,8.5,1.0,None,None,1.0),('Weighted base',4.2,8.5,1.9,None,None,1.0),('Old-style',4.2,8.5,1.5,None,None,1.0)]
+sets=[('Final · bold AR + wedge',4.2,8.5,1.0,1.9,None,1.6,True),('Final · bold AR',4.2,8.5,1.0,1.9,None,1.6,False),('Final · Thin + O',4.2,8.5,1.0,1.9,None,1.0,False),('Traced R · thin letters',4.2,8.5,1.0,1.9,'traced',1.0,False),('Traced R · serif letters',4.2,8.5,1.0,1.9,'traced_serif',1.0,False),('Elegant · all letters',4.2,8.5,1.0,1.9,'elegant_all',1.0,False),('R · elegant',4.2,8.5,1.0,1.9,'elegant',1.0,False),('Desk · horseshoe',4.2,8.5,1.0,1.9,'horseshoe',1.0,False),('Desk · rounded',4.2,8.5,1.0,1.9,'round',1.0,False),('Desk · table top',4.2,8.5,1.0,1.9,'top',1.0,False),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem',1.0,False),('Thin',4.2,8.5,1.0,None,None,1.0,False),('Weighted base',4.2,8.5,1.9,None,None,1.0,False),('Old-style',4.2,8.5,1.5,None,None,1.0,False)]
 tiles=''
-for name,t1,t2,k,ko,dk,ar in sets:
-    L=letters(t1,t2,k,ko,dk,ar); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
+for name,t1,t2,k,ko,dk,ar,wg in sets:
+    L=letters(t1,t2,k,ko,dk,ar,wg); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
     a=svg(L,'#1b1a18',LIGHT,'g'+key+'l'); b=svg(L,'#EEE9E4',DARK,'g'+key+'d')
     open(f'aron-thin-{key}-light.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="796" height="240" viewBox="{VB}">{a}</svg>')
     open(f'aron-thin-{key}-dark.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="796" height="240" viewBox="{VB}"><rect x="0" y="20" width="796" height="240" fill="#0e0e0e"/>{b}</svg>')
