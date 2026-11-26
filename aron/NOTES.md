@@ -321,3 +321,5 @@
 - **히어로 윤슬:** canvas.yunseul — 따뜻한 하얀 반짝임(최대 320개)이 각자 다른 속도로 깜빡임, 납작한 빛 + 밝을 때 십자 반짝, 은은한 글로우. 모션 줄이기 설정이면 정지
 - 윤슬 효과 삭제 (사용자)
 - 히어로 ARON 밑 'CLINIC & HOSPITAL INTERIOR' 다시 넣음 (사용자)
+- 히어로 ARON 로고 10px 작게 (am-hero width calc(42vw - 10px), max 630px)
+- **About 아래 carme.framer.website 홈 구성 추가 (사용자 답 없어 추천안: 팔레트·검정 푸터 유지):** ① Recent Work — 2단 엇갈린 그리드 4장(N° — 01~04, 호버 시 제목: Warmth/Stillness/Light/Dasan AI Orthopedics), 사진 work-01~03(빌드 영상 마지막 프레임)+dasan-lobby, More Work 알약 버튼+화살표 원 ② Stories — 왼쪽 'Stories', 오른쪽 번호 목록 5개(제목+분류, 구분선), More Stories. Inter, 흰 배경, 등장 페이드업
