@@ -21,6 +21,15 @@ def letters(t1,t2,k,ko=None,desk=None):
     L['Rd']=''
     if desk=='top':      # a slightly thicker table top that overhangs to the left, with a short leg at its end
         L['Rd']=P([(x0-16,T-1),(xb,T-1),(xb,T+t1*1.9),(x0-16,T+t1*1.9)])+' '+P([(x0-12,T),(x0-12+t1,T),(x0-12+t1,T+58),(x0-12,T+58)])
+    if desk=='round':    # the R's head becomes a wide, low desk counter with rounded corners, standing on two legs
+        x0_,x1_,y0_,y1_,r=222,346,T,T+78,32
+        def rrect(xa,ya,xb2,yb,rad):
+            return (f'M{xa+rad} {ya} H{xb2-rad} A{rad} {rad} 0 0 1 {xb2} {ya+rad} V{yb-rad} A{rad} {rad} 0 0 1 {xb2-rad} {yb} '
+                    f'H{xa+rad} A{rad} {rad} 0 0 1 {xa} {yb-rad} V{ya+rad} A{rad} {rad} 0 0 1 {xa+rad} {ya} Z')
+        L['Rs']=''; L['Rt']=''; L['R']=''
+        L['Rd']=rrect(x0_,y0_,x1_,y1_,r)+' '+rrect(x0_+t1*1.2,y0_+t1*1.6,x1_-t1*1.6,y1_-t1,r-t1*1.3)
+        L['Rd']+=' '+P([(x0_+22,y1_-1),(x0_+22+t1,y1_-1),(x0_+22+t1,B),(x0_+22,B)])                 # straight leg
+        L['Rd']+=' '+P([(x1_-52,y1_-2),(x1_-52+t2,y1_-2),(x1_+14+t2*0.5,B),(x1_+14-t2*0.5,B)])      # R's diagonal leg
     if desk=='stem':     # cantilever desk: the stem is the leg, the top overhangs it on the left
         L['Rd']=P([(x0-22,T-1),(xb,T-1),(xb,T+t1*1.9),(x0-22,T+t1*1.9)])+' '+P([(x0+10,T),(x0+10+t1,T),(x0+10+t1,B),(x0+10,B)])
     # O: old-style diagonal stress — thick at lower-left and upper-right, thin at upper-left and lower-right
@@ -37,12 +46,12 @@ def letters(t1,t2,k,ko=None,desk=None):
     L['t1']=t1; return L
 def svg(L,ink,grad,gid):
     return (f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">{grad}</linearGradient></defs>'
-            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"]}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["Rt"]}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}"/><path d="{L["R"]}" fill="{ink}"/>'
+            f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"] or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["Rt"] or "M0 0"}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}" fill-rule="evenodd"/><path d="{L["R"] or "M0 0"}" fill="{ink}"/>'
             f'<path d="{L["O"]}" fill="url(#{gid})" fill-rule="evenodd"/><path d="{L["N"]}" fill="url(#{gid})"/>')
 LIGHT='<stop offset="0" stop-color="#5f5c58"/><stop offset=".55" stop-color="#a7a39d"/><stop offset="1" stop-color="#d3cfc8"/>'
 DARK='<stop offset="0" stop-color="#e2ddd5"/><stop offset=".55" stop-color="#9d9993"/><stop offset="1" stop-color="#5a5753"/>'
 VB='-10 20 806 240'
-sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
+sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('Desk · rounded',4.2,8.5,1.0,1.9,'round'),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
 tiles=''
 for name,t1,t2,k,ko,dk in sets:
     L=letters(t1,t2,k,ko,dk); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
