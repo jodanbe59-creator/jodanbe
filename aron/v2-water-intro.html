@@ -522,6 +522,13 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 @media (prefers-reduced-motion: reduce) { .sketch path { stroke-dashoffset: 0; transition: none; } }
 
 .photo-stage, .scrim { display: none !important; }   /* leftovers from removed chapters */
+
+/* About sits in the footer's open space; the line drops from it to the big words */
+.af { height: auto !important; min-height: 100vh; padding: clamp(90px, 12vw, 160px) 24px clamp(300px, 34vw, 420px); }
+.af-about { position: relative; z-index: 3; max-width: 600px; margin: 0 auto; text-align: center; }
+.af-about h2 { margin: 0 0 22px; font-family: Jost, var(--font-body); font-weight: 400; font-size: 1rem; }
+.af-about .about-body p { margin: 0 0 1.2em; font-family: Jost, var(--font-body); font-weight: 300; font-size: clamp(1.02rem, 1.3vw, 1.15rem); line-height: 1.6; color: #2b2b2b; }
+.af .af-drop { position: relative !important; left: auto !important; top: auto !important; transform: none !important; margin: 26px auto 0; height: clamp(160px, 22vh, 240px) !important; }
 </style>
 </head>
 <body>
@@ -563,15 +570,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 <main>
   <section id="intro" aria-label="ARON"></section>
 
-  <section class="about" aria-labelledby="t-about">
-    <div class="about-row">
-      <h2 id="t-about">About</h2>
-      <div class="about-body">
-        <p>ARON Design is an interior design studio for clinics, hospitals and commercial spaces. We shape every project around the people who will use it&nbsp;— the patient who walks in a little nervous, and the doctor who works there every day.</p>
-        <p>Soft curves, layered light and honest, lasting materials are how we make a space feel calm, whatever its palette. From the first idea to the final detail, we design every part of it with care.</p>
-      </div>
-    </div>
-  </section>
+
 
   <section id="statement" aria-label="About ARON">
     <div class="st-sticky">
@@ -610,6 +609,8 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 
 
+
+
 </main>
 
 <section class="projects" id="projects" aria-labelledby="t-projects" aria-hidden="true">
@@ -632,6 +633,10 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 </section>
 
 <footer class="af" id="contact">
+  <div class="af-about" aria-labelledby="t-about"><h2 id="t-about">About</h2><div class="about-body">
+        <p>ARON Design is an interior design studio for clinics, hospitals and commercial spaces. We shape every project around the people who will use it&nbsp;— the patient who walks in a little nervous, and the doctor who works there every day.</p>
+        <p>Soft curves, layered light and honest, lasting materials are how we make a space feel calm, whatever its palette. From the first idea to the final detail, we design every part of it with care.</p>
+      </div></div>
   <div class="af-drop" aria-hidden="true"><i class="af-line"></i><i class="af-dot"></i></div>
   <div class="af-marquee" aria-hidden="true">
     <div class="af-row af-row--1"><div class="af-track"><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span><span>ARON DESIGN</span></div></div>

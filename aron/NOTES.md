@@ -346,3 +346,4 @@
 - N° — 03 = 병원 인테리어 평면도(진료실 2·처치실·영상실·화장실·사무실·접수·대기·출입구, 문 열림 호, 치수선, 방위표, 축척, 라벨). 선 그려지는 모션 + 라벨 페이드. 원본 photos/work-03-plan.svg, 스크립트 photos/work-03-plan.py
 - 문장 아래 검은 띠 수정: 간격 줄이며 sticky가 짧아져 페이지 기본 바탕(어두운 색)이 비쳤음 → #statement 배경 흰색(원래 문장 영역 색)
 - About ↔ 문장 위치 교체: 히어로 → About → 'We design spaces…'(선 떨어짐) → Recent Work → Stories → 푸터
+- About → 푸터 안 빈 자리(사용자 '여기에'): 가운데 정렬 About 제목+본문, 그 아래 떨어지는 선+원 → 큰 옅은 글자. 순서: 히어로 → 문장 → Recent Work → Stories → 푸터(About 포함)
