@@ -294,3 +294,4 @@
 - 09 TONES~CLIENTS 삭제(심볼 사진 자리 6칸 + 병원 이름 띠). PALETTE FROM NATURE 배경 검정(#0e0e0e), 글자 밝게. 검정 구간(팔레트·푸터)에선 상단 메뉴 밝은색
 - 무드보드 모션: 화면 들어올 때 사진이 아래→위로 열림(clip-path) + 1.18→1 줌, 캡션 뒤따라 등장, 줄마다 0.12s 간격. 스크롤 패럴랙스(사진마다 속도 다름, 모바일·모션 줄이기 설정에선 끔)
 - 무드보드 둘째 줄 아래(PORCELAIN VEIL 밑, 왼쪽) 문구: 'Textures you can almost touch — stone, leaf, and the slow work of time.' (같은 세리프, 스르륵 등장)
+- 히어로 빛(오로라 색 빛 + 유리 노이즈) 삭제 (사용자). 화이트 그레이 물 + 옅은 헤이즈만 남김. 동작 그대로
