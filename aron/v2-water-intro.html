@@ -362,8 +362,11 @@ body.capture .mist, body.capture .intro-cue, body.capture .logo { display: none;
 
 /* ── hero light: soft frosted-glass aurora over white-grey water (approved) ── */
 /* water: cool steel-blue → refined neutral white-grey (no blue cast) */
-.mist-video { filter: brightness(1.08) contrast(1.03); }
-.warm { position:absolute; inset:0; pointer-events:none; background:#efefed; opacity:.22; }  /* soft milky haze, like a pale pool */
+.mist-video { filter: sepia(.12) brightness(1.08) contrast(1.03); }
+.warm { position:absolute; inset:0; pointer-events:none; background:#f3efe9; opacity:.22; }  /* soft milky haze, warmed */
+/* warm white glow: a soft sunlit bloom over the water so it does not read cold */
+.warm::after { content:""; position:absolute; inset:-10%; background: radial-gradient(ellipse 60% 55% at 50% 38%, rgba(255,247,234,1) 0%, rgba(255,240,222,.75) 30%, rgba(255,236,214,0) 70%); mix-blend-mode: screen; opacity: 2.6; animation: wglow 9s ease-in-out infinite alternate; }
+@keyframes wglow { from { transform: scale(1) translateY(0); } to { transform: scale(1.06) translateY(-1.5%); } }
 .aurora { position:absolute; inset:-10%; pointer-events:none; mix-blend-mode: soft-light; filter: blur(90px) saturate(1.1); opacity:.5; }
 .aurora.glow { mix-blend-mode: screen; opacity:.1; filter: blur(110px); }
 .aurora i { position:absolute; border-radius:50%; display:block; will-change:transform; }
