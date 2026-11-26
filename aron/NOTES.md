@@ -347,3 +347,4 @@
 - 문장 아래 검은 띠 수정: 간격 줄이며 sticky가 짧아져 페이지 기본 바탕(어두운 색)이 비쳤음 → #statement 배경 흰색(원래 문장 영역 색)
 - About ↔ 문장 위치 교체: 히어로 → About → 'We design spaces…'(선 떨어짐) → Recent Work → Stories → 푸터
 - About → 푸터 안 빈 자리(사용자 '여기에'): 가운데 정렬 About 제목+본문, 그 아래 떨어지는 선+원 → 큰 옅은 글자. 순서: 히어로 → 문장 → Recent Work → Stories → 푸터(About 포함)
+- About → N° — 04 칸에 한 줄씩(9줄, 두 문단). 칸이 보이면 위에서부터 한 줄씩 떠오름. 푸터는 About 빼고 원래대로(선+원+큰 글자+연락처)
