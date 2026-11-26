@@ -463,11 +463,20 @@ body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
 .mood-note.is-in { opacity: 1; transform: none; }
 .mood-note--l { margin-left: 2%; }
 @media (prefers-reduced-motion: reduce) { .mood-it .mood-frame { clip-path: none; } .mood-it img { transform: none; } .mood-it figcaption, .mood-note { opacity: 1; transform: none; } }
+
+/* ARON wordmark (final): AR in the text colour, ON in a grey gradient that flips on dark */
+.aron-mark { display: block; height: auto; color: #1b1a18; --on1: #5f5c58; --on2: #a7a39d; --on3: #d3cfc8; }
+.am-hero { width: clamp(240px, 42vw, 640px); margin: 0 auto; }
+.am-top { width: 92px; }
+.am-loader { width: 150px; color: #EEE9E4; --on1: #e2ddd5; --on2: #9d9993; --on3: #5a5753; }
+.mist-logo { letter-spacing: 0 !important; padding-left: 0 !important; line-height: 1; }
+.logo { letter-spacing: 0 !important; }
+body.on-dark .aron-mark { color: #EEE9E4; --on1: #e2ddd5; --on2: #9d9993; --on3: #5a5753; }
 </style>
 </head>
 <body>
 
-<div id="loader" aria-hidden="true"><div><div class="loader-mark">ARON</div><div class="loader-bar"><i></i></div></div></div>
+<div id="loader" aria-hidden="true"><div><div class="loader-mark"><svg class="aron-mark am-loader" viewBox="0 20 796 240" role="img" aria-label="ARON"><defs><linearGradient id="amg-loader" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--on1)"/><stop offset=".55" style="stop-color:var(--on2)"/><stop offset="1" style="stop-color:var(--on3)"/></linearGradient></defs><path d="M97.69 40.00 L102.31 40.00 L21.16 240.00 L18.84 240.00 Z M98.90 40.00 L109.10 40.00 L186.34 240.00 L181.66 240.00 Z" fill="currentColor"/><path d="M230 42.1 H300 A47.9 47.9 0 0 1 300 137.9 H274" fill="none" stroke="currentColor" stroke-width="4.2"/><path d="M230.00 40.00 L300.00 40.00 L300.00 44.20 L230.00 45.25 Z" fill="currentColor"/><path d="M287.32 137.90 L296.68 137.90 L356.55 240.00 L351.45 240.00 Z" fill="currentColor"/><path d="M400 140 A96 100 0 1 0 592 140 A96 100 0 1 0 400 140 Z M422.32 172.81 A80.66 95.38 -24.0 1 1 569.68 107.19 A80.66 95.38 -24.0 1 1 422.32 172.81 Z" fill="url(#amg-loader)" fill-rule="evenodd"/><path d="M638.00 40.00 L640.52 40.00 L642.20 240.00 L638.00 240.00 Z M765.48 40.00 L768.00 40.00 L768.00 240.00 L763.80 240.00 Z M638.00 40.00 L648.20 40.00 L768.00 240.00 L755.25 240.00 Z" fill="url(#amg-loader)"/></svg></div><div class="loader-bar"><i></i></div></div></div>
 
 <canvas id="scene" aria-label="빈 공간이 선으로 그려지는 실시간 3D 장면"></canvas>
 <div class="photo-stage" aria-hidden="true">
@@ -481,10 +490,10 @@ body.on-dark .topbar, body.on-dark .menu { background: transparent !important; }
 </div>
 <div class="scrim"></div>
 
-<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" data-loop="intro-loop.mp4" poster="intro-drop.jpg" muted playsinline preload="auto"></video><div class="mist-veil"></div><div class="warm"></div><div class="mist-inner"><p class="mist-logo">ARON</p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
+<div class="mist video-intro" aria-hidden="true"><video class="mist-video" data-src="intro-drop.mp4" data-loop="intro-loop.mp4" poster="intro-drop.jpg" muted playsinline preload="auto"></video><div class="mist-veil"></div><div class="warm"></div><div class="mist-inner"><p class="mist-logo"><svg class="aron-mark am-hero" viewBox="0 20 796 240" role="img" aria-label="ARON"><defs><linearGradient id="amg-hero" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--on1)"/><stop offset=".55" style="stop-color:var(--on2)"/><stop offset="1" style="stop-color:var(--on3)"/></linearGradient></defs><path d="M97.69 40.00 L102.31 40.00 L21.16 240.00 L18.84 240.00 Z M98.90 40.00 L109.10 40.00 L186.34 240.00 L181.66 240.00 Z" fill="currentColor"/><path d="M230 42.1 H300 A47.9 47.9 0 0 1 300 137.9 H274" fill="none" stroke="currentColor" stroke-width="4.2"/><path d="M230.00 40.00 L300.00 40.00 L300.00 44.20 L230.00 45.25 Z" fill="currentColor"/><path d="M287.32 137.90 L296.68 137.90 L356.55 240.00 L351.45 240.00 Z" fill="currentColor"/><path d="M400 140 A96 100 0 1 0 592 140 A96 100 0 1 0 400 140 Z M422.32 172.81 A80.66 95.38 -24.0 1 1 569.68 107.19 A80.66 95.38 -24.0 1 1 422.32 172.81 Z" fill="url(#amg-hero)" fill-rule="evenodd"/><path d="M638.00 40.00 L640.52 40.00 L642.20 240.00 L638.00 240.00 Z M765.48 40.00 L768.00 40.00 L768.00 240.00 L763.80 240.00 Z M638.00 40.00 L648.20 40.00 L768.00 240.00 L755.25 240.00 Z" fill="url(#amg-hero)"/></svg></p><p class="mist-sub">CLINIC &amp; HOSPITAL INTERIOR</p></div></div>
 <canvas class="splash" aria-hidden="true"></canvas>
 <button type="button" class="scroll-cue intro-cue" aria-label="아래로 스크롤"><span class="mouse"><i></i></span></button>
-<a class="logo" href="#intro" aria-label="ARON, 맨 위로">ARON</a>
+<a class="logo" href="#intro" aria-label="ARON, 맨 위로"><svg class="aron-mark am-top" viewBox="0 20 796 240" role="img" aria-label="ARON"><defs><linearGradient id="amg-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--on1)"/><stop offset=".55" style="stop-color:var(--on2)"/><stop offset="1" style="stop-color:var(--on3)"/></linearGradient></defs><path d="M97.69 40.00 L102.31 40.00 L21.16 240.00 L18.84 240.00 Z M98.90 40.00 L109.10 40.00 L186.34 240.00 L181.66 240.00 Z" fill="currentColor"/><path d="M230 42.1 H300 A47.9 47.9 0 0 1 300 137.9 H274" fill="none" stroke="currentColor" stroke-width="4.2"/><path d="M230.00 40.00 L300.00 40.00 L300.00 44.20 L230.00 45.25 Z" fill="currentColor"/><path d="M287.32 137.90 L296.68 137.90 L356.55 240.00 L351.45 240.00 Z" fill="currentColor"/><path d="M400 140 A96 100 0 1 0 592 140 A96 100 0 1 0 400 140 Z M422.32 172.81 A80.66 95.38 -24.0 1 1 569.68 107.19 A80.66 95.38 -24.0 1 1 422.32 172.81 Z" fill="url(#amg-top)" fill-rule="evenodd"/><path d="M638.00 40.00 L640.52 40.00 L642.20 240.00 L638.00 240.00 Z M765.48 40.00 L768.00 40.00 L768.00 240.00 L763.80 240.00 Z M638.00 40.00 L648.20 40.00 L768.00 240.00 L755.25 240.00 Z" fill="url(#amg-top)"/></svg></a>
 <header class="topbar">
   <nav class="menu" aria-label="메뉴">
     <div class="has-sub">
