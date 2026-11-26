@@ -1,4 +1,5 @@
-import math, sys
+import math, sys, os
+TRACED=open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'traced-r-path.txt')).read()
 T,B=40,240; H=B-T
 def P(pts): return 'M'+' L'.join(f'{x:.2f} {y:.2f}' for x,y in pts)+' Z'
 def stroke(xt,xb,wt,wb):
@@ -49,7 +50,7 @@ def letters(t1,t2,k,ko=None,desk=None):
         d+=' '+P([(xh,yb-hl*1.6),(xb,yb-hl*1.6),(xb,yb),(xh,yb)])                                # bowl closes onto the hairline
         L['Rd']=d
         L['Rh']=f'M{xh+hl/2} {T} V{B-30} Q{xh+hl/2} {B-hl/2} {xh+34} {B-hl/2} H{xh+78}'           # hairline leg
-    if desk=='elegant_all':   # A and N in the same serif language as the elegant R
+    if desk in ('elegant_all','traced_serif'):   # A and N in the same serif language as the elegant R
         hl=t1*0.55; sw=t2*0.95; sf=hl*1.6
         # A: hairline left leg, solid right leg, flat serifs at both feet (still no crossbar)
         A=P([(100,T),(102,T),(20+hl*2.2,B),(20,B)])+' '+P([(100,T),(100+sw*0.9,T),(184,B),(184-sw*1.25,B)])
@@ -62,6 +63,11 @@ def letters(t1,t2,k,ko=None,desk=None):
         N+=' '+P([(xl-12,T),(xl+sw*1.25,T),(xl+sw*1.25,T+sf),(xl-12,T+sf)])+' '+P([(xl-12,B-sf),(xl+14,B-sf),(xl+14,B),(xl-12,B)])
         N+=' '+P([(xr-14,T),(xr+12,T),(xr+12,T+sf),(xr-14,T+sf)])
         L['N']=N
+    if desk in ('traced','traced_serif'):   # the exact reference R (traced vector), scaled to cap height
+        k_=200/136.2243; tx=226-27.8884*k_; ty=T-25.88*k_
+        L['Rs']=''; L['Rt']=''; L['R']=''; L['Rd']=''
+        L['Rx']=f'<path d="{TRACED}" transform="translate({tx:.2f} {ty:.2f}) scale({k_:.4f})" fill-rule="evenodd"/>'
+        L['shift']=26
     if desk=='stem':     # cantilever desk: the stem is the leg, the top overhangs it on the left
         L['Rd']=P([(x0-22,T-1),(xb,T-1),(xb,T+t1*1.9),(x0-22,T+t1*1.9)])+' '+P([(x0+10,T),(x0+10+t1,T),(x0+10+t1,B),(x0+10,B)])
     # O: old-style diagonal stress — thick at lower-left and upper-right, thin at upper-left and lower-right
@@ -79,11 +85,12 @@ def letters(t1,t2,k,ko=None,desk=None):
 def svg(L,ink,grad,gid):
     return (f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">{grad}</linearGradient></defs>'
             f'<path d="{L["A"]}" fill="{ink}"/><path d="{L["Rs"] or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]}"/><path d="{L["Rt"] or "M0 0"}" fill="{ink}"/><path d="{L["Rd"]}" fill="{ink}" fill-rule="evenodd"/><path d="{L.get("Rh") or "M0 0"}" fill="none" stroke="{ink}" stroke-width="{L["t1"]*0.55}"/><path d="{L["R"] or "M0 0"}" fill="{ink}"/>'
-            f'<path d="{L["O"]}" fill="url(#{gid})" fill-rule="evenodd"/><path d="{L["N"]}" fill="url(#{gid})"/>')
+            + (f'<g fill="{ink}">{L["Rx"]}</g>' if L.get("Rx") else '')
+            + f'<g transform="translate({L.get("shift",0)},0)"><path d="{L["O"]}" fill="url(#{gid})" fill-rule="evenodd"/><path d="{L["N"]}" fill="url(#{gid})"/></g>')
 LIGHT='<stop offset="0" stop-color="#5f5c58"/><stop offset=".55" stop-color="#a7a39d"/><stop offset="1" stop-color="#d3cfc8"/>'
 DARK='<stop offset="0" stop-color="#e2ddd5"/><stop offset=".55" stop-color="#9d9993"/><stop offset="1" stop-color="#5a5753"/>'
-VB='-6 20 792 240'
-sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('Elegant · all letters',4.2,8.5,1.0,1.9,'elegant_all'),('R · elegant',4.2,8.5,1.0,1.9,'elegant'),('Desk · horseshoe',4.2,8.5,1.0,1.9,'horseshoe'),('Desk · rounded',4.2,8.5,1.0,1.9,'round'),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
+VB='-6 20 822 240'
+sets=[('Final · Thin + O',4.2,8.5,1.0,1.9,None),('Traced R · thin letters',4.2,8.5,1.0,1.9,'traced'),('Traced R · serif letters',4.2,8.5,1.0,1.9,'traced_serif'),('Elegant · all letters',4.2,8.5,1.0,1.9,'elegant_all'),('R · elegant',4.2,8.5,1.0,1.9,'elegant'),('Desk · horseshoe',4.2,8.5,1.0,1.9,'horseshoe'),('Desk · rounded',4.2,8.5,1.0,1.9,'round'),('Desk · table top',4.2,8.5,1.0,1.9,'top'),('Desk · cantilever',4.2,8.5,1.0,1.9,'stem'),('Thin',4.2,8.5,1.0,None,None),('Weighted base',4.2,8.5,1.9,None,None),('Old-style',4.2,8.5,1.5,None,None)]
 tiles=''
 for name,t1,t2,k,ko,dk in sets:
     L=letters(t1,t2,k,ko,dk); key=name.lower().replace(' · ','-').replace(' + ','-').replace(' ','-')
