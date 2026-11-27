@@ -383,3 +383,4 @@
 - Philosophy 본문에서 "아론(ARON)은 A Ripple ON…뜻입니다" 문장 삭제.
 - ABOUT: 물결 이미지 축소(56vw·최대 700px). Philosophy → Brand Story(아론+파동 이야기). 새 섹션: What we design(4), Our Promise(4), Process & Timeline(1주/1–2주/2–3주/2주/공사 기간 중 디자인 확인, 공사 6–10주) — 기간 숫자는 확인 필요한 임시값. 시공은 하지 않는다는 점 명시.
 - ABOUT 로고 축소(clamp 130–260px). 미리보기 안에서 글이 안 보이는 경우 대비해 스크롤 위치로도 나타나게 보강.
+- 버그 수정: Lenis가 About 화면 안의 휠/터치 스크롤을 막아 첫 장면 아래 내용이 안 보였음 → about-layer(와 projects)에 data-lenis-prevent.
