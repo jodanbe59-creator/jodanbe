@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARON · 세로 스트라이프 타이포</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #e9e9e7; }
+  body { display: grid; place-items: center; font-family: Inter, "Helvetica Neue", Arial, sans-serif; }
+  .poster { position: relative; height: min(94vh, 1300px); aspect-ratio: 9 / 16; background: #0b0b0b; box-shadow: 0 20px 60px rgba(0,0,0,.18); overflow: hidden; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .meta { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); color: #f2f2f2; font-size: clamp(7px, .9vh, 11px); font-weight: 600; line-height: 1.25; letter-spacing: .02em; text-transform: uppercase; text-align: left; mix-blend-mode: difference; }
+  .meta p { margin: 0 0 1.1em; }
+</style>
+</head>
+<body>
+<div class="poster">
+  <canvas id="cv"></canvas>
+  <div class="meta"><p>ARON Design<br>Clinic &amp; Hospital Interior</p><p>A vessel of light —<br>calm, considered,<br>and made to last.</p></div>
+</div>
+<script>
+/* ARON stacked vertically, drawn as horizontal light stripes with cylindrical shading (reference: striped poster type). */
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const mask = document.createElement('canvas'), mctx = mask.getContext('2d');
+  const blur = document.createElement('canvas'), bctx = blur.getContext('2d');
+  let W = 0, H = 0, D = 1, data = null, t0 = performance.now();
+
+  // rounded, condensed letter shapes built from thick strokes (inside a box x,y,w,h)
+  function letter(c, ch, x, y, w, h, s) {
+    const r = Math.max(2, w / 2 - s / 2), L = x + s / 2, R = x + w - s / 2, T = y + s / 2, B = y + h - s / 2;
+    c.beginPath();
+    if (ch === 'A') { c.moveTo(L, B); c.lineTo(L, T + r); c.arc(x + w / 2, T + r, r, Math.PI, 0); c.lineTo(R, B); c.moveTo(L, y + h * .58); c.lineTo(R, y + h * .58); }
+    if (ch === 'R') { const bh = h * .64, br = Math.max(2, (bh - s) / 2), bx = R - br; c.moveTo(L, B); c.lineTo(L, T); c.lineTo(bx, T); c.arc(bx, T + br, br, -Math.PI / 2, Math.PI / 2); c.lineTo(L, T + 2 * br); c.moveTo(x + w * .45, T + 2 * br); c.lineTo(R, B); }
+    if (ch === 'O') { c.moveTo(L, T + r); c.arc(x + w / 2, T + r, r, Math.PI, 0); c.lineTo(R, B - r); c.arc(x + w / 2, B - r, r, 0, Math.PI); c.closePath(); }
+    if (ch === 'N') { c.moveTo(L, B); c.lineTo(L, T); c.lineTo(R, B); c.lineTo(R, T); }
+    c.lineWidth = s; c.lineCap = 'round'; c.lineJoin = 'round'; c.stroke();
+  }
+
+  function build() {
+    const r = cv.getBoundingClientRect(); D = Math.min(devicePixelRatio || 1, 2);
+    W = Math.round(r.width * D); H = Math.round(r.height * D);
+    for (const c of [cv, mask, blur]) { c.width = W; c.height = H; }
+    mctx.fillStyle = '#000'; mctx.fillRect(0, 0, W, H); mctx.strokeStyle = '#fff';
+    const padX = W * .06, padY = H * .03, gap = H * .012, lh = (H - padY * 2 - gap * 3) / 4, lw = Math.min(W * .7, lh * 1.25), s = Math.min(lw, lh) * .27;
+    ['A', 'R', 'O', 'N'].forEach((ch, i) => letter(mctx, ch, padX, padY + i * (lh + gap), lw, lh, s));
+    // soft copy of the mask = inner brightness (thick centre glows, edges fall off)
+    bctx.filter = `blur(${Math.round(s * .22)}px)`; bctx.drawImage(mask, 0, 0); bctx.filter = 'none';
+    data = { m: mctx.getImageData(0, 0, W, H).data, b: bctx.getImageData(0, 0, W, H).data };
+  }
+
+  function draw(now) {
+    const t = (now - t0) / 1000, pitch = Math.max(3, Math.round(H / 300)), thick = pitch * .55;
+    ctx.fillStyle = '#0b0b0b'; ctx.fillRect(0, 0, W, H);
+    const { m, b } = data;
+    for (let y = 0; y < H; y += pitch) {
+      const shift = Math.round(Math.sin(y * .012 + t * 1.2) * W * .006);   // slow horizontal drift, row by row
+      let x = 0;
+      while (x < W) {
+        const sx = Math.min(W - 1, Math.max(0, x - shift)), i = (y * W + sx) * 4;
+        if (m[i] > 127) {
+          let x2 = x; while (x2 < W) { const j = (y * W + Math.min(W - 1, Math.max(0, x2 - shift))) * 4; if (m[j] <= 127) break; x2 += 2; }
+          // shade along the run: bright core from the blurred mask
+          const g = ctx.createLinearGradient(x, 0, x2, 0);
+          for (let k = 0; k <= 6; k++) { const xx = x + (x2 - x) * k / 6, jj = (y * W + Math.min(W - 1, Math.max(0, Math.round(xx) - shift))) * 4, v = b[jj] / 255;
+            g.addColorStop(k / 6, `rgba(255,255,255,${(.04 + .96 * Math.pow(v, 2.2)).toFixed(3)})`); }
+          ctx.fillStyle = g; ctx.fillRect(x, y, x2 - x, thick); x = x2;
+        } else x += 2;
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  build(); addEventListener('resize', build); requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
