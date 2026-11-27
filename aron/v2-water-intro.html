@@ -785,6 +785,10 @@ body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
 .cue-chev i:nth-child(2) { animation-delay: .2s; } .cue-chev i:nth-child(3) { animation-delay: .4s; }
 @keyframes cue-ch { 0% { opacity: 0; transform: rotate(45deg) translate(-4px, -4px); } 50% { opacity: 1; } 100% { opacity: 0; transform: rotate(45deg) translate(4px, 4px); } }
 @media (prefers-reduced-motion: reduce) { .cue-chev i { animation: none; opacity: 1; } }
+/* statement line matches the footer line: 1.5px black + open circle */
+.st-line { width: 1.5px !important; background: #111 !important; }
+.st-drop { width: 22px !important; height: 22px !important; margin: -11px 0 0 -11px !important; border: 1.5px solid #111; background: #fff !important; box-sizing: border-box; opacity: 0; }
+.st-label { top: calc(43vh + 44px + 30px) !important; }
 </style>
 </head>
 <body>
@@ -1581,11 +1585,10 @@ if (!CAPTURE) {
       const p = st.progress, vh = innerHeight, top = 0.3 * vh + 44, land = LAND_Y * vh + 44;   // +44: room for the longer tick above the sentence
       const fall = Math.pow(smooth(0.05, 0.5, p), 1.6);                       // the line accelerates like a falling drop
       const len = (land - top) * fall;
-      const landed = smooth(0.5, 0.56, p);
-      lineEl.style.height = Math.max(0, len - landed * (land - top)) + 'px';  // on impact the line drains into the drop
-      lineEl.style.top = (top + landed * (land - top)) + 'px';
+      lineEl.style.height = Math.max(0, len - 11) + 'px';   // line + open circle, like the footer's
+      lineEl.style.top = top + 'px';
       gsap.set('.st-label', { opacity: smooth(0.52, 0.64, p), y: 8 * (1 - smooth(0.52, 0.66, p)) });
-      gsap.set(dropEl, { top: top + len, scale: 1 + 0.4 * landed - 1.4 * smooth(0.56, 0.62, p), opacity: 1 - smooth(0.58, 0.64, p) });
+      gsap.set(dropEl, { top: top + len, scale: 1, opacity: smooth(0.04, 0.1, p) });   // no waiting dot: the circle appears once the line starts to fall
       V.open = 0;   // no reveal after the statement: the page goes straight on to the spaces
       // the lobby comes into focus as it is uncovered
       // start close on the water wall, then pull back while the mist lifts: sofas, desk and wall, then ceiling and chandelier
@@ -2137,6 +2140,12 @@ ready.then(() => {
     a.style.setProperty('background', `rgb(${c[0]},${c[1]},${c[2]})`, 'important'); };
   window.__aboutBgUpd = upd; addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd);
   const hook = () => { if (window.__lenis) window.__lenis.on('scroll', upd); }; hook(); setTimeout(hook, 1500); upd(); })();
+</script>
+<script>
+/* footer line ends level with the CLIENTS label, so it never crosses the moving names */
+(() => { const af = document.querySelector('.af'), drop = af && af.querySelector('.af-drop'), lab = af && af.querySelector('.af-label'); if (!lab) return;
+  const fit = () => { const a = af.getBoundingClientRect(), l = lab.getBoundingClientRect(); drop.style.height = Math.max(120, (l.top + l.height / 2) - a.top + 11) + 'px'; };
+  addEventListener('resize', fit); addEventListener('load', fit); fit(); })();
 </script>
 </body>
 </html>
