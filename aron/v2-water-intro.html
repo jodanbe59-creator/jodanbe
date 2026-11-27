@@ -721,6 +721,8 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .ab-story { margin: 0; font-family: "Noto Sans KR", sans-serif; font-weight: 300; font-size: 13.5px; line-height: 1.85; color: #4a4844; word-break: keep-all; }
 .ab-shader { position: relative; aspect-ratio: 2 / 1; background: #020202; overflow: hidden; }
 .ab-shader canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.about-layer .ab-story, .about-layer .ab-col p, .about-layer .ab-entry { transition: color 1.1s ease; }
+.about-layer.ink .ab-story, .about-layer.ink .ab-col p, .about-layer.ink .ab-entry { color: #0b0b0a; transition: color .35s ease; }
 </style>
 </head>
 <body>
@@ -2120,6 +2122,12 @@ if (gl) {
   kick();
 }
 })();
+</script>
+<script>
+/* About: each scroll gesture deepens the body text briefly, then it eases back */
+(() => { const L = document.getElementById('about'); if (!L) return; let tmr = 0;
+  const pulse = () => { L.classList.add('ink'); clearTimeout(tmr); tmr = setTimeout(() => L.classList.remove('ink'), 450); };
+  L.addEventListener('wheel', pulse, { passive: true }); L.addEventListener('touchmove', pulse, { passive: true }); })();
 </script>
 </body>
 </html>
