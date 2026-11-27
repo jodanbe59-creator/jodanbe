@@ -738,6 +738,18 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .about-layer .ab-vline { background: #55534f; }
 .about-layer .about-close { background: #161615; color: #eeeae4; border-color: #44423e; }
 .about-layer .about-close:hover { background: #eeeae4; color: #161615; }
+/* ABOUT: light falling onto the water */
+.about-layer .ab-fig { position: relative; isolation: isolate; }
+.about-layer .ab-fig img { position: relative; z-index: 1; }
+.about-layer .ab-fig::after { content: ""; position: absolute; z-index: 2; left: 50%; top: 50%; width: 62%; height: 46%; transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(255,250,240,.34) 0%, rgba(255,250,240,.12) 40%, rgba(255,250,240,0) 70%);
+  mix-blend-mode: screen; pointer-events: none; opacity: 0; transition: opacity 2.2s ease 1.2s; }
+.about-layer.open .ab-fig::after, .about-layer.open .ab-beam { opacity: 1; }
+.about-layer .ab-fig img { filter: brightness(.82); transition: filter 2.4s ease 1s; }
+.about-layer.open .ab-fig img { filter: brightness(1.12); }
+.ab-beam { position: absolute; z-index: 2; left: 50%; bottom: 34%; width: 74%; height: 78vh; transform: translateX(-50%) rotate(-34deg); transform-origin: 50% 100%; filter: blur(16px); mix-blend-mode: screen; pointer-events: none; opacity: 0; transition: opacity 2.6s ease .3s;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); }
+.ab-beam i { position: absolute; inset: 0; clip-path: polygon(43% 0, 57% 0, 100% 100%, 0 100%); background: linear-gradient(to bottom, rgba(255,247,232,0) 0%, rgba(255,247,232,.04) 30%, rgba(255,247,232,.16) 100%); }
 </style>
 </head>
 <body>
@@ -820,7 +832,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 <div class="about-layer" id="about" data-lenis-prevent role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
   <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
   <section class="ab-intro">
-    <figure class="ab-fig"><img src="photos/ripple-still-dark.png" alt="" aria-hidden="true"></figure>
+    <figure class="ab-fig"><span class="ab-beam" aria-hidden="true"><i></i></span><img src="photos/ripple-still-dark.png" alt="" aria-hidden="true"></figure>
     <div class="ab-id">
       <div class="ab-dict">
         <p class="ab-entry"><i>n.</i> <b>aron</b> <span class="ab-ph">[아론]</span> <span class="ab-sep">:</span> 히브리어로 소중한 것을 담는 그릇</p>
