@@ -590,10 +590,61 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .af-ko b { font-family: "Noto Serif KR", serif !important; font-weight: 700; letter-spacing: -.02em; }
 .af-ko i { font-family: "Noto Sans KR", sans-serif !important; font-weight: 200; letter-spacing: -.01em; }
 /* ABOUT: only visible from the menu, as its own full-screen layer */
-.about-layer { position: fixed; inset: 0; z-index: 40; background: #fff; overflow-y: auto; overscroll-behavior: contain; display: grid; align-items: center;
+.about-layer { position: fixed; inset: 0; z-index: 40; background: #fff; overflow-y: auto; overscroll-behavior: contain; display: block;
   opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility .5s; }
 .about-layer.open { opacity: 1; visibility: visible; }
 .about-layer .about-close { z-index: 41; background: #fff; }
+/* ABOUT layer: brand philosophy motion — drop → ripple → ARON = A Ripple ON */
+.ab-hero { position: relative; height: 100vh; min-height: 560px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; color: #111; }
+.ab-water { position: absolute; left: 50%; top: 50%; width: min(120vmin, 1100px); height: min(120vmin, 1100px); transform: translate(-50%, -50%); overflow: visible; pointer-events: none; }
+.ab-rings circle { fill: none; stroke: #b9b8b4; stroke-width: .6; opacity: 0; transform-box: fill-box; transform-origin: center; vector-effect: non-scaling-stroke; }
+.ab-rings circle.ab-sky { stroke: #9FC3F1; }
+.ab-drop { fill: #2b2b2b; opacity: 0; }
+.about-layer.play .ab-drop { animation: ab-fall 1s cubic-bezier(.55,0,.9,.4) .25s both; }
+.about-layer.play .ab-rings circle { animation: ab-ring 5.2s cubic-bezier(.15,.6,.3,1) infinite; }
+.about-layer.play .ab-rings circle:nth-child(1) { animation-delay: 1.25s; }
+.about-layer.play .ab-rings circle:nth-child(2) { animation-delay: 1.65s; }
+.about-layer.play .ab-rings circle:nth-child(3) { animation-delay: 2.15s; }
+.about-layer.play .ab-rings circle:nth-child(4) { animation-delay: 2.75s; }
+.about-layer.play .ab-rings circle:nth-child(5) { animation-delay: 3.45s; }
+@keyframes ab-fall { 0% { opacity: 0; transform: translateY(-260px) scaleY(1.3); } 12% { opacity: 1; } 92% { opacity: 1; transform: translateY(0) scaleY(1.15); } 100% { opacity: 0; transform: translateY(0) scale(1.6, .3); } }
+@keyframes ab-ring { 0% { opacity: 0; transform: scale(.05); } 8% { opacity: .9; } 100% { opacity: 0; transform: scale(6.5); } }
+.ab-name { position: relative; margin: 0; font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: clamp(56px, 9vw, 150px); line-height: 1; letter-spacing: .04em; white-space: nowrap; display: flex; align-items: baseline; }
+.ab-name b { font-weight: 500; opacity: 0; transform: translateY(.25em); transition: opacity 1s ease, transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.ab-name b:nth-of-type(2) { transition-delay: .12s; } .ab-name b:nth-of-type(3) { transition-delay: .24s; }
+.ab-x { display: inline-block; overflow: hidden; max-width: 0; opacity: 0; color: #a3a19c; font-style: italic; font-weight: 300; transition: max-width 1.4s cubic-bezier(.7,0,.2,1), opacity 1s ease .3s; }
+.about-layer.s1 .ab-name b { opacity: 1; transform: none; }
+.about-layer.s2 .ab-x { max-width: var(--w, 4em); opacity: 1; }
+.ab-cap { position: relative; margin: 34px 0 0; font-family: "Noto Sans KR", sans-serif; font-weight: 300; font-size: clamp(13px, 1vw, 15px); letter-spacing: .14em; color: #6b6964; opacity: 0; transform: translateY(8px); transition: opacity 1s ease .9s, transform 1s ease .9s; }
+.about-layer.s2 .ab-cap { opacity: 1; transform: none; }
+
+.ab-rv { opacity: 0; transform: translateY(28px); transition: opacity 1.1s ease, transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.ab-rv.in { opacity: 1; transform: none; }
+.ab-phil { max-width: 860px; margin: 0 auto; padding: clamp(60px, 10vw, 140px) clamp(20px, 4vw, 40px) clamp(40px, 6vw, 80px); text-align: center; color: #2b2b2b; }
+.ab-eye { margin: 0 0 22px; font-family: Jost, sans-serif; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: #8d8b86; }
+.ab-head { margin: 0 0 36px; font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: clamp(38px, 5vw, 72px); line-height: 1.08; color: #111; transition-delay: .1s; }
+.ab-head em { font-style: italic; font-weight: 300; color: #4a4844; }
+.ab-body { margin: 0; font-family: "Noto Sans KR", sans-serif; font-weight: 300; font-size: clamp(15px, 1.15vw, 18px); line-height: 2.05; word-break: keep-all; transition-delay: .2s; }
+.ab-body b { font-weight: 500; color: #111; }
+.ab-prin { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); max-width: 1240px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) clamp(16px, 2.8vw, 40px) clamp(60px, 8vw, 120px); border-top: 1px solid #ecebe8; }
+.ab-p { color: #2b2b2b; } .ab-p:nth-child(2) { transition-delay: .15s; } .ab-p:nth-child(3) { transition-delay: .3s; }
+.ab-ic { width: 72px; height: 72px; margin-bottom: 26px; overflow: visible; }
+.ab-ic * { fill: none; stroke: #2b2b2b; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.ab-no { display: block; margin-bottom: 12px; font-family: Jost, sans-serif; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #8d8b86; }
+.ab-p h4 { margin: 0 0 14px; font-family: "Noto Serif KR", serif; font-weight: 500; font-size: clamp(19px, 1.5vw, 23px); color: #111; }
+.ab-p p { margin: 0; font-family: "Noto Sans KR", sans-serif; font-weight: 300; font-size: 15px; line-height: 1.95; word-break: keep-all; }
+.ic-drop ellipse { fill: #2b2b2b; stroke: none; animation: ic-drop 2.6s cubic-bezier(.55,0,.9,.4) infinite; }
+.ic-drop line { stroke: #b9b8b4; }
+@keyframes ic-drop { 0% { transform: translateY(-34px); opacity: 0; } 15% { opacity: 1; } 70% { transform: translateY(22px); opacity: 1; } 78%, 100% { transform: translateY(22px) scale(2, .3); opacity: 0; } }
+.ic-ripple circle { transform-box: fill-box; transform-origin: center; animation: ic-ring 3s ease-out infinite; opacity: 0; }
+.ic-ripple circle:nth-child(2) { animation-delay: 1s; } .ic-ripple circle:nth-child(3) { animation-delay: 2s; stroke: #9FC3F1; }
+.ic-ripple .dot { fill: #2b2b2b; stroke: none; animation: none; opacity: 1; }
+@keyframes ic-ring { 0% { transform: scale(.2); opacity: 0; } 10% { opacity: 1; } 100% { transform: scale(3.4); opacity: 0; } }
+.ic-still .wave { animation: ic-still 4s ease-in-out infinite alternate; }
+@keyframes ic-still { from { d: path("M-32 0 Q-24 -10 -16 0 T0 0 T16 0 T32 0"); } to { d: path("M-32 0 Q-24 0 -16 0 T0 0 T16 0 T32 0"); } }
+.about-layer section.sky { border-top: 1px solid #ecebe8; }
+@media (max-width: 760px) { .ab-prin { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .ab-rings circle, .ab-drop, .ab-ic * { animation: none !important; } .ab-rv { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
@@ -675,6 +726,32 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 <div class="about-layer" id="about" role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
   <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
+  <section class="ab-hero" aria-label="ARON — A Ripple ON">
+    <svg class="ab-water" viewBox="-300 -300 600 600" aria-hidden="true">
+      <g class="ab-rings"><circle r="40"/><circle r="40"/><circle r="40"/><circle r="40" class="ab-sky"/><circle r="40"/></g>
+      <ellipse class="ab-drop" cx="0" cy="0" rx="5" ry="7"/>
+    </svg>
+    <h2 class="ab-name"><b>A</b><span class="ab-x ab-sp">&nbsp;</span><b>R</b><span class="ab-x">ipple</span><span class="ab-x ab-sp">&nbsp;</span><b>ON</b></h2>
+    <p class="ab-cap">아론 — 첫 물방울이 만든 파동</p>
+  </section>
+
+  <section class="ab-phil">
+    <p class="ab-eye ab-rv">Philosophy</p>
+    <h3 class="ab-head ab-rv">One drop.<br><em>A ripple of care.</em></h3>
+    <p class="ab-body ab-rv">아론(ARON)은 <b>‘A Ripple ON’</b>, 하나의 파동이 시작된다는 뜻입니다.<br>
+      수면에 떨어진 물방울 하나가 끝없이 번져가듯, 우리가 그은 한 줄의 선은 그 공간에 들어서는 모든 사람에게 닿습니다.<br>
+      긴장한 채 문을 여는 환자에게는 안도감으로, 매일 그곳을 지키는 의료진에게는 편안함으로, 그리고 병원에는 오래 남는 신뢰로.</p>
+  </section>
+
+  <section class="ab-prin">
+    <div class="ab-p ab-rv"><svg viewBox="-40 -40 80 80" class="ab-ic ic-drop" aria-hidden="true"><line x1="-30" y1="26" x2="30" y2="26"/><ellipse cx="0" cy="0" rx="3.2" ry="4.4"/></svg>
+      <span class="ab-no">01 — Drop</span><h4>한 사람에서 시작합니다</h4><p>모든 설계는 문을 여는 단 한 사람의 시선과 걸음에서 출발합니다. 그 사람이 처음 마주하는 5초를 가장 먼저 그립니다.</p></div>
+    <div class="ab-p ab-rv"><svg viewBox="-40 -40 80 80" class="ab-ic ic-ripple" aria-hidden="true"><circle r="10"/><circle r="10"/><circle r="10"/><circle r="2" class="dot"/></svg>
+      <span class="ab-no">02 — Ripple</span><h4>고요함은 번져갑니다</h4><p>부드러운 곡선과 겹겹의 빛으로 마음의 긴장을 낮추고, 그 편안함이 대기실에서 진료실까지 공간 전체로 퍼지게 합니다.</p></div>
+    <div class="ab-p ab-rv"><svg viewBox="-40 -40 80 80" class="ab-ic ic-still" aria-hidden="true"><path class="wave" d="M-32 0 Q-24 -10 -16 0 T0 0 T16 0 T32 0"/></svg>
+      <span class="ab-no">03 — Still</span><h4>다시 잔잔해지는 공간</h4><p>파동이 지나간 수면처럼, 유행보다 오래 머무는 정직한 소재와 비율로 완성합니다. 10년 뒤에도 고요한 공간을 만듭니다.</p></div>
+  </section>
+
   <section class="sky" aria-labelledby="t-sky">
     <div class="sky-card"><div class="sky-bars" aria-hidden="true"><i class="sky-bar" style="--c:#EDEDEB;--w:0.46;--n:0"></i><i class="sky-bar" style="--c:#BDBDBA;--w:0.78;--n:1"></i><i class="sky-bar" style="--c:#9FC3F1;--w:1.0;--n:2"></i><i class="sky-bar" style="--c:#CCDFF8;--w:0.22;--n:3"></i><i class="sky-bar" style="--c:#FF50BF;--w:0.56;--n:4"></i></div><div class="sky-text">
       <h2 id="t-sky" class="sky-h">About</h2>
@@ -1899,9 +1976,16 @@ ready.then(() => {
 </script>
 <script>
 (() => { const L = document.getElementById('about'); if (!L) return;
-  const sk = L.querySelector('.sky'), btn = document.querySelector('[data-open="about"]'), x = L.querySelector('.about-close');
+  const sk = L.querySelector('section.sky'), btn = document.querySelector('[data-open="about"]'), x = L.querySelector('.about-close');
   function open() { L.classList.add('open'); L.setAttribute('aria-hidden', 'false'); document.documentElement.classList.add('layer-open'); if (window.__lenis) window.__lenis.stop();
-    L.scrollTop = 0; sk.classList.remove('is-in'); void sk.offsetWidth; requestAnimationFrame(() => sk.classList.add('is-in')); setTimeout(() => x.focus(), 50); }
+    L.scrollTop = 0; sk.classList.remove('is-in'); play(); setTimeout(() => x.focus(), 50); }
+  const xs = L.querySelectorAll('.ab-x'), rvs = L.querySelectorAll('.ab-rv'); let tm = [];
+  xs.forEach((e) => { e.style.maxWidth = 'none'; e.style.setProperty('--w', (e.scrollWidth + 2) + 'px'); e.style.maxWidth = ''; });
+  function play() { tm.forEach(clearTimeout); L.classList.remove('play', 's1', 's2'); rvs.forEach((r) => r.classList.remove('in')); void L.offsetWidth;
+    xs.forEach((e) => { e.style.maxWidth = 'none'; e.style.setProperty('--w', (e.scrollWidth + 2) + 'px'); e.style.maxWidth = ''; });
+    L.classList.add('play'); tm = [setTimeout(() => L.classList.add('s1'), 1350), setTimeout(() => L.classList.add('s2'), 2900)]; }
+  const rio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); if (e.target === sk) sk.classList.add('is-in'); } }), { root: L, threshold: 0.2 });
+  rvs.forEach((r) => rio.observe(r)); rio.observe(sk);
   function close() { if (!L.classList.contains('open')) return; L.classList.remove('open'); L.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('layer-open'); if (window.__lenis) window.__lenis.start(); btn.focus(); }
   btn.addEventListener('click', open); x.addEventListener('click', close);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); }); })();
