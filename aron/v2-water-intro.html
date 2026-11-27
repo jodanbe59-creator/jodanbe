@@ -741,15 +741,15 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 /* ABOUT: light falling onto the water */
 .about-layer .ab-fig { position: relative; isolation: isolate; }
 .about-layer .ab-fig img { position: relative; z-index: 1; }
-.about-layer .ab-fig::after { content: ""; position: absolute; z-index: 2; left: 50%; top: 50%; width: 62%; height: 46%; transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(255,250,240,.34) 0%, rgba(255,250,240,.12) 40%, rgba(255,250,240,0) 70%);
+.about-layer .ab-fig::after { content: ""; position: absolute; z-index: 2; left: 50%; top: 50%; width: 130%; height: 110%; transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(255,250,240,.26) 0%, rgba(255,250,240,.12) 30%, rgba(255,250,240,.04) 55%, rgba(255,250,240,0) 72%);
   mix-blend-mode: screen; pointer-events: none; opacity: 0; transition: opacity 2.2s ease 1.2s; }
 .about-layer.open .ab-fig::after, .about-layer.open .ab-beam { opacity: 1; }
 .about-layer .ab-fig img { filter: brightness(.82); transition: filter 2.4s ease 1s; }
 .about-layer.open .ab-fig img { filter: brightness(1.12); }
-.ab-beam { position: absolute; z-index: 2; left: 50%; bottom: 34%; width: 74%; height: 78vh; transform: translateX(-50%) rotate(-34deg); transform-origin: 50% 100%; filter: blur(16px); mix-blend-mode: screen; pointer-events: none; opacity: 0; transition: opacity 2.6s ease .3s;
+.ab-beam { position: absolute; z-index: 2; left: 50%; bottom: 34%; width: 240%; height: 80vh; transform: translateX(-50%) rotate(-34deg); transform-origin: 50% 100%; filter: blur(10px); mix-blend-mode: screen; pointer-events: none; opacity: 0; transition: opacity 2.6s ease .3s;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); }
-.ab-beam i { position: absolute; inset: 0; clip-path: polygon(43% 0, 57% 0, 100% 100%, 0 100%); background: linear-gradient(to bottom, rgba(255,247,232,0) 0%, rgba(255,247,232,.04) 30%, rgba(255,247,232,.16) 100%); }
+.ab-beam i { position: absolute; inset: 0; background: radial-gradient(ellipse 22% 100% at 50% 100%, rgba(255,247,232,.20) 0%, rgba(255,247,232,.10) 35%, rgba(255,247,232,.03) 60%, rgba(255,247,232,0) 80%); }
 </style>
 </head>
 <body>
