@@ -380,3 +380,4 @@
 - ABOUT 첫 장면: 영상을 전체화면 대신 가운데 액자(78vw·최대 1120px, 16:9, 흰 여백)로. 글자 ARON 대신 홈 히어로와 같은 SVG 로고(Final bold AR) 사용, 영상 위 가운데. 그 아래 작은 "A Ripple ON" + 한글 캡션.
 - ABOUT 첫 장면: 영상 빼고 사용자 제공 물결 이미지(채도 15%로 낮춤, 위아래 여백 잘라 2:1) photos/ripple-still.jpg로 교체. 이미지 페이드·확대 → 로고(0.9초) → A Ripple ON(2.3초).
 - ABOUT 첫 장면: 로고 아래 "A Ripple ON" 펼침과 한글 캡션 삭제 → "아론"만 표시 (사용자: 맘대로 정하지 말 것).
+- Philosophy 본문에서 "아론(ARON)은 A Ripple ON…뜻입니다" 문장 삭제.
