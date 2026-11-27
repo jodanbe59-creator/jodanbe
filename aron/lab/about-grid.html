@@ -23,6 +23,15 @@
   .tint { position: absolute; inset: 0; z-index: 1; background: rgba(150,168,196,.16); mix-blend-mode: multiply; pointer-events: none; }
   .t1 { --bx: 0%; --by: 0%; } .t2 { --bx: 50%; --by: 0%; } .t3 { --bx: 100%; --by: 0%; }
   .t4 { --bx: 0%; --by: 100%; } .t5 { --bx: 50%; --by: 100%; } .t6 { --bx: 100%; --by: 100%; }
+  /* per-tile photo swap (owner/editors only) */
+  .t.has-img::before { background: var(--img) center / cover no-repeat, #f4f4f3; }
+  .swap { position: absolute; z-index: 3; right: 8px; bottom: 8px; display: none; gap: 6px; }
+  body.can-edit .swap { display: flex; }
+  .swap button { all: unset; cursor: pointer; font: 500 11px/1 Inter, "Noto Sans KR", sans-serif; letter-spacing: .02em; color: #111; background: rgba(255,255,255,.86); border: 1px solid rgba(0,0,0,.12); border-radius: 999px; padding: 7px 10px; opacity: 0; transition: opacity .2s; }
+  .t:hover .swap button, .swap button:focus-visible { opacity: 1; }
+  .swap .reset { display: none; } .t.has-img .swap .reset { display: inline-block; }
+  .t.busy::before { opacity: .5; }
+  .note { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 9; font: 12px/1.4 "Noto Sans KR", sans-serif; color: #ddd; background: rgba(0,0,0,.6); padding: 8px 12px; border-radius: 8px; display: none; }
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (prefers-reduced-motion: reduce) { .t::before { animation: none; } }
 </style>
@@ -30,13 +39,41 @@
 <body>
 <section class="ag" aria-label="About">
   <div class="grid">
-    <div class="t t1"><i class="tint"></i><p class="tc">n. aron [아론]<span class="ko">히브리어로 소중한 것을 담는 그릇</span></p></div>
-    <div class="t t2"><i class="tint"></i><p class="tl">ARON Design · About</p><p class="mr">A vessel of light</p></div>
-    <div class="t t3"><i class="tint"></i><p class="ml">Philosophy<span class="ko">물방울 하나가 번져가듯,<br>처음 그은 선이 공간의 모든 사람에게<br>닿도록 디자인합니다</span></p></div>
-    <div class="t t4"><i class="tint"></i><p class="bl">빛을 담은 그릇에 물방울 하나가 떨어지면,<br>파동이 일고 빛이 공간 전체로 번져갑니다</p></div>
-    <div class="t t5"><i class="tint"></i><p class="bc">Design<span class="ko">진료의 흐름과 환자의 마음을 먼저 생각한<br>편안하고 고요한 공간을 제안합니다</span></p></div>
-    <div class="t t6"><i class="tint"></i><p class="mr">Promise<span class="ko">개원일에 맞춘 설계 일정과<br>그대로 지을 수 있는 정확한 도면을 약속합니다</span></p><p class="bl">Clinic &amp; Hospital Interior<br>Instagram @aron_design</p></div>
+    <div class="t t1" data-tile="t1"><i class="tint"></i><span class="swap"><button type="button" class="pick">사진 바꾸기</button><button type="button" class="reset">처음 사진</button></span><p class="tc">n. aron [아론]<span class="ko">히브리어로 소중한 것을 담는 그릇</span></p></div>
+    <div class="t t2" data-tile="t2"><i class="tint"></i><span class="swap"><button type="button" class="pick">사진 바꾸기</button><button type="button" class="reset">처음 사진</button></span><p class="tl">ARON Design · About</p><p class="mr">A vessel of light</p></div>
+    <div class="t t3" data-tile="t3"><i class="tint"></i><span class="swap"><button type="button" class="pick">사진 바꾸기</button><button type="button" class="reset">처음 사진</button></span><p class="ml">Philosophy<span class="ko">물방울 하나가 번져가듯,<br>처음 그은 선이 공간의 모든 사람에게<br>닿도록 디자인합니다</span></p></div>
+    <div class="t t4" data-tile="t4"><i class="tint"></i><span class="swap"><button type="button" class="pick">사진 바꾸기</button><button type="button" class="reset">처음 사진</button></span><p class="bl">빛을 담은 그릇에 물방울 하나가 떨어지면,<br>파동이 일고 빛이 공간 전체로 번져갑니다</p></div>
+    <div class="t t5" data-tile="t5"><i class="tint"></i><span class="swap"><button type="button" class="pick">사진 바꾸기</button><button type="button" class="reset">처음 사진</button></span><p class="bc">Design<span class="ko">진료의 흐름과 환자의 마음을 먼저 생각한<br>편안하고 고요한 공간을 제안합니다</span></p></div>
+    <div class="t t6" data-tile="t6"><i class="tint"></i><span class="swap"><button type="button" class="pick">사진 바꾸기</button><button type="button" class="reset">처음 사진</button></span><p class="mr">Promise<span class="ko">개원일에 맞춘 설계 일정과<br>그대로 지을 수 있는 정확한 도면을 약속합니다</span></p><p class="bl">Clinic &amp; Hospital Interior<br>Instagram @aron_design</p></div>
   </div>
 </section>
+<p class="note" role="status"></p>
+<input type="file" accept="image/*" id="file" hidden>
+<script>
+/* Each tile's photo can be swapped by the owner/editors: upload -> assets, pointer -> db "tiles/<id>". Everyone sees the saved photos. */
+(async () => {
+  const note = document.querySelector('.note'), file = document.getElementById('file');
+  const say = (t) => { note.textContent = t; note.style.display = t ? 'block' : 'none'; if (t) setTimeout(() => (note.style.display = 'none'), 4000); };
+  const tiles = [...document.querySelectorAll('.t[data-tile]')];
+  const show = (el, url) => { if (url && url.startsWith('/_blob/')) { el.style.setProperty('--img', 'url("' + url.replace(/"/g, '') + '")'); el.classList.add('has-img'); } else { el.style.removeProperty('--img'); el.classList.remove('has-img'); } };
+  const db = await claude.use('db'); if (!db) return;
+  const user = await claude.use('user'), assets = await claude.use('assets');
+  let edit = false; try { edit = !!(user && await user.canEdit()); } catch (e) {}
+  if (edit && assets) document.body.classList.add('can-edit');
+  const timer = setTimeout(() => say('저장된 사진을 아직 불러오지 못했어요.'), 10000);
+  db.collection('tiles').onSnapshot((snap) => { if (!snap.metadata.fromCache) clearTimeout(timer);
+    const map = {}; snap.docs.forEach((d) => { const v = d.data(); if (v && v.assetId) map[d.id] = '/_blob/' + String(v.assetId); });
+    tiles.forEach((el) => show(el, map[el.dataset.tile])); }, () => { clearTimeout(timer); });
+  let target = null;
+  tiles.forEach((el) => {
+    el.querySelector('.pick').addEventListener('click', () => { target = el; file.value = ''; file.click(); });
+    el.querySelector('.reset').addEventListener('click', async () => { try { await db.doc('tiles/' + el.dataset.tile).delete(); } catch (e) { say('되돌리지 못했어요.'); } });
+  });
+  file.addEventListener('change', async () => { const f = file.files && file.files[0]; if (!f || !target) return; const el = target; el.classList.add('busy');
+    try { const a = await assets.upload(f); await db.doc('tiles/' + el.dataset.tile).set({ assetId: a.id, name: f.name.slice(0, 120), at: new Date().toISOString() }); show(el, '/_blob/' + a.id); }
+    catch (e) { say(e && e.code === 'quota_exceeded' ? '저장 공간이 가득 찼어요.' : '사진을 올리지 못했어요. 20MB 이하 이미지인지 확인해 주세요.'); }
+    el.classList.remove('busy'); });
+})();
+</script>
 </body>
 </html>
