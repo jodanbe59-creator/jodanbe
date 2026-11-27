@@ -756,6 +756,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 /* menu bar slides up after the hero, slides back down on return */
 .topbar, a.logo { translate: 0 0; transition: translate .7s cubic-bezier(.22,.7,.2,1); }
 body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
+.st-label { position: absolute; left: 50%; top: calc(43vh + 44px + 22px); transform: translateX(-50%); margin: 0; font-family: Jost, sans-serif; font-weight: 400; font-size: 12px; letter-spacing: .34em; padding-left: .34em; text-transform: uppercase; color: #4a4844; opacity: 0; }
 </style>
 </head>
 <body>
@@ -799,6 +800,7 @@ body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
         <span class="st-tick" aria-hidden="true"></span>
         <p class="st-text">A vessel of <em>light</em>.</p>
         <span class="st-line" aria-hidden="true"></span>
+        <span class="st-label">About</span>
       </div>
       <div class="st-fx" aria-hidden="true">
         <i class="st-drop"></i><i class="st-ring"></i><i class="st-ring"></i><i class="st-ring"></i>
@@ -1560,6 +1562,7 @@ if (!CAPTURE) {
       const landed = smooth(0.5, 0.56, p);
       lineEl.style.height = Math.max(0, len - landed * (land - top)) + 'px';  // on impact the line drains into the drop
       lineEl.style.top = (top + landed * (land - top)) + 'px';
+      gsap.set('.st-label', { opacity: smooth(0.52, 0.64, p), y: 8 * (1 - smooth(0.52, 0.66, p)) });
       gsap.set(dropEl, { top: top + len, scale: 1 + 0.4 * landed - 1.4 * smooth(0.56, 0.62, p), opacity: 1 - smooth(0.58, 0.64, p) });
       V.open = 0;   // no reveal after the statement: the page goes straight on to the spaces
       // the lobby comes into focus as it is uncovered
@@ -2099,6 +2102,17 @@ ready.then(() => {
 /* menu bar: up once the hero has scrolled past, down again when you come back to it */
 (() => { const hero = document.getElementById('intro'); if (!hero) return;
   const upd = () => { const b = hero.getBoundingClientRect(); document.body.classList.toggle('bar-up', b.bottom < innerHeight * 0.5); };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd);
+  const hook = () => { if (window.__lenis) window.__lenis.on('scroll', upd); }; hook(); setTimeout(hook, 1500); upd(); })();
+</script>
+<script>
+/* About background deepens from white to charcoal as the section scrolls in */
+(() => { const a = document.getElementById('about'); if (!a) return;
+  const A = [255, 255, 255], B = [22, 22, 21];
+  const upd = () => { const r = a.getBoundingClientRect(), vh = innerHeight;
+    let t = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.95))); t = t * t * (3 - 2 * t);
+    const c = A.map((v, i) => Math.round(v + (B[i] - v) * t));
+    a.style.setProperty('background', `rgb(${c[0]},${c[1]},${c[2]})`, 'important'); };
   addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd);
   const hook = () => { if (window.__lenis) window.__lenis.on('scroll', upd); }; hook(); setTimeout(hook, 1500); upd(); })();
 </script>
