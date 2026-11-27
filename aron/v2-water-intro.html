@@ -753,6 +753,9 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .about-layer { --lb-angle: -29deg; --lb-int: 0.8; --lb-spread: 42%; --lb-blur: 10px; --lb-len: 140vh; --lb-glow: 0.55; }   /* light values chosen by the user */
 /* About now lives on the home page, right under "A vessel of light." */
 .about-layer.about-sec { position: relative !important; inset: auto; z-index: 3; opacity: 1 !important; visibility: visible !important; transform: none !important; overflow: hidden; overscroll-behavior: auto; min-height: 100vh; transition: none; }
+/* menu bar slides up after the hero, slides back down on return */
+.topbar, a.logo { translate: 0 0; transition: translate .7s cubic-bezier(.22,.7,.2,1); }
+body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
 </style>
 </head>
 <body>
@@ -2091,6 +2094,13 @@ ready.then(() => {
   const upd = () => { const b = a.getBoundingClientRect(); document.body.classList.toggle('on-dark', b.top < 60 && b.bottom > 60); };
   addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd);
   if (window.__lenis) window.__lenis.on('scroll', upd); setTimeout(() => { if (window.__lenis) window.__lenis.on('scroll', upd); }, 1500); upd(); })();
+</script>
+<script>
+/* menu bar: up once the hero has scrolled past, down again when you come back to it */
+(() => { const hero = document.getElementById('intro'); if (!hero) return;
+  const upd = () => { const b = hero.getBoundingClientRect(); document.body.classList.toggle('bar-up', b.bottom < innerHeight * 0.5); };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd);
+  const hook = () => { if (window.__lenis) window.__lenis.on('scroll', upd); }; hook(); setTimeout(hook, 1500); upd(); })();
 </script>
 </body>
 </html>
