@@ -681,6 +681,31 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .ab-steps em { grid-row: span 2; font-style: normal; font-family: Jost, "Noto Sans KR", sans-serif; font-size: 14px; letter-spacing: .06em; color: #8d8b86; padding-top: 2px; }
 .ab-steps b { font-family: "Noto Sans KR", sans-serif; font-weight: 500; font-size: 17px; color: #111; margin-bottom: 8px; }
 @media (max-width: 860px) { .ab-sec { grid-template-columns: 1fr; } .ab-sec-h { position: static; } .ab-list { grid-template-columns: 1fr; } .ab-steps li { grid-template-columns: 1fr; } .ab-steps em { grid-row: auto; margin-bottom: 4px; } }
+/* ABOUT: quiet, lots of white space, no motion */
+.about-layer .ab-rv { opacity: 1 !important; transform: none !important; transition: none !important; }
+.about-layer .sky-bar { transform: none !important; transition: none !important; }
+.about-layer .ab-steps .ab-dot::after { display: none; }
+.ab-intro { max-width: 1240px; margin: 0 auto; padding: clamp(120px, 16vh, 180px) clamp(16px, 2.8vw, 40px) clamp(90px, 12vh, 140px); display: flex; flex-direction: column; align-items: center; color: #2b2b2b; }
+.ab-fig { margin: 0; width: min(44vw, 560px); }
+.ab-fig img { display: block; width: 100%; height: auto; }
+.ab-id { margin-top: clamp(36px, 5vh, 56px); display: flex; align-items: center; gap: 22px; }
+.ab-mark { margin: 0; width: clamp(84px, 7vw, 120px); line-height: 0; }
+.about-layer .aron-mark.am-about { color: #1b1a18; --on1: #5f5c58; --on2: #a7a39d; --on3: #d3cfc8; width: 100%; }
+.ab-def { margin: 0; padding-left: 22px; border-left: 1px solid #d9d8d4; font-family: "Noto Sans KR", Jost, sans-serif; font-weight: 300; font-size: 14px; letter-spacing: .06em; color: #4a4844; }
+.ab-vline { display: block; width: 1px; height: clamp(64px, 9vh, 110px); background: #bdbcb8; margin: clamp(44px, 6vh, 70px) 0; }
+.ab-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(100%, 1040px); }
+.ab-col { padding: 6px clamp(18px, 2.6vw, 40px); border-left: 1px solid #ecebe8; }
+.ab-col:first-child { border-left: 0; }
+.ab-num { display: block; font-family: Jost, sans-serif; font-size: 11px; letter-spacing: .24em; color: #a3a19c; margin-bottom: 14px; }
+.ab-col h3 { margin: 0 0 14px; font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: clamp(22px, 1.9vw, 28px); line-height: 1.15; color: #111; }
+.ab-col p { margin: 0; font-family: "Noto Sans KR", sans-serif; font-weight: 300; font-size: 13.5px; line-height: 1.85; color: #6b6964; word-break: keep-all; }
+@media (max-width: 760px) { .ab-fig { width: 78vw; } .ab-cols { grid-template-columns: 1fr; gap: 34px; } .ab-col { border-left: 0; text-align: center; } .ab-id { flex-direction: column; gap: 14px; } .ab-def { border-left: 0; padding-left: 0; } }
+.about-layer { display: flex !important; align-items: center; justify-content: center; }
+.ab-intro { width: 100%; padding: clamp(56px, 8vh, 96px) clamp(16px, 2.8vw, 40px) clamp(40px, 6vh, 70px); }
+.ab-fig { width: min(44vw, 560px, 64vh); }
+.ab-id { margin-top: clamp(22px, 3.6vh, 44px); }
+.ab-vline { height: clamp(36px, 6vh, 80px); margin: clamp(22px, 3.6vh, 44px) 0; }
+@media (max-width: 760px) { .ab-intro { padding-top: 64px; padding-bottom: 28px; } .ab-cols { gap: 20px; } .ab-col h3 { margin-bottom: 8px; } .ab-num { margin-bottom: 6px; } .ab-vline { margin: 18px 0; } }
 </style>
 </head>
 <body>
@@ -762,71 +787,20 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 <div class="about-layer" id="about" data-lenis-prevent role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
   <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
-  <section class="ab-hero" aria-label="ARON 아론">
-    <div class="ab-frame">
-      <img class="ab-ripple" src="photos/ripple-still.jpg" alt="" aria-hidden="true">
-      <h2 class="ab-logo" aria-label="ARON"><svg class="aron-mark am-about" viewBox="-6 20 822 240" aria-hidden="true"><defs><linearGradient id="amg-hero-ab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--on1)"/><stop offset=".55" style="stop-color:var(--on2)"/><stop offset="1" style="stop-color:var(--on3)"/></linearGradient></defs><path d="M96.30 40.00 L103.70 40.00 L21.85 240.00 L18.15 240.00 Z M95.84 40.00 L112.16 40.00 L187.74 240.00 L180.26 240.00 Z" fill="currentColor"/><path d="M230 43.36 H300 A46.64 46.64 0 0 1 300 136.64 H274" fill="none" stroke="currentColor" stroke-width="6.720000000000001"/><path d="M230.00 40.00 L300.00 40.00 L300.00 46.72 L230.00 48.40 Z" fill="currentColor"/><path d="" fill="currentColor" fill-rule="evenodd"/><path d="M0 0" fill="currentColor"/><path d="M0 0" fill="none" stroke="currentColor" stroke-width="2.3100000000000005"/><path d="M284.52 136.64 L299.48 136.64 L358.08 240.00 L349.92 240.00 Z" fill="currentColor"/><g transform="translate(0,0)"><path d="M400 140 A96 100 0 1 0 592 140 A96 100 0 1 0 400 140 Z M422.32 172.81 A80.66 95.38 -24.0 1 1 569.68 107.19 A80.66 95.38 -24.0 1 1 422.32 172.81 Z" fill="url(#amg-hero-ab)" fill-rule="evenodd"/><path d="M638.00 40.00 L640.52 40.00 L642.20 240.00 L638.00 240.00 Z M765.48 40.00 L768.00 40.00 L768.00 240.00 L763.80 240.00 Z M638.00 40.00 L648.20 40.00 L768.00 240.00 L755.25 240.00 Z" fill="url(#amg-hero-ab)"/><path d="M0 0" fill="url(#amg-hero-ab)"/></g></svg></h2>
+  <section class="ab-intro">
+    <figure class="ab-fig"><img src="photos/ripple-still.jpg" alt="" aria-hidden="true"></figure>
+    <div class="ab-id">
+      <h2 class="ab-mark" aria-label="ARON"><svg class="aron-mark am-about" viewBox="-6 20 822 240" aria-hidden="true"><defs><linearGradient id="amg-hero-ab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--on1)"/><stop offset=".55" style="stop-color:var(--on2)"/><stop offset="1" style="stop-color:var(--on3)"/></linearGradient></defs><path d="M96.30 40.00 L103.70 40.00 L21.85 240.00 L18.15 240.00 Z M95.84 40.00 L112.16 40.00 L187.74 240.00 L180.26 240.00 Z" fill="currentColor"/><path d="M230 43.36 H300 A46.64 46.64 0 0 1 300 136.64 H274" fill="none" stroke="currentColor" stroke-width="6.720000000000001"/><path d="M230.00 40.00 L300.00 40.00 L300.00 46.72 L230.00 48.40 Z" fill="currentColor"/><path d="" fill="currentColor" fill-rule="evenodd"/><path d="M0 0" fill="currentColor"/><path d="M0 0" fill="none" stroke="currentColor" stroke-width="2.3100000000000005"/><path d="M284.52 136.64 L299.48 136.64 L358.08 240.00 L349.92 240.00 Z" fill="currentColor"/><g transform="translate(0,0)"><path d="M400 140 A96 100 0 1 0 592 140 A96 100 0 1 0 400 140 Z M422.32 172.81 A80.66 95.38 -24.0 1 1 569.68 107.19 A80.66 95.38 -24.0 1 1 422.32 172.81 Z" fill="url(#amg-hero-ab)" fill-rule="evenodd"/><path d="M638.00 40.00 L640.52 40.00 L642.20 240.00 L638.00 240.00 Z M765.48 40.00 L768.00 40.00 L768.00 240.00 L763.80 240.00 Z M638.00 40.00 L648.20 40.00 L768.00 240.00 L755.25 240.00 Z" fill="url(#amg-hero-ab)"/><path d="M0 0" fill="url(#amg-hero-ab)"/></g></svg></h2>
+      <p class="ab-def">아론 &nbsp;·&nbsp; Clinic &amp; Hospital Interior Design</p>
     </div>
-    <p class="ab-name ab-ko">아론</p>
+    <span class="ab-vline" aria-hidden="true"></span>
+    <div class="ab-cols">
+      <div class="ab-col"><span class="ab-num">01</span><h3>Philosophy of ARON</h3><p>물방울 하나가 번져가듯,<br>처음 그은 선이 공간의 모든 사람에게 닿도록 디자인합니다</p></div>
+      <div class="ab-col"><span class="ab-num">02</span><h3>Care-Based Design</h3><p>진료의 흐름과 환자의 마음을 먼저 생각한<br>편안하고 고요한 공간을 제안합니다</p></div>
+      <div class="ab-col"><span class="ab-num">03</span><h3>Promised Schedule</h3><p>개원일에 맞춘 설계 일정과<br>그대로 지을 수 있는 정확한 도면을 약속합니다</p></div>
+    </div>
   </section>
 
-  <section class="ab-phil">
-    <p class="ab-eye ab-rv">Brand Story</p>
-    <h3 class="ab-head ab-rv">One drop.<br><em>A ripple of care.</em></h3>
-    <p class="ab-body ab-rv">
-      고요한 수면에 물방울 하나가 떨어지면, 파동은 소리 없이 끝까지 번져갑니다.<br>
-      아론의 디자인도 그렇게 시작합니다. 처음 그은 한 줄의 선이 동선이 되고, 빛이 되고, 마침내 그 공간에 들어서는 모든 사람의 하루에 닿습니다.<br>
-      긴장한 채 문을 여는 환자에게는 안도감으로, 매일 그곳을 지키는 의료진에게는 편안함으로, 그리고 병원에는 오래 남는 신뢰로.<br>
-      아론은 그 파동이 시작되는 첫 순간을 디자인합니다.</p>
-  </section>
-
-  <section class="ab-prin">
-    <div class="ab-p ab-rv"><svg viewBox="-40 -40 80 80" class="ab-ic ic-drop" aria-hidden="true"><line x1="-30" y1="26" x2="30" y2="26"/><ellipse cx="0" cy="0" rx="3.2" ry="4.4"/></svg>
-      <span class="ab-no">01 — Drop</span><h4>한 사람에서 시작합니다</h4><p>모든 설계는 문을 여는 단 한 사람의 시선과 걸음에서 출발합니다. 그 사람이 처음 마주하는 5초를 가장 먼저 그립니다.</p></div>
-    <div class="ab-p ab-rv"><svg viewBox="-40 -40 80 80" class="ab-ic ic-ripple" aria-hidden="true"><circle r="10"/><circle r="10"/><circle r="10"/><circle r="2" class="dot"/></svg>
-      <span class="ab-no">02 — Ripple</span><h4>고요함은 번져갑니다</h4><p>부드러운 곡선과 겹겹의 빛으로 마음의 긴장을 낮추고, 그 편안함이 대기실에서 진료실까지 공간 전체로 퍼지게 합니다.</p></div>
-    <div class="ab-p ab-rv"><svg viewBox="-40 -40 80 80" class="ab-ic ic-still" aria-hidden="true"><path class="wave" d="M-32 0 Q-24 -10 -16 0 T0 0 T16 0 T32 0"/></svg>
-      <span class="ab-no">03 — Still</span><h4>다시 잔잔해지는 공간</h4><p>파동이 지나간 수면처럼, 유행보다 오래 머무는 정직한 소재와 비율로 완성합니다. 10년 뒤에도 고요한 공간을 만듭니다.</p></div>
-  </section>
-
-  <section class="ab-sec ab-what">
-    <div class="ab-sec-h ab-rv"><p class="ab-eye">What we design</p><h3 class="ab-h3">병원과 의원을 위한<br>인테리어 디자인</h3></div>
-    <ul class="ab-list">
-      <li class="ab-rv"><span>01</span><b>공간 기획 · 동선 설계</b><p>접수부터 대기, 진료, 수납까지. 환자와 의료진의 흐름이 엇갈리지 않도록 진료 과목에 맞춰 공간을 나눕니다.</p></li>
-      <li class="ab-rv"><span>02</span><b>인테리어 디자인</b><p>로비와 대기실, 진료실, 처치실까지 하나의 분위기로 이어지도록 전체 공간의 톤과 형태를 디자인합니다.</p></li>
-      <li class="ab-rv"><span>03</span><b>빛 · 소재 · 컬러</b><p>눈부심 없는 간접광, 오래 써도 변하지 않는 마감재, 마음을 가라앉히는 색을 고릅니다.</p></li>
-      <li class="ab-rv"><span>04</span><b>3D 시안 · 설계 도면</b><p>완성될 모습을 3D로 먼저 보여드리고, 시공팀이 그대로 지을 수 있는 정확한 도면으로 정리합니다.</p></li>
-    </ul>
-  </section>
-
-  <section class="ab-sec ab-promise">
-    <div class="ab-sec-h ab-rv"><p class="ab-eye">Our Promise</p><h3 class="ab-h3">아론이<br>약속하는 것</h3></div>
-    <ul class="ab-list">
-      <li class="ab-rv"><span>—</span><b>진료가 먼저입니다</b><p>보기 좋은 공간보다 일하기 좋은 공간을 먼저 생각합니다. 모든 디자인은 원장님의 진료 방식에서 출발합니다.</p></li>
-      <li class="ab-rv"><span>—</span><b>약속한 일정을 지킵니다</b><p>개원일에서 거꾸로 계산한 디자인 일정표를 처음에 함께 정하고, 그 일정 안에서 모든 도면을 마칩니다.</p></li>
-      <li class="ab-rv"><span>—</span><b>도면대로 지어지게 합니다</b><p>시공 중에도 현장과 소통하며 디자인 의도가 그대로 구현되도록 확인합니다.</p></li>
-      <li class="ab-rv"><span>—</span><b>오래 고요한 공간</b><p>유행을 따르기보다 10년 뒤에도 편안한 비율과 소재를 선택합니다.</p></li>
-    </ul>
-  </section>
-
-  <section class="ab-sec ab-process">
-    <div class="ab-sec-h ab-rv"><p class="ab-eye">Process &amp; Timeline</p><h3 class="ab-h3">첫 상담부터<br>개원까지</h3></div>
-    <ol class="ab-steps">
-      <li class="ab-rv"><span class="ab-dot"></span><em>1주</em><b>상담 · 현장 실측</b><p>진료 과목과 규모, 개원 일정을 듣고 현장을 실측합니다.</p></li>
-      <li class="ab-rv"><span class="ab-dot"></span><em>1–2주</em><b>공간 기획 · 동선</b><p>평면 계획과 동선을 정리해 공간의 뼈대를 잡습니다.</p></li>
-      <li class="ab-rv"><span class="ab-dot"></span><em>2–3주</em><b>디자인 · 3D 시안</b><p>분위기와 소재, 조명을 담은 3D 시안을 함께 다듬습니다.</p></li>
-      <li class="ab-rv"><span class="ab-dot"></span><em>2주</em><b>설계 도면</b><p>시공에 필요한 상세 도면과 마감재 목록을 완성합니다.</p></li>
-      <li class="ab-rv"><span class="ab-dot"></span><em>공사 기간 동안</em><b>시공 단계 디자인 확인</b><p>시공은 전문 시공사가 맡고, 아론은 디자인이 도면대로 구현되는지 확인합니다. 공사 기간은 규모에 따라 보통 6–10주입니다.</p></li>
-    </ol>
-  </section>
-
-  <section class="sky" aria-labelledby="t-sky">
-    <div class="sky-card"><div class="sky-bars" aria-hidden="true"><i class="sky-bar" style="--c:#EDEDEB;--w:0.46;--n:0"></i><i class="sky-bar" style="--c:#BDBDBA;--w:0.78;--n:1"></i><i class="sky-bar" style="--c:#9FC3F1;--w:1.0;--n:2"></i><i class="sky-bar" style="--c:#CCDFF8;--w:0.22;--n:3"></i><i class="sky-bar" style="--c:#FF50BF;--w:0.56;--n:4"></i></div><div class="sky-text">
-      <h2 id="t-sky" class="sky-h">About</h2>
-      <p>ARON Design is an interior design studio for clinics, hospitals and commercial spaces. We shape every project around the people who will use it&nbsp;— the patient who walks in a little nervous, and the doctor who works there every day.</p>
-      <p>Soft curves, layered light and honest, lasting materials are how we make a space feel calm, whatever its palette. From the first idea to the final detail, we design every part of it with care.</p>
-    </div></div>
-  </section>
 </div>
 <section class="projects" id="projects" data-lenis-prevent aria-labelledby="t-projects" aria-hidden="true">
   <button type="button" class="projects-close" aria-label="포트폴리오 닫기">×</button>
@@ -2044,7 +2018,7 @@ ready.then(() => {
 </script>
 <script>
 (() => { const L = document.getElementById('about'); if (!L) return;
-  const sk = L.querySelector('section.sky'), btn = document.querySelector('[data-open="about"]'), x = L.querySelector('.about-close');
+  const sk = L.querySelector('section.sky') || document.createElement('i'), btn = document.querySelector('[data-open="about"]'), x = L.querySelector('.about-close');
   function open() { L.classList.add('open'); L.setAttribute('aria-hidden', 'false'); document.documentElement.classList.add('layer-open'); if (window.__lenis) window.__lenis.stop();
     L.scrollTop = 0; sk.classList.remove('is-in'); play(); setTimeout(() => x.focus(), 50); }
   const xs = L.querySelectorAll('.ab-x'), rvs = L.querySelectorAll('.ab-rv'); let tm = [];
