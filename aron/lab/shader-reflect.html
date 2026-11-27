@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflect Shader · 미리보기</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #020202; overflow: hidden; }
+  #wrap { position: fixed; inset: 0; background: #020202; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="wrap"><canvas id="cv"></canvas></div>
+<script>
+/* Vanilla port of the pasted "Reflect Shader" (ShaderGroupSwitcher) — same GLSL, same defaults. */
+const P = { tint: '#ffffff', speed: 50, brightness: 100, thickness: 20, chromatic: 10, bandGap: 20, zoom: 295, hover: 90 };
+const VERT = `attribute vec2 aPosition; void main(){ gl_Position = vec4(aPosition,0.0,1.0); }`;
+const FRAG = `
+precision highp float;
+#define MAXLINES 12
+uniform vec2 uResolution; uniform float uTime; uniform float uLineWidth; uniform float uSpread; uniform float uBands;
+uniform float uScale; uniform float uIntensity; uniform int uLineCount; uniform vec3 uTint;
+uniform vec2 uPointer; uniform float uHover; uniform float uReach;
+float channel(vec2 uv, float r, float t, float jf){
+  float sum = 0.0; float band = mod(uv.x + uv.y, uBands);
+  for (int i = 0; i < MAXLINES; i++) { if (i < uLineCount) {
+    float d = fract(t - uSpread * jf + float(i) * 0.01) * 5.0 - r + band;
+    sum += uLineWidth * float(i * i) / max(abs(d), 1e-4); } }
+  return sum;
+}
+void main(){
+  vec2 s = (gl_FragCoord.xy * 2.0 - uResolution) / min(uResolution.x, uResolution.y);
+  s *= uScale;
+  vec2 uv = s - uPointer * min(uHover, 1.0);
+  float reach = max(uReach, 1e-3); float r = length(uv); float t = uTime * 0.05;
+  vec3 color = vec3(channel(uv, r, t, 0.0), channel(uv, r, t, 1.0), channel(uv, r, t, 2.0));
+  float dp = length(s - uPointer) / reach; float glow = uHover * exp(-dp * dp);
+  vec3 c = min(color * uIntensity * (1.0 + glow) * uTint, vec3(1.0));
+  gl_FragColor = vec4(c, clamp(max(max(c.r, c.g), c.b), 0.0, 1.0));
+}`;
+const MAX_DPR = 2, BASE_RATE = 3, LINE_COUNT = 5, FOLLOW_RATE = 8, HOVER_REACH_PX = 260;
+const wrap = document.getElementById('wrap'), canvas = document.getElementById('cv');
+const gl = canvas.getContext('webgl', { antialias: false, alpha: true, premultipliedAlpha: true });
+if (gl) {
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+  const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FRAG)); gl.linkProgram(pr); gl.useProgram(pr);
+  const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,3,-1,-1,3]), gl.STATIC_DRAW);
+  const ap = gl.getAttribLocation(pr, 'aPosition'); gl.enableVertexAttribArray(ap); gl.vertexAttribPointer(ap, 2, gl.FLOAT, false, 0, 0);
+  const U = n => gl.getUniformLocation(pr, n);
+  const u = { res: U('uResolution'), time: U('uTime'), lw: U('uLineWidth'), sp: U('uSpread'), bands: U('uBands'), scale: U('uScale'), int: U('uIntensity'), lc: U('uLineCount'), tint: U('uTint'), ptr: U('uPointer'), hover: U('uHover'), reach: U('uReach') };
+  const resize = () => { const d = Math.min(devicePixelRatio || 1, MAX_DPR); const w = Math.max(1, Math.round(canvas.clientWidth * d)), h = Math.max(1, Math.round(canvas.clientHeight * d));
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; } gl.viewport(0, 0, w, h); gl.uniform2f(u.res, w, h); };
+  resize(); new ResizeObserver(resize).observe(canvas);
+  const p = { tx: 0, ty: 0, x: 0, y: 0, inside: 0, ease: 0 };
+  wrap.addEventListener('pointermove', (e) => { const w = wrap.clientWidth, h = wrap.clientHeight, m = Math.min(w, h); p.tx = (e.offsetX * 2 - w) / m; p.ty = (h - e.offsetY * 2) / m; p.inside = 1; });
+  wrap.addEventListener('pointerleave', () => { p.tx = 0; p.ty = 0; p.inside = 0; });
+  const hex = s => { const n = parseInt(s.slice(1), 16); return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; };
+  let last = 0, t = 0;
+  const frame = (now) => { requestAnimationFrame(frame); const dt = last ? Math.min((now - last) / 1000, 1 / 15) : 0; last = now;
+    t = (t + BASE_RATE * (P.speed / 50) * dt) % 20000;
+    gl.uniform1f(u.time, t); gl.uniform1f(u.lw, P.thickness / 10000); gl.uniform1f(u.sp, P.chromatic / 1000); gl.uniform1f(u.bands, Math.max(P.bandGap, 1) / 100);
+    gl.uniform1f(u.scale, P.zoom / 100); gl.uniform1f(u.int, P.brightness / 100); gl.uniform1i(u.lc, LINE_COUNT); gl.uniform3f(u.tint, ...hex(P.tint));
+    const k = 1 - Math.exp(-dt * FOLLOW_RATE); p.x += (p.tx - p.x) * k; p.y += (p.ty - p.y) * k; p.ease += (p.inside - p.ease) * k;
+    const sc = P.zoom / 100, side = Math.max(1, Math.min(canvas.clientWidth, canvas.clientHeight));
+    gl.uniform2f(u.ptr, p.x * sc, p.y * sc); gl.uniform1f(u.hover, (P.hover / 100) * p.ease); gl.uniform1f(u.reach, ((HOVER_REACH_PX * 2) / side) * sc);
+    gl.drawArrays(gl.TRIANGLES, 0, 3); };
+  requestAnimationFrame(frame);
+}
+</script>
+</body>
+</html>

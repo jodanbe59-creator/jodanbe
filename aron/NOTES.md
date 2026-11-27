@@ -390,3 +390,4 @@
 - ABOUT 3열 제목 A안: Philosophy / Design / Promise.
 - 홈 문장 교체: "A vessel of light." (light 강조). 아론 뜻 = 히브리어 aron 함(궤) + 빛(or) 풀이를 합친 문장.
 - ABOUT: 로고 아래 사전식 정의로 교체 — "n. aron [아론] : 히브리어로 소중한 것을 담는 그릇" + 그릇·물방울·파동·빛 두 줄 설명. 로고/정의 세로 쌓기, 한 화면 유지.
+- ABOUT 그림: 물결 이미지 → 사용자 제공 Reflect Shader(빛 고리, WebGL, 기본값 그대로·배경 #020202는 코드 기본값). About 열려 있을 때만 그림, 마우스 따라 이동. 단독 미리보기 lab/shader-reflect.html.
