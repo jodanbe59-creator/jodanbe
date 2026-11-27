@@ -381,3 +381,4 @@
 - ABOUT 첫 장면: 영상 빼고 사용자 제공 물결 이미지(채도 15%로 낮춤, 위아래 여백 잘라 2:1) photos/ripple-still.jpg로 교체. 이미지 페이드·확대 → 로고(0.9초) → A Ripple ON(2.3초).
 - ABOUT 첫 장면: 로고 아래 "A Ripple ON" 펼침과 한글 캡션 삭제 → "아론"만 표시 (사용자: 맘대로 정하지 말 것).
 - Philosophy 본문에서 "아론(ARON)은 A Ripple ON…뜻입니다" 문장 삭제.
+- ABOUT: 물결 이미지 축소(56vw·최대 700px). Philosophy → Brand Story(아론+파동 이야기). 새 섹션: What we design(4), Our Promise(4), Process & Timeline(1주/1–2주/2–3주/2주/공사 기간 중 디자인 확인, 공사 6–10주) — 기간 숫자는 확인 필요한 임시값. 시공은 하지 않는다는 점 명시.
