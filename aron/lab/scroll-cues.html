@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARON · 스크롤 인디케이터 후보</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Noto+Sans+KR:wght@400&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f3efe9; color: #2a2520; font-family: Jost, "Noto Sans KR", sans-serif; }
+  h1 { margin: 48px 0 8px; text-align: center; font-weight: 400; font-size: 15px; letter-spacing: .2em; text-transform: uppercase; }
+  .sub { text-align: center; margin: 0 0 40px; font: 13px "Noto Sans KR", sans-serif; color: #6b6964; }
+  .grid { max-width: 1100px; margin: 0 auto 80px; padding: 0 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { position: relative; height: 260px; background: #faf8f5; border: 1px solid #e6e1d9; display: grid; place-items: center; }
+  .card b { position: absolute; left: 14px; top: 12px; font: 600 12px Jost, sans-serif; letter-spacing: .1em; color: #8d8b86; }
+  .card span.n { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font: 13px "Noto Sans KR", sans-serif; color: #4a4844; }
+  .ink { color: #2a2520; }
+
+  /* 0 current: mouse */
+  .mouse { width: 26px; height: 42px; border: 1.5px solid rgba(42,37,32,.55); border-radius: 14px; position: relative; }
+  .mouse i { position: absolute; left: 50%; top: 8px; width: 3px; height: 8px; margin-left: -1.5px; border-radius: 2px; background: #b9a07d; animation: wheel 1.8s ease-in-out infinite; }
+  @keyframes wheel { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(12px); } }
+
+  /* 1 falling line */
+  .line { position: relative; width: 1px; height: 72px; background: rgba(42,37,32,.14); overflow: hidden; }
+  .line::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: #2a2520; animation: fall 2s cubic-bezier(.6,0,.3,1) infinite; }
+  @keyframes fall { 0% { top: -40%; } 100% { top: 100%; } }
+
+  /* 2 drop + ripple */
+  .drop { position: relative; width: 60px; height: 80px; }
+  .drop i { position: absolute; left: 50%; top: 0; width: 6px; height: 8px; margin-left: -3px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: #2a2520; animation: d 2.4s cubic-bezier(.55,0,.9,.4) infinite; }
+  .drop s { position: absolute; left: 50%; bottom: 6px; width: 40px; height: 12px; margin-left: -20px; border: 1px solid #2a2520; border-radius: 50%; opacity: 0; animation: r 2.4s ease-out infinite; }
+  @keyframes d { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 55% { transform: translateY(62px); opacity: 1; } 60%, 100% { transform: translateY(62px) scale(1.6,.2); opacity: 0; } }
+  @keyframes r { 0%, 55% { transform: scale(.1); opacity: 0; } 60% { opacity: .8; } 100% { transform: scale(1.4); opacity: 0; } }
+
+  /* 3 vertical text */
+  .vtext { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .vtext em { font-style: normal; font-size: 11px; letter-spacing: .35em; writing-mode: vertical-rl; text-transform: uppercase; }
+  .vtext i { width: 1px; height: 40px; background: #2a2520; transform-origin: top; animation: grow 1.8s ease-in-out infinite; }
+  @keyframes grow { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+  /* 4 rotating circle text */
+  .ring { position: relative; width: 96px; height: 96px; }
+  .ring svg { width: 100%; height: 100%; animation: spin 14s linear infinite; }
+  .ring text { font: 400 9.5px Jost, sans-serif; letter-spacing: 3.2px; fill: #2a2520; text-transform: uppercase; }
+  .ring::after { content: "↓"; position: absolute; inset: 0; display: grid; place-items: center; font: 300 18px Jost, sans-serif; animation: bob 1.8s ease-in-out infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes bob { 50% { transform: translateY(5px); } }
+
+  /* 5 chevrons */
+  .chev { display: flex; flex-direction: column; align-items: center; }
+  .chev i { width: 12px; height: 12px; border-right: 1.2px solid #2a2520; border-bottom: 1.2px solid #2a2520; transform: rotate(45deg); margin-top: -4px; opacity: 0; animation: ch 1.8s ease-in-out infinite; }
+  .chev i:nth-child(2) { animation-delay: .2s; } .chev i:nth-child(3) { animation-delay: .4s; }
+  @keyframes ch { 0% { opacity: 0; transform: rotate(45deg) translate(-4px,-4px); } 50% { opacity: 1; } 100% { opacity: 0; transform: rotate(45deg) translate(4px,4px); } }
+
+  /* 6 dot on a track */
+  .track { position: relative; width: 1px; height: 64px; background: rgba(42,37,32,.2); }
+  .track i { position: absolute; left: -3px; top: 0; width: 7px; height: 7px; border-radius: 50%; background: #2a2520; animation: tr 2.2s cubic-bezier(.6,0,.3,1) infinite; }
+  @keyframes tr { 0% { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: 57px; opacity: 0; } }
+
+  /* 7 word + underline */
+  .word { font: 400 12px Jost, sans-serif; letter-spacing: .4em; text-transform: uppercase; padding-left: .4em; position: relative; }
+  .word::after { content: ""; position: absolute; left: 0; right: 0; bottom: -10px; height: 1px; background: #2a2520; transform-origin: left; animation: ul 2s ease-in-out infinite; }
+  @keyframes ul { 0% { transform: scaleX(0); transform-origin: left; } 50% { transform: scaleX(1); transform-origin: left; } 51% { transform-origin: right; } 100% { transform: scaleX(0); transform-origin: right; } }
+
+  /* 8 ripple only (concentric) */
+  .rip { position: relative; width: 70px; height: 70px; }
+  .rip i { position: absolute; inset: 0; border: 1px solid #2a2520; border-radius: 50%; opacity: 0; animation: rp 3s ease-out infinite; }
+  .rip i:nth-child(2) { animation-delay: 1s; } .rip i:nth-child(3) { animation-delay: 2s; }
+  .rip::after { content: ""; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px; border-radius: 50%; background: #2a2520; }
+  @keyframes rp { 0% { transform: scale(.1); opacity: 0; } 15% { opacity: .9; } 100% { transform: scale(1); opacity: 0; } }
+
+  @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+<h1>Scroll Indicator</h1>
+<p class="sub">첫 화면 아래 "내려보세요" 표시 후보 · 번호로 골라주세요</p>
+<div class="grid">
+  <div class="card"><b>0</b><div class="mouse"><i></i></div><span class="n">지금 쓰는 것 · 마우스</span></div>
+  <div class="card"><b>1</b><div class="line"></div><span class="n">흘러내리는 선</span></div>
+  <div class="card"><b>2</b><div class="drop"><i></i><s></s></div><span class="n">물방울이 떨어져 파동</span></div>
+  <div class="card"><b>3</b><div class="vtext"><em>Scroll</em><i></i></div><span class="n">세로 글자 + 선</span></div>
+  <div class="card"><b>4</b><div class="ring"><svg viewBox="0 0 100 100"><defs><path id="c" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text><textPath href="#c">Scroll · Scroll · Scroll ·</textPath></text></svg></div><span class="n">돌아가는 원형 글자</span></div>
+  <div class="card"><b>5</b><div class="chev"><i></i><i></i><i></i></div><span class="n">겹친 화살표</span></div>
+  <div class="card"><b>6</b><div class="track"><i></i></div><span class="n">선 위로 내려가는 점</span></div>
+  <div class="card"><b>7</b><div class="word">Scroll</div><span class="n">글자 + 밑줄</span></div>
+  <div class="card"><b>8</b><div class="rip"><i></i><i></i><i></i></div><span class="n">퍼지는 파동</span></div>
+</div>
+</body>
+</html>
