@@ -751,6 +751,8 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); }
 .ab-beam i { position: absolute; inset: 0; background: radial-gradient(ellipse var(--lb-spread, 22%) 100% at 50% 100%, rgba(255,247,232,calc(.20 * var(--lb-int, 1))) 0%, rgba(255,247,232,calc(.10 * var(--lb-int, 1))) 35%, rgba(255,247,232,calc(.03 * var(--lb-int, 1))) 60%, rgba(255,247,232,0) 80%); }
 .about-layer { --lb-angle: -29deg; --lb-int: 0.8; --lb-spread: 42%; --lb-blur: 10px; --lb-len: 140vh; --lb-glow: 0.55; }   /* light values chosen by the user */
+/* About now lives on the home page, right under "A vessel of light." */
+.about-layer.about-sec { position: relative !important; inset: auto; z-index: 3; opacity: 1 !important; visibility: visible !important; transform: none !important; overflow: hidden; overscroll-behavior: auto; min-height: 100vh; transition: none; }
 </style>
 </head>
 <body>
@@ -801,6 +803,26 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
     </div>
   </section>
 
+  <section class="about-layer about-sec" id="about" aria-label="About">
+  <section class="ab-intro">
+    <figure class="ab-fig"><span class="ab-beam" aria-hidden="true"><i></i></span><img src="photos/ripple-still-dark.png" alt="" aria-hidden="true"></figure>
+    <div class="ab-id">
+      <div class="ab-dict">
+        <p class="ab-entry"><i>n.</i> <b>aron</b> <span class="ab-ph">[아론]</span> <span class="ab-sep">:</span> 히브리어로 소중한 것을 담는 그릇</p>
+        <p class="ab-story">빛을 담은 그릇에 물방울 하나가 떨어지면, 파동이 일고 빛이 공간 전체로 번져갑니다.<br>아론은 공간을 빛을 담는 그릇으로, 디자인을 그 첫 물방울로 생각합니다.</p>
+      </div>
+    </div>
+    <span class="ab-vline" aria-hidden="true"></span>
+    <div class="ab-cols">
+      <div class="ab-col"><h3>Philosophy</h3><p>물방울 하나가 번져가듯,<br>처음 그은 선이 공간의 모든 사람에게 닿도록 디자인합니다</p></div>
+      <div class="ab-col"><h3>Design</h3><p>진료의 흐름과 환자의 마음을 먼저 생각한<br>편안하고 고요한 공간을 제안합니다</p></div>
+      <div class="ab-col"><h3>Promise</h3><p>개원일에 맞춘 설계 일정과<br>그대로 지을 수 있는 정확한 도면을 약속합니다</p></div>
+    </div>
+  </section>
+
+</section>
+
+
 
 
 
@@ -830,25 +852,6 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 </main>
 
-<div class="about-layer" id="about" data-lenis-prevent role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
-  <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
-  <section class="ab-intro">
-    <figure class="ab-fig"><span class="ab-beam" aria-hidden="true"><i></i></span><img src="photos/ripple-still-dark.png" alt="" aria-hidden="true"></figure>
-    <div class="ab-id">
-      <div class="ab-dict">
-        <p class="ab-entry"><i>n.</i> <b>aron</b> <span class="ab-ph">[아론]</span> <span class="ab-sep">:</span> 히브리어로 소중한 것을 담는 그릇</p>
-        <p class="ab-story">빛을 담은 그릇에 물방울 하나가 떨어지면, 파동이 일고 빛이 공간 전체로 번져갑니다.<br>아론은 공간을 빛을 담는 그릇으로, 디자인을 그 첫 물방울로 생각합니다.</p>
-      </div>
-    </div>
-    <span class="ab-vline" aria-hidden="true"></span>
-    <div class="ab-cols">
-      <div class="ab-col"><h3>Philosophy</h3><p>물방울 하나가 번져가듯,<br>처음 그은 선이 공간의 모든 사람에게 닿도록 디자인합니다</p></div>
-      <div class="ab-col"><h3>Design</h3><p>진료의 흐름과 환자의 마음을 먼저 생각한<br>편안하고 고요한 공간을 제안합니다</p></div>
-      <div class="ab-col"><h3>Promise</h3><p>개원일에 맞춘 설계 일정과<br>그대로 지을 수 있는 정확한 도면을 약속합니다</p></div>
-    </div>
-  </section>
-
-</div>
 <section class="projects" id="projects" data-lenis-prevent aria-labelledby="t-projects" aria-hidden="true">
   <button type="button" class="projects-close" aria-label="포트폴리오 닫기">×</button>
   <div class="projects-head">
@@ -2065,24 +2068,11 @@ ready.then(() => {
   io.observe(cl); })();
 </script>
 <script>
-(() => { const L = document.getElementById('about'); if (!L) return;
-  const sk = L.querySelector('section.sky') || document.createElement('i'), btn = document.querySelector('[data-open="about"]'), x = L.querySelector('.about-close');
-  function open() { L.classList.add('open'); L.setAttribute('aria-hidden', 'false'); document.documentElement.classList.add('layer-open'); if (window.__lenis) window.__lenis.stop();
-    L.scrollTop = 0; sk.classList.remove('is-in'); play(); setTimeout(() => x.focus(), 50); }
-  const xs = L.querySelectorAll('.ab-x'), rvs = L.querySelectorAll('.ab-rv'); let tm = [];
-  xs.forEach((e) => { e.style.maxWidth = 'none'; e.style.setProperty('--w', (e.scrollWidth + 2) + 'px'); e.style.maxWidth = ''; });
-  function play() { tm.forEach(clearTimeout); L.classList.remove('play', 's1', 's2'); rvs.forEach((r) => r.classList.remove('in')); void L.offsetWidth;
-    xs.forEach((e) => { e.style.maxWidth = 'none'; e.style.setProperty('--w', (e.scrollWidth + 2) + 'px'); e.style.maxWidth = ''; });
-    requestAnimationFrame(() => L.classList.add('play'));
-    tm = [setTimeout(() => L.classList.add('s1'), 900), setTimeout(() => L.classList.add('s2'), 2300), setTimeout(() => { if (typeof chk === 'function') chk(); }, 400)]; }
-  const rio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); if (e.target === sk) sk.classList.add('is-in'); } }), { root: L, threshold: 0.2 });
-  rvs.forEach((r) => rio.observe(r)); rio.observe(sk);
-  /* fallback: reveal by scroll position too, in case IntersectionObserver doesn't fire inside an embedded preview */
-  function chk() { const h = L.clientHeight; rvs.forEach((r) => { const t = r.getBoundingClientRect().top; if (t < h * 0.9) r.classList.add('in'); }); if (sk.getBoundingClientRect().top < h * 0.85) sk.classList.add('is-in'); }
-  L.addEventListener('scroll', chk, { passive: true }); addEventListener('resize', chk);
-  function close() { if (!L.classList.contains('open')) return; L.classList.remove('open'); L.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('layer-open'); if (window.__lenis) window.__lenis.start(); btn.focus(); }
-  btn.addEventListener('click', open); x.addEventListener('click', close);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); }); })();
+(() => { const L = document.getElementById('about'), btn = document.querySelector('[data-open="about"]'); if (!L) return;
+  /* ABOUT menu scrolls down to the section; the light fades in when the section comes into view */
+  if (btn) btn.addEventListener('click', () => { if (window.__lenis) window.__lenis.scrollTo(L, { duration: 1.6 }); else L.scrollIntoView({ behavior: 'smooth' }); });
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { L.classList.add('open', 'play', 's1', 's2'); io.disconnect(); } }), { threshold: 0.35 });
+  io.observe(L); })();
 </script>
 <script>
 (() => { const st = document.getElementById('statement'); if (!st) return;
@@ -2094,6 +2084,13 @@ ready.then(() => {
 (() => { const L = document.getElementById('about'); if (!L) return; let tmr = 0;
   const pulse = () => { L.classList.add('ink'); clearTimeout(tmr); tmr = setTimeout(() => L.classList.remove('ink'), 450); };
   L.addEventListener('wheel', pulse, { passive: true }); L.addEventListener('touchmove', pulse, { passive: true }); })();
+</script>
+<script>
+/* top bar turns light while the dark About section sits under it */
+(() => { const a = document.getElementById('about'); if (!a) return;
+  const upd = () => { const b = a.getBoundingClientRect(); document.body.classList.toggle('on-dark', b.top < 60 && b.bottom > 60); };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd);
+  if (window.__lenis) window.__lenis.on('scroll', upd); setTimeout(() => { if (window.__lenis) window.__lenis.on('scroll', upd); }, 1500); upd(); })();
 </script>
 </body>
 </html>
