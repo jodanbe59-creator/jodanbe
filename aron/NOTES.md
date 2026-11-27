@@ -386,3 +386,4 @@
 - 버그 수정: Lenis가 About 화면 안의 휠/터치 스크롤을 막아 첫 장면 아래 내용이 안 보였음 → about-layer(와 projects)에 data-lenis-prevent.
 - ABOUT 전면 개편(여백, 모션 없음, 스크롤 없이 한 화면): 물결 이미지 → ARON 로고 | 아론 · Clinic & Hospital Interior Design → 세로선 → 3열(Philosophy of ARON / Care-Based Design / Promised Schedule). Brand Story·원칙·What we design·Promise·Process·막대 섹션은 About에서 제거(이전 커밋에 남아 있음). 참고: Aether About.
 - 푸터: 고객사 이름 흐르는 줄 위 왼쪽에 "— CLIENTS" 라벨 추가 (병원만이 아니라서 Hospitals 대신 Clients).
+- ABOUT 3열: 번호 01–03과 열 사이 세로줄 삭제, 가운데 정렬, 설명글 색 진하게(#34322f, 굵기 400).
