@@ -660,6 +660,8 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .ab-ripple { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transform: scale(.94); transition: opacity 1.6s ease, transform 2.4s cubic-bezier(.2,.7,.2,1); }
 .about-layer.play .ab-ripple { opacity: 1; transform: none; }
 .about-layer .ab-name { margin-top: 0; }
+.about-layer .ab-name.ab-ko { font-family: "Noto Serif KR", serif; font-weight: 400; font-size: clamp(18px, 1.6vw, 24px); letter-spacing: .5em; padding-left: .5em; color: #2b2b2b; opacity: 0; transform: translateY(8px); transition: opacity 1.2s ease, transform 1.2s ease; }
+.about-layer.s2 .ab-name.ab-ko { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
@@ -741,12 +743,12 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 <div class="about-layer" id="about" role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
   <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
-  <section class="ab-hero" aria-label="ARON — A Ripple ON">
+  <section class="ab-hero" aria-label="ARON 아론">
     <div class="ab-frame">
       <img class="ab-ripple" src="photos/ripple-still.jpg" alt="" aria-hidden="true">
       <h2 class="ab-logo" aria-label="ARON"><svg class="aron-mark am-about" viewBox="-6 20 822 240" aria-hidden="true"><defs><linearGradient id="amg-hero-ab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--on1)"/><stop offset=".55" style="stop-color:var(--on2)"/><stop offset="1" style="stop-color:var(--on3)"/></linearGradient></defs><path d="M96.30 40.00 L103.70 40.00 L21.85 240.00 L18.15 240.00 Z M95.84 40.00 L112.16 40.00 L187.74 240.00 L180.26 240.00 Z" fill="currentColor"/><path d="M230 43.36 H300 A46.64 46.64 0 0 1 300 136.64 H274" fill="none" stroke="currentColor" stroke-width="6.720000000000001"/><path d="M230.00 40.00 L300.00 40.00 L300.00 46.72 L230.00 48.40 Z" fill="currentColor"/><path d="" fill="currentColor" fill-rule="evenodd"/><path d="M0 0" fill="currentColor"/><path d="M0 0" fill="none" stroke="currentColor" stroke-width="2.3100000000000005"/><path d="M284.52 136.64 L299.48 136.64 L358.08 240.00 L349.92 240.00 Z" fill="currentColor"/><g transform="translate(0,0)"><path d="M400 140 A96 100 0 1 0 592 140 A96 100 0 1 0 400 140 Z M422.32 172.81 A80.66 95.38 -24.0 1 1 569.68 107.19 A80.66 95.38 -24.0 1 1 422.32 172.81 Z" fill="url(#amg-hero-ab)" fill-rule="evenodd"/><path d="M638.00 40.00 L640.52 40.00 L642.20 240.00 L638.00 240.00 Z M765.48 40.00 L768.00 40.00 L768.00 240.00 L763.80 240.00 Z M638.00 40.00 L648.20 40.00 L768.00 240.00 L755.25 240.00 Z" fill="url(#amg-hero-ab)"/><path d="M0 0" fill="url(#amg-hero-ab)"/></g></svg></h2>
     </div>
-    <p class="ab-name"><b>A</b><span class="ab-x ab-sp">&nbsp;</span><b>R</b><span class="ab-x">ipple</span><span class="ab-x ab-sp">&nbsp;</span><b>ON</b></p>    <p class="ab-cap">아론 — 첫 물방울이 만든 파동</p>
+    <p class="ab-name ab-ko">아론</p>
   </section>
 
   <section class="ab-phil">
