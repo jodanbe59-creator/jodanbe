@@ -750,17 +750,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .ab-beam { position: absolute; z-index: 2; left: 50%; bottom: 34%; width: 240%; height: var(--lb-len, 80vh); transform: translateX(-50%) rotate(var(--lb-angle, -34deg)); transform-origin: 50% 100%; filter: blur(var(--lb-blur, 10px)); mix-blend-mode: screen; pointer-events: none; opacity: 0; transition: opacity 2.6s ease .3s;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); }
 .ab-beam i { position: absolute; inset: 0; background: radial-gradient(ellipse var(--lb-spread, 22%) 100% at 50% 100%, rgba(255,247,232,calc(.20 * var(--lb-int, 1))) 0%, rgba(255,247,232,calc(.10 * var(--lb-int, 1))) 35%, rgba(255,247,232,calc(.03 * var(--lb-int, 1))) 60%, rgba(255,247,232,0) 80%); }
-/* temporary light tuner (preview only) */
-.lt-btn { position: absolute; left: 18px; bottom: 18px; z-index: 50; all: unset; position: fixed; left: 18px; bottom: 18px; z-index: 60; cursor: pointer; font: 12px/1 "Noto Sans KR", sans-serif; letter-spacing: .08em; color: #eeeae4; border: 1px solid #44423e; border-radius: 999px; padding: 10px 14px; background: #161615; }
-.lt-panel { position: fixed; left: 18px; bottom: 62px; z-index: 60; width: 250px; padding: 16px 16px 12px; border: 1px solid #3a3835; border-radius: 12px; background: rgba(22,22,21,.94); color: #eeeae4; font: 12px/1.4 "Noto Sans KR", sans-serif; display: none; }
-.lt-panel.on { display: block; }
-.lt-panel label { display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; margin-bottom: 10px; }
-.lt-panel input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: #d8d2c6; }
-.lt-panel output { color: #a9a59e; font-variant-numeric: tabular-nums; }
-.lt-row { display: flex; gap: 8px; margin-top: 6px; }
-.lt-row button { all: unset; cursor: pointer; flex: 1; text-align: center; padding: 8px 0; border: 1px solid #44423e; border-radius: 8px; }
-.lt-row button:hover { background: #eeeae4; color: #161615; }
-.lt-code { margin-top: 8px; color: #8f8c86; font-size: 11px; word-break: break-all; }
+.about-layer { --lb-angle: -29deg; --lb-int: 0.8; --lb-spread: 42%; --lb-blur: 10px; --lb-len: 140vh; --lb-glow: 0.55; }   /* light values chosen by the user */
 </style>
 </head>
 <body>
@@ -842,17 +832,6 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 <div class="about-layer" id="about" data-lenis-prevent role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
   <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
-  <button type="button" class="lt-btn" aria-expanded="false">빛 조절</button>
-  <div class="lt-panel" role="group" aria-label="빛 조절">
-    <label>각도 <output data-o="angle"></output><input type="range" data-k="angle" min="-70" max="70" step="1" value="-34"></label>
-    <label>밝기 <output data-o="int"></output><input type="range" data-k="int" min="0" max="3" step="0.05" value="1"></label>
-    <label>퍼짐 <output data-o="spread"></output><input type="range" data-k="spread" min="6" max="60" step="1" value="22"></label>
-    <label>부드러움 <output data-o="blur"></output><input type="range" data-k="blur" min="0" max="60" step="1" value="10"></label>
-    <label>길이 <output data-o="len"></output><input type="range" data-k="len" min="30" max="140" step="1" value="80"></label>
-    <label>수면 빛 <output data-o="glow"></output><input type="range" data-k="glow" min="0" max="2.5" step="0.05" value="1"></label>
-    <div class="lt-row"><button type="button" data-act="reset">처음값</button><button type="button" data-act="copy">값 복사</button></div>
-    <p class="lt-code"></p>
-  </div>
   <section class="ab-intro">
     <figure class="ab-fig"><span class="ab-beam" aria-hidden="true"><i></i></span><img src="photos/ripple-still-dark.png" alt="" aria-hidden="true"></figure>
     <div class="ab-id">
@@ -2115,20 +2094,6 @@ ready.then(() => {
 (() => { const L = document.getElementById('about'); if (!L) return; let tmr = 0;
   const pulse = () => { L.classList.add('ink'); clearTimeout(tmr); tmr = setTimeout(() => L.classList.remove('ink'), 450); };
   L.addEventListener('wheel', pulse, { passive: true }); L.addEventListener('touchmove', pulse, { passive: true }); })();
-</script>
-<script>
-/* temporary light tuner for the About water light — values shown so they can be baked in */
-(() => { const L = document.getElementById('about'), btn = L && L.querySelector('.lt-btn'), pan = L && L.querySelector('.lt-panel'); if (!pan) return;
-  const unit = { angle: 'deg', int: '', spread: '%', blur: 'px', len: 'vh', glow: '' }, def = {};
-  const ins = pan.querySelectorAll('input[type=range]'), code = pan.querySelector('.lt-code');
-  const apply = () => { const v = {}; ins.forEach((i) => { const k = i.dataset.k; v[k] = i.value; L.style.setProperty('--lb-' + k, i.value + unit[k]); pan.querySelector('[data-o="' + k + '"]').textContent = i.value + unit[k]; });
-    code.textContent = '각도 ' + v.angle + ' · 밝기 ' + v.int + ' · 퍼짐 ' + v.spread + ' · 부드러움 ' + v.blur + ' · 길이 ' + v.len + ' · 수면빛 ' + v.glow; };
-  ins.forEach((i) => { def[i.dataset.k] = i.value; i.addEventListener('input', apply); });
-  btn.addEventListener('click', () => { const on = pan.classList.toggle('on'); btn.setAttribute('aria-expanded', on); });
-  pan.querySelector('[data-act="reset"]').addEventListener('click', () => { ins.forEach((i) => { i.value = def[i.dataset.k]; }); apply(); });
-  pan.querySelector('[data-act="copy"]').addEventListener('click', (e) => { const t = code.textContent; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => { e.target.textContent = '복사됨'; setTimeout(() => (e.target.textContent = '값 복사'), 1200); }).catch(() => {}); });
-  pan.addEventListener('wheel', (e) => e.stopPropagation(), { passive: true });
-  apply(); })();
 </script>
 </body>
 </html>
