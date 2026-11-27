@@ -33,10 +33,10 @@
   .t.busy::before { opacity: .5; }
   .note { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 9; font: 12px/1.4 "Noto Sans KR", sans-serif; color: #ddd; background: rgba(0,0,0,.6); padding: 8px 12px; border-radius: 8px; display: none; }
   /* tile 3 keeps the photo's own colour */
-  .t1:not(.has-img)::before, .t3:not(.has-img)::before { background-image: url(ripple-grid-color.jpg); filter: none; }
-  .t1:not(.has-img) .tint, .t3:not(.has-img) .tint { display: none; }
-  .t1:not(.has-img)::after, .t3:not(.has-img)::after { display: none; }   /* no grain: exactly the photo's own colour */
-  .t1:not(.has-img)::before, .t3:not(.has-img)::before { background-color: #fff; }
+  .t1:not(.has-img)::before, .t3:not(.has-img)::before, .t5:not(.has-img)::before { background-image: url(ripple-grid-color.jpg); filter: none; }
+  .t1:not(.has-img) .tint, .t3:not(.has-img) .tint, .t5:not(.has-img) .tint { display: none; }
+  .t1:not(.has-img)::after, .t3:not(.has-img)::after, .t5:not(.has-img)::after { display: none; }   /* no grain: exactly the photo's own colour */
+  .t1:not(.has-img)::before, .t3:not(.has-img)::before, .t5:not(.has-img)::before { background-color: #fff; }
   /* hover: the photo inside the tile slowly zooms in */
   .t::before { transform: scale(1); transition: transform 1.1s cubic-bezier(.2,.7,.2,1); will-change: transform; }
   .t:hover::before, .t:focus-within::before { transform: scale(1.12); }
