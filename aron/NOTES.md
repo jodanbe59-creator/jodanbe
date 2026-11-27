@@ -426,3 +426,4 @@
 - About 임시 "배경색" 고르기(About이 화면에 있을 때 왼쪽 아래). 색 정하면 고정하고 삭제 예정.
 - 홈 문장 5번안: "A vessel of light — / calm, considered, and made to last." (light 강조).
 - About 배경 흰색(#ffffff) 고정, 배경색 고르기 바 삭제.
+- Promise 문구에서 병원(개원일) 언급 제거: "처음 정한 일정 그대로, / 도면 그대로 지어지는 공간을 약속합니다".
