@@ -789,6 +789,11 @@ body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
 .st-line { width: 1.5px !important; background: #111 !important; }
 .st-drop { width: 22px !important; height: 22px !important; margin: -11px 0 0 -11px !important; border: 1.5px solid #111; background: #fff !important; box-sizing: border-box; opacity: 0; }
 .st-label { top: calc(43vh + 44px + 30px) !important; }
+/* About is a menu-only layer again */
+.about-layer.about-pop { position: fixed; inset: 0; z-index: 40; background: #fff !important; overflow-y: auto; display: grid !important; place-items: center; padding: clamp(56px, 8vh, 90px) clamp(16px, 4vw, 64px) clamp(28px, 5vh, 64px); opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility .45s; }
+.about-layer.about-pop.open { opacity: 1; visibility: visible; }
+.about-layer.about-pop .about-close { position: fixed; background: #fff; color: #2a2520; border-color: rgba(0,0,0,.14); }
+.about-layer.about-pop .about-close:hover { background: #2a2520; color: #fff; }
 </style>
 </head>
 <body>
@@ -840,16 +845,7 @@ body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
     </div>
   </section>
 
-  <section class="about-layer about-sec" id="about" aria-label="About">
-  <div class="ag-grid">
-    <div class="ag-t ag1"><i class="ag-tint"></i><p class="ag-tc">n. aron [아론]<span class="ag-ko">히브리어로 소중한 것을 담는 그릇</span></p></div>
-    <div class="ag-t ag2"><i class="ag-tint"></i><p class="ag-tl">ARON Design · About</p><p class="ag-mr">A vessel of light</p></div>
-    <div class="ag-t ag3"><i class="ag-tint"></i><p class="ag-ml">Philosophy<span class="ag-ko">물방울 하나가 번져가듯,<br>처음 그은 선이 공간의 모든 사람에게<br>닿도록 디자인합니다</span></p></div>
-    <div class="ag-t ag4"><i class="ag-tint"></i><p class="ag-bl">빛을 담은 그릇에 물방울 하나가 떨어지면,<br>파동이 일고 빛이 공간 전체로 번져갑니다</p></div>
-    <div class="ag-t ag5"><i class="ag-tint"></i><p class="ag-bc">Design<span class="ag-ko">진료의 흐름과 환자의 마음을 먼저 생각한<br>편안하고 고요한 공간을 제안합니다</span></p></div>
-    <div class="ag-t ag6"><i class="ag-tint"></i><p class="ag-mr">Promise<span class="ag-ko">처음 정한 일정 그대로,<br>도면 그대로 지어지는 공간을 약속합니다</span></p><p class="ag-bl">Clinic &amp; Hospital Interior<br>Instagram @aron_design</p></div>
-  </div>
-</section>
+
 
 </section>
 
@@ -883,6 +879,17 @@ body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
 
 </main>
 
+  <div class="about-layer about-pop" id="about" data-lenis-prevent role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
+  <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
+  <div class="ag-grid">
+    <div class="ag-t ag1"><i class="ag-tint"></i><p class="ag-tc">n. aron [아론]<span class="ag-ko">히브리어로 소중한 것을 담는 그릇</span></p></div>
+    <div class="ag-t ag2"><i class="ag-tint"></i><p class="ag-tl">ARON Design · About</p><p class="ag-mr">A vessel of light</p></div>
+    <div class="ag-t ag3"><i class="ag-tint"></i><p class="ag-ml">Philosophy<span class="ag-ko">물방울 하나가 번져가듯,<br>처음 그은 선이 공간의 모든 사람에게<br>닿도록 디자인합니다</span></p></div>
+    <div class="ag-t ag4"><i class="ag-tint"></i><p class="ag-bl">빛을 담은 그릇에 물방울 하나가 떨어지면,<br>파동이 일고 빛이 공간 전체로 번져갑니다</p></div>
+    <div class="ag-t ag5"><i class="ag-tint"></i><p class="ag-bc">Design<span class="ag-ko">진료의 흐름과 환자의 마음을 먼저 생각한<br>편안하고 고요한 공간을 제안합니다</span></p></div>
+    <div class="ag-t ag6"><i class="ag-tint"></i><p class="ag-mr">Promise<span class="ag-ko">처음 정한 일정 그대로,<br>도면 그대로 지어지는 공간을 약속합니다</span></p><p class="ag-bl">Clinic &amp; Hospital Interior<br>Instagram @aron_design</p></div>
+  </div>
+</div>
 <section class="projects" id="projects" data-lenis-prevent aria-labelledby="t-projects" aria-hidden="true">
   <button type="button" class="projects-close" aria-label="포트폴리오 닫기">×</button>
   <div class="projects-head">
@@ -2099,11 +2106,12 @@ ready.then(() => {
   io.observe(cl); })();
 </script>
 <script>
-(() => { const L = document.getElementById('about'), btn = document.querySelector('[data-open="about"]'); if (!L) return;
-  /* ABOUT menu scrolls down to the section; the light fades in when the section comes into view */
-  if (btn) btn.addEventListener('click', () => { if (window.__lenis) window.__lenis.scrollTo(L, { duration: 1.6 }); else L.scrollIntoView({ behavior: 'smooth' }); });
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { L.classList.add('open', 'play', 's1', 's2'); io.disconnect(); } }), { threshold: 0.35 });
-  io.observe(L); })();
+(() => { const L = document.getElementById('about'), btn = document.querySelector('[data-open="about"]'), x = L && L.querySelector('.about-close'); if (!L || !btn) return;
+  /* ABOUT opens its own full-screen layer again */
+  const open = () => { L.classList.add('open'); L.setAttribute('aria-hidden', 'false'); document.documentElement.classList.add('layer-open'); if (window.__lenis) window.__lenis.stop(); L.scrollTop = 0; setTimeout(() => x.focus(), 50); };
+  const close = () => { if (!L.classList.contains('open')) return; L.classList.remove('open'); L.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('layer-open'); if (window.__lenis) window.__lenis.start(); btn.focus(); };
+  btn.addEventListener('click', open); x.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); }); })();
 </script>
 <script>
 (() => { const st = document.getElementById('statement'); if (!st) return;
