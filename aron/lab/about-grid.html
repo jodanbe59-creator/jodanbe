@@ -45,9 +45,8 @@
   .t p.tr, .t p.mr, .t p.br { transform-origin: right center; } .t p.bl, .t p.bc { transform-origin: left bottom; }
   .t:hover p, .t:focus-within p { transform: scale(1.06); }
   /* tiles 2, 4, 5: white type with a soft shadow so it reads on light photo */
-  .t2 p, .t4 p, .t5 p { color: #fff; font-weight: 600; text-shadow: 0 1px 1px rgba(0,0,0,.55), 0 2px 8px rgba(0,0,0,.45), 0 0 22px rgba(0,0,0,.32); }
+  .t2 p, .t4 p, .t5 p { color: #fff; font-weight: 600; -webkit-text-stroke: .7px rgba(20,20,20,.7); paint-order: stroke fill; text-shadow: 0 1px 0 rgba(0,0,0,.35); }
   .t2 p .ko, .t4 p .ko, .t5 p .ko { font-weight: 500; }
-  .t5 p { text-shadow: 0 1px 2px rgba(0,0,0,.75), 0 2px 12px rgba(0,0,0,.6), 0 0 30px rgba(0,0,0,.45); }   /* white tile: a deeper shadow */
   @media (prefers-reduced-motion: reduce) { .t::before, .t p { transition: none; } }
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (prefers-reduced-motion: reduce) { .t::before { animation: none; } }
