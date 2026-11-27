@@ -33,8 +33,8 @@
   .t.busy::before { opacity: .5; }
   .note { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 9; font: 12px/1.4 "Noto Sans KR", sans-serif; color: #ddd; background: rgba(0,0,0,.6); padding: 8px 12px; border-radius: 8px; display: none; }
   /* tile 3 keeps the photo's own colour */
-  .t3:not(.has-img)::before { background-image: url(ripple-grid-color.jpg); filter: none; }
-  .t3:not(.has-img) .tint { display: none; }
+  .t1:not(.has-img)::before, .t3:not(.has-img)::before { background-image: url(ripple-grid-color.jpg); filter: none; }
+  .t1:not(.has-img) .tint, .t3:not(.has-img) .tint { display: none; }
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (prefers-reduced-motion: reduce) { .t::before { animation: none; } }
 </style>
