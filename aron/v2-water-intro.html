@@ -649,7 +649,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .ab-hero { gap: 0; }
 .ab-frame { position: relative; width: min(78vw, 1120px); aspect-ratio: 16 / 9; max-height: 64vh; overflow: hidden; display: grid; place-items: center; }
 .ab-frame .ab-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.ab-logo { position: relative; margin: 0; width: clamp(200px, 26vw, 460px); opacity: 0; transform: translateY(14px); transition: opacity 1.2s ease, transform 1.4s cubic-bezier(.2,.7,.2,1); }
+.ab-logo { position: relative; margin: 0; width: clamp(130px, 15vw, 260px); opacity: 0; transform: translateY(14px); transition: opacity 1.2s ease, transform 1.4s cubic-bezier(.2,.7,.2,1); }
 .about-layer.s1 .ab-logo { opacity: 1; transform: none; }
 .about-layer .aron-mark.am-about { color: #1b1a18; --on1: #5f5c58; --on2: #a7a39d; --on3: #d3cfc8; width: 100%; }
 .about-layer .ab-name { margin-top: 38px; font-size: clamp(22px, 2.2vw, 34px); letter-spacing: .08em; }
@@ -2052,9 +2052,12 @@ ready.then(() => {
   function play() { tm.forEach(clearTimeout); L.classList.remove('play', 's1', 's2'); rvs.forEach((r) => r.classList.remove('in')); void L.offsetWidth;
     xs.forEach((e) => { e.style.maxWidth = 'none'; e.style.setProperty('--w', (e.scrollWidth + 2) + 'px'); e.style.maxWidth = ''; });
     requestAnimationFrame(() => L.classList.add('play'));
-    tm = [setTimeout(() => L.classList.add('s1'), 900), setTimeout(() => L.classList.add('s2'), 2300)]; }
+    tm = [setTimeout(() => L.classList.add('s1'), 900), setTimeout(() => L.classList.add('s2'), 2300), setTimeout(() => { if (typeof chk === 'function') chk(); }, 400)]; }
   const rio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); if (e.target === sk) sk.classList.add('is-in'); } }), { root: L, threshold: 0.2 });
   rvs.forEach((r) => rio.observe(r)); rio.observe(sk);
+  /* fallback: reveal by scroll position too, in case IntersectionObserver doesn't fire inside an embedded preview */
+  function chk() { const h = L.clientHeight; rvs.forEach((r) => { const t = r.getBoundingClientRect().top; if (t < h * 0.9) r.classList.add('in'); }); if (sk.getBoundingClientRect().top < h * 0.85) sk.classList.add('is-in'); }
+  L.addEventListener('scroll', chk, { passive: true }); addEventListener('resize', chk);
   function close() { if (!L.classList.contains('open')) return; L.classList.remove('open'); L.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('layer-open'); if (window.__lenis) window.__lenis.start(); btn.focus(); }
   btn.addEventListener('click', open); x.addEventListener('click', close);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); }); })();
