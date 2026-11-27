@@ -730,7 +730,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .ab-mark, .ab-dict { position: relative; z-index: 1; }
 @media (max-width: 760px) { .ab-water { width: 220px; } }
 /* ABOUT background D: deep charcoal */
-.about-layer { background: #dddedc !important; }
+.about-layer { background: #ffffff !important; }
 .about-layer .ab-entry, .about-layer .ab-entry b, .about-layer .ab-col h3 { color: #f2f0ec !important; }
 .about-layer .ab-entry i, .about-layer .ab-ph, .about-layer .ab-sep { color: #8f8c86 !important; }
 .about-layer .ab-story, .about-layer .ab-col p { color: #bdbab4 !important; }
@@ -778,14 +778,6 @@ body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
 @media (max-width: 760px) { .ag-grid { grid-template-columns: repeat(2, 1fr); } .ag-t::before { background-size: calc(200% + 6px) calc(300% + 12px); }
   .ag1 { --bx: 0%; --by: 0%; } .ag2 { --bx: 100%; --by: 0%; } .ag3 { --bx: 0%; --by: 50%; } .ag4 { --bx: 100%; --by: 50%; } .ag5 { --bx: 0%; --by: 100%; } .ag6 { --bx: 100%; --by: 100%; } }
 @media (prefers-reduced-motion: reduce) { .ag-t::before, .ag-t p { transition: none; } }
-/* temporary About background picker (preview only) */
-.bgp { position: fixed; left: 18px; bottom: 18px; z-index: 60; display: none; align-items: center; gap: 10px; padding: 8px 12px 8px 8px; border-radius: 999px; background: rgba(255,255,255,.92); border: 1px solid rgba(0,0,0,.12); box-shadow: 0 4px 18px rgba(0,0,0,.08); font: 12px/1 "Noto Sans KR", Inter, sans-serif; color: #222; }
-.bgp.on { display: flex; }
-.bgp input[type=color] { width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; }
-.bgp input[type=color]::-webkit-color-swatch-wrapper { padding: 0; } .bgp input[type=color]::-webkit-color-swatch { border: 1px solid rgba(0,0,0,.15); border-radius: 50%; }
-.bgp output { font-variant-numeric: tabular-nums; letter-spacing: .04em; min-width: 62px; }
-.bgp button { all: unset; cursor: pointer; padding: 6px 9px; border-radius: 999px; border: 1px solid rgba(0,0,0,.14); }
-.bgp button:hover { background: #222; color: #fff; }
 </style>
 </head>
 <body>
@@ -2131,24 +2123,13 @@ ready.then(() => {
 <script>
 /* About background deepens from white to charcoal as the section scrolls in */
 (() => { const a = document.getElementById('about'); if (!a) return;
-  const A = [255, 255, 255]; window.__aboutBg = window.__aboutBg || [221, 222, 220];
+  const A = [255, 255, 255]; window.__aboutBg = window.__aboutBg || [255, 255, 255];
   const upd = () => { const r = a.getBoundingClientRect(), vh = innerHeight;
     let t = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.95))); t = t * t * (3 - 2 * t);
     const B = window.__aboutBg; const c = A.map((v, i) => Math.round(v + (B[i] - v) * t));
     a.style.setProperty('background', `rgb(${c[0]},${c[1]},${c[2]})`, 'important'); };
   window.__aboutBgUpd = upd; addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd);
   const hook = () => { if (window.__lenis) window.__lenis.on('scroll', upd); }; hook(); setTimeout(hook, 1500); upd(); })();
-</script>
-<div class="bgp" role="group" aria-label="About 배경색"><input type="color" value="#dddedc" aria-label="배경색 고르기"><span>배경색</span><output>#dddedc</output><button type="button" data-act="reset">처음색</button><button type="button" data-act="copy">복사</button></div>
-<script>
-/* temporary About background picker: appears while About is on screen */
-(() => { const a = document.getElementById('about'), box = document.querySelector('.bgp'); if (!a || !box) return;
-  const inp = box.querySelector('input'), out = box.querySelector('output'), DEF = '#dddedc';
-  const set = (hex) => { const n = parseInt(hex.slice(1), 16); window.__aboutBg = [(n >> 16) & 255, (n >> 8) & 255, n & 255]; out.textContent = hex; if (window.__aboutBgUpd) window.__aboutBgUpd(); };
-  inp.addEventListener('input', () => set(inp.value));
-  box.querySelector('[data-act="reset"]').addEventListener('click', () => { inp.value = DEF; set(DEF); });
-  box.querySelector('[data-act="copy"]').addEventListener('click', (e) => { (navigator.clipboard ? navigator.clipboard.writeText(inp.value) : Promise.reject()).then(() => { e.target.textContent = '복사됨'; setTimeout(() => (e.target.textContent = '복사'), 1200); }).catch(() => {}); });
-  new IntersectionObserver((es) => es.forEach((e) => box.classList.toggle('on', e.isIntersecting)), { threshold: 0.3 }).observe(a); })();
 </script>
 </body>
 </html>

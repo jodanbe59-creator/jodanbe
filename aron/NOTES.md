@@ -425,3 +425,4 @@
 - About 그리드 축소(최대 820px·100vh), 글자 크기도 칸에 맞춰 줄임. 배경: 차콜 → 연한 쿨그레이 #dddedc (사용자가 추천 요청, 참고 포스터 바탕색 계열). 흰→그레이 스크롤 페이드. 상단바 on-dark 전환 끔.
 - About 임시 "배경색" 고르기(About이 화면에 있을 때 왼쪽 아래). 색 정하면 고정하고 삭제 예정.
 - 홈 문장 5번안: "A vessel of light — / calm, considered, and made to last." (light 강조).
+- About 배경 흰색(#ffffff) 고정, 배경색 고르기 바 삭제.
