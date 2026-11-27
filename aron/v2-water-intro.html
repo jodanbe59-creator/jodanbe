@@ -595,6 +595,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .about-layer.open { opacity: 1; visibility: visible; }
 .about-layer .about-close { z-index: 41; background: #fff; }
 /* ABOUT layer: brand philosophy motion — drop → ripple → ARON = A Ripple ON */
+.ab-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ab-hero { position: relative; height: 100vh; min-height: 560px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; color: #111; }
 .ab-water { position: absolute; left: 50%; top: 50%; width: min(120vmin, 1100px); height: min(120vmin, 1100px); transform: translate(-50%, -50%); overflow: visible; pointer-events: none; }
 .ab-rings circle { fill: none; stroke: #b9b8b4; stroke-width: .6; opacity: 0; transform-box: fill-box; transform-origin: center; vector-effect: non-scaling-stroke; }
@@ -727,10 +728,7 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 <div class="about-layer" id="about" role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
   <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
   <section class="ab-hero" aria-label="ARON — A Ripple ON">
-    <svg class="ab-water" viewBox="-300 -300 600 600" aria-hidden="true">
-      <g class="ab-rings"><circle r="40"/><circle r="40"/><circle r="40"/><circle r="40" class="ab-sky"/><circle r="40"/></g>
-      <ellipse class="ab-drop" cx="0" cy="0" rx="5" ry="7"/>
-    </svg>
+    <video class="ab-video" src="photos/drop-ripple-focus.mp4" poster="photos/drop-ripple-focus.jpg" muted playsinline preload="auto" aria-hidden="true"></video>
     <h2 class="ab-name"><b>A</b><span class="ab-x ab-sp">&nbsp;</span><b>R</b><span class="ab-x">ipple</span><span class="ab-x ab-sp">&nbsp;</span><b>ON</b></h2>
     <p class="ab-cap">아론 — 첫 물방울이 만든 파동</p>
   </section>
@@ -1983,10 +1981,11 @@ ready.then(() => {
   xs.forEach((e) => { e.style.maxWidth = 'none'; e.style.setProperty('--w', (e.scrollWidth + 2) + 'px'); e.style.maxWidth = ''; });
   function play() { tm.forEach(clearTimeout); L.classList.remove('play', 's1', 's2'); rvs.forEach((r) => r.classList.remove('in')); void L.offsetWidth;
     xs.forEach((e) => { e.style.maxWidth = 'none'; e.style.setProperty('--w', (e.scrollWidth + 2) + 'px'); e.style.maxWidth = ''; });
-    L.classList.add('play'); tm = [setTimeout(() => L.classList.add('s1'), 1350), setTimeout(() => L.classList.add('s2'), 2900)]; }
+    L.classList.add('play'); const v = L.querySelector('.ab-video'); if (v) { try { v.currentTime = 0; v.play().catch(() => {}); } catch (e) {} }
+    tm = [setTimeout(() => L.classList.add('s1'), 2200), setTimeout(() => L.classList.add('s2'), 3800)]; }
   const rio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); if (e.target === sk) sk.classList.add('is-in'); } }), { root: L, threshold: 0.2 });
   rvs.forEach((r) => rio.observe(r)); rio.observe(sk);
-  function close() { if (!L.classList.contains('open')) return; L.classList.remove('open'); L.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('layer-open'); if (window.__lenis) window.__lenis.start(); btn.focus(); }
+  function close() { if (!L.classList.contains('open')) return; const v = L.querySelector('.ab-video'); if (v) v.pause(); L.classList.remove('open'); L.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('layer-open'); if (window.__lenis) window.__lenis.start(); btn.focus(); }
   btn.addEventListener('click', open); x.addEventListener('click', close);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); }); })();
 </script>
