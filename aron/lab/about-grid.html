@@ -35,6 +35,8 @@
   /* tile 3 keeps the photo's own colour */
   .t1:not(.has-img)::before, .t3:not(.has-img)::before { background-image: url(ripple-grid-color.jpg); filter: none; }
   .t1:not(.has-img) .tint, .t3:not(.has-img) .tint { display: none; }
+  .t1:not(.has-img)::after, .t3:not(.has-img)::after { display: none; }   /* no grain: exactly the photo's own colour */
+  .t1:not(.has-img)::before, .t3:not(.has-img)::before { background-color: #fff; }
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (prefers-reduced-motion: reduce) { .t::before { animation: none; } }
 </style>
