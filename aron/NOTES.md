@@ -427,3 +427,4 @@
 - 홈 문장 5번안: "A vessel of light — / calm, considered, and made to last." (light 강조).
 - About 배경 흰색(#ffffff) 고정, 배경색 고르기 바 삭제.
 - Promise 문구에서 병원(개원일) 언급 제거: "처음 정한 일정 그대로, / 도면 그대로 지어지는 공간을 약속합니다".
+- 스크롤 인디케이터: 마우스 → 흘러내리는 선(1번 후보).
