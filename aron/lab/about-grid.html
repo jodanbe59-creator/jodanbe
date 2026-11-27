@@ -12,9 +12,7 @@
   .grid { width: min(100%, 1240px, 150vh); display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
   .t { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #e9e9e7; color: #111; font: 500 clamp(9px, .78vw, 12px)/1.15 Inter, "Noto Sans KR", sans-serif; letter-spacing: .01em; text-transform: uppercase; }
   /* blurred light: the ripple photo, hugely blurred and cropped differently per tile, plus a soft dark mass */
-  .t::before { content: ""; position: absolute; inset: -30%; background: var(--dark, none), url(ripple-still.jpg) var(--pos, 50% 50%) / var(--size, 220%) no-repeat, #f4f4f3;
-    filter: blur(var(--blur, 30px)) contrast(1.45) brightness(1.02) grayscale(1); transform: rotate(var(--rot, 0deg)) scale(1.05); animation: drift 26s ease-in-out infinite alternate; animation-delay: var(--d, 0s); }
-  @keyframes drift { from { transform: rotate(var(--rot, 0deg)) scale(1.05) translate(0, 0); } to { transform: rotate(var(--rot, 0deg)) scale(1.12) translate(var(--dx, 3%), var(--dy, -2%)); } }
+  .t::before { content: ""; position: absolute; inset: 0; background: url(ripple-grid.jpg) var(--bx) var(--by) / calc(300% + 12px) calc(200% + 6px) no-repeat, #f4f4f3; filter: grayscale(1) contrast(1.08); }
   /* film grain */
   .t::after { content: ""; position: absolute; inset: 0; opacity: .22; mix-blend-mode: multiply; pointer-events: none;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
@@ -23,12 +21,8 @@
   .tl { left: 7%; top: 7%; } .tr { right: 7%; top: 7%; text-align: right; } .bl { left: 7%; bottom: 7%; } .br { right: 7%; bottom: 7%; text-align: right; } .cl { left: 7%; top: 30%; } .tc { left: 28%; top: 7%; } .mr { right: 7%; top: 42%; text-align: right; } .ml { left: 7%; top: 46%; } .bc { left: 34%; bottom: 7%; } .mc { left: 22%; top: 24%; }
   .w { color: #fff; }
   .tint { position: absolute; inset: 0; z-index: 1; background: rgba(150,168,196,.16); mix-blend-mode: multiply; pointer-events: none; }
-  .t1 { --pos: 18% 40%; --size: 260%; --dark: radial-gradient(ellipse 55% 50% at 22% 20%, rgba(6,6,6,1), transparent 72%); --rot: -8deg; }
-  .t2 { --pos: 70% 60%; --size: 240%; --dark: radial-gradient(ellipse 38% 46% at 78% 70%, rgba(8,8,8,.95), transparent 70%); --rot: 12deg; --d: -6s; --dx: -3%; }
-  .t3 { --pos: 50% 30%; --size: 300%; --dark: radial-gradient(ellipse 50% 60% at 30% 55%, rgba(12,12,12,.85), transparent 72%); --rot: 4deg; --d: -12s; }
-  .t4 { --pos: 30% 70%; --size: 200%; --dark: radial-gradient(ellipse 40% 40% at 85% 15%, rgba(20,20,20,.55), transparent 70%); --rot: -14deg; --d: -3s; --dy: 3%; }
-  .t5 { --pos: 60% 40%; --size: 280%; --dark: radial-gradient(ellipse 30% 40% at 30% 25%, rgba(15,15,15,.6), transparent 70%); --rot: 20deg; --d: -18s; }
-  .t6 { --pos: 80% 50%; --size: 240%; --dark: radial-gradient(ellipse 52% 50% at 22% 86%, rgba(6,6,6,1), transparent 72%); --rot: -4deg; --d: -9s; --dx: -2%; }
+  .t1 { --bx: 0%; --by: 0%; } .t2 { --bx: 50%; --by: 0%; } .t3 { --bx: 100%; --by: 0%; }
+  .t4 { --bx: 0%; --by: 100%; } .t5 { --bx: 50%; --by: 100%; } .t6 { --bx: 100%; --by: 100%; }
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (prefers-reduced-motion: reduce) { .t::before { animation: none; } }
 </style>
@@ -36,12 +30,12 @@
 <body>
 <section class="ag" aria-label="About">
   <div class="grid">
-    <div class="t t1"><i class="tint"></i><p class="tc w">n. aron [아론]<span class="ko">히브리어로 소중한 것을 담는 그릇</span></p></div>
+    <div class="t t1"><i class="tint"></i><p class="tc">n. aron [아론]<span class="ko">히브리어로 소중한 것을 담는 그릇</span></p></div>
     <div class="t t2"><i class="tint"></i><p class="tl">ARON Design · About</p><p class="mr">A vessel of light</p></div>
-    <div class="t t3"><i class="tint"></i><p class="ml w">Philosophy<span class="ko">물방울 하나가 번져가듯,<br>처음 그은 선이 공간의 모든 사람에게<br>닿도록 디자인합니다</span></p></div>
-    <div class="t t4"><i class="tint"></i><p class="mc">빛을 담은 그릇에 물방울 하나가 떨어지면,<br>파동이 일고 빛이 공간 전체로 번져갑니다</p></div>
+    <div class="t t3"><i class="tint"></i><p class="ml">Philosophy<span class="ko">물방울 하나가 번져가듯,<br>처음 그은 선이 공간의 모든 사람에게<br>닿도록 디자인합니다</span></p></div>
+    <div class="t t4"><i class="tint"></i><p class="bl">빛을 담은 그릇에 물방울 하나가 떨어지면,<br>파동이 일고 빛이 공간 전체로 번져갑니다</p></div>
     <div class="t t5"><i class="tint"></i><p class="bc">Design<span class="ko">진료의 흐름과 환자의 마음을 먼저 생각한<br>편안하고 고요한 공간을 제안합니다</span></p></div>
-    <div class="t t6"><i class="tint"></i><p class="mr">Promise<span class="ko">개원일에 맞춘 설계 일정과<br>그대로 지을 수 있는 정확한 도면을 약속합니다</span></p><p class="bl w">Clinic &amp; Hospital Interior<br>Instagram @aron_design</p></div>
+    <div class="t t6"><i class="tint"></i><p class="mr">Promise<span class="ko">개원일에 맞춘 설계 일정과<br>그대로 지을 수 있는 정확한 도면을 약속합니다</span></p><p class="bl">Clinic &amp; Hospital Interior<br>Instagram @aron_design</p></div>
   </div>
 </section>
 </body>
