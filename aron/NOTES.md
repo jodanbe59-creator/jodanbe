@@ -375,3 +375,4 @@
 - 메뉴 INTERIOR → ABOUT (#about = .sky 섹션으로 스크롤). 하위메뉴(ALL/CLINIC/COMMERCIAL/HOSPITAL)와 드롭다운 JS 삭제.
 - ABOUT 섹션을 홈에서 빼고 메뉴 ABOUT 전용 화면(.about-layer, ×/Esc로 닫기, 열 때마다 막대 애니메이션)으로 이동. 메뉴: ABOUT · WORK · CONTACT · FOLLOW (WORK는 #work로 스크롤).
 - ABOUT 화면에 브랜드 철학 추가: ARON = "A Ripple ON". 모션(물방울 낙하→파문→ARON이 A Ripple ON으로 펼쳐짐), Philosophy "One drop. A ripple of care.", 원칙 3개(01 Drop/02 Ripple/03 Still, 아이콘 애니메이션). 기존 막대+About 글은 맨 아래 유지.
+- 업로드 영상(물방울→파동, 4K 14초) 웹용 변환: photos/drop-ripple.mp4. 초점 이동 버전: photos/drop-ripple-focus.mp4 (낙하 중엔 물방울만 선명, 닿은 뒤엔 퍼지는 파동 영역만 선명·바깥 블러; 생성 스크립트 drop-ripple-focus.py). 아직 사이트엔 안 넣음.
