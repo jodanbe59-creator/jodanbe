@@ -794,6 +794,19 @@ body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
 .about-layer.about-pop.open { opacity: 1; visibility: visible; }
 .about-layer.about-pop .about-close { position: fixed; background: #fff; color: #2a2520; border-color: rgba(0,0,0,.14); }
 .about-layer.about-pop .about-close:hover { background: #2a2520; color: #fff; }
+/* About layer: the home line falls in (line + open circle), then the label */
+.about-layer.about-pop { display: flex !important; flex-direction: column; align-items: center; justify-content: center; }
+.ab-fall { position: relative; width: 60px; height: clamp(96px, 14vh, 130px); flex: none; margin-bottom: clamp(14px, 2.4vh, 26px); }
+.ab-fall-line { position: absolute; left: 50%; top: 0; width: 1.5px; height: 0; background: #111; transform: translateX(-50%); }
+.ab-fall-dot { position: absolute; left: 50%; top: 0; width: 22px; height: 22px; margin-left: -11px; border: 1.5px solid #111; border-radius: 50%; background: #fff; box-sizing: border-box; opacity: 0; }
+.ab-fall-label { position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 8px); font: 400 12px/1 "Noto Sans KR", Jost, sans-serif; letter-spacing: .34em; padding-left: .34em; color: #4a4844; white-space: nowrap; opacity: 0; }
+.about-layer.open .ab-fall-line { animation: abf-line 1.4s cubic-bezier(.55,0,.75,.35) .25s forwards; }
+.about-layer.open .ab-fall-dot { animation: abf-dot 1.4s cubic-bezier(.55,0,.75,.35) .25s forwards; }
+.about-layer.open .ab-fall-label { animation: abf-label .9s ease 1.5s forwards; }
+@keyframes abf-line { to { height: calc(100% - 44px); } }
+@keyframes abf-dot { 0% { top: 0; opacity: 0; } 8% { opacity: 1; } 100% { top: calc(100% - 44px - 11px); opacity: 1; } }
+@keyframes abf-label { to { opacity: 1; transform: translate(-50%, 0); } }
+@media (prefers-reduced-motion: reduce) { .about-layer.open .ab-fall-line { animation: none; height: calc(100% - 44px); } .about-layer.open .ab-fall-dot { animation: none; top: calc(100% - 55px); opacity: 1; } .about-layer.open .ab-fall-label { animation: none; opacity: 1; transform: translate(-50%, 0); } }
 </style>
 </head>
 <body>
@@ -837,7 +850,6 @@ body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
         <span class="st-tick" aria-hidden="true"></span>
         <p class="st-text">A vessel of <em>light</em>&nbsp;—<br>calm, considered, and made to last.</p>
         <span class="st-line" aria-hidden="true"></span>
-        <span class="st-label">About</span>
       </div>
       <div class="st-fx" aria-hidden="true">
         <i class="st-drop"></i><i class="st-ring"></i><i class="st-ring"></i><i class="st-ring"></i>
@@ -881,6 +893,7 @@ body.bar-up .topbar, body.bar-up a.logo { translate: 0 -160%; }
 
   <div class="about-layer about-pop" id="about" data-lenis-prevent role="dialog" aria-modal="true" aria-label="About" aria-hidden="true">
   <button type="button" class="projects-close about-close" aria-label="닫기">×</button>
+  <div class="ab-fall" aria-hidden="true"><i class="ab-fall-line"></i><i class="ab-fall-dot"></i><span class="ab-fall-label">아론</span></div>
   <div class="ag-grid">
     <div class="ag-t ag1"><i class="ag-tint"></i><p class="ag-tc">n. aron [아론]<span class="ag-ko">히브리어로 소중한 것을 담는 그릇</span></p></div>
     <div class="ag-t ag2"><i class="ag-tint"></i><p class="ag-tl">ARON Design · About</p><p class="ag-mr">A vessel of light</p></div>
@@ -1594,7 +1607,6 @@ if (!CAPTURE) {
       const len = (land - top) * fall;
       lineEl.style.height = Math.max(0, len - 11) + 'px';   // line + open circle, like the footer's
       lineEl.style.top = top + 'px';
-      gsap.set('.st-label', { opacity: smooth(0.52, 0.64, p), y: 8 * (1 - smooth(0.52, 0.66, p)) });
       gsap.set(dropEl, { top: top + len, scale: 1, opacity: smooth(0.04, 0.1, p) });   // no waiting dot: the circle appears once the line starts to fall
       V.open = 0;   // no reveal after the statement: the page goes straight on to the spaces
       // the lobby comes into focus as it is uncovered
