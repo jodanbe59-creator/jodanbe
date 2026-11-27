@@ -388,3 +388,4 @@
 - 푸터: 고객사 이름 흐르는 줄 위 왼쪽에 "— CLIENTS" 라벨 추가 (병원만이 아니라서 Hospitals 대신 Clients).
 - ABOUT 3열: 번호 01–03과 열 사이 세로줄 삭제, 가운데 정렬, 설명글 색 진하게(#34322f, 굵기 400).
 - ABOUT 3열 제목 A안: Philosophy / Design / Promise.
+- 홈 문장 교체: "A vessel of light." (light 강조). 아론 뜻 = 히브리어 aron 함(궤) + 빛(or) 풀이를 합친 문장.
