@@ -706,6 +706,8 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 .ab-id { margin-top: clamp(22px, 3.6vh, 44px); }
 .ab-vline { height: clamp(36px, 6vh, 80px); margin: clamp(22px, 3.6vh, 44px) 0; }
 @media (max-width: 760px) { .ab-intro { padding-top: 64px; padding-bottom: 28px; } .ab-cols { gap: 20px; } .ab-col h3 { margin-bottom: 8px; } .ab-num { margin-bottom: 6px; } .ab-vline { margin: 18px 0; } }
+.af-label { margin: 0 0 clamp(4px, 1vh, 12px); padding-left: 40px; display: flex; align-items: center; gap: 14px; font-family: Jost, sans-serif; font-weight: 400; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: #6b6964; }
+.af-label::before { content: ""; width: 28px; height: 1px; background: #9a9893; }
 </style>
 </head>
 <body>
@@ -824,9 +826,10 @@ html.lenis, html.lenis body { height: auto; } .lenis.lenis-smooth { scroll-behav
 
 <footer class="af" id="contact">
   <div class="af-drop" aria-hidden="true"><i class="af-line"></i><i class="af-dot"></i></div>
-  <div class="af-marquee" aria-hidden="true">
-    <div class="af-row af-row--1"><div class="af-track af-names"><span><b>Kyunghee Onsaeng</b> <i>Korean Medicine</i></span><span><i>Gwangmyeong Madione</i> <b>Orthopedics</b></span><span><i>Dasan AI</i> <b>Orthopedics</b></span><span><b>Kyunghee Onsaeng</b> <i>Korean Medicine</i></span><span><i>Gwangmyeong Madione</i> <b>Orthopedics</b></span><span><i>Dasan AI</i> <b>Orthopedics</b></span></div></div>
-    <div class="af-row af-row--2"><div class="af-track af-names"><span><i>Kyunghee Onsaeng</i> <b>Korean Medicine</b></span><span><b>Gwangmyeong Madione</b> <i>Orthopedics</i></span><span><b>Dasan AI</b> <i>Orthopedics</i></span><span><i>Kyunghee Onsaeng</i> <b>Korean Medicine</b></span><span><b>Gwangmyeong Madione</b> <i>Orthopedics</i></span><span><b>Dasan AI</b> <i>Orthopedics</i></span></div></div>
+  <div class="af-marquee">
+    <p class="af-label">Clients</p>
+    <div class="af-row af-row--1" aria-hidden="true"><div class="af-track af-names"><span><b>Kyunghee Onsaeng</b> <i>Korean Medicine</i></span><span><i>Gwangmyeong Madione</i> <b>Orthopedics</b></span><span><i>Dasan AI</i> <b>Orthopedics</b></span><span><b>Kyunghee Onsaeng</b> <i>Korean Medicine</i></span><span><i>Gwangmyeong Madione</i> <b>Orthopedics</b></span><span><i>Dasan AI</i> <b>Orthopedics</b></span></div></div>
+    <div class="af-row af-row--2" aria-hidden="true"><div class="af-track af-names"><span><i>Kyunghee Onsaeng</i> <b>Korean Medicine</b></span><span><b>Gwangmyeong Madione</b> <i>Orthopedics</i></span><span><b>Dasan AI</b> <i>Orthopedics</i></span><span><i>Kyunghee Onsaeng</i> <b>Korean Medicine</b></span><span><b>Gwangmyeong Madione</b> <i>Orthopedics</i></span><span><b>Dasan AI</b> <i>Orthopedics</i></span></div></div>
   </div>
   <div class="af-base">
     <div class="af-col"><p>&copy;2026 ARON Design</p><p>All rights reserved</p></div>
